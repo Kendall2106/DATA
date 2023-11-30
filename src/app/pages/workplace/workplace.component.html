@@ -1,0 +1,47 @@
+
+            <div class="list col-lg-12" style="display: flex; flex-wrap: wrap;"> <!-- Adjusted column size to col-lg-6 -->
+                
+                <div class="col-lg-12 col-md-12" style="margin-left: 2%; margin-top: 3%;">
+                    <h1>Lista de {{message}}</h1>
+                </div>
+                <div class="filter col-lg-10 col-12" style="margin-top: 3%; text-align: end;"> 
+                    <select id="opTipos">
+                        <option disabled selected style="display:none;">Categoria</option>
+                        <option *ngFor="let opcion of opTipos" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <select id="opAnios" >
+                        <option disabled selected style="display:none;">Año visto</option>
+                        <option *ngFor="let opcion of opAnios" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <select id="opCalificacion" (ngModel)="calificacionSelec">
+                        <option disabled selected style="display:none;">Calificacion</option>
+                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+                    <div class="card col-lg-3" *ngFor="let movie of movies" style="margin-top: 3%; margin-left: 2%; margin-right: 2%;">
+                        <div class="row">
+                            <div class="left col-lg-4" style="text-align: center; margin: 1%;">
+                                <img class="imagen" src="./assets/img/peliculas/{{ movie.image }}" >
+                                
+                            </div>
+
+                            <div class="right col-lg-6" style="margin: 1%;">
+                                <h5> {{ movie.name }}</h5>
+                                <p> {{ movie.date }}</p>
+                                <div class="row" style="margin-top: 10%;">
+                                    <div class="type col-lg-12 col-12" >
+                                        <p class="etiqueta"> {{ movie.type }}</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="score col-lg-1 col-12">
+                                <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= movie.score">&#9733;</span>
+                        </div>
+
+                        </div>
+                       
+                        
+                    </div>
+            </div>

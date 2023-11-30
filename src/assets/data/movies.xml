@@ -1,0 +1,58 @@
+<movies>
+  <movie>
+    <id>1</id>
+    <name>Super Mario</name>
+    <date>29/11/2023</date>
+    <score>5</score>
+    <type>Animacion</type>
+    <image>p1.jpg</image>
+    <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>2</id>
+      <name>Infinity War</name>
+      <date>29/11/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p1.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+    <id>1</id>
+    <name>Super Mario</name>
+    <date>29/11/2023</date>
+    <score>1</score>
+    <image>p1.jpg</image>
+    <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>2</id>
+      <name>Infinity War</name>
+      <date>29/11/2023</date>
+      <score>0</score>
+      <image>p1.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+    <id>1</id>
+    <name>Super Mario</name>
+    <date>29/11/2023</date>
+    <score>5</score>
+    <image>p1.jpg</image>
+    <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>2</id>
+      <name>Infinity War</name>
+      <date>29/11/2023</date>
+      <score>5</score>
+      <image>p1.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+</movies>

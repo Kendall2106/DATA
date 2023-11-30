@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --color-1: #2C2926;
+    --color-text: #ded8cf;
+    }
+    
+    html, body{
+        background-color: var(--color-1);
+        color: var(--color-text);
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+/* Estilos para la luz alrededor del cursor */
+.light-effect {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5); /* Color de la luz (blanco semi-transparente) */
+    border-radius: 50%; /* Hace que la luz sea circular */
+    pointer-events: none; /* Evita que la luz afecte a los elementos subyacentes */
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    animation: pulse 1s infinite; /* Animación de pulso */
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.8;
+    }
+}

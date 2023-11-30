@@ -1,0 +1,12 @@
+
+a{
+    cursor: pointer;
+}
+
+a:hover{
+    opacity: 50%;
+}
+
+.menu{
+    font-size: 1.5rem;
+}
