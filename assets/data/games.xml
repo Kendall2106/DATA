@@ -1,0 +1,73 @@
+<games>
+  <game>
+    <id>1</id>
+    <name>Inmortaly</name>
+    <date>14/01/2023</date>
+    <score>3</score>
+    <type></type>
+    <image>g1.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+      <id>2</id>
+      <name>Moonlighter</name>
+      <date>30/01/2023</date>
+      <score>4</score>
+      <type></type>
+      <image>g2.jpg</image>
+      <visible>True</visible>
+  </game>
+
+  <game>
+    <id>3</id>
+    <name>Stacklands</name>
+    <date>04/02/2023</date>
+    <score>3</score>
+    <type></type>
+    <image>g3.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>4</id>
+    <name>Terraria</name>
+    <date>13/03/2023</date>
+    <score>5</score>
+    <type></type>
+    <image>g4.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>5</id>
+    <name>Coockie Clicker</name>
+    <date>23/04/2023</date>
+    <score>2</score>
+    <type></type>
+    <image>g5.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>6</id>
+    <name>Halo CE</name>
+    <date>13/07/2023</date>
+    <score>4</score>
+    <type></type>
+    <image>g6.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>7</id>
+    <name>Luna fishing Garden</name>
+    <date>29/07/2023</date>
+    <score>3</score>
+    <type></type>
+    <image>g7.jpg</image>
+    <visible>True</visible>
+  </game>
+
+
+</games>
