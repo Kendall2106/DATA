@@ -6,6 +6,7 @@ import { Movie } from 'src/app/core/model/movie.model';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { MovieService } from 'src/app/core/service/movie.service';
+import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
   selector: 'app-workplace',
@@ -21,7 +22,7 @@ export class WorkplaceComponent implements OnInit {
   opAnios: string[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
-  constructor(private movieService: MovieService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
+  constructor(private movieService: MovieService, private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White"] // Colores correspondientes
@@ -52,7 +53,12 @@ export class WorkplaceComponent implements OnInit {
       this.animeService.getAnimes().subscribe(animes => {
         this.data = animes.sort((a, b) => b.id - a.id);
       });
+    } else if (this.message === 'Series') {
+      this.seriesService.getSeries().subscribe(series => {
+        this.data = series.sort((a, b) => b.id - a.id);
+      });
     }
+
     // Añade lógica para otros casos si es necesario
   }
 
