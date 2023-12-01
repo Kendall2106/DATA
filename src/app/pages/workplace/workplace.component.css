@@ -22,15 +22,15 @@
 }
 
 .star {
-    font-size: 18px; /* Ajusta el tamaño de las estrellas según tu preferencia */
-    color: gray;    /* Color de estrella no seleccionada */
-    cursor: pointer; /* Cambia el cursor al pasar sobre las estrellas */
+    font-size: 18px; 
+    color: gray;   
+    cursor: pointer;  
 
     
   }
   
   .filled {
-    color: gold; /* Color de estrella seleccionada */
+    color: gold; 
   }
 
  select{
@@ -42,14 +42,33 @@
  } 
 
  select option {
-    background-color: var(--color-1); /* Cambia este color según tus preferencias */
-    color: var(--color-text); /* Cambia este color según tus preferencias */
+    background-color: var(--color-1); 
+    color: var(--color-text); 
   }
 
   @media (max-width:1000px) {
-    .imagen{
+   /*.imagen{
         width: 50%;
         height: 210px;
+    }*/
+
+    .card{
+      width: 100%;
     }
+
+    .imagen{
+      width: 100%;
+      height: 100px;
+      margin-top: 15%;
+    }
+
+    .etiqueta{
+      
+    }
+
+    .star{
+      
+    }
+
 }
 

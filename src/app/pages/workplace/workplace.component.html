@@ -20,12 +20,12 @@
                 </div>
                     <div class="card col-lg-3" *ngFor="let movie of movies" style="margin-top: 3%; margin-left: 2%; margin-right: 2%;">
                         <div class="row">
-                            <div class="left col-lg-4" style="text-align: center; margin: 1%;">
+                            <div class="left col-lg-4 col-3" style="text-align: center; margin: 1%;">
                                 <img class="imagen" src="./assets/img/peliculas/{{ movie.image }}" >
                                 
                             </div>
 
-                            <div class="right col-lg-6" style="margin: 1%;">
+                            <div class="right col-lg-6 col-6" style="margin: 1%;">
                                 <h5> {{ movie.name }}</h5>
                                 <p> {{ movie.date }}</p>
                                 <div class="row" style="margin-top: 10%;">
@@ -36,9 +36,9 @@
                                 
                             </div>
 
-                            <div class="score col-lg-1 col-12">
+                            <div class="score col-lg-1 col-2">
                                 <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= movie.score">&#9733;</span>
-                        </div>
+                            </div>
 
                         </div>
                        
