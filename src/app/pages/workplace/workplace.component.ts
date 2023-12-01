@@ -15,6 +15,8 @@ import { SeriesService } from 'src/app/core/service/series.service';
 })
 export class WorkplaceComponent implements OnInit {
   data: any[] = [];
+  resultFilter: any[]=[];
+
   movies: Movie[] = [];
   animes: Anime[] = [];
   message: string = '';
@@ -27,11 +29,13 @@ export class WorkplaceComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White"] // Colores correspondientes
     ];
-      this.opAnios= ["2020","2021","2022"];
+      this.opAnios= ["2023","2022","2021","2020"];
       this.opCalificacion = ["0","1","2","3","4","5"];
   }
 
   ngOnInit() {
+  
+
     if (!this.dataService.typeData) {
       this.router.navigate(['/']);
     }
@@ -48,17 +52,21 @@ export class WorkplaceComponent implements OnInit {
     if (this.message === 'Peliculas') {
       this.movieService.getMovies().subscribe(movies => {
         this.data = movies.sort((a, b) => b.id - a.id);
+        this.resultFilter=this.data;
       });
     } else if (this.message === 'Animes') {
       this.animeService.getAnimes().subscribe(animes => {
         this.data = animes.sort((a, b) => b.id - a.id);
+        this.resultFilter=this.data;
       });
     } else if (this.message === 'Series') {
       this.seriesService.getSeries().subscribe(series => {
         this.data = series.sort((a, b) => b.id - a.id);
+        this.resultFilter=this.data;
       });
     }
 
+    //this.resultFilter=this.data;
     // Añade lógica para otros casos si es necesario
   }
 
@@ -67,8 +75,41 @@ export class WorkplaceComponent implements OnInit {
     return index !== -1 ? this.opTipos[1][index] : 'greenyellow'; // Color por defecto para tipos desconocidos
   }
 
+  filterScore(query: any): void {
+    this.resultFilter=[];
 
+    this.resultFilter = this.data.filter((d) => {
+      const scoreAsString = d.score.toString().toLowerCase();
+      const queryValue = query.target.value.toString().toLowerCase();
+      return scoreAsString === queryValue;
+    });
 
+  }
+
+  filterYear(query: any): void {
+    this.resultFilter=[];
+
+    this.resultFilter = this.data.filter((d) => {
+      const date = d.date.toString().toLowerCase();
+      var parts = date.split("/");
+      const year = parseInt(parts[2], 10);
+      
+      const queryValue = query.target.value.toString().toLowerCase();
+      return (year+"") === queryValue;
+    });
+
+  }
+
+  filterType(query: any): void {
+    this.resultFilter=[];
+
+    this.resultFilter = this.data.filter((d) => {
+      const typeString = d.type.toString().toLowerCase();
+      const queryValue = query.target.value.toString().toLowerCase();
+      return typeString === queryValue;
+    });
+
+  }
 
 
 }
