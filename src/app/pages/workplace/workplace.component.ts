@@ -5,6 +5,7 @@ import { Anime } from 'src/app/core/model/anime.model';
 import { Movie } from 'src/app/core/model/movie.model';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
+import { GameService } from 'src/app/core/service/game.service';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
@@ -24,7 +25,7 @@ export class WorkplaceComponent implements OnInit {
   opAnios: string[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
-  constructor(private movieService: MovieService, private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
+  constructor(private movieService: MovieService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White"] // Colores correspondientes
@@ -62,6 +63,11 @@ export class WorkplaceComponent implements OnInit {
     } else if (this.message === 'Series') {
       this.seriesService.getSeries().subscribe(series => {
         this.data = series.sort((a, b) => b.id - a.id);
+        this.resultFilter=this.data;
+      });
+    } else if (this.message === 'Juegos') {
+      this.gameService.getGames().subscribe(games => {
+        this.data = games.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
       });
     }
@@ -110,6 +116,8 @@ export class WorkplaceComponent implements OnInit {
     });
 
   }
+
+ 
 
 
 }

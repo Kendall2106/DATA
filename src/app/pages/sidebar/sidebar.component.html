@@ -1,8 +1,8 @@
-<div class="body col-lg-12 col-12" >
-        <div class="header col-lg-12" style=" margin-left: 20%; margin-right: 15%;margin-top: 20%;">       
+<!--<div class="body col-lg-12 col-12" >
+        <div class=" col-lg-12" style=" margin-left: 20%; margin-right: 15%;margin-top: 20%;">       
             <img src="./assets/img/prisma1.png" style="width: 280px; height: 180px;">
         </div>
-        <div class="menu col-lg-12" style="margin-left: 20%; margin-right: 20%;">
+       <div class="menu col-lg-12" style="margin-left: 20%; margin-right: 20%;">
             <ul>
                 <li><a (click)="navegarAComponenteDestino('Peliculas')">Peliculas</a></li>
                 <li><a (click)="navegarAComponenteDestino('Series')">Series</a></li>
@@ -15,4 +15,62 @@
        
        
         
+</div><div class="body col-lg-12 col-12" >
+        <div class=" col-lg-12" style=" margin-left: 20%; margin-right: 15%;margin-top: 20%;">       
+            <img src="./assets/img/prisma1.png" style="width: 280px; height: 180px;">
+        </div>
+       <div class="menu col-lg-12" style="margin-left: 20%; margin-right: 20%;">
+            <ul>
+                <li><a (click)="navegarAComponenteDestino('Peliculas')">Peliculas</a></li>
+                <li><a (click)="navegarAComponenteDestino('Series')">Series</a></li>
+                <li><a (click)="navegarAComponenteDestino('Animes')">Anime</a></li>
+                <li><a (click)="navegarAComponenteDestino('Juegos')">Juegos</a></li>
+                <li><a (click)="navegarAComponenteDestino('Libros')">Libros</a></li>
+                
+            </ul>
+        </div>
+       
+       
+        
+</div>--> 
+
+<!--<div class="body col-lg-12 col-12">
+    <div class="col-lg-12" style="margin-left: 20%; margin-right: 15%; margin-top: 20%;">
+        <img src="./assets/img/prisma1.png" style="width: 280px; height: 180px;">
+    </div>
+    
+    <button id="menuBtn" class="menu-btn" (click)="toggleMenu()">Menú</button>
+
+    <div class="menu col-lg-12" id="mainMenu" style="margin-left: 20%; margin-right: 20%; display: none;">
+        <ul>
+            <li><a (click)="navegarAComponenteDestino('Peliculas')">Peliculas</a></li>
+                <li><a (click)="navegarAComponenteDestino('Series')">Series</a></li>
+                <li><a (click)="navegarAComponenteDestino('Animes')">Anime</a></li>
+                <li><a (click)="navegarAComponenteDestino('Juegos')">Juegos</a></li>
+                <li><a (click)="navegarAComponenteDestino('Libros')">Libros</a></li>
+        </ul>
+    </div>
+</div>-->
+
+
+<div class="body col-lg-12 col-12" >
+    <div class="row">
+        <div class=" col-lg-10 col-9" style="margin-top: 15%;">       
+            <img class="imgTitle" src="./assets/img/prisma1.png">
+        </div>
+        <div class=" btnMenu col-lg-2 col-3" style="display: none; margin-top: 30%;">       
+            <button (click)="toggleMobileMenu()" style="margin: 0%;"><i class="uil uil-list-ul"></i></button>
+        </div>
+    </div>
+   
+   <div class="menu col-lg-12" id="menu" style="margin-left: 20%; margin-right: 20%;">
+        <ul >
+            <li><a (click)="navegarAComponenteDestino('Peliculas')">Peliculas</a></li>
+            <li><a (click)="navegarAComponenteDestino('Series')">Series</a></li>
+            <li><a (click)="navegarAComponenteDestino('Animes')">Anime</a></li>
+            <li><a (click)="navegarAComponenteDestino('Juegos')">Juegos</a></li>
+            <li><a (click)="navegarAComponenteDestino('Libros')">Libros</a></li>
+            
+        </ul>
+    </div>
 </div>

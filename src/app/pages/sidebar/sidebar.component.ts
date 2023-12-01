@@ -21,6 +21,14 @@ export class SidebarComponent implements OnInit {
   navegarAComponenteDestino(data: String) {
     this.dataService.typeData = data;
     this.router.navigate(['/Workplace']);
+    this.toggleMobileMenu();
   }
+
+  toggleMobileMenu(): void {
+    const menu = document.getElementById('menu')!;
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+
 
 }
