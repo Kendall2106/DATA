@@ -1,57 +1,281 @@
 <movies>
   <movie>
     <id>1</id>
-    <name>Super Mario</name>
-    <date>29/11/2023</date>
-    <score>5</score>
-    <type>Animacion</type>
+    <name>Megan</name>
+    <date>12/01/2023</date>
+    <score>3</score>
+    <type>Terror</type>
     <image>p1.jpg</image>
     <visible>True</visible>
   </movie>
 
   <movie>
       <id>2</id>
-      <name>Infinity War</name>
-      <date>29/11/2023</date>
+      <name>Quiero comerme tu pancreas</name>
+      <date>18/01/2023</date>
       <score>4</score>
       <type>Animacion</type>
-      <image>p1.jpg</image>
+      <image>p2.jpg</image>
       <visible>True</visible>
   </movie>
 
   <movie>
-    <id>1</id>
-    <name>Super Mario</name>
-    <date>29/11/2023</date>
-    <score>1</score>
-    <image>p1.jpg</image>
+    <id>3</id>
+    <name>Wakanda Forever</name>
+    <date>02/02/2023</date>
+    <score>4</score>
+    <type>Accion</type>
+    <image>p3.jpg</image>
     <visible>True</visible>
   </movie>
 
   <movie>
-      <id>2</id>
-      <name>Infinity War</name>
-      <date>29/11/2023</date>
-      <score>0</score>
-      <image>p1.jpg</image>
+      <id>4</id>
+      <name>El hombre lobo</name>
+      <date>11/02/2023</date>
+      <score>2</score>
+      <type>Triller</type>
+      <image>p4.jpg</image>
       <visible>True</visible>
   </movie>
 
   <movie>
-    <id>1</id>
-    <name>Super Mario</name>
-    <date>29/11/2023</date>
-    <score>5</score>
-    <image>p1.jpg</image>
+    <id>5</id>
+    <name>El rito</name>
+    <date>16/02/2023</date>
+    <score>3</score>
+    <type>Terror</type>
+    <image>p5.jpg</image>
     <visible>True</visible>
   </movie>
 
   <movie>
-      <id>2</id>
-      <name>Infinity War</name>
-      <date>29/11/2023</date>
+      <id>6</id>
+      <name>Super escuela de Heroes</name>
+      <date>19/02/2023</date>
+      <score>3</score>
+      <type>Accion</type>
+      <image>p6.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>7</id>
+      <name>Pocahontas</name>
+      <date>24/02/2023</date>
+      <score>3</score>
+      <type>Animacion</type>
+      <image>p7.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>8</id>
+      <name>Exorcismo de Emily Rose</name>
+      <date>02/03/2023</date>
+      <score>3</score>
+      <type>Terror</type>
+      <image>p8.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>9</id>
+      <name>Duro de matar</name>
+      <date>02/03/2023</date>
+      <score>3</score>
+      <type>Accion</type>
+      <image>p9.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>10</id>
+      <name>El gato con botas</name>
+      <date>05/03/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p10.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>11</id>
+      <name>Hercules</name>
+      <date>24/03/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p11.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>12</id>
+      <name>Las ventajas de ser invisible</name>
+      <date>02/04/2023</date>
+      <score>1</score>
+      <type>Romance</type>
+      <image>p12.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>13</id>
+      <name>La visita</name>
+      <date>06/04/2023</date>
+      <score>4</score>
+      <type>Triller</type>
+      <image>p13.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>14</id>
+      <name>El jardin de las palabras</name>
+      <date>08/04/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p14.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>15</id>
+      <name>El tiempo contigo</name>
+      <date>13/04/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p15.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>16</id>
+      <name>5cm por segundo</name>
+      <date>14/04/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p16.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>17</id>
+      <name>A Silence Voice</name>
+      <date>15/04/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p17.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>18</id>
+      <name>Your name</name>
+      <date>15/04/2023</date>
       <score>5</score>
-      <image>p1.jpg</image>
+      <type>Animacion</type>
+      <image>p18.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>19</id>
+      <name>Super Mario Bros</name>
+      <date>07/07/2023</date>
+      <score>3</score>
+      <type>Animacion</type>
+      <image>p19.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>20</id>
+      <name>Spiderman Across the Spiderverse</name>
+      <date>10/08/2023</date>
+      <score>5</score>
+      <type>Animacion</type>
+      <image>p20.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>21</id>
+      <name>Dungeons and Dragons</name>
+      <date>23/09/2023</date>
+      <score>3</score>
+      <type>Accion</type>
+      <image>p21.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>22</id>
+      <name>Suzume</name>
+      <date>01/10/2023</date>
+      <score>4</score>
+      <type>Animacion</type>
+      <image>p22.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>23</id>
+      <name>Nadie te salvara</name>
+      <date>15/10/2023</date>
+      <score>4</score>
+      <type>Terror</type>
+      <image>p23.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>24</id>
+      <name>Lemonade Mouth</name>
+      <date>29/10/2023</date>
+      <score>3</score>
+      <type>Musical</type>
+      <image>p24.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>25</id>
+      <name>Guardianes de la galaxia 3</name>
+      <date>01/11/2023</date>
+      <score>4</score>
+      <type>Accion</type>
+      <image>p25.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>26</id>
+      <name>Terrifer 1</name>
+      <date>07/11/2023</date>
+      <score>2</score>
+      <type>Terror</type>
+      <image>p26.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>27</id>
+      <name>Terrifer: El origen</name>
+      <date>07/11/2023</date>
+      <score>2</score>
+      <type>Terror</type>
+      <image>p27.jpg</image>
+      <visible>True</visible>
+  </movie>
+
+  <movie>
+      <id>28</id>
+      <name>Ant-Man: Quantumanía</name>
+      <date>21/11/2023</date>
+      <score>2</score>
+      <type>Accion</type>
+      <image>p28.jpg</image>
       <visible>True</visible>
   </movie>
 

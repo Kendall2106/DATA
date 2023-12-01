@@ -32,7 +32,7 @@ export class WorkplaceComponent implements OnInit {
 
     if(this.message=="Peliculas"){
       this.movieService.getMovies().subscribe(movies => {
-        this.movies = movies;
+        this.movies = movies.sort((a, b) => b.id - a.id); //Orden Desc
       });
     }
     

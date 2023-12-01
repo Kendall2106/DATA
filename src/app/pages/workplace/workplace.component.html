@@ -4,7 +4,7 @@
                 <div class="col-lg-12 col-md-12" style="margin-left: 2%; margin-top: 3%;">
                     <h1>Lista de {{message}}</h1>
                 </div>
-                <div class="filter col-lg-10 col-12" style="margin-top: 3%; text-align: end;"> 
+                <div class="filter col-lg-10 col-12" style="margin-top: 3%; text-align: end; margin-bottom: 3%;"> 
                     <select id="opTipos">
                         <option disabled selected style="display:none;">Categoria</option>
                         <option *ngFor="let opcion of opTipos" [value]="opcion">{{ opcion }}</option>
@@ -18,7 +18,7 @@
                         <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
                     </select>
                 </div>
-                    <div class="card col-lg-3" *ngFor="let movie of movies" style="margin-top: 3%; margin-left: 2%; margin-right: 2%;">
+                    <div class="card col-lg-3" *ngFor="let movie of movies" style="margin-bottom: 3%; margin-left: 2%; margin-right: 2%;">
                         <div class="row">
                             <div class="left col-lg-4 col-3" style="text-align: center; margin: 1%;">
                                 <img class="imagen" src="./assets/img/peliculas/{{ movie.image }}" >
