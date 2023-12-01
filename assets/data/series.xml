@@ -1,0 +1,33 @@
+<series>
+  <serie>
+    <id>1</id>
+    <name>Rick and Morty</name>
+    <date>06/02/2023</date>
+    <score>3</score>
+    <type></type>
+    <image>s1.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+      <id>2</id>
+      <name>The last of us</name>
+      <date>12/03/2023</date>
+      <score>5</score>
+      <type></type>
+      <image>s2.jpg</image>
+      <visible>True</visible>
+  </serie>
+
+   <serie>
+    <id>3</id>
+    <name>Pesadillas</name>
+    <date>01/11/2023</date>
+    <score>2</score>
+    <type></type>
+    <image>s3.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+
+</series>
