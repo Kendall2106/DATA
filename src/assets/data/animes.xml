@@ -1,0 +1,267 @@
+<animes>
+  <anime>
+    <id>1</id>
+    <name>Charlotte</name>
+    <date>02/01/2023</date>
+    <score>3</score>
+    <type></type>
+    <numTemp>1</numTemp>
+    <image>a1.jpg</image>
+    <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>2</id>
+      <name>Sayonara Watshi no Cramer</name>
+      <date>05/01/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a2.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+   <anime>
+    <id>3</id>
+    <name>Chainsaw Man</name>
+    <date>18/01/2023</date>
+    <score>3</score>
+    <type></type>
+    <numTemp>1</numTemp>
+    <image>a3.jpg</image>
+    <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>4</id>
+      <name>Tokio Ghoul</name>
+      <date>10/02/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a4.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>5</id>
+      <name>Tokio Ghoul 2: ^A</name>
+      <date>11/02/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>2</numTemp>
+      <image>a5.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>6</id>
+      <name>Plastic Memory</name>
+      <date>15/02/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a6.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>7</id>
+      <name>Eminence of Shadow</name>
+      <date>04/03/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a7.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+    <anime>
+      <id>8</id>
+      <name>Clannad</name>
+      <date>12/03/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a8.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>9</id>
+      <name>My Hero Academy 6</name>
+      <date>25/03/2023</date>
+      <score>5</score>
+      <type></type>
+      <numTemp>6</numTemp>
+      <image>a9.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>10</id>
+      <name>My Dress-Up Darling</name>
+      <date>26/03/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a10.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>11</id>
+      <name>Las Quintillizas 1</name>
+      <date>13/05/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a11.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>12</id>
+      <name>Las Quintillizas 2</name>
+      <date>16/05/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a12.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>13</id>
+      <name>Bochi the Rock</name>
+      <date>21/06/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a13.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>14</id>
+      <name>Sword Art Online 1</name>
+      <date>01/08/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a14.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>15</id>
+      <name>Sword Art Online 2</name>
+      <date>15/08/2023</date>
+      <score>2</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a15.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>16</id>
+      <name>Sword Art Online 3</name>
+      <date>30/08/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a16.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>17</id>
+      <name>Mushoku tensei 1</name>
+      <date>05/09/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a17.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>18</id>
+      <name>Mushoku tensei 2</name>
+      <date>01/10/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a18.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>19</id>
+      <name>Nagatoro 1</name>
+      <date>20/10/2023</date>
+      <score>2</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a19.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>20</id>
+      <name>Nagatoro 2</name>
+      <date>05/11/2023</date>
+      <score>2</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a20.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>21</id>
+      <name>Ore monogatari</name>
+      <date>10/11/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a21.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>22</id>
+      <name>HighSchool of the dead</name>
+      <date>15/11/2023</date>
+      <score>2</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a22.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>23</id>
+      <name>Demon Slayer: Arco Herreros</name>
+      <date>20/11/2023</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a23.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>24</id>
+      <name>AOT: Final Chapter</name>
+      <date>25/11/2023</date>
+      <score>5</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a24.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+
+</animes>
