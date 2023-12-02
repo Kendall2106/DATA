@@ -24,8 +24,14 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleMobileMenu(): void {
+    /*const btn = document.getElementById('btnMenu')!;
+    if(btn.style.display == 'none'){
+      
+    }*/
+    
     const menu = document.getElementById('menu')!;
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    
   }
 
 

@@ -6,6 +6,7 @@ import { Movie } from 'src/app/core/model/movie.model';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
+import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
@@ -25,10 +26,10 @@ export class WorkplaceComponent implements OnInit {
   opAnios: string[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
-  constructor(private movieService: MovieService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
+  constructor(private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
-      ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller"],
-      ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White"] // Colores correspondientes
+      ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
+      ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
     ];
       this.opAnios= ["2023","2022","2021","2020"];
       this.opCalificacion = ["0","1","2","3","4","5"];
@@ -70,7 +71,13 @@ export class WorkplaceComponent implements OnInit {
         this.data = games.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
       });
+    } else if (this.message === 'Libros') {
+      this.libroService.getLibros().subscribe(libros => {
+        this.data = libros.sort((a, b) => b.id - a.id);
+        this.resultFilter=this.data;
+      });
     }
+
 
     //this.resultFilter=this.data;
     // Añade lógica para otros casos si es necesario
