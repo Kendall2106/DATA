@@ -1,0 +1,73 @@
+<libros>
+  <libro>
+    <id>1</id>
+    <name>La Busqueda del asesino</name>
+    <date>09/01/2023</date>
+    <score>5</score>
+    <type>Fantasia</type>
+    <image>l1.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+  <libro>
+      <id>2</id>
+      <name>Las ventajas de ser invisible</name>
+      <date>28/01/2023</date>
+      <score>2</score>
+      <type>Romance</type>
+      <image>l2.jpg</image>
+      <visible>True</visible>
+  </libro>
+
+   <libro>
+    <id>3</id>
+    <name>El alma del emperador</name>
+    <date>05/02/2023</date>
+    <score>4</score>
+    <type>Fantasia</type>
+    <image>l3.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+  <libro>
+    <id>4</id>
+    <name>NeverWhere</name>
+    <date>19/02/2023</date>
+    <score>4</score>
+    <type>Fantasia</type>
+    <image>l4.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+  <libro>
+    <id>5</id>
+    <name>La voz de las espadas</name>
+    <date>23/03/2023</date>
+    <score>3</score>
+    <type>Fantasia</type>
+    <image>l5.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+  <libro>
+    <id>6</id>
+    <name>Nada, Carmen Laforet</name>
+    <date>02/04/2023</date>
+    <score>2</score>
+    <type>No Ficcion</type>
+    <image>l6.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+  <libro>
+    <id>7</id>
+    <name>Nada, </name>
+    <date>09/04/2023</date>
+    <score>3</score>
+    <type>Ficcion</type>
+    <image>l7.jpg</image>
+    <visible>True</visible>
+  </libro>
+
+
+</libros>
