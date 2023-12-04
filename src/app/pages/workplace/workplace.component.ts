@@ -78,7 +78,7 @@ export class WorkplaceComponent implements OnInit {
       });
     }
 
-
+    this.applyFilters();
     //this.resultFilter=this.data;
     // Añade lógica para otros casos si es necesario
   }
@@ -88,21 +88,23 @@ export class WorkplaceComponent implements OnInit {
     return index !== -1 ? this.opTipos[1][index] : 'greenyellow'; // Color por defecto para tipos desconocidos
   }
 
-  filterScore(query: any): void {
-    this.resultFilter=[];
+  /*filterScore(query: any): void {
+   // this.resultFilter=[];
 
-    this.resultFilter = this.data.filter((d) => {
-      const scoreAsString = d.score.toString().toLowerCase();
-      const queryValue = query.target.value.toString().toLowerCase();
-      return scoreAsString === queryValue;
-    });
+        this.resultFilter = this.data;
 
+        this.resultFilter = this.resultFilter.filter((d) => {
+          const scoreAsString = d.score.toString().toLowerCase();
+          const queryValue = query.target.value.toString().toLowerCase();
+          return scoreAsString === queryValue;
+        });
+    
   }
 
   filterYear(query: any): void {
-    this.resultFilter=[];
+   // this.resultFilter=[];
 
-    this.resultFilter = this.data.filter((d) => {
+    this.resultFilter = this.resultFilter.filter((d) => {
       const date = d.date.toString().toLowerCase();
       var parts = date.split("/");
       const year = parseInt(parts[2], 10);
@@ -114,16 +116,79 @@ export class WorkplaceComponent implements OnInit {
   }
 
   filterType(query: any): void {
-    this.resultFilter=[];
+    //this.resultFilter=[];
+    if(query.target.value.toString()=="Todos"){
+      this.resultFilter = this.data;
+    }else{
+      this.resultFilter = this.resultFilter.filter((d) => {
+        const typeString = d.type.toString().toLowerCase();
+        const queryValue = query.target.value.toString().toLowerCase();
+        return typeString === queryValue;
+      });
+     
+    }
+    
 
-    this.resultFilter = this.data.filter((d) => {
-      const typeString = d.type.toString().toLowerCase();
-      const queryValue = query.target.value.toString().toLowerCase();
-      return typeString === queryValue;
-    });
+  }*/
 
+  selectedCategory: string = 'Todos';
+  selectedYear: string = 'Todos';
+  selectedScore: string = 'Todos';
+
+// Agrega un método para aplicar los filtros
+applyFilters() {
+  // Aplica los filtros según los valores seleccionados
+  this.resultFilter = this.data
+    .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
+    .filter(item => this.selectedYear === 'Todos' || this.convertYear(item))
+    .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+}
+
+  filterType(event: any) {
+    this.selectedCategory = event.target.value;
+    this.applyFilters();
+  }
+  
+  filterYear(event: any) {
+    this.selectedYear = event.target.value;
+    this.applyFilters();
+  }
+  
+  filterScore(event: any) {
+    this.selectedScore = event.target.value;
+    this.applyFilters();
   }
 
+
+
+
+  convertYear(item: any): boolean {
+    const date = item.date.toString().toLowerCase();
+    const parts = date.split("/");
+    const year = parseInt(parts[2], 10);
+  
+    return (year+"") === this.selectedYear;
+  }
+
+  
+  currentSortOrder: 'asc' | 'desc' = 'desc';
+
+// Método para cambiar el orden de acuerdo al score
+sortDataByScore() {
+  this.resultFilter = this.resultFilter.sort((a, b) => {
+    const scoreA = a.score;
+    const scoreB = b.score;
+
+    if (this.currentSortOrder === 'asc') {
+      return scoreA - scoreB;
+    } else {
+      return scoreB - scoreA;
+    }
+  });
+
+  // Cambia el orden actual para la próxima vez
+  this.currentSortOrder = this.currentSortOrder === 'asc' ? 'desc' : 'asc';
+}
  
 
 

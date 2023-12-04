@@ -1,0 +1,20 @@
+.content{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2rem;
+    
+    
+}
+
+.graficos {
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos específicos para pantallas más pequeñas (móviles) */
+@media (max-width:1000px) {
+
+    .content{
+        font-size: 0.8rem;
+    }
+
+}
