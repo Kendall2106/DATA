@@ -8,11 +8,15 @@
 .graficos {
     align-items: center;
     justify-content: center;
+    margin-left: 10%;
 }
 
 /* Estilos específicos para pantallas más pequeñas (móviles) */
 @media (max-width:1000px) {
 
+    .graficos{
+        margin: 0%;
+    }
     .content{
         font-size: 0.8rem;
     }
