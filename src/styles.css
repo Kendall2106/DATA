@@ -9,7 +9,12 @@
         color: var(--color-text);
         transition: background-color 0.3s, box-shadow 0.3s;
         font-family: 'Orbitron', sans-serif;
+        /*background-image: url('./assets/fondo1.png');
+        background-size: cover; 
+        background-position: center;
+        background-repeat: no-repeat; */
     }
+
 
 /* Estilos para la luz alrededor del cursor */
 .light-effect {

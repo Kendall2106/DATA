@@ -34,7 +34,7 @@ export class GraphicsComponent {
     if (window.innerWidth <= 767) {
       this.view = [window.innerWidth - 20, 300]; // Ajusta estos valores según tus necesidades
     } else {
-      this.view = [700, 400]; // Tamaño predeterminado para pantallas más grandes
+      this.view = [460, 300]; // Tamaño predeterminado para pantallas más grandes
     }
   }
 

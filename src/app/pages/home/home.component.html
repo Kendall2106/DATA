@@ -25,7 +25,7 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   (select)="onSelect($event)">
-</ngx-charts-bar-vertical>-->
+</ngx-charts-bar-vertical>
 
 
 <div class="content col-lg-12">
@@ -36,5 +36,24 @@
     <h1 style="margin-bottom: 5%; margin-left: 5%; margin-top: 5%;"><i class="uil uil-calendar-alt"></i> 2022</h1>
     <div class="graficos">
         <app-graphics [datos]="single2"></app-graphics>
+    </div>
+</div>-->
+
+
+<div class="content col-lg-12">
+    <div class="row">
+        <div class="col-lg-4" >
+            <div class="graficos">
+                <h1 style="margin-bottom: 5%; margin-left: 5%; margin-top: 5%;"><i class="uil uil-calendar-alt"></i> 2023</h1>
+                <app-graphics [datos]="single"></app-graphics>
+            </div>
+        </div>
+        <div class="col-lg-4 columnas">
+            <h1 style="margin-bottom: 5%; margin-left: 5%; margin-top: 5%;"><i class="uil uil-calendar-alt"></i> 2022</h1>
+            <div class="graficos">
+                <app-graphics [datos]="single2"></app-graphics>
+            </div>
+        </div>
+       
     </div>
 </div>
