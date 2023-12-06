@@ -36,49 +36,58 @@ export class WorkplaceComponent implements OnInit {
   }
 
   ngOnInit() {
-  
 
     if (!this.dataService.typeData) {
       this.router.navigate(['/']);
     }
-
+    //const selectElement = document.getElementById('opAnios');
+    //this.filterYear(document.getElementById('opAnios'));
     this.router.events.subscribe(event => {
       
         this.message = this.dataService.typeData;
         this.loadData();
    
     });
+
+    this.selectedYear = this.opAnios[0];
+   // this.applyFilters();
   }
 
   loadData() {
     if (this.message === 'Peliculas') {
       this.movieService.getMovies().subscribe(movies => {
         this.data = movies.sort((a, b) => b.id - a.id);
-        this.resultFilter=this.data;
+       // this.resultFilter=this.data.filter((d) => {  return d.date>="01/01/2023"; });
+       this.resultFilter=this.data;
+       this.applyFilters();
       });
     } else if (this.message === 'Animes') {
       this.animeService.getAnimes().subscribe(animes => {
         this.data = animes.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
+        this.applyFilters();
       });
     } else if (this.message === 'Series') {
       this.seriesService.getSeries().subscribe(series => {
         this.data = series.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
+        this.applyFilters();
       });
     } else if (this.message === 'Juegos') {
       this.gameService.getGames().subscribe(games => {
         this.data = games.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
+        this.applyFilters();
       });
     } else if (this.message === 'Libros') {
       this.libroService.getLibros().subscribe(libros => {
         this.data = libros.sort((a, b) => b.id - a.id);
         this.resultFilter=this.data;
+        this.applyFilters();
       });
     }
 
-    this.applyFilters();
+    
     //this.resultFilter=this.data;
     // Añade lógica para otros casos si es necesario
   }
@@ -88,60 +97,36 @@ export class WorkplaceComponent implements OnInit {
     return index !== -1 ? this.opTipos[1][index] : 'greenyellow'; // Color por defecto para tipos desconocidos
   }
 
-  /*filterScore(query: any): void {
-   // this.resultFilter=[];
 
-        this.resultFilter = this.data;
 
-        this.resultFilter = this.resultFilter.filter((d) => {
-          const scoreAsString = d.score.toString().toLowerCase();
-          const queryValue = query.target.value.toString().toLowerCase();
-          return scoreAsString === queryValue;
-        });
-    
-  }
+  convert(date: any): number {
+       const dateTemp = date.toString().toLowerCase();
+       var parts = dateTemp.split("/");
+       const year = parseInt(parts[2], 10);
+       return year;
 
-  filterYear(query: any): void {
-   // this.resultFilter=[];
-
-    this.resultFilter = this.resultFilter.filter((d) => {
-      const date = d.date.toString().toLowerCase();
-      var parts = date.split("/");
-      const year = parseInt(parts[2], 10);
-      
-      const queryValue = query.target.value.toString().toLowerCase();
-      return (year+"") === queryValue;
-    });
-
-  }
-
-  filterType(query: any): void {
-    //this.resultFilter=[];
-    if(query.target.value.toString()=="Todos"){
-      this.resultFilter = this.data;
-    }else{
-      this.resultFilter = this.resultFilter.filter((d) => {
-        const typeString = d.type.toString().toLowerCase();
-        const queryValue = query.target.value.toString().toLowerCase();
-        return typeString === queryValue;
-      });
-     
-    }
-    
-
-  }*/
+   }
 
   selectedCategory: string = 'Todos';
-  selectedYear: string = 'Todos';
+  selectedYear: string = this.opAnios[0];
   selectedScore: string = 'Todos';
 
 // Agrega un método para aplicar los filtros
+
+
 applyFilters() {
-  // Aplica los filtros según los valores seleccionados
   this.resultFilter = this.data
     .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
-    .filter(item => this.selectedYear === 'Todos' || this.convertYear(item))
+    .filter(item => this.convertYear(item))
     .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+
+}
+
+convertYear(item: any): boolean {
+  const date = item.date.toString().toLowerCase();
+  const parts = date.split("/");
+  const year = parseInt(parts[2], 10);
+  return (year+"") === this.selectedYear;
 }
 
   filterType(event: any) {
@@ -153,6 +138,8 @@ applyFilters() {
     this.selectedYear = event.target.value;
     this.applyFilters();
   }
+
+
   
   filterScore(event: any) {
     this.selectedScore = event.target.value;
@@ -162,15 +149,9 @@ applyFilters() {
 
 
 
-  convertYear(item: any): boolean {
-    const date = item.date.toString().toLowerCase();
-    const parts = date.split("/");
-    const year = parseInt(parts[2], 10);
   
-    return (year+"") === this.selectedYear;
-  }
 
-  
+
   currentSortOrder: 'asc' | 'desc' = 'desc';
 
 // Método para cambiar el orden de acuerdo al score

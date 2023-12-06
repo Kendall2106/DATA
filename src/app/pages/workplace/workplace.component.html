@@ -11,9 +11,7 @@
                         <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
                     </select>
                     <select id="opAnios" (change)="filterYear($event)">
-                        <option disabled selected style="display:none;">Año visto</option>
-                        <option>Todos</option>
-                        <option *ngFor="let opcion of opAnios" [value]="opcion">{{ opcion }}</option>
+                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>
                     </select>
                     <select id="opCalificacion" (ngModel)="calificacionSelec" (change)="filterScore($event)" >
                         <option disabled selected style="display:none;">Calificacion</option>
@@ -32,7 +30,7 @@
                             </div>
 
                             <div class="right col-lg-6 col-6" style="margin: 1%;">
-                                <h5> {{ d.name }}</h5>
+                                <h5 style="font-size: 1.1rem;"> {{ d.name }}</h5>
                                 <p> {{ d.date }}</p>
                                 <div class="row" style="margin-top: 10%;">
                                     <div class="type col-lg-12 col-12" >

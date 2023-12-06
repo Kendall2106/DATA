@@ -13,13 +13,15 @@ import { HomeComponent } from './pages/home/home.component';
 
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GraphicsComponent } from './pages/component/graphics/graphics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkplaceComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    GraphicsComponent
 
   ],
   imports: [

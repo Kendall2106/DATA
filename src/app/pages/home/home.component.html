@@ -31,20 +31,10 @@
 <div class="content col-lg-12">
     <h1 style="margin-bottom: 5%; margin-left: 5%; margin-top: 5%;"><i class="uil uil-calendar-alt"></i> 2023</h1>
     <div class="graficos">
-        <ngx-charts-bar-vertical
-        [view]="view"
-        scheme="flame"
-        [results]="single"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        (select)="onSelect($event)"
-        style="fill: white;">
-        </ngx-charts-bar-vertical>
+        <app-graphics [datos]="single"></app-graphics>
+    </div>
+    <h1 style="margin-bottom: 5%; margin-left: 5%; margin-top: 5%;"><i class="uil uil-calendar-alt"></i> 2022</h1>
+    <div class="graficos">
+        <app-graphics [datos]="single2"></app-graphics>
     </div>
 </div>

@@ -8,6 +8,7 @@
         background-color: var(--color-1);
         color: var(--color-text);
         transition: background-color 0.3s, box-shadow 0.3s;
+        font-family: 'Orbitron', sans-serif;
     }
 
 /* Estilos para la luz alrededor del cursor */
