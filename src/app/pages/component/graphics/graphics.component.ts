@@ -32,9 +32,9 @@ export class GraphicsComponent {
   setViewSize() {
     // Ajustar el tamaño del gráfico según el ancho de la pantalla
     if (window.innerWidth <= 767) {
-      this.view = [window.innerWidth - 20, 300]; // Ajusta estos valores según tus necesidades
+      this.view = [window.innerWidth - 20, 200]; // Ajusta estos valores según tus necesidades
     } else {
-      this.view = [460, 300]; // Tamaño predeterminado para pantallas más grandes
+      this.view = [900, 300]; // Tamaño predeterminado para pantallas más grandes
     }
   }
 

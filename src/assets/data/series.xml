@@ -29,5 +29,15 @@
     <visible>True</visible>
   </serie>
 
+  <serie>
+    <id>4</id>
+    <name>Loki 2</name>
+    <date>08/12/2023</date>
+    <score>5</score>
+    <type></type>
+    <image>s4.jpg</image>
+    <visible>True</visible>
+  </serie>
+
 
 </series>

@@ -43,6 +43,19 @@ export class HomeComponent implements OnInit{
     }
   }*/
 
+  years: number[] = [2023, 2022];
+
+  // Puedes ajustar estos valores según tus necesidades
+  progress: { [key: number]: number } = {
+    2023: 30, // Porcentaje de progreso para el año 2023
+    2022: 70 // Porcentaje de progreso para el año 2022
+  };
+
+  getProgressWidth(year: number): string {
+    const percentage = this.progress[year] || 0;
+    return percentage + '%';
+  }
+
   ngOnInit(): void {
     this.loadData(2023).subscribe((data: any[]) => {
       this.single = data;
