@@ -80,14 +80,13 @@
                 <h4>Recomendaciones</h4>
                 
             </div>
-            <div style="border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); margin-top: 5%;">
-                <h4>Top 5</h4>
-                <ngb-carousel *ngIf="nombres$ | async as nombres">
+            <div style="border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); margin-top: 5%; min-height: 250px; ">
+                <h4>5 Estrellas 2023</h4>
+                <ngb-carousel *ngIf="nombres$ | async as nombres" [interval]="5000">
                     <ng-template ngbSlide *ngFor="let tipo of tipos">
-                      <div class="card" *ngFor="let item of filterByTipo(nombres, tipo)">
-                        <div class="card-body">
+                      <div class="card" *ngFor="let item of filterByTipo(nombres, tipo)" style="border: none; background-color: red;">
+                        <div class="card-body custom-list-item" style="background-color: var(--color-1); color: var(--color-text);">
                           <h5 class="card-title">{{ item.nombre }}</h5>
-                          <p class="card-text">{{ tipo }}</p>
                         </div>
                       </div>
                     </ng-template>

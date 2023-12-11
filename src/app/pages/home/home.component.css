@@ -11,6 +11,10 @@
   }
 
 
+  ::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next {
+    display: none;
+  }
+
 
 
 .content{

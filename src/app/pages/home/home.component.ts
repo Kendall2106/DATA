@@ -69,10 +69,7 @@ export class HomeComponent implements OnInit{
       this.single2 = data;
     });
 
-    /*this.d().subscribe((data: any[]) => {
-      this.recomendaciones = data;
-    });*/
-   // this.nombres$ = this.d();
+    this.nombres$ = this.d();
   }
 
 
@@ -175,7 +172,8 @@ d(): Observable<{ tipo: string, nombre: string }[]> {
 
 // Suponiendo que esta función filtra objetos con una propiedad 'score' mayor o igual a 5
 filterByScore(items: any[]): any[] {
-  return items.filter(item => item.score >= 5);
+  const añoActual = new Date().getFullYear();
+  return items.filter(item => item.score >= 5 && this.convert(item.date)==añoActual);
 }
 
 
