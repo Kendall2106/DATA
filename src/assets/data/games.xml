@@ -69,5 +69,95 @@
     <visible>True</visible>
   </game>
 
+  <game>
+    <id>8</id>
+    <name>Celeste</name>
+    <date>09/01/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>g8.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>9</id>
+    <name>The Forest</name>
+    <date>18/01/2022</date>
+    <score>3</score>
+    <type></type>
+    <image>g9.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>10</id>
+    <name>Verde hoja: LR</name>
+    <date>01/02/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>g10.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>11</id>
+    <name>Hollow Knight</name>
+    <date>03/03/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>g11.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>12</id>
+    <name>SteamWorld Heist</name>
+    <date>11/03/2022</date>
+    <score>3</score>
+    <type></type>
+    <image>g12.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>13</id>
+    <name>Subnautica</name>
+    <date>19/03/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>g13.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>14</id>
+    <name>The massenger</name>
+    <date>03/08/2022</date>
+    <score>3</score>
+    <type></type>
+    <image>g14.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>15</id>
+    <name>Forager</name>
+    <date>15/08/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>g15.jpg</image>
+    <visible>True</visible>
+  </game>
+
+  <game>
+    <id>16</id>
+    <name>ARK</name>
+    <date>25/12/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>g16.jpg</image>
+    <visible>True</visible>
+  </game>
+
 
 </games>

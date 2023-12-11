@@ -263,5 +263,114 @@
       <visible>True</visible>
   </anime>
 
+  <anime>
+      <id>25</id>
+      <name>KNY: Distrito Rojo</name>
+      <date>14/01/2022</date>
+      <score>5</score>
+      <type></type>
+      <numTemp>2</numTemp>
+      <image>a25.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>26</id>
+      <name>Naruto</name>
+      <date>19/02/2022</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a26.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>27</id>
+      <name>AOT: Guerra de Paradis</name>
+      <date>03/04/2022</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>4,2</numTemp>
+      <image>a27.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>28</id>
+      <name>Kotaro vive solo</name>
+      <date>19/04/2022</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a28.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>29</id>
+      <name>Shigatsu wa Kimi no Uso</name>
+      <date>24/04/2022</date>
+      <score>5</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a29.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>30</id>
+      <name>Tokyo Magniture 8.0</name>
+      <date>19/05/2022</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a30.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>31</id>
+      <name>Angel Beats</name>
+      <date>26/05/2022</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a31.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+<anime>
+      <id>32</id>
+      <name>Spy Family</name>
+      <date>25/06/2022</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1,1</numTemp>
+      <image>a32.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>33</id>
+      <name>Anohana</name>
+      <date>06/10/2022</date>
+      <score>4</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a33.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+<anime>
+      <id>34</id>
+      <name>Spy Family 1,2</name>
+      <date>31/12/2022</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1,2</numTemp>
+      <image>a34.jpg</image>
+      <visible>True</visible>
+  </anime>
 
 </animes>

@@ -15,6 +15,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphicsComponent } from './pages/component/graphics/graphics.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,8 @@ import { GraphicsComponent } from './pages/component/graphics/graphics.component
     AppRoutingModule,
     HttpClientModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

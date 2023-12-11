@@ -17,8 +17,10 @@ export class HomeComponent implements OnInit{
 
 
 
+  nombres$: Observable<{ tipo: string; nombre: string; }[]> | undefined;
+  tipos = ['peliculas', 'series', 'animes', 'juegos', 'libros'];
 
-
+  recomendaciones: any[] = [];
   single: any[] = [];
   single2: any[] = [];
   valor: number = 0;
@@ -32,6 +34,7 @@ export class HomeComponent implements OnInit{
 
   constructor(private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
     //this.setViewSize(); // Establecer el tamaño inicial
+    
   }
 
   /*setViewSize() {
@@ -57,12 +60,19 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+
     this.loadData(2023).subscribe((data: any[]) => {
       this.single = data;
     });
     this.loadData(2022).subscribe((data: any[]) => {
       this.single2 = data;
     });
+
+    /*this.d().subscribe((data: any[]) => {
+      this.recomendaciones = data;
+    });*/
+   // this.nombres$ = this.d();
   }
 
 
@@ -93,43 +103,6 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  /*ngOnInit(): void {
-    //this.clear();
-
-    this.single = this.loadData(2023);
-
-  }
-  
-  loadData(year: number): any[] {
-    // Use forkJoin to combine data from multiple observables
-    var datosTemp:any[] = [];
-
-    forkJoin([
-      this.movieService.getMovies(),
-      this.seriesService.getSeries(),
-      this.animeService.getAnimes(),
-      this.gameService.getGames(),
-      this.libroService.getLibros()
-    ]).subscribe(([movies, series, animes, games, libros]) => {
-    
-      const movieValue = this.cantidadPorAnio(movies, year);
-      const seriesValue = this.cantidadPorAnio(series, year);
-      const animeValue = this.cantidadPorAnio(animes, year);
-      const gameValue = this.cantidadPorAnio(games,year);
-      const libroValue = this.cantidadPorAnio(libros, year);
-
-      // Combine data from all services
-      datosTemp = [
-        { name: 'Peliculas', value: movieValue },
-        { name: 'Series', value: seriesValue },
-        { name: 'Animes', value: animeValue },
-        { name: 'Juegos', value: gameValue },
-        { name: 'Libros', value: libroValue }
-      ];
-    });
-    return datosTemp;
-  }*/
-
   cantidadPorAnio(param: any, year: number){
     const filtered = param.filter((p: { date: any; }) => {
       return this.convert(p.date) === year;
@@ -146,24 +119,69 @@ export class HomeComponent implements OnInit{
 
 }
 
- /*onSelect(data: any): void {
-    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
+/*d(): Observable<any[]> {
+  return forkJoin([
+    this.movieService.getMovies(),
+    this.seriesService.getSeries(),
+    this.animeService.getAnimes(),
+    this.gameService.getGames(),
+    this.libroService.getLibros()
+  ]).pipe(
+    map(([movies, series, animes, games, libros]: [any[], any[], any[], any[], any[]]) => {
+      const moviesWithScore5 = this.filterByScore(movies);
+      const seriesWithScore5 = this.filterByScore(series);
+      const animesWithScore5 = this.filterByScore(animes);
+      const gamesWithScore5 = this.filterByScore(games);
+      const librosWithScore5 = this.filterByScore(libros);
 
-  onActivate(data: any): void {
-    //console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
+      const datos: any[] = [];
+      // Mapear para obtener solo el nombre de cada registro
+      moviesWithScore5.forEach(movie => datos.push(movie.name));
+      seriesWithScore5.forEach(serie => datos.push(serie.name));
+      animesWithScore5.forEach(anime => datos.push(anime.name));
+      gamesWithScore5.forEach(game => datos.push(game.name));
+      librosWithScore5.forEach(libro => datos.push(libro.name));
 
-  onDeactivate(data: any): void {
-    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }*/
-
-
-/*clear(){
-  this.valor =this.dataMovie.length;
+      console.log(datos);
+      return datos;
+    })
+  );
 }*/
 
+d(): Observable<{ tipo: string, nombre: string }[]> {
+  return forkJoin([
+    this.movieService.getMovies(),
+    this.seriesService.getSeries(),
+    this.animeService.getAnimes(),
+    this.gameService.getGames(),
+    this.libroService.getLibros()
+  ]).pipe(
+    map(([movies, series, animes, games, libros]: [any[], any[], any[], any[], any[]]) => {
+      const moviesWithScore5 = this.filterByScore(movies).map(movie => ({ tipo: 'peliculas', nombre: movie.name }));
+      const seriesWithScore5 = this.filterByScore(series).map(serie => ({ tipo: 'series', nombre: serie.name }));
+      const animesWithScore5 = this.filterByScore(animes).map(anime => ({ tipo: 'animes', nombre: anime.name }));
+      const gamesWithScore5 = this.filterByScore(games).map(game => ({ tipo: 'juegos', nombre: game.name }));
+      const librosWithScore5 = this.filterByScore(libros).map(libro => ({ tipo: 'libros', nombre: libro.name }));
 
+      const datos: { tipo: string, nombre: string }[] = [];
+
+      // Concatenar los datos de cada tipo
+      datos.push(...moviesWithScore5, ...seriesWithScore5, ...animesWithScore5, ...gamesWithScore5, ...librosWithScore5);
+
+      return datos;
+    })
+  );
+}
+
+// Suponiendo que esta función filtra objetos con una propiedad 'score' mayor o igual a 5
+filterByScore(items: any[]): any[] {
+  return items.filter(item => item.score >= 5);
+}
+
+
+filterByTipo(items: any[], tipo: string): any[] {
+  return items.filter(item => item.tipo === tipo);
+}
 
 
  

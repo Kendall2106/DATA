@@ -1,8 +1,9 @@
 .prin{
-    margin-left: 15%; 
+    
     margin-right: 15%; 
     margin-top: 5%;
 }
+
 .progress-bar {
     height: 10px;
     background-color: blue; /* Cambia el color según tus preferencias */

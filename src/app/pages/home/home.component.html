@@ -60,7 +60,42 @@
 
 
 <div class="prin">
-<h1>Archives</h1>
+    <div class="row">
+        <div class="col-lg-8"  style="margin: 2%; border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); ">
+            <h1>Archives</h1>
+            <div style=" margin-left: 5%; margin-right: 5%; margin-top: 5%;">
+                <h4>2023</h4>
+                <app-graphics [datos]="single"></app-graphics>
+            </div>
+            <div style="margin-left: 5%; margin-right: 5%; margin-top: 5%;">
+                <h4>2022</h4>
+                <app-graphics [datos]="single2"></app-graphics>
+            </div>
+            
+        </div>
+        <div class="col-lg-3" style=" margin: 2%; border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);" >
+            <!--
+            -->
+            <div style=" border-radius: 3%; margin-top: 5%; border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
+                <h4>Recomendaciones</h4>
+                
+            </div>
+            <div style="border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); margin-top: 5%;">
+                <h4>Top 5</h4>
+                <ngb-carousel *ngIf="nombres$ | async as nombres">
+                    <ng-template ngbSlide *ngFor="let tipo of tipos">
+                      <div class="card" *ngFor="let item of filterByTipo(nombres, tipo)">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ item.nombre }}</h5>
+                          <p class="card-text">{{ tipo }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+            </div>
+        </div>
+    </div>
+<!--<h1>Archives</h1>
     <div style=" margin-left: 5%; margin-right: 5%; margin-top: 5%;">
         <h4>2023</h4>
         <app-graphics [datos]="single"></app-graphics>
@@ -68,6 +103,8 @@
     <div style="margin-left: 5%; margin-right: 5%; margin-top: 5%;">
         <h4>2022</h4>
         <app-graphics [datos]="single2"></app-graphics>
-    </div>
+    </div>-->
+
+    
     
 </div>

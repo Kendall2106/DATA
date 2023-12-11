@@ -1,4 +1,8 @@
 
+.list{
+  max-height: calc(105vh - 60px); /* Ajusta el valor según tus necesidades */
+  overflow-y: auto;
+}
 
 .card{
     background-color: var(--color-1);

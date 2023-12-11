@@ -39,5 +39,95 @@
     <visible>True</visible>
   </serie>
 
+  <serie>
+    <id>5</id>
+    <name>Arcane</name>
+    <date>06/01/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>s5.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>6</id>
+    <name>What if</name>
+    <date>14/01/2022</date>
+    <score>3</score>
+    <type></type>
+    <image>s6.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>7</id>
+    <name>Book of Boba Fett</name>
+    <date>22/02/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>s7.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>8</id>
+    <name>The Cuphead show</name>
+    <date>21/03/2022</date>
+    <score>3</score>
+    <type></type>
+    <image>s8.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>9</id>
+    <name>Severance</name>
+    <date>25/06/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>s9.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>10</id>
+    <name>Stranger Things</name>
+    <date>02/08/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>s10.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>11</id>
+    <name>Avatar</name>
+    <date>02/10/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>s11.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>12</id>
+    <name>La casa del Dragon</name>
+    <date>23/10/2022</date>
+    <score>5</score>
+    <type></type>
+    <image>s12.jpg</image>
+    <visible>True</visible>
+  </serie>
+
+  <serie>
+    <id>13</id>
+    <name>Merlina</name>
+    <date>02/12/2022</date>
+    <score>4</score>
+    <type></type>
+    <image>s13.jpg</image>
+    <visible>True</visible>
+  </serie>
+
 
 </series>
