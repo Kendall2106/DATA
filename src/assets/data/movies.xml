@@ -279,4 +279,14 @@
       <visible>True</visible>
   </movie>
 
+  <movie>
+      <id>29</id>
+      <name>Cisne Negro</name>
+      <date>11/12/2023</date>
+      <score>3</score>
+      <type>Terror</type>
+      <image>p29.jpg</image>
+      <visible>True</visible>
+  </movie>
+
 </movies>
