@@ -373,4 +373,26 @@
       <visible>True</visible>
   </anime>
 
+  <anime>
+      <id>35</id>
+      <name>Classroom of the elite 1</name>
+      <date>13/12/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>1</numTemp>
+      <image>a35.jpg</image>
+      <visible>True</visible>
+  </anime>
+
+  <anime>
+      <id>36</id>
+      <name>Classroom of the elite 2</name>
+      <date>13/12/2023</date>
+      <score>3</score>
+      <type></type>
+      <numTemp>2</numTemp>
+      <image>a36.jpg</image>
+      <visible>True</visible>
+  </anime>
+
 </animes>
