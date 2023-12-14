@@ -11,6 +11,10 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { DataService } from './core/service/data.service';
 import { HomeComponent } from './pages/home/home.component';
 
+import {initializeApp,provideFirebaseApp} from '@angular/fire/app';
+import {environment} from '../environments/environment';
+import {getFirestore,provideFirestore} from '@angular/fire/firestore';
+
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphicsComponent } from './pages/component/graphics/graphics.component';
@@ -33,7 +37,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(()=> getFirestore())
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

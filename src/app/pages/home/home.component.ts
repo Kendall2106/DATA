@@ -5,6 +5,7 @@ import { AnimeService } from 'src/app/core/service/anime.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { SeriesService } from 'src/app/core/service/series.service';
+import { Servicios } from 'src/app/core/service/servicios.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit{
   single2: any[] = [];
   valor: number = 0;
   dataMovie: any[] = [];
+  students: any;
 
 /*
   @HostListener('window:resize', ['$event'])
@@ -32,7 +34,7 @@ export class HomeComponent implements OnInit{
     this.setViewSize();
   }*/
 
-  constructor(private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
+  constructor(private s: Servicios, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
     //this.setViewSize(); // Establecer el tamaño inicial
     
   }
@@ -179,6 +181,17 @@ filterByScore(items: any[]): any[] {
 
 filterByTipo(items: any[], tipo: string): any[] {
   return items.filter(item => item.tipo === tipo);
+}
+
+click(): void {
+  this.s.saveData();
+}
+
+async read() {
+  /*var datos: any[] = this.s.daata();*/
+  const students = [];
+  this.students = await this.s.daata();
+  console.log(this.students);
 }
 
 
