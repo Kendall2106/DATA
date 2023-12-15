@@ -20,6 +20,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraphicsComponent } from './pages/component/graphics/graphics.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateComponent } from './pages/create/create.component';
+import { FormsModule } from '@angular/forms'; 
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     WorkplaceComponent,
     SidebarComponent,
     HomeComponent,
-    GraphicsComponent
+    GraphicsComponent,
+    CreateComponent
 
   ],
   imports: [
@@ -38,6 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxChartsModule,
     BrowserAnimationsModule,
     NgbModule,
+    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(()=> getFirestore())
   ],

@@ -23,6 +23,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/Workplace']);
   }
 
+  navegarCreate(){
+    this.router.navigate(['/Create']);
+  }
+
   toggleMobileMenu(): void {
     /*const btn = document.getElementById('btnMenu')!;
     if(btn.style.display == 'none'){

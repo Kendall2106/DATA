@@ -18,17 +18,10 @@ export class Servicios {
 }
 
 
-  async daata(): Promise<any> {
+async daata(): Promise<any> {
   const acollection = collection(this.firestore,'students');
   const querySnapshot = await getDocs(acollection);
   return querySnapshot.docs.map(doc => doc.data());
-  /*querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    //console.log('Nombre:', data);
-    return data;
-  });*/
- // console.log(querySnapshot.docs);
- // return acollection;
 }
 
 

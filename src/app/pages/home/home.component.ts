@@ -64,14 +64,14 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
 
 
-    this.loadData(2023).subscribe((data: any[]) => {
+   /* this.loadData(2023).subscribe((data: any[]) => {
       this.single = data;
     });
     this.loadData(2022).subscribe((data: any[]) => {
       this.single2 = data;
     });
 
-    this.nombres$ = this.d();
+    this.nombres$ = this.d();*/
   }
 
 

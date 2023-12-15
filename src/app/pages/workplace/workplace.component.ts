@@ -53,7 +53,39 @@ export class WorkplaceComponent implements OnInit {
    // this.applyFilters();
   }
 
-  loadData() {
+  async loadData(){
+    if (this.message === 'Peliculas') {
+      this.data = (await this.movieService.getMovies()).map((movie: { date: string; }) => {
+        movie.date = this.convertDate(movie.date);
+        return movie;
+      });
+      this.resultFilter=this.data;
+      this.resultFilter.forEach((element: any)=>{
+        element.image ='data:image/jpg;base64,' + element.image;
+      });
+      this.applyFilters();
+    }else if (this.message === 'Series') {
+      this.data = (await this.seriesService.getSeries()).map((serie: { date: string; }) => {
+        serie.date = this.convertDate(serie.date);
+        return serie;
+      });
+      this.resultFilter=this.data;
+      this.resultFilter.forEach((element: any)=>{
+        element.image ='data:image/jpg;base64,' + element.image;
+      });
+      this.applyFilters();
+    }
+  }
+
+  convertDate(date: any): string {
+    const dateTemp = date.toString().toLowerCase();
+    var parts = dateTemp.split("-");
+    const year = parseInt(parts[2], 10);
+    return parts[2]+"-"+parts[1]+"-"+parts[0];
+
+}
+
+  /*loadData() {
     if (this.message === 'Peliculas') {
       this.movieService.getMovies().subscribe(movies => {
         this.data = movies.sort((a, b) => b.id - a.id);
@@ -90,7 +122,7 @@ export class WorkplaceComponent implements OnInit {
     
     //this.resultFilter=this.data;
     // Añade lógica para otros casos si es necesario
-  }
+  }*/
 
   getColorByType(type: string): string {
     const index = this.opTipos[0].indexOf(type);
@@ -106,6 +138,20 @@ export class WorkplaceComponent implements OnInit {
        return year;
 
    }
+
+   /*convertirTimestampAFecha(timestamp: any): string {
+    const fecha = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);
+  
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getFullYear();
+  
+    const formatoFecha = `${dia}/${mes}/${anio}`;
+  
+    return formatoFecha;
+  }*/
+
+
 
   selectedCategory: string = 'Todos';
   selectedYear: string = this.opAnios[0];
@@ -124,10 +170,13 @@ applyFilters() {
 
 convertYear(item: any): boolean {
   const date = item.date.toString().toLowerCase();
-  const parts = date.split("/");
+  const parts = date.split("-");
   const year = parseInt(parts[2], 10);
   return (year+"") === this.selectedYear;
 }
+
+
+
 
   filterType(event: any) {
     this.selectedCategory = event.target.value;
@@ -139,8 +188,6 @@ convertYear(item: any): boolean {
     this.applyFilters();
   }
 
-
-  
   filterScore(event: any) {
     this.selectedScore = event.target.value;
     this.applyFilters();

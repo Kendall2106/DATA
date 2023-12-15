@@ -1,0 +1,47 @@
+<form (ngSubmit)="onSubmit()" #movieForm="ngForm">
+
+    <div>
+        <label for="tipo">Tipo:</label>
+        <select name="tipo" id="tipo" [(ngModel)]="tipo">
+            <option>Peliculas</option>
+            <option>Series</option>
+        </select>
+      </div>
+
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="data.name" required>
+    </div>
+  
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" [(ngModel)]="data.date" required>
+    </div>
+  
+    <div>
+      <label for="score">Score:</label>
+      <input type="text" id="score" name="score" [(ngModel)]="data.score" required>
+    </div>
+  
+    <div>
+      <label for="type">Type:</label>
+      <input type="text" id="type" name="type" [(ngModel)]="data.type" required>
+    </div>
+  
+    <div>
+      <label for="image">Image:</label>
+      <!--<input type="text" id="image" name="image" [(ngModel)]="data.image" required>-->
+      <input id="formFileLg" (change)="obtenerImagen($event)" type="file"
+      accept="image/png, .jpeg, .jpg, image/gif" />
+    </div>
+  
+    <div>
+      <label for="visible">Visible:</label>
+      <select id="visible" name="visible" [(ngModel)]="data.visible" required>
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+    </div>
+  
+    <button type="submit" [disabled]="!movieForm.valid">Submit</button>
+  </form>
