@@ -1,29 +1,20 @@
-<!--<ngx-charts-bar-vertical
-[view]="view"
-scheme="flame"
-[results]="datos"
-[gradient]="gradient"
-[xAxis]="showXAxis"
-[yAxis]="showYAxis"
-[legend]="showLegend"
-[showXAxisLabel]="showXAxisLabel"
-[showYAxisLabel]="showYAxisLabel"
-[xAxisLabel]="xAxisLabel"
-[yAxisLabel]="yAxisLabel"
-(select)="onSelect($event)"
-style="fill: white;">
-</ngx-charts-bar-vertical>-->
-
-
-<ngx-charts-bar-horizontal
-[view]="view"
-scheme="flame"
-[results]="datos"
-[gradient]="gradient"
-[xAxis]="showXAxis"
-[yAxis]="showYAxis"
-[xAxisLabel]="xAxisLabel"
-[yAxisLabel]="yAxisLabel"
-(select)="onSelect($event)"
-style="fill: white;">
-</ngx-charts-bar-horizontal>
+<div *ngIf="loading">
+    <!-- Agrega aquí tu componente de carga o una animación -->
+    <p>Cargando...</p>
+  </div>
+  
+  <div *ngIf="!loading">
+    <!-- Muestra el gráfico solo cuando loading es false -->
+    <ngx-charts-bar-horizontal
+      [view]="view"
+      scheme="flame"
+      [results]="datos"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      (select)="onSelect($event)"
+      style="fill: white;">
+    </ngx-charts-bar-horizontal>
+  </div>

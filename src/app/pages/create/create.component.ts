@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movie } from 'src/app/core/model/movie.model';
+import { AnimeService } from 'src/app/core/service/anime.service';
+import { DataService } from 'src/app/core/service/data.service';
+import { GameService } from 'src/app/core/service/game.service';
+import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 import { Utils } from 'src/app/core/utilidades/util';
@@ -11,12 +16,23 @@ import { Utils } from 'src/app/core/utilidades/util';
 })
 export class CreateComponent {
 
-  constructor(private movieService: MovieService, private serieServicio: SeriesService){}
+  tipo: any;
+  data: any = {}
+  opTipos: string[][] = [];
+  opCalificacion: string[] = [];
+
+  constructor(private router: Router, private dataService: DataService, private libroService: LibrosService,private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService){
+    this.opTipos = [
+      ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
+      ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
+      ];
+    this.opCalificacion = ["0","1","2","3","4","5"];
+  }
 
  // data: any; 
   //data: Movie = new Movie();
-  tipo: any;
-  data: any = {}
+  
+
 
   registrarFacilidad() {
     //this.dataFacilidad.imagen = this.dataFacilidad.imagen;
@@ -39,6 +55,11 @@ export class CreateComponent {
     });
   }
 
+  navegarAComponenteDestino(data: String) {
+    this.dataService.typeData = data;
+    this.router.navigate(['/Workplace']);
+  }
+
   onSubmit() {
     // Aquí puedes manejar la lógica cuando se envía el formulario
     console.log("EXIT ");
@@ -49,6 +70,20 @@ export class CreateComponent {
     if(this.tipo=="Series"){
       this.serieServicio.createSeries(this.data);
     }
+
+    if(this.tipo=="Animes"){
+      this.animeService.createAnimes(this.data);
+    }
+
+    if(this.tipo=="Juegos"){
+      this.juegosService.createGames(this.data);
+    }
+
+    if(this.tipo=="Libros"){
+      this.libroService.createBook(this.data);
+    }
+
+    this.navegarAComponenteDestino(this.tipo);
     
   }
 

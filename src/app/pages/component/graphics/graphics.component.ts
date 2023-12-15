@@ -7,7 +7,7 @@ import { Component, HostListener, Input } from '@angular/core';
 })
 export class GraphicsComponent {
   @Input() datos: any[] | undefined;
-  view: [number,number] = [700, 400];
+  view: [number, number] = [700, 400];
 
   // options
   showXAxis = true;
@@ -18,15 +18,19 @@ export class GraphicsComponent {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
-
+  loading: boolean = true;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.setViewSize();
   }
 
-  constructor(){
+  constructor() {
     this.setViewSize(); // Establecer el tamaño inicial
+    // Simular carga de datos (puedes eliminar esto en tu aplicación real)
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 
   setViewSize() {
@@ -39,15 +43,14 @@ export class GraphicsComponent {
   }
 
   onSelect(data: any): void {
-    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data: any): void {
-    //console.log('Activate', JSON.parse(JSON.stringify(data)));
+    // console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data: any): void {
-    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
 }

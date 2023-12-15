@@ -28,7 +28,7 @@ export class SeriesService {
         'score' : serie.score,
         'type' : serie.type,
         'image' : serie.image,
-        'visible' : serie.visible
+        'visible' : true
     });
   }
 

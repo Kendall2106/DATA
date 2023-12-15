@@ -58,7 +58,7 @@ export class MovieService {
         'score' : movie.score,
         'type' : movie.type,
         'image' : movie.image,
-        'visible' : movie.visible
+        'visible' : true
     });
   }
 

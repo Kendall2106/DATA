@@ -61,48 +61,39 @@ export class HomeComponent implements OnInit{
     return percentage + '%';
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
 
-   /* this.loadData(2023).subscribe((data: any[]) => {
+    /*this.loadData(2023).subscribe((data: any[]) => {
       this.single = data;
-    });
-    this.loadData(2022).subscribe((data: any[]) => {
+    });*/
+    /*this.loadData(2022).subscribe((data: any[]) => {
       this.single2 = data;
-    });
-
-    this.nombres$ = this.d();*/
+    });*/
+    this.single2 = await this.loadData(2022);
+    this.single = await this.loadData(2023);
+    //this.nombres$ = this.d();
   }
 
 
   
-  loadData(year: number): Observable<any[]> {
-    return forkJoin([
-      this.movieService.getMovies(),
-      this.seriesService.getSeries(),
-      this.animeService.getAnimes(),
-      this.gameService.getGames(),
-      this.libroService.getLibros()
-    ]).pipe(
-      map(([movies, series, animes, games, libros]: [any[], any[], any[], any[], any[]]) => {
-        const movieValue = this.cantidadPorAnio(movies, year);
-        const seriesValue = this.cantidadPorAnio(series, year);
-        const animeValue = this.cantidadPorAnio(animes, year);
-        const gameValue = this.cantidadPorAnio(games, year);
-        const libroValue = this.cantidadPorAnio(libros, year);
-  
-        return [
-          { name: 'Peliculas', value: movieValue },
-          { name: 'Series', value: seriesValue },
-          { name: 'Animes', value: animeValue },
-          { name: 'Juegos', value: gameValue },
-          { name: 'Libros', value: libroValue }
-        ];
-      })
-    );
+   async loadData(year: number) {
+    var movies = await this.movieService.getMovies();
+    var series = await this.seriesService.getSeries();
+    var animes = await this.animeService.getAnimes();
+    var games = await this.gameService.getGames();
+    var books = await this.libroService.getBook();
+
+    return [
+      { name: 'Peliculas', value: this.cantidadPorAnio(movies, year) },
+      { name: 'Series', value: this.cantidadPorAnio(series, year) },
+      { name: 'Animes', value: this.cantidadPorAnio(animes, year) },
+      { name: 'Juegos', value: this.cantidadPorAnio(games, year) },
+      { name: 'Libros', value: this.cantidadPorAnio(books, year) }    ];
   }
 
   cantidadPorAnio(param: any, year: number){
+    console.log(param);
     const filtered = param.filter((p: { date: any; }) => {
       return this.convert(p.date) === year;
     });
@@ -112,8 +103,8 @@ export class HomeComponent implements OnInit{
 
   convert(date: any): number {
     const dateTemp = date.toString().toLowerCase();
-    var parts = dateTemp.split("/");
-    const year = parseInt(parts[2], 10);
+    var parts = dateTemp.split("-");
+    const year = parseInt(parts[0], 10);
     return year;
 
 }
@@ -147,13 +138,13 @@ export class HomeComponent implements OnInit{
   );
 }*/
 
-d(): Observable<{ tipo: string, nombre: string }[]> {
+/*d(): Observable<{ tipo: string, nombre: string }[]> {
   return forkJoin([
     this.movieService.getMovies(),
     this.seriesService.getSeries(),
     this.animeService.getAnimes(),
     this.gameService.getGames(),
-    this.libroService.getLibros()
+    this.libroService.getBook()
   ]).pipe(
     map(([movies, series, animes, games, libros]: [any[], any[], any[], any[], any[]]) => {
       const moviesWithScore5 = this.filterByScore(movies).map(movie => ({ tipo: 'peliculas', nombre: movie.name }));
@@ -170,7 +161,7 @@ d(): Observable<{ tipo: string, nombre: string }[]> {
       return datos;
     })
   );
-}
+}*/
 
 // Suponiendo que esta función filtra objetos con una propiedad 'score' mayor o igual a 5
 filterByScore(items: any[]): any[] {

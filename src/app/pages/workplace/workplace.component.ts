@@ -53,28 +53,35 @@ export class WorkplaceComponent implements OnInit {
    // this.applyFilters();
   }
 
+
+
+
   async loadData(){
     if (this.message === 'Peliculas') {
-      this.data = (await this.movieService.getMovies()).map((movie: { date: string; }) => {
-        movie.date = this.convertDate(movie.date);
-        return movie;
-      });
-      this.resultFilter=this.data;
-      this.resultFilter.forEach((element: any)=>{
-        element.image ='data:image/jpg;base64,' + element.image;
-      });
-      this.applyFilters();
-    }else if (this.message === 'Series') {
-      this.data = (await this.seriesService.getSeries()).map((serie: { date: string; }) => {
-        serie.date = this.convertDate(serie.date);
-        return serie;
-      });
-      this.resultFilter=this.data;
-      this.resultFilter.forEach((element: any)=>{
-        element.image ='data:image/jpg;base64,' + element.image;
-      });
-      this.applyFilters();
+      this.data = await this.loadDataForType(this.movieService.getMovies());
+    } else if (this.message === 'Series') {
+      this.data = await this.loadDataForType(this.seriesService.getSeries());
+    } else if (this.message === 'Animes') {
+      this.data = await this.loadDataForType(this.animeService.getAnimes());
+    }else if (this.message === 'Juegos') {
+      this.data = await this.loadDataForType(this.gameService.getGames());
+    }else if (this.message === 'Libros') {
+      this.data = await this.loadDataForType(this.libroService.getBook());
     }
+
+    this.resultFilter=this.data;
+    this.resultFilter.forEach((element: any)=>{
+        element.image ='data:image/jpg;base64,' + element.image;
+    });
+    this.applyFilters();
+  }
+
+  async loadDataForType(service: Promise<any>) {
+    const typeData = await service;
+    return typeData.map((item: { date: string }) => {
+      item.date = this.convertDate(item.date);
+      return item;
+    });
   }
 
   convertDate(date: any): string {
@@ -85,50 +92,10 @@ export class WorkplaceComponent implements OnInit {
 
 }
 
-  /*loadData() {
-    if (this.message === 'Peliculas') {
-      this.movieService.getMovies().subscribe(movies => {
-        this.data = movies.sort((a, b) => b.id - a.id);
-       // this.resultFilter=this.data.filter((d) => {  return d.date>="01/01/2023"; });
-       this.resultFilter=this.data;
-       this.applyFilters();
-      });
-    } else if (this.message === 'Animes') {
-      this.animeService.getAnimes().subscribe(animes => {
-        this.data = animes.sort((a, b) => b.id - a.id);
-        this.resultFilter=this.data;
-        this.applyFilters();
-      });
-    } else if (this.message === 'Series') {
-      this.seriesService.getSeries().subscribe(series => {
-        this.data = series.sort((a, b) => b.id - a.id);
-        this.resultFilter=this.data;
-        this.applyFilters();
-      });
-    } else if (this.message === 'Juegos') {
-      this.gameService.getGames().subscribe(games => {
-        this.data = games.sort((a, b) => b.id - a.id);
-        this.resultFilter=this.data;
-        this.applyFilters();
-      });
-    } else if (this.message === 'Libros') {
-      this.libroService.getLibros().subscribe(libros => {
-        this.data = libros.sort((a, b) => b.id - a.id);
-        this.resultFilter=this.data;
-        this.applyFilters();
-      });
-    }
-
-    
-    //this.resultFilter=this.data;
-    // Añade lógica para otros casos si es necesario
-  }*/
-
   getColorByType(type: string): string {
     const index = this.opTipos[0].indexOf(type);
     return index !== -1 ? this.opTipos[1][index] : 'greenyellow'; // Color por defecto para tipos desconocidos
   }
-
 
 
   convert(date: any): number {
@@ -139,25 +106,10 @@ export class WorkplaceComponent implements OnInit {
 
    }
 
-   /*convertirTimestampAFecha(timestamp: any): string {
-    const fecha = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);
   
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getFullYear();
-  
-    const formatoFecha = `${dia}/${mes}/${anio}`;
-  
-    return formatoFecha;
-  }*/
-
-
-
   selectedCategory: string = 'Todos';
   selectedYear: string = this.opAnios[0];
   selectedScore: string = 'Todos';
-
-// Agrega un método para aplicar los filtros
 
 
 applyFilters() {
@@ -174,8 +126,6 @@ convertYear(item: any): boolean {
   const year = parseInt(parts[2], 10);
   return (year+"") === this.selectedYear;
 }
-
-
 
 
   filterType(event: any) {
@@ -195,13 +145,8 @@ convertYear(item: any): boolean {
 
 
 
-
-  
-
-
   currentSortOrder: 'asc' | 'desc' = 'desc';
 
-// Método para cambiar el orden de acuerdo al score
 sortDataByScore() {
   this.resultFilter = this.resultFilter.sort((a, b) => {
     const scoreA = a.score;
@@ -214,7 +159,6 @@ sortDataByScore() {
     }
   });
 
-  // Cambia el orden actual para la próxima vez
   this.currentSortOrder = this.currentSortOrder === 'asc' ? 'desc' : 'asc';
 }
  

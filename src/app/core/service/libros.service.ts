@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Book } from '../model/book.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,29 @@ import { map } from 'rxjs/operators';
 export class LibrosService {
   private xmlUrl = 'assets/data/libros.xml'; // Ruta al archivo XML, ajusta según tu estructura de carpetas
 
+  firestore: Firestore = inject(Firestore);
+
   constructor(private http: HttpClient) {}
 
-  getLibros(): Observable<any[]> {
+  async getBook(): Promise<any> {
+    const acollection = collection(this.firestore,'books');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.map(doc => doc.data());
+  }
+
+  async createBook(data: Book){
+    const acollection = collection(this.firestore,'books');
+    addDoc(acollection,{
+        'name' : data.name,
+        'date' : data.date,
+        'score' : data.score,
+        'type' : data.type,
+        'image' : data.image,
+        'visible' : true
+    });
+  }
+
+ /* getLibros(): Observable<any[]> {
     return this.http.get(this.xmlUrl, { responseType: 'text' }).pipe(
       map((xmlString: string) => {
         const parser = new DOMParser();
@@ -41,5 +63,5 @@ export class LibrosService {
         });
       })
     );
-  }
+  }*/
 }
