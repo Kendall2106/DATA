@@ -6,6 +6,7 @@ import { LibrosService } from 'src/app/core/service/libros.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 import { Servicios } from 'src/app/core/service/servicios.service';
+import { RecoService } from 'src/app/core/service/recomendacion.service';
 
 
 @Component({
@@ -16,10 +17,11 @@ import { Servicios } from 'src/app/core/service/servicios.service';
 export class HomeComponent implements OnInit{
 
 
-
+  nameReco: any;
+  tipo:any;
 
   nombres$: Observable<{ tipo: string; nombre: string; }[]> | undefined;
-  tipos = ['peliculas', 'series', 'animes', 'juegos', 'libros'];
+  tipos = ['Peliculas', 'Series', 'Animes', 'Juegos', 'Libros'];
 
   recomendaciones: any[] = [];
   single: any[] = [];
@@ -28,13 +30,14 @@ export class HomeComponent implements OnInit{
   dataMovie: any[] = [];
   students: any;
 
+
 /*
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.setViewSize();
   }*/
 
-  constructor(private s: Servicios, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
+  constructor(private recoService: RecoService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
     //this.setViewSize(); // Establecer el tamaño inicial
     
   }
@@ -72,7 +75,8 @@ export class HomeComponent implements OnInit{
     });*/
     this.single2 = await this.loadData(2022);
     this.single = await this.loadData(2023);
-    //this.nombres$ = this.d();
+
+    await this.readReco();
   }
 
 
@@ -93,7 +97,7 @@ export class HomeComponent implements OnInit{
   }
 
   cantidadPorAnio(param: any, year: number){
-    console.log(param);
+    //console.log(param);
     const filtered = param.filter((p: { date: any; }) => {
       return this.convert(p.date) === year;
     });
@@ -171,19 +175,19 @@ filterByScore(items: any[]): any[] {
 
 
 filterByTipo(items: any[], tipo: string): any[] {
-  return items.filter(item => item.tipo === tipo);
+  return items.filter(item => item.type === tipo);
 }
 
-click(): void {
-  this.s.saveData();
+saveReco(){
+  this.recoService.createReco(this.nameReco, this.tipo);
 }
 
-async read() {
-  /*var datos: any[] = this.s.daata();*/
-  const students = [];
-  this.students = await this.s.daata();
-  console.log(this.students);
+async readReco(){
+  this.recomendaciones = await this.recoService.getReco();
 }
+
+
+
 
 
  

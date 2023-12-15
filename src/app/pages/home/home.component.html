@@ -78,11 +78,33 @@
             -->
             <div style=" border-radius: 3%; margin-top: 5%; border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
                 <h4>Recomendaciones</h4>
-                
+                <input placeholder="Nuevo" style="width: 90%;"  [(ngModel)]="nameReco" />
+                <select name="tipo" id="tipo" style="width: 70%;"  [(ngModel)]="tipo">
+                    <option>Peliculas</option>
+                    <option>Series</option>
+                    <option>Animes</option>
+                    <option>Juegos</option>
+                    <option>Libros</option>
+                </select>
+                <button (click)="saveReco()">Save</button>
+                <ngb-carousel [interval]="5000" [showNavigationIndicators]="false">
+                    <ng-template ngbSlide="" *ngFor="let tipo of tipos">
+                        <h5>{{tipo}}</h5>
+                      <div class="card" *ngFor="let item of filterByTipo(recomendaciones, tipo)" style="border: none; background-color: red;">
+                        <div class="card-body custom-list-item" style="background-color: var(--color-1); color: var(--color-text);">
+                          
+                          <ul>
+                            <li>{{ item.name }}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+
             </div>
             <div style="border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); margin-top: 5%; min-height: 250px; ">
                 <h4>5 Estrellas 2023</h4>
-                <ngb-carousel *ngIf="nombres$ | async as nombres" [interval]="5000">
+               <!-- <ngb-carousel *ngIf="nombres$ | async as nombres" [interval]="5000">
                     <ng-template ngbSlide *ngFor="let tipo of tipos">
                       <div class="card" *ngFor="let item of filterByTipo(nombres, tipo)" style="border: none; background-color: red;">
                         <div class="card-body custom-list-item" style="background-color: var(--color-1); color: var(--color-text);">
@@ -90,7 +112,7 @@
                         </div>
                       </div>
                     </ng-template>
-                  </ngb-carousel>
+                  </ngb-carousel>-->
             </div>
         </div>
     </div>
@@ -108,5 +130,3 @@
     
 </div>
 
-<button (click)="click()">Click</button>
-<button (click)="read()">2</button>
