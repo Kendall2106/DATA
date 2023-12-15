@@ -27,7 +27,7 @@ export class GameService {
         'name' : data.name,
         'date' : data.date,
         'score' : data.score,
-        'type' : data.type,
+        'type' : null,
         'image' : data.image,
         'visible' : true
     });
