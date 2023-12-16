@@ -180,6 +180,7 @@ filterByTipo(items: any[], tipo: string): any[] {
 
 saveReco(){
   this.recoService.createReco(this.nameReco, this.tipo);
+  this.readReco();
 }
 
 async readReco(){

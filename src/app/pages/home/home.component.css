@@ -1,6 +1,6 @@
 .prin{
     
-    margin-right: 15%; 
+    margin-right: 5%; 
     margin-top: 5%;
 }
 
@@ -11,9 +11,7 @@
   }
 
 
-  ::ng-deep .carousel-control-prev, ::ng-deep .carousel-control-next {
-    display: none;
-  }
+  
 
 
 

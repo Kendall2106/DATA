@@ -30,7 +30,7 @@ export class GraphicsComponent {
     // Simular carga de datos (puedes eliminar esto en tu aplicación real)
     setTimeout(() => {
       this.loading = false;
-    }, 2000);
+    }, 3000);
   }
 
   setViewSize() {

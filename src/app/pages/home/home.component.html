@@ -76,7 +76,7 @@
         <div class="col-lg-3" style=" margin: 2%; border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);" >
             <!--
             -->
-            <div style=" border-radius: 3%; margin-top: 5%; border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
+            <div style="border-radius: 3%;  border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); margin-top: 5%;  ">
                 <h4>Recomendaciones</h4>
                 <input placeholder="Nuevo" style="width: 90%;"  [(ngModel)]="nameReco" />
                 <select name="tipo" id="tipo" style="width: 70%;"  [(ngModel)]="tipo">
@@ -87,9 +87,11 @@
                     <option>Libros</option>
                 </select>
                 <button (click)="saveReco()">Save</button>
-                <ngb-carousel [interval]="5000" [showNavigationIndicators]="false">
+            </div>
+            <div style=" border-radius: 3%; margin-top: 5%; border: 2px solid #333; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); min-height: 250px;" >
+                <ngb-carousel  [showNavigationIndicators]="false" [showNavigationArrows]="false">
                     <ng-template ngbSlide="" *ngFor="let tipo of tipos">
-                        <h5>{{tipo}}</h5>
+                    <h5>{{tipo}}</h5>
                       <div class="card" *ngFor="let item of filterByTipo(recomendaciones, tipo)" style="border: none; background-color: red;">
                         <div class="card-body custom-list-item" style="background-color: var(--color-1); color: var(--color-text);">
                           

@@ -29,7 +29,7 @@ export class WorkplaceComponent implements OnInit {
   constructor(private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
-      ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
+      ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
     ];
       this.opAnios= ["2023","2022","2021","2020"];
       this.opCalificacion = ["0","1","2","3","4","5"];
@@ -69,7 +69,9 @@ export class WorkplaceComponent implements OnInit {
       this.data = await this.loadDataForType(this.libroService.getBook());
     }
 
-    this.resultFilter=this.data;
+
+    this.resultFilter=this.sortData(this.data);
+    console.log(this.resultFilter[0].date);
     this.resultFilter.forEach((element: any)=>{
         element.image ='data:image/jpg;base64,' + element.image;
     });
@@ -91,6 +93,22 @@ export class WorkplaceComponent implements OnInit {
     return parts[2]+"-"+parts[1]+"-"+parts[0];
 
 }
+
+  sortData(data: any[]){  
+    return data.sort((a, b) => {
+      const [dayA, monthA, yearA] = a.date.split('-').map(Number);
+      const [dayB, monthB, yearB] = b.date.split('-').map(Number);
+
+      // Compara primero por año, luego por mes y finalmente por día, en orden descendente
+      if (yearB !== yearA) {
+        return yearB - yearA;
+      }
+      if (monthB !== monthA) {
+        return monthB - monthA;
+      }
+      return dayB - dayA;
+    });
+  }
 
   getColorByType(type: string): string {
     const index = this.opTipos[0].indexOf(type);
