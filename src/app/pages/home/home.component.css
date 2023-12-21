@@ -54,4 +54,30 @@
         margin: 0%;
     }
 
+    .iconos{
+        display: none;
+    }
+
+}
+
+.body{
+    margin-left: 12%;
+    margin-right: 12%;
+    margin-top: 5%;
+}
+.name:hover{
+    background-color: var(--color-1);
+}
+
+.uil {
+    font-size: 24px; /* Ajusta el tamaño según sea necesario */
+    
+}
+
+.option{
+    margin-top: 1%;
+}
+
+.iconos{
+    text-align: center;
 }

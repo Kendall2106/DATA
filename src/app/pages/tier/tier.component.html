@@ -1,0 +1,35 @@
+<div>
+    <div style="margin:5%;">
+        <div class="row" style=" margin-bottom: 5%;" >
+            <div class="row">
+                <div class="col-lg-3">
+                    <button (click)="loadData('Peliculas')">Peliculas</button>
+                </div>
+                <div class="col-lg-2">
+                    <button (click)="loadData('Series')">Series</button>
+                </div>
+                <div class="col-lg-2">
+                    <button (click)="loadData('Animes')">Animes</button>
+                </div>
+                <div class="col-lg-2">
+                    <button (click)="loadData('Juegos')">Juegos</button>
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="loadData('Libros')">Libros</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngFor="let item of categorias.reverse(); let i = index">
+            <div class="row">
+                <div class="izq col-lg-2">
+                    <h5>{{item}}</h5>
+                </div>
+                <div class="der col-lg-10" >
+                    <div *ngFor="let anime of dataScore(this.data, categorias.length - i)"  style="display: inline;">
+                        <img class="imagen" [src]="anime.image" alt="#"  />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

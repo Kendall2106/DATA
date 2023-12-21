@@ -4,6 +4,7 @@
   overflow-y: auto;
 }
 
+
 .card{
     background-color: var(--color-1);
     color: var(--color-text);
@@ -27,7 +28,10 @@
 .imagen{
     width: 90%; 
     height: 130px;
+
 }
+
+
 
 .star {
     font-size: 18px; 

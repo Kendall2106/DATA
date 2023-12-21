@@ -1,0 +1,29 @@
+.imagen{
+    width: 80px; 
+    height: 130px;
+    margin-right: 1%;
+    margin-bottom: 1%;;
+    margin-top: 1%;
+}
+
+.izq {
+    border-style: dashed;
+    border-color: green;
+}
+
+.der{
+    border-style: dashed ;
+    border-color: orange;
+}
+
+button{
+    width: 100%;
+    border-style: solid;
+    border-color: white;
+    color: white;
+    background-color: transparent;
+}
+
+button:hover{
+    background-color: rgb(91, 79, 67);
+}

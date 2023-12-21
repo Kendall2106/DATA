@@ -21,7 +21,8 @@ import { GraphicsComponent } from './pages/component/graphics/graphics.component
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateComponent } from './pages/create/create.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { TierComponent } from './pages/tier/tier.component'; 
 
 
 
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     SidebarComponent,
     HomeComponent,
     GraphicsComponent,
-    CreateComponent
+    CreateComponent,
+    TierComponent
 
   ],
   imports: [

@@ -7,6 +7,8 @@ import { GameService } from 'src/app/core/service/game.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 import { Servicios } from 'src/app/core/service/servicios.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
+import { DataService } from 'src/app/core/service/data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,7 +39,7 @@ export class HomeComponent implements OnInit{
     this.setViewSize();
   }*/
 
-  constructor(private recoService: RecoService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
+  constructor(private router: Router, private dataService: DataService,private recoService: RecoService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
     //this.setViewSize(); // Establecer el tamaño inicial
     
   }
@@ -190,6 +192,12 @@ async readReco(){
 
 
 
+
+
+navegarAComponenteDestino(data: String) {
+  this.dataService.typeData = data;
+  this.router.navigate(['/Workplace']);
+}
 
  
 }

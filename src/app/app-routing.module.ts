@@ -4,12 +4,14 @@ import { WorkplaceComponent } from './pages/workplace/workplace.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CreateComponent } from './pages/create/create.component';
+import { TierComponent } from './pages/tier/tier.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent },
   {path:'Sidebar', component: SidebarComponent },
   {path:'Workplace', component: WorkplaceComponent },
-  {path:'Create', component: CreateComponent }
+  {path:'Create', component: CreateComponent },
+  {path:'Tier', component: TierComponent }
 ];
 
 @NgModule({

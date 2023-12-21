@@ -9,13 +9,15 @@ import { DataService } from 'src/app/core/service/data.service';
 })
 export class SidebarComponent implements OnInit {
   
+  anioActual: string ="";
+
   constructor(private router: Router, private dataService: DataService){
 
   }
 
 
   ngOnInit(): void {
-    
+    this.anioActual=new Date().getFullYear()+"";
   }
 
   navegarAComponenteDestino(data: String) {
@@ -25,6 +27,10 @@ export class SidebarComponent implements OnInit {
 
   navegarCreate(){
     this.router.navigate(['/Create']);
+  }
+
+  navegarTier(){
+    this.router.navigate(['/Tier']);
   }
 
   toggleMobileMenu(): void {
