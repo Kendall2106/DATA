@@ -14,11 +14,17 @@ export class TierComponent implements OnInit{
   categorias: any[] = ["Olvidables","Malas","Normal","Buenas","God"];
   data: any[]=[];
   anioActual: string ="";
+  opAnios: any[] = ["2023","2022","2021","2020","2019", "Todos"];
+  selectedYear: string = this.opAnios[0];
+  resultFilter: any[]=[];
 
-  constructor(private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){}
+
+  constructor(private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
+    
+  }
   
   ngOnInit(): void {
-    this.anioActual=new Date().getFullYear()+"";
+   // this.anioActual=new Date().getFullYear()+"";
 
   }
 
@@ -35,14 +41,15 @@ export class TierComponent implements OnInit{
       }else if (message === 'Libros') {
         this.data = await this.loadDataForType(this.libroService.getBook());
       }
+      console.log(this.selectedYear);
+      this.applyFilters();
 
-      this.data = this.data.filter((d: { date: string; }) => this.convertYear(d.date) == this.anioActual);
 
       this.data.forEach((element: any)=>{
         element.image ='data:image/jpg;base64,' + element.image;
     });
 
-    
+    this.resultFilter=this.data;
 
   }
 
@@ -65,5 +72,31 @@ export class TierComponent implements OnInit{
     return da.filter((d: { score: number; }) => d.score == num);
     
   }
+
+  filterYear(event: any) {
+    this.selectedYear = event.target.value;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+  
+   // this.resultFilter = this.data.filter(item => this.convertYear(item))
+   
+  // filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+    if(this.selectedYear==="Todos"){
+      this.resultFilter = this.data;
+      console.log(1);
+    }else{
+      this.data = this.data.filter((d: { date: string; }) => this.convertYear(d.date) == this.selectedYear);
+      console.log(2);
+    }
+  }
+
+  /*convertYear(item: any): boolean {
+    const date = item.date.toString().toLowerCase();
+    const parts = date.split("-");
+    const year = parseInt(parts[2], 10);
+    return (year+"") === this.selectedYear;
+  }*/
 
 }

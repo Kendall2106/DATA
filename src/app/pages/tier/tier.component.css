@@ -27,3 +27,17 @@ button{
 button:hover{
     background-color: rgb(91, 79, 67);
 }
+
+select{
+    width: 100%;
+    border-style: solid;
+    border-color: white;
+    color: white;
+    background-color: transparent;
+}
+
+select option {
+    background-color: var(--color-1); 
+    color: var(--color-text); 
+  }
+
