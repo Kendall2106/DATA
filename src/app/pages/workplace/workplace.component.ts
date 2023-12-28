@@ -179,6 +179,13 @@ sortDataByScore() {
 
   this.currentSortOrder = this.currentSortOrder === 'asc' ? 'desc' : 'asc';
 }
+
+getColor(score: any){
+  if(score==5){
+    return 'gold'; 
+  }
+  return '#ded8cf';
+}
  
 
 

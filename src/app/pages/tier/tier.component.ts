@@ -11,12 +11,17 @@ import { SeriesService } from 'src/app/core/service/series.service';
   styleUrls: ['./tier.component.css']
 })
 export class TierComponent implements OnInit{
-  categorias: any[] = ["Olvidables","Malas","Normal","Buenas","God"];
+  //categorias: any[] = ["Olvidables","Malas","Normal","Buenas","God"];
+  categorias: any[] = ["Dioos","Buenas","Normal","Malas","Olvidables"];
   data: any[]=[];
   anioActual: string ="";
   opAnios: any[] = ["2023","2022","2021","2020","2019", "Todos"];
   selectedYear: string = this.opAnios[0];
   resultFilter: any[]=[];
+  tier: any[] = [
+    [0, 1, 2, 3, 4],
+    ["#FF7F7F", "#FFBF7F", "#FFDF7F", "#FFFF7F", "#BFFF7F"] // Colores correspondientes
+  ];
 
 
   constructor(private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){

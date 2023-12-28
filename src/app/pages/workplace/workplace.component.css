@@ -7,9 +7,11 @@
 
 .card{
     background-color: var(--color-1);
+    
     color: var(--color-text);
     border-style: solid;
     border-color: var(--color-text);
+    /*border-color: gold;*/
     font-size: 0.8rem;
     
 }

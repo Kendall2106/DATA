@@ -7,14 +7,25 @@
 }
 
 .izq {
-    border-style: dashed;
-    border-color: green;
+    border-style: solid;
+    border-color: black;
+    color: black;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
 }
 
 .der{
-    border-style: dashed ;
-    border-color: orange;
+     border-style: solid ;
+    border-color: black;
+    border-left: none;
+    background-color: #1A1A17;
 }
+
+/*.card{
+    border-style: solid;
+    border-color: black;
+}*/
 
 button{
     width: 100%;
