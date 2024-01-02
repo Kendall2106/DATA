@@ -31,7 +31,7 @@ export class WorkplaceComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
     ];
-      this.opAnios= ["2023","2022","2021","2020","2019"];
+      this.opAnios= ["2024","2023","2022","2021","2020","2019"];
       this.opCalificacion = ["0","1","2","3","4","5"];
   }
 

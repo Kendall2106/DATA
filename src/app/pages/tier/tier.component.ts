@@ -15,7 +15,7 @@ export class TierComponent implements OnInit{
   categorias: any[] = ["Dioos","Buenas","Normal","Malas","Olvidables"];
   data: any[]=[];
   anioActual: string ="";
-  opAnios: any[] = ["2023","2022","2021","2020","2019", "Todos"];
+  opAnios: any[] = ["2024","2023","2022","2021","2020","2019", "Todos"];
   selectedYear: string = this.opAnios[0];
   resultFilter: any[]=[];
   tier: any[] = [
