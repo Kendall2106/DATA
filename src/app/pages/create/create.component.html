@@ -47,10 +47,14 @@
   
     <button type="submit" [disabled]="!movieForm.valid">Submit</button>
   </form>-->
+  
 
   <div class="container col-lg-12" style="margin-top: 5%;">
     <form (ngSubmit)="onSubmit()" #movieForm="ngForm">
         <div class="container col-lg-6" >
+            <div class="top col-lg-12" style="margin-bottom: 3%;">
+                <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
+            </div>
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-3">

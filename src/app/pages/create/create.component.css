@@ -11,3 +11,9 @@ select{
     width: 100%;
     margin-bottom: 4%;
 }
+
+.imgTitle{
+    width: 280px; 
+    height: 180px;
+    margin-left: 2%;
+}

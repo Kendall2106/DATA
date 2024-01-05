@@ -199,5 +199,12 @@ navegarAComponenteDestino(data: String) {
   this.router.navigate(['/Workplace']);
 }
 
+navegarCreate(){
+  this.router.navigate(['/Create']);
+}
+
+navegarTier(){
+  this.router.navigate(['/Tier']);
+}
  
 }

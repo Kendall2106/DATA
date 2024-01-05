@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
@@ -24,7 +25,7 @@ export class TierComponent implements OnInit{
   ];
 
 
-  constructor(private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
+  constructor(private router: Router, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
     
   }
   
@@ -95,6 +96,12 @@ export class TierComponent implements OnInit{
       this.data = this.data.filter((d: { date: string; }) => this.convertYear(d.date) == this.selectedYear);
       console.log(2);
     }
+  }
+
+
+
+  navegarHome(){
+    this.router.navigate(['./']);
   }
 
   /*convertYear(item: any): boolean {

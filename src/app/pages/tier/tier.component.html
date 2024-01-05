@@ -1,7 +1,10 @@
-<div>
+
     <div style="margin:5%;">
         <div class="row" style=" margin-bottom: 5%;" >
-            <div class="row">
+            
+                <div class="col-lg-1">
+                    <button (click)="navegarHome()">Home</button>
+                </div>
                 <div class="col-lg-2">
                     <button (click)="loadData('Peliculas')">Peliculas</button>
                 </div>
@@ -17,14 +20,14 @@
                 <div class="col-lg-2">
                     <button (click)="loadData('Libros')">Libros</button>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     <select id="opAnios" (change)="filterYear($event)">
                         <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>
                     </select>
                 </div>
-            </div>
+            
         </div>
-        <div class="row" *ngFor="let i of tier[0]">
+        <div  *ngFor="let i of tier[0]">
             <div class="row" style="margin-bottom: 1%;">
                 <div class="izq col-lg-2" [style.background-color]="tier[1][i]">
                     <h5>{{categorias[i]}}</h5>
@@ -37,4 +40,4 @@
             </div>
         </div>
     </div>
-</div>
+
