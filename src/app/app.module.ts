@@ -22,7 +22,9 @@ import { GraphicsComponent } from './pages/component/graphics/graphics.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateComponent } from './pages/create/create.component';
 import { FormsModule } from '@angular/forms';
-import { TierComponent } from './pages/tier/tier.component'; 
+import { TierComponent } from './pages/tier/tier.component';
+import { ListNextComponent } from './pages/list-next/list-next.component'; 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -35,7 +37,8 @@ import { TierComponent } from './pages/tier/tier.component';
     HomeComponent,
     GraphicsComponent,
     CreateComponent,
-    TierComponent
+    TierComponent,
+    ListNextComponent
 
   ],
   imports: [
@@ -46,6 +49,7 @@ import { TierComponent } from './pages/tier/tier.component';
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
+    DragDropModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(()=> getFirestore())
   ],

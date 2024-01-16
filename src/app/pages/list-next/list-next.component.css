@@ -1,0 +1,52 @@
+/* sample-table.component.css */
+
+.table-container {
+    margin: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    color: black;
+  }
+
+  .imgTitle{
+    width: 280px; 
+    height: 180px;
+    margin-left: 2%;
+}
+
+.etiqueta {
+    color: black;
+    box-shadow: 0 0 29px #3c3c3c6b;
+    border-radius: 5px;
+    font-family: 'Hedvig Letters Serif', serif;
+    text-align: center;
+    text-decoration: none;
+}
+
+.card {
+
+  padding: 10px;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: grab;
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+

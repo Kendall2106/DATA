@@ -206,5 +206,9 @@ navegarCreate(){
 navegarTier(){
   this.router.navigate(['/Tier']);
 }
+
+navegarList(){
+  this.router.navigate(['/ListNext']);
+}
  
 }
