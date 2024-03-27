@@ -19,6 +19,7 @@ export class TierComponent implements OnInit{
   opAnios: any[] = ["2024","2023","2022","2021","2020","2019", "Todos"];
   selectedYear: string = this.opAnios[0];
   resultFilter: any[]=[];
+  resultCount: any = 0;
   tier: any[] = [
     [0, 1, 2, 3, 4],
     ["#FF7F7F", "#FFBF7F", "#FFDF7F", "#FFFF7F", "#BFFF7F"] // Colores correspondientes
@@ -56,7 +57,7 @@ export class TierComponent implements OnInit{
     });
 
     this.resultFilter=this.data;
-
+    this.resultCount=this.resultFilter.length;
   }
 
   async loadDataForType(service: Promise<any>) {
