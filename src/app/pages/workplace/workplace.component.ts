@@ -8,6 +8,7 @@ import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
+import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class WorkplaceComponent implements OnInit {
   opAnios: string[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
-  constructor(private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
+  constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
@@ -67,6 +68,8 @@ export class WorkplaceComponent implements OnInit {
       this.data = await this.loadDataForType(this.gameService.getGames());
     }else if (this.message === 'Libros') {
       this.data = await this.loadDataForType(this.libroService.getBook());
+    }else if (this.message === 'Musica') {
+      this.data = await this.loadDataForType(this.musicService.getMusic());
     }
 
 

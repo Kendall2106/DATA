@@ -9,6 +9,7 @@ import { Servicios } from 'src/app/core/service/servicios.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { Router } from '@angular/router';
+import { MusicService } from 'src/app/core/service/music.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit{
   tipo:any;
 
   nombres$: Observable<{ tipo: string; nombre: string; }[]> | undefined;
-  tipos = ['Peliculas', 'Series', 'Animes', 'Juegos', 'Libros'];
+  tipos = ['Peliculas', 'Series', 'Animes', 'Juegos', 'Libros', 'Musica'];
 
   recomendaciones: any[] = [];
   single: any[] = [];
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit{
     this.setViewSize();
   }*/
 
-  constructor(private router: Router, private dataService: DataService,private recoService: RecoService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
+  constructor(private router: Router, private dataService: DataService,private recoService: RecoService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,) {
     //this.setViewSize(); // Establecer el tamaño inicial
     
   }
@@ -89,13 +90,15 @@ export class HomeComponent implements OnInit{
     var animes = await this.animeService.getAnimes();
     var games = await this.gameService.getGames();
     var books = await this.libroService.getBook();
+    var music = await this.musicService.getMusic();
 
     return [
       { name: 'Peliculas', value: this.cantidadPorAnio(movies, year) },
       { name: 'Series', value: this.cantidadPorAnio(series, year) },
       { name: 'Animes', value: this.cantidadPorAnio(animes, year) },
       { name: 'Juegos', value: this.cantidadPorAnio(games, year) },
-      { name: 'Libros', value: this.cantidadPorAnio(books, year) }    ];
+      { name: 'Libros', value: this.cantidadPorAnio(books, year) },
+      { name: 'Musica', value: this.cantidadPorAnio(music, year) }  ];
   }
 
   cantidadPorAnio(param: any, year: number){

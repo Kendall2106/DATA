@@ -20,6 +20,9 @@
                 <div class="col-lg-2">
                     <button (click)="loadData('Libros')">Libros</button>
                 </div>
+                <div class="col-lg-2">
+                    <button (click)="loadData('Musica')">Musica</button>
+                </div>
                 <div class="col-lg-1">
                     <select id="opAnios" (change)="filterYear($event)">
                         <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>

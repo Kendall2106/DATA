@@ -11,6 +11,7 @@ import { ApiAnimeService } from 'src/app/core/service/apiAnime.service';
 export class ListNextComponent implements OnInit{
 
   recomendaciones: any[] = [];
+  animes: any[] = [];
   opTipos: string[][] = [];
 
   constructor(private recoService: RecoService, private apiAnimeService: ApiAnimeService) {
@@ -50,10 +51,16 @@ export class ListNextComponent implements OnInit{
 
 
   async getAll(){
-    await this.apiAnimeService.getAnimeByPage(2).subscribe((response: any) => {
-        console.log(response);
-        this.recomendaciones = response.data;
+    await this.apiAnimeService.getAnimeByPage(10).subscribe((response: any) => {
+       // console.log(response);
+        this.animes = response.data;
     });
+    
+  }
+
+   saveAnime(anime: any){
+    this.recomendaciones.push(anime);
+
   }
 
 

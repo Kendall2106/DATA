@@ -4,6 +4,7 @@ import { AnimeService } from 'src/app/core/service/anime.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
+import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class TierComponent implements OnInit{
   ];
 
 
-  constructor(private router: Router, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
+  constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
     
   }
   
@@ -47,6 +48,8 @@ export class TierComponent implements OnInit{
         this.data = await this.loadDataForType(this.gameService.getGames());
       }else if (message === 'Libros') {
         this.data = await this.loadDataForType(this.libroService.getBook());
+      }else if (message === 'Musica') {
+        this.data = await this.loadDataForType(this.musicService.getMusic());
       }
       console.log(this.selectedYear);
       this.applyFilters();

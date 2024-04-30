@@ -6,6 +6,7 @@ import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
+import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 import { Utils } from 'src/app/core/utilidades/util';
 
@@ -21,7 +22,7 @@ export class CreateComponent {
   opTipos: string[][] = [];
   opCalificacion: string[] = [];
 
-  constructor(private router: Router, private dataService: DataService, private libroService: LibrosService,private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService){
+  constructor(private router: Router, private dataService: DataService, private musicService: MusicService ,private libroService: LibrosService,private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService){
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
@@ -81,6 +82,10 @@ export class CreateComponent {
 
     if(this.tipo=="Libros"){
       this.libroService.createBook(this.data);
+    }
+
+    if(this.tipo=="Musica"){
+      this.musicService.createMusic(this.data);
     }
 
     this.navegarAComponenteDestino(this.tipo);
