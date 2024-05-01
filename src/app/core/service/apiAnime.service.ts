@@ -26,7 +26,7 @@ export class ApiAnimeService {
   }
 
   getAnimeByRange(){
-    const url = `${this.apiUrl}?min_score=4`;
+    const url = `${this.apiUrl}?max_score=5`;
     return this.http.get(url);  
   }
 

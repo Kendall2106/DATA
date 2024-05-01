@@ -19,7 +19,7 @@
      border-style: solid ;
     border-color: black;
     border-left: none;
-    background-color: #131130;
+    background-color: #252525;
 }
 
 /*.card{
@@ -71,6 +71,7 @@ select option {
     text-align: left;
     border-radius: 10px;
     height: calc(77vh - 60px);
+    background:  #121212;
 }
 
 
@@ -90,9 +91,10 @@ select option {
 
 .body{
     margin-top: 10px;
-    background-color: #1F1D3A;
+    background-color: #121212;
     margin-bottom: 10px;
     border-radius: 10px;
+   
    
 }
 

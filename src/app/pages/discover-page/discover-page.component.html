@@ -1,6 +1,20 @@
 <div class="body">
     <header>
-        <button class="perfil-button">Perfil</button>
+        
+        <div class="row nbar"  style="margin-bottom: 3%;">
+            <div class="col-lg-6 col-6 col-md-6" style="text-align: left;">
+          
+                <i (click)="restNumber()" class="uil uil-angle-left"></i>
+                <i (click)="aumentarNumero()" class="uil uil-angle-right"></i>
+               
+            </div>
+            <div class="col-lg-5 col-5 col-md-5">
+                <input [(ngModel)]="search"  class="form-control me-2" type="search" aria-label="Search" name="search" style="background-color: transparent; color: white;"> 
+            </div>
+            <div class="col-lg-1 col-1 col-md-1">
+                <button (click)="searchAnimesByName()"  class="btn btn-outline-success" style="background-color: transparent; color: white; border-color: white;">Buscar</button>
+            </div>
+        </div>
     </header>
 
     <div class="container list col-lg-12">
@@ -32,25 +46,8 @@
         <h4>Lista de Animes</h4>
         <div class="table-container">
 
-             <nav class="navbar navbar-expand-lg bg-body-tertiary">
-              <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <button (click)="restNumber()">restar</button>
-                    <button (click)="aumentarNumero()">aumentar</button>
-                  </ul>
-                  <div class="d-flex" role="search">
-                    <input [(ngModel)]="search"  class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search"
-                      name="search">
-                    <button (click)="searchAnimesByName()"  class="btn btn-outline-success">Buscar</button>
-                  </div>
-                </div>
-              </div>
-            </nav>
+
+            
   
             <div class="row">
                 <div *ngFor="let cardAnime of animes" class="col-lg-2 col-6 col-md-4">

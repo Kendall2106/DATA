@@ -1,8 +1,9 @@
 .body{
     margin-top: 10px;
-    background-color: #1F1D3A;
+    background-color: #121212;
     margin-bottom: 10px;
     border-radius: 10px;
+    
    
 }
 
@@ -19,7 +20,9 @@ mat-icon {
   margin-right: 10px;
 }
 
-
+nav {
+    background-color: #121212; /* Cambia #2c3e50 por el color que desees */
+  }
 
 .imagen{
   width: 100%; 
@@ -40,7 +43,7 @@ h4{
 
 
 .list{
-    max-height: calc(95vh - 60px); /* Ajusta el valor según tus necesidades */
+    max-height: calc(92vh - 60px); /* Ajusta el valor según tus necesidades */
     overflow-y: auto;
   }
 
@@ -50,7 +53,7 @@ h4{
 
 
 header {
-    background-color: #1F1D3A;
+    background-color: transparent;
     color: #fff;
     padding: 5px 20px;
     text-align: right;
@@ -76,6 +79,9 @@ header {
 }
 
 
+i{
+    font-size: 30px;
+}
 
 @media (max-width:1000px) {
 
