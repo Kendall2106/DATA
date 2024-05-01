@@ -14,6 +14,7 @@ export class DiscoverPageComponent {
   opTipos: string[][] = [];
   numPage: number = 1;
   search: string = "";
+  numVisible: number = 0;
 
 
   constructor( private apiAnimeService: ApiAnimeService) {
@@ -23,6 +24,13 @@ export class DiscoverPageComponent {
     await this.getAll();
     await this.getAnimeAiring();
     await this.getAnimeByRange();
+
+    this.numVisible = window.innerWidth <= 768 ? 2 : 6;
+
+    // Escucha el evento de cambio de tamaño de la ventana para ajustar el número de elementos visibles
+    window.addEventListener('resize', () => {
+      this.numVisible = window.innerWidth <= 768 ? 2 : 6;
+    });
     
   }
 
@@ -37,7 +45,7 @@ export class DiscoverPageComponent {
 
   async getAll(){
     await this.apiAnimeService.getAnimeByPage(this.numPage).subscribe((response: any) => {
-       // console.log(response);
+        console.log(response);
         this.animes = response.data;
     });
   }
