@@ -442,6 +442,9 @@ TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
 
 
+primeng
+MIT
+
 rfdc
 MIT
 Copyright 2019 "David Mark Clements <david.mark.clements@gmail.com>"
