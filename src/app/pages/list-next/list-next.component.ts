@@ -23,7 +23,7 @@ export class ListNextComponent implements OnInit{
   }
   async ngOnInit() {
    // this.readReco();
-    await this.getAll();
+   // await this.getAll();
   }
 
   

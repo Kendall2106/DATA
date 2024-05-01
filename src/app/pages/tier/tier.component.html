@@ -1,5 +1,5 @@
 
-    <div style="margin:5%;">
+    <!--<div style="margin:5%;">
         <div class="row" style=" margin-bottom: 5%;" >
             
                 <div class="col-lg-1">
@@ -45,5 +45,87 @@
         <div class="resultCount">
             <h5>Total: {{resultCount}}</h5> 
         </div>
+    </div>-->
+
+
+    
+<div class="menu px-4 text-center">
+    <div class="row gx-5">
+        <div class="column col-lg-3">
+            <div class="menu px-4">
+    
+                <div class="row gx-5">
+                    <div class="column col-lg-12" style="background-color: #1F1D3A;">
+                        <div class="top col-lg-12" style="margin-bottom: 3%;">
+                            <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
+                        </div>
+                        <div class="link" >
+                            <h5><i class="uil uil-subject"></i> Biblioteca</h5>
+                        </div>
+                        <div class="link" >
+                            <h5><i class="uil uil-subject"></i> Tier</h5>
+                        </div>
+                    </div>
+            
+                    <div class="columnDesc col-lg-12" style="background-color: #1F1D3A; ">
+                        <div style="margin-top: 2%; margin-bottom: 5%;">
+                            <h4>Descubrir:</h4>
+                        </div>
+                        <div style=" margin-bottom: 5%;">
+                            <h5>Ano: </h5>
+                            <select id="opAnios" (change)="filterYear($event)">
+                                <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>
+                            </select>
+                        </div>
+                        <div class="link" (click)="loadData('Peliculas')">
+                            <h5><i class="uil uil-subject"></i> Peliculas</h5>
+                        </div>
+                        <div class="link" (click)="loadData('Series')">
+                            <h5><i class="uil uil-subject"></i> Series</h5>
+                        </div>
+                        <div class="link" (click)="loadData('Animes')">
+                            <h5><i class="uil uil-subject"></i> Anime</h5>
+                        </div>
+                        <div class="link" (click)="loadData('Juegos')">
+                            <h5><i class="uil uil-subject"></i> Juegos</h5>
+                        </div>
+                        <div class="link" (click)="loadData('Libros')">
+                            <h5><i class="uil uil-subject"></i> Libros</h5>
+                        </div>
+                        <div class="link" (click)="loadData('Musica')">
+                            <h5><i class="uil uil-subject"></i> Musica</h5>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column col-lg-9">
+            <div class="body">
+                <div class="container list col-lg-12">
+                    <div  *ngFor="let i of tier[0]">
+                        <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+                            <div class="izq col-lg-2" [style.background-color]="tier[1][i]">
+                                <h5>{{categorias[i]}}</h5>
+                            </div>
+                            <div class="der col-lg-10">
+                                <div *ngFor="let anime of dataScore(this.resultFilter, categorias.length - i)"  style="display: inline;">
+                                    <img title="{{anime.name}}" class="imagen" [src]="anime.image" alt="#"  />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+            </div>
+            <div class="resultCount">
+                <h5>Total: {{resultCount}}</h5> 
+            </div>
+
+            
+        </div>
     </div>
+</div>
 

@@ -2,34 +2,19 @@
     margin-top: 10px;
     background-color: #1F1D3A;
     margin-bottom: 10px;
+    border-radius: 10px;
+   
 }
 
 
-
-
-  .imgTitle{
-    width: 280px; 
-    height: 180px;
-    margin-left: 2%;
-}
-
-.etiqueta {
-    color: black;
-    box-shadow: 0 0 29px #3c3c3c6b;
-    border-radius: 5px;
-    font-family: 'Hedvig Letters Serif', serif;
-    text-align: center;
-    text-decoration: none;
-}
 
 .card {
-
-  padding: 5px;
-  margin: 5px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  cursor: grab;
-}
+    padding: 5px;
+    margin: 5px;
+    cursor: grab;
+    background-color: transparent;
+    
+  }
 
 mat-icon {
   margin-right: 10px;
@@ -41,6 +26,53 @@ mat-icon {
   width: 100%; 
   height: 250px;
   border: 1px solid #000000;
+  border-radius: 10px;
+  
 
 }
+
+h4{
+    text-align: left;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+
+.list{
+    max-height: calc(95vh - 60px); /* Ajusta el valor según tus necesidades */
+    overflow-y: auto;
+  }
+
+  .list::-webkit-scrollbar {
+    width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
+
+
+header {
+    background-color: #1F1D3A;
+    color: #fff;
+    padding: 5px 20px;
+    text-align: right;
+    border-radius: 10px;
+}
+/* Estilos para el botón */
+.perfil-button {
+    background-color: transparent; /* Azul */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width:1000px) {
+
+ 
+     .imagen{
+       height: 70px;
+     }
+ 
+ 
+ }
+
 

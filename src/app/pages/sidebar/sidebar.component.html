@@ -26,19 +26,40 @@
 
 
 <div class="menu px-4">
+    
     <div class="row gx-5">
         <div class="column col-lg-12" style="background-color: #1F1D3A;">
-           <a (click)="navegarLibrary()">Biblioteca</a>
-           <h5>Perfil</h5>
+            <div class="top col-lg-12" style="margin-bottom: 3%;">
+                <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
+            </div>
+            <div class="link" (click)="navegarLibrary()" >
+                <h5><i class="uil uil-subject"></i> Biblioteca</h5>
+            </div>
+            <div class="link" (click)="navegarTier()">
+                <h5><i class="uil uil-subject"></i> Tier</h5>
+            </div>
         </div>
-        <div class="column col-lg-12" style="background-color: #1F1D3A;">
-            <ul >
-                <li><a (click)="navegarAComponenteDestino('Peliculas')">Peliculas</a></li>
-                <li><a (click)="navegarAComponenteDestino('Series')">Series</a></li>
-                <li><a (click)="navegarAComponenteDestino('Animes')">Anime</a></li>
-                <li><a (click)="navegarAComponenteDestino('Juegos')">Juegos</a></li>
-                <li><a (click)="navegarAComponenteDestino('Libros')">Libros</a></li>
-            </ul>
+
+        <div class="columnDesc col-lg-12" style="background-color: #1F1D3A; ">
+            <div style="margin-top: 2%; margin-bottom: 5%;">
+                <h4>Descubrir:</h4>
+            </div>
+
+            <div class="link" (click)="navegarAComponenteDestino('Peliculas')">
+                <h5><i class="uil uil-subject"></i> Peliculas</h5>
+            </div>
+            <div class="link" (click)="navegarAComponenteDestino('Series')">
+                <h5><i class="uil uil-subject"></i> Series</h5>
+            </div>
+            <div class="link" (click)="navegarAComponenteDestino('Animes')">
+                <h5><i class="uil uil-subject"></i> Anime</h5>
+            </div>
+            <div class="link" (click)="navegarAComponenteDestino('Juegos')">
+                <h5><i class="uil uil-subject"></i> Juegos</h5>
+            </div>
+            <div class="link" (click)="navegarAComponenteDestino('Libros')">
+                <h5><i class="uil uil-subject"></i> Libros</h5>
+            </div>
         </div>
     </div>
 </div>

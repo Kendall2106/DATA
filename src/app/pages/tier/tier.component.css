@@ -19,7 +19,7 @@
      border-style: solid ;
     border-color: black;
     border-left: none;
-    background-color: #1F1D3A;
+    background-color: #131130;
 }
 
 /*.card{
@@ -54,5 +54,54 @@ select option {
 
   .resultCount{
     text-align: right;
+    margin-top: 2%;
   }
+
+
+
+
+  .column{
+    margin-top: 10px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.columnDesc{
+    margin-top: 10px;
+    text-align: left;
+    border-radius: 10px;
+    height: calc(77vh - 60px);
+}
+
+
+
+.imgTitle{
+    width: 140px; 
+    height: 90px;
+    margin-left: 2%;
+    margin-top: 2%;
+}
+
+.link{
+    margin-bottom: 5%;
+    cursor: pointer;
+}
+
+
+.body{
+    margin-top: 10px;
+    background-color: #1F1D3A;
+    margin-bottom: 10px;
+    border-radius: 10px;
+   
+}
+
+.list{
+    height: calc(95vh - 60px); /* Ajusta el valor según tus necesidades */
+    overflow-y: auto;
+  }
+
+  .list::-webkit-scrollbar {
+    width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
 

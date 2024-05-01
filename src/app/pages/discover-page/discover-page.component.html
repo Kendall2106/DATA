@@ -1,36 +1,83 @@
 <div class="body">
-    <div class="container col-lg-12">
+    <header>
+        <button class="perfil-button">Perfil</button>
+    </header>
+
+    <div class="container list col-lg-12">
         
-        <h2>Animes más Vistos</h2>
-        <div cdkDropList class="row"> 
-            <div *ngFor="let cardAnime of animes.slice(0, 6)" cdkDrag class="col-lg-2 col-4 col-md-4">
-              <div class="card container">
-                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                <button >click</button>
-              </div>
-            </div>
-        </div>
+
+        <h4>Airing</h4>
+
+          <p-carousel [value]="animesAiring" [numVisible]="6" [numScroll]="3" [circular]="true" [showIndicators]="false">
+            <ng-template let-cardAnime pTemplate="item">
+                <div class="card">
+                    <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                  </div>
+            </ng-template>
+        </p-carousel>
+
+          
+        <h4>Score +4</h4>
+
+          <p-carousel [value]="animesRange" [numVisible]="6" [numScroll]="3" [circular]="true" [showIndicators]="false">
+            <ng-template let-cardAnime pTemplate="item">
+                <div class="card">
+                    <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                  </div>
+            </ng-template>
+        </p-carousel>
 
 
-        <h2>Animes nuevos</h2>
-        <div cdkDropList class="row"> 
-            <div *ngFor="let cardAnime of animes.slice(7, 13)" cdkDrag class="col-lg-2 col-4 col-md-4">
-              <div class="card container">
-                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                <button >click</button>
-              </div>
-            </div>
-        </div>
 
-        <h2>Recomendaciones</h2>
-        <div cdkDropList class="row"> 
-            <div *ngFor="let cardAnime of animes.slice(13, 19)" cdkDrag class="col-lg-2 col-4 col-md-4">
-              <div class="card container">
-                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                <button >click</button>
+        <h4>Lista de Animes</h4>
+        <div class="table-container">
+
+             <nav class="navbar navbar-expand-lg bg-body-tertiary">
+              <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <button (click)="restNumber()">restar</button>
+                    <button (click)="aumentarNumero()">aumentar</button>
+                  </ul>
+                  <div class="d-flex" role="search">
+                    <input [(ngModel)]="search"  class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search"
+                      name="search">
+                    <button (click)="searchAnimesByName()"  class="btn btn-outline-success">Buscar</button>
+                  </div>
+                </div>
               </div>
+            </nav>
+  
+            <div cdkDropList class="row">
+                <div *ngFor="let cardAnime of animes" cdkDrag class="col-lg-2 col-4 col-md-4">
+                  <div class="card">
+                    <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                    <!--<button (click)="saveAnime(cardAnime)">click</button>-->
+                  </div>
+                </div>
             </div>
-        </div>
+  
+  
+          
+  
+            <div cdkDropList class="row" style="background: black;">
+              <div *ngFor="let card of recomendaciones" cdkDrag class="col-lg-2 col-4 col-md-4">
+                <div class="card">
+                  <img class="imagen" [src]="card.images.jpg.image_url" alt="#"  />
+                </div>
+              </div>
+          </div>
+            
+  
+         
+                
+          </div>
+
+       
 
 
     </div>

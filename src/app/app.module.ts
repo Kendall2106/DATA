@@ -28,6 +28,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HomeComponent } from './pages/home/home.component';
 import { DiscoverPageComponent } from './pages/discover-page/discover-page.component';
 
+import { CarouselModule } from 'primeng/carousel';
+
 
 
 
@@ -53,6 +55,7 @@ import { DiscoverPageComponent } from './pages/discover-page/discover-page.compo
     NgbModule,
     FormsModule,
     DragDropModule,
+    CarouselModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(()=> getFirestore())
   ],

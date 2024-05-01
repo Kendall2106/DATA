@@ -36,14 +36,14 @@
     text-decoration: none;
 }
 
-.card {
+/*.card {
 
   padding: 5px;
   margin: 5px;
   background-color: #fff;
   border: 1px solid #ddd;
   cursor: grab;
-}
+}*/
 
 mat-icon {
   margin-right: 10px;
