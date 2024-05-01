@@ -1,0 +1,46 @@
+.body{
+    margin-top: 10px;
+    background-color: #1F1D3A;
+    margin-bottom: 10px;
+}
+
+
+
+
+  .imgTitle{
+    width: 280px; 
+    height: 180px;
+    margin-left: 2%;
+}
+
+.etiqueta {
+    color: black;
+    box-shadow: 0 0 29px #3c3c3c6b;
+    border-radius: 5px;
+    font-family: 'Hedvig Letters Serif', serif;
+    text-align: center;
+    text-decoration: none;
+}
+
+.card {
+
+  padding: 5px;
+  margin: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: grab;
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+
+
+.imagen{
+  width: 100%; 
+  height: 250px;
+  border: 1px solid #000000;
+
+}
+

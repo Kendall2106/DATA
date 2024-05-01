@@ -33,6 +33,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/Tier']);
   }
 
+  navegarLibrary(){
+    this.router.navigate(['/library']);
+  }
+
   toggleMobileMenu(): void {
     /*const btn = document.getElementById('btnMenu')!;
     if(btn.style.display == 'none'){

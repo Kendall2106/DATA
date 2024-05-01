@@ -9,7 +9,7 @@ import { WorkplaceComponent } from './pages/workplace/workplace.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { DataService } from './core/service/data.service';
-import { HomeComponent } from './pages/home/home.component';
+import { LibraryComponent } from './pages/library/library.component';
 
 import {initializeApp,provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
@@ -25,6 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { TierComponent } from './pages/tier/tier.component';
 import { ListNextComponent } from './pages/list-next/list-next.component'; 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HomeComponent } from './pages/home/home.component';
+import { DiscoverPageComponent } from './pages/discover-page/discover-page.component';
 
 
 
@@ -34,12 +36,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     AppComponent,
     WorkplaceComponent,
     SidebarComponent,
-    HomeComponent,
+    LibraryComponent,
     GraphicsComponent,
     CreateComponent,
     TierComponent,
-    ListNextComponent
-
+    ListNextComponent,
+    HomeComponent,
+    DiscoverPageComponent
   ],
   imports: [
     BrowserModule,

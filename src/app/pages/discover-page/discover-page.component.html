@@ -1,0 +1,38 @@
+<div class="body">
+    <div class="container col-lg-12">
+        
+        <h2>Animes más Vistos</h2>
+        <div cdkDropList class="row"> 
+            <div *ngFor="let cardAnime of animes.slice(0, 6)" cdkDrag class="col-lg-2 col-4 col-md-4">
+              <div class="card container">
+                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                <button >click</button>
+              </div>
+            </div>
+        </div>
+
+
+        <h2>Animes nuevos</h2>
+        <div cdkDropList class="row"> 
+            <div *ngFor="let cardAnime of animes.slice(7, 13)" cdkDrag class="col-lg-2 col-4 col-md-4">
+              <div class="card container">
+                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                <button >click</button>
+              </div>
+            </div>
+        </div>
+
+        <h2>Recomendaciones</h2>
+        <div cdkDropList class="row"> 
+            <div *ngFor="let cardAnime of animes.slice(13, 19)" cdkDrag class="col-lg-2 col-4 col-md-4">
+              <div class="card container">
+                <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
+                <button >click</button>
+              </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

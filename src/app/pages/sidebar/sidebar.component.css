@@ -1,5 +1,5 @@
 
-a{
+/*a{
     cursor: pointer;
 }
 
@@ -32,7 +32,7 @@ button{
 
 @media (max-width:1000px) {
     .btnMenu {
-        display: block !important; /* Puedes usar "inline-block" u otro valor según tus necesidades */
+        display: block !important;
     }
 
     .menu{
@@ -43,7 +43,10 @@ button{
         width: 80%;
         margin-left: 20%;
     }
+}*/
+
+.column{
+ 
+    margin-top: 10px;
 }
-
-
 
