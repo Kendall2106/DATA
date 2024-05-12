@@ -55,6 +55,9 @@
                     <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
                     <!--<button (click)="saveAnime(cardAnime)">click</button>-->
                     <p class="title">{{cardAnime.title}}</p>
+
+                    
+
                   </div>
                 </div>
             </div>
@@ -70,7 +73,8 @@
               </div>
           </div>
             
-  
+          <button mat-raised-button matTooltip="Este es un tooltip de ejemplo">Botón 1</button>
+          <button mat-raised-button [matTooltip]="tooltipText">Botón 2</button>
          
                 
           </div>
@@ -80,4 +84,11 @@
 
     </div>
 </div>
+
+
+
+
+
+
+
 
