@@ -29,7 +29,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DiscoverPageComponent } from './pages/discover-page/discover-page.component';
 
 import { CarouselModule } from 'primeng/carousel';
-import { MatTooltipModule } from '@angular/material/tooltip';
+//import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -58,7 +58,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     DragDropModule,
     CarouselModule,
-    MatTooltipModule,
+   // MatTooltipModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(()=> getFirestore())
   ],

@@ -94,7 +94,7 @@ export class DiscoverPageComponent {
   }*/
 
 
-  tooltipText = 'Este es otro tooltip de ejemplo';
+  //tooltipText = 'Este es otro tooltip de ejemplo';
 
   
 }
