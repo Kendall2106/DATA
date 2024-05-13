@@ -29,10 +29,10 @@ export class DiscoverPageComponent {
     await this.getAnimeAiring();
     await this.getAnimeByRange();
 
-    this.numVisible = window.innerWidth <= 768 ? 2 : 6;
+    this.numVisible = window.innerWidth <= 768 ? 1 : 6;
 
     window.addEventListener('resize', () => {
-      this.numVisible = window.innerWidth <= 768 ? 2 : 6;
+      this.numVisible = window.innerWidth <= 768 ? 1 : 6;
     });
   }
 

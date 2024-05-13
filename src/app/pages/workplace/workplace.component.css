@@ -14,8 +14,12 @@
     border-color: var(--color-text);
     /*border-color: gold;*/
     font-size: 0.8rem;
-    
+    margin-bottom: 3%; 
+    margin-left: 4%; 
+    margin-right: 4%;
 }
+
+
 
 .etiqueta {
     width: 50%;
@@ -100,7 +104,11 @@
 
     .card{
       width: 100%;
+      margin: 0%;
+      margin-bottom: 2%;
     }
+
+
 
     .imagen{
       width: 100%;

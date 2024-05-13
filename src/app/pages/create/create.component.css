@@ -17,3 +17,8 @@ select{
     height: 180px;
     margin-left: 2%;
 }
+
+.container{
+    padding: 2%;
+    border-radius: 10px;
+}
