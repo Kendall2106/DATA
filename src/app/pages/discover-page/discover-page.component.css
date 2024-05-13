@@ -59,6 +59,7 @@ header {
     text-align: right;
     border-radius: 10px;
 }
+
 /* Estilos para el botón */
 .perfil-button {
     background-color: transparent; /* Azul */
@@ -84,16 +85,6 @@ i{
 }
 
 
-::ng-deep .tooltip-inner {
-  background-color: #333; /* Color de fondo del tooltip */
-  color: #fff; /* Color del texto del tooltip */
-  border: 1px solid #fff; /* Borde del tooltip */
-  border-radius: 4px; /* Radio del borde */
-  padding: 8px; /* Espaciado interno del tooltip */
-  width: 500px; /* Ancho máximo del tooltip */
-  max-width: 500px; /* Ancho máximo del tooltip */
-  height: 300px;
-}
 
 
 

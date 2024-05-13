@@ -27,6 +27,9 @@ export class WorkplaceComponent implements OnInit {
   opAnios: string[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
+  resultCount: any = 0;
+
+
   constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
@@ -78,6 +81,9 @@ export class WorkplaceComponent implements OnInit {
     this.resultFilter.forEach((element: any)=>{
         element.image ='data:image/jpg;base64,' + element.image;
     });
+
+
+    this.resultCount=this.resultFilter.length;
     this.applyFilters();
   }
 
@@ -138,6 +144,8 @@ applyFilters() {
     .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
     .filter(item => this.convertYear(item))
     .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+
+    this.resultCount=this.resultFilter.length;
 
 }
 

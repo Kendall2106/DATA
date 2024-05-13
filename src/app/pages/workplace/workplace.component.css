@@ -2,11 +2,12 @@
 .list{
   max-height: calc(105vh - 60px); /* Ajusta el valor según tus necesidades */
   overflow-y: auto;
+  width: 100%;
 }
 
 
 .card{
-    background-color: var(--color-1);
+    background-color: #252525;
     
     color: var(--color-text);
     border-style: solid;
@@ -69,6 +70,27 @@
     color: var(--color-text);
     margin-left: 1%;
   }
+
+  .body{
+    margin-top: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    
+   
+}
+
+
+  .container{
+    height: calc(78vh - 60px);
+    overflow-y: auto;
+    align-items: end;
+  }
+
+  .container::-webkit-scrollbar {
+    width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
+
 
   @media (max-width:1000px) {
    /*.imagen{
