@@ -27,7 +27,7 @@ nav {
 .imagen{
   width: 100%; 
   height: 250px;
-  overflow: hidden; /* Oculta el contenido que exceda la altura */
+ 
   border: 1px solid #000000;
   border-radius: 10px;
   
@@ -82,6 +82,26 @@ header {
 i{
     font-size: 30px;
 }
+
+
+::ng-deep .tooltip-inner {
+  background-color: #333; /* Color de fondo del tooltip */
+  color: #fff; /* Color del texto del tooltip */
+  border: 1px solid #fff; /* Borde del tooltip */
+  border-radius: 4px; /* Radio del borde */
+  padding: 8px; /* Espaciado interno del tooltip */
+  width: 500px; /* Ancho máximo del tooltip */
+  max-width: 500px; /* Ancho máximo del tooltip */
+  height: 300px;
+}
+
+
+
+
+
+
+
+
 
 @media (max-width:1000px) {
 

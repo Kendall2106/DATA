@@ -30,6 +30,8 @@ import { DiscoverPageComponent } from './pages/discover-page/discover-page.compo
 
 import { CarouselModule } from 'primeng/carousel';
 //import { MatTooltipModule } from '@angular/material/tooltip';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -58,7 +60,8 @@ import { CarouselModule } from 'primeng/carousel';
     FormsModule,
     DragDropModule,
     CarouselModule,
-   // MatTooltipModule,
+    TooltipModule.forRoot(),
+    ModalModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(()=> getFirestore())
   ],

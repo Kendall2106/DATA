@@ -47,35 +47,17 @@
         <div class="table-container">
 
 
-            
-  
-            <div class="row">
-                <div *ngFor="let cardAnime of animes" class="col-lg-2 col-6 col-md-4">
-                  <div class="card">
-                    <img class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                    <!--<button (click)="saveAnime(cardAnime)">click</button>-->
-                    <p class="title">{{cardAnime.title}}</p>
-
-                    
-
-                  </div>
-                </div>
-            </div>
-  
-  
-          
-  
-            <div cdkDropList class="row" style="background: black;">
-              <div *ngFor="let card of recomendaciones" cdkDrag class="col-lg-2 col-4 col-md-4">
-                <div class="card">
-                  <img class="imagen" [src]="card.images.jpg.image_url" alt="#"  />
-                </div>
+          <div class="row">
+            <div *ngFor="let cardAnime of animes" class="col-lg-2 col-6 col-md-4">
+              <div class="card">
+                <img (click)="openModal(cardAnime)" class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#">
+                <p class="title">{{cardAnime.title}}</p>
               </div>
+            </div>
           </div>
-            
-        <!--   <button mat-raised-button matTooltip="Este es un tooltip de ejemplo">Botón 1</button>
-          <button mat-raised-button [matTooltip]="tooltipText">Botón 2</button>-->
+          
          
+
                 
           </div>
 
@@ -84,6 +66,7 @@
 
     </div>
 </div>
+
 
 
 

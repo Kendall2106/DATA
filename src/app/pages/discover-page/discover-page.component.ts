@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiAnimeService } from 'src/app/core/service/apiAnime.service';
+import { ModalComponent } from '../component/modal/modal.components';
 
 @Component({
   selector: 'app-discover-page',
@@ -7,19 +9,21 @@ import { ApiAnimeService } from 'src/app/core/service/apiAnime.service';
   styleUrls: ['./discover-page.component.css']
 })
 export class DiscoverPageComponent {
+
+
   recomendaciones: any[] = [];
   animes: any[] = [];
-  animesAiring: any[] =[];
-  animesRange: any[] =[];
+  animesAiring: any[] = [];
+  animesRange: any[] = [];
   opTipos: string[][] = [];
   numPage: number = 1;
   search: string = "";
   numVisible: number = 0;
+  animeSelected: any;
+  isModalOpen: boolean = false;
 
+  constructor(private apiAnimeService: ApiAnimeService, public modalService: NgbModal) {}
 
-  constructor( private apiAnimeService: ApiAnimeService) {
-
-  }
   async ngOnInit() {
     await this.getAll();
     await this.getAnimeAiring();
@@ -27,74 +31,79 @@ export class DiscoverPageComponent {
 
     this.numVisible = window.innerWidth <= 768 ? 2 : 6;
 
-    // Escucha el evento de cambio de tamaño de la ventana para ajustar el número de elementos visibles
     window.addEventListener('resize', () => {
       this.numVisible = window.innerWidth <= 768 ? 2 : 6;
     });
-    
   }
 
-  
-  /*async getAll(){
-    await this.apiAnimeService.getAnimeUpComing(1).subscribe((response: any) => {
-        console.log(response);
-        this.animes = response.data;
-    });
-    
-  }*/
 
-  async getAll(){
+  async getAll() {
     await this.apiAnimeService.getAnimeByPage(this.numPage).subscribe((response: any) => {
-        console.log(response);
-        this.animes = response.data;
+      console.log(response);
+      this.animes = response.data;
     });
   }
 
-  async searchAnimesByName(){
-    await this.apiAnimeService.searchAnimesByName(this.search,this.numPage).subscribe((response: any) => {
-       // console.log(response);
-        this.animes = response.data;
+  async searchAnimesByName() {
+    await this.apiAnimeService.searchAnimesByName(this.search, this.numPage).subscribe((response: any) => {
+      this.animes = response.data;
     });
   }
 
-  
-
-  async getAnimeAiring(){
+  async getAnimeAiring() {
     await this.apiAnimeService.getAnimeAiring().subscribe((response: any) => {
-        console.log(response);
-        this.animesAiring = response.data;
+      console.log(response);
+      this.animesAiring = response.data;
     });
   }
 
-  async getAnimeByRange(){
+  async getAnimeByRange() {
     await this.apiAnimeService.getAnimeByRange().subscribe((response: any) => {
-        console.log(response);
-        this.animesRange = response.data;
+      console.log(response);
+      this.animesRange = response.data;
     });
   }
 
-   saveAnime(anime: any){
+  saveAnime(anime: any) {
     this.recomendaciones.push(anime);
-
   }
 
   aumentarNumero() {
-    this.numPage++; // Incrementamos el número
+    this.numPage++;
     this.getAll();
   }
 
-  restNumber(){
-    this.numPage--; // Incrementamos el número
+  restNumber() {
+    this.numPage--;
     this.getAll();
   }
 
-   /*saveAnime(anime: any){
-    this.recomendaciones.push(anime);
-
-  }*/
 
 
-  //tooltipText = 'Este es otro tooltip de ejemplo';
+
+
+
+  public user = {
+    name: 'Izzat Nadiri',
+    age: 26
+  }
+
+ 
+
+
+  openModal(anime: any) {
+
+    const modalRef = this.modalService.open(ModalComponent, { centered: true });
+
+    modalRef.componentInstance.data = anime;
+    console.log(anime);
+    // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+    //   console.log(receivedEntry);
+    // })
+  }
+
+
 
   
+
 }

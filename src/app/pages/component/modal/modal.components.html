@@ -1,0 +1,38 @@
+
+
+
+
+   
+
+  <div class="modalPrin">
+    <div class="modal-header">
+        <h4 class="modal-title">{{animeModal.title}}</h4>
+        <button type="button" class="close" aria-label="Cerrar" (click)="closeModal()" >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-3">
+                    <img class="imagen" [src]="animeModal.images.jpg.image_url" alt="#">
+                </div>
+                <div class=" col-lg-9">
+                        <div>
+                            <p class="synopsis">{{animeModal.synopsis}}</p>
+                        </div>
+                        <div>
+                            <p>Episodios: {{animeModal.episodes}}</p>
+                            <button>CLick</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+  </div>
+
+
+
+
+  
+ 
+
