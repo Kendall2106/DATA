@@ -28,7 +28,7 @@ export class WorkplaceComponent implements OnInit {
   opCalificacion: string[] = [];
   calificacionSelec: any;
   resultCount: any = 0;
-
+  color: any ="";
 
   constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
@@ -49,7 +49,7 @@ export class WorkplaceComponent implements OnInit {
     this.router.events.subscribe(event => {
       
         this.message = this.dataService.typeData;
-        this.loadData();
+        this.loadData('Animes');
    
     });
 
@@ -60,24 +60,30 @@ export class WorkplaceComponent implements OnInit {
 
 
 
-  async loadData(){
-    if (this.message === 'Peliculas') {
+  async loadData(message: any){
+    if (message === 'Movies') {
+      this.color = 'linear-gradient(to bottom, #00913f3b, 20%, #121212)';
       this.data = await this.loadDataForType(this.movieService.getMovies());
-    } else if (this.message === 'Series') {
+    } else if (message === 'Series') {
+      this.color = 'linear-gradient(to bottom, #c3e91a33, 20%, #121212)';
       this.data = await this.loadDataForType(this.seriesService.getSeries());
-    } else if (this.message === 'Animes') {
+    } else if (message === 'Animes') {
+      this.color = 'linear-gradient(to bottom, #4e239481, 20%, #121212)';
       this.data = await this.loadDataForType(this.animeService.getAnimes());
-    }else if (this.message === 'Juegos') {
+    }else if (message === 'Games') {
+      this.color = 'linear-gradient(to bottom, #f8798e3a, 20%, #121212)';
       this.data = await this.loadDataForType(this.gameService.getGames());
-    }else if (this.message === 'Libros') {
+    }else if (message === 'Books') {
+      this.color = 'linear-gradient(to bottom, #8040003a, 20%, #121212)';
       this.data = await this.loadDataForType(this.libroService.getBook());
-    }else if (this.message === 'Musica') {
+    }else if (message === 'Music') {
+      this.color = 'linear-gradient(to bottom, #0000ff3f, 20%, #121212)';
       this.data = await this.loadDataForType(this.musicService.getMusic());
     }
 
-
+    this.message = message;
     this.resultFilter=this.sortData(this.data);
-    console.log(this.resultFilter[0].date);
+    
     this.resultFilter.forEach((element: any)=>{
         element.image ='data:image/jpg;base64,' + element.image;
     });
@@ -85,6 +91,8 @@ export class WorkplaceComponent implements OnInit {
 
     this.resultCount=this.resultFilter.length;
     this.applyFilters();
+
+    console.log(this.data);
   }
 
   async loadDataForType(service: Promise<any>) {
@@ -123,6 +131,7 @@ export class WorkplaceComponent implements OnInit {
     const index = this.opTipos[0].indexOf(type);
     return index !== -1 ? this.opTipos[1][index] : 'greenyellow'; // Color por defecto para tipos desconocidos
   }
+
 
 
   convert(date: any): number {
@@ -195,7 +204,7 @@ getColor(score: any){
   if(score==5){
     return 'gold'; 
   }
-  return '#ded8cf';
+  return '';
 }
  
 

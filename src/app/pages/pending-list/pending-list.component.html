@@ -1,0 +1,50 @@
+<div class="body">
+    <header>
+        <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
+        <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
+        <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
+        <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
+        <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
+        <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
+
+    </header>
+
+
+        <div class="list" style="width: 80%;">
+
+            <div class="card container"  *ngFor="let d of data">
+                <div class="row" >
+                    <div class="left col-lg-2" style="text-align: center; margin-top: 1%; margin-bottom: 1%; ">
+                        <img class="imagen" [src]="d.image" alt="#" />
+                    </div>
+                    <div class="right col-lg-10 d-flex flex-column justify-content-between" style="margin-top: 1%; margin-bottom: 1%; text-align: start;">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 style="color: white;">{{ d.name }}</h5>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button class="btnCard btn "><i class="iconCard uil uil-trash-alt"></i></button>
+                                    <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"  (click)="toggleLike(d)">
+                                        <i class="iconCard uil uil-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto test d-flex justify-content-between align-items-center">
+                            <p class="tags">Multiplayer</p>
+                            <p class="release-date">Jan 12, 2023</p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <button class="b1 btn "> viewed</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+          
+                  
+
+    
+</div>
+

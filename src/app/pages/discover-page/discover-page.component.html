@@ -1,20 +1,11 @@
 <div class="body">
     <header>
-        
-        <div class="row nbar col-lg-12 col-12"  style="margin-bottom: 3%;">
-            <div class="col-lg-6 col-4 col-md-6" style="text-align: left;">
-          
-                <i (click)="restNumber()" class="uil uil-angle-left"></i>
-                <i (click)="aumentarNumero()" class="uil uil-angle-right"></i>
-               
-            </div>
-            <div class="col-lg-5 col-4 col-md-5">
-                <input [(ngModel)]="search"  class="form-control me-2" type="search" aria-label="Search" name="search" style="background-color: transparent; color: white;"> 
-            </div>
-            <div class="col-lg-1 col-2 col-md-1">
-                <button (click)="searchAnimesByName()"  class="btn btn-outline-success" style="background-color: transparent; color: white; border-color: white;">Buscar</button>
-            </div>
-        </div>
+        <button (click)="getAnime();"><i class="uil uil-letter-japanese-a"></i> Anime</button>
+        <button (click)="getMovies();"><i class="uil uil-ticket"></i> Peliculas</button>
+        <button (click)="getSeries()"><i class="uil uil-files-landscapes"></i> Series</button>
+        <button (click)="getBooks();"><i class="uil uil-book-alt"></i> Libros</button>
+        <button (click)="getGames();"><i class="uil uil-basketball-hoop"></i> Juegos</button>
+        <button (click)="getMusic();"><i class="uil uil-music"></i> Musica</button>
 
     </header>
 
@@ -23,47 +14,48 @@
 
         <h4>Airing</h4>
 
-          <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [showIndicators]="false">
-            <ng-template let-cardAnime pTemplate="item" >
-                <div class="cardCircule">
-                    <img (click)="openModal(cardAnime)"  class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                  </div>
-            </ng-template>
+
+
+      <div *ngIf="animesAiring.length === 0">No animes available</div>
+      <div *ngIf="animesAiring.length > 0">
+        <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [showIndicators]="false">
+          <ng-template let-cardData pTemplate="item">
+            <div class="cardCircule" (click)="openModal(cardData)">
+              <img class="imagen" [src]="cardData.image" [alt]="cardData.name" />
+            </div>
+          </ng-template>
         </p-carousel>
-
-          
-        <h4>Score +4</h4>
-
-          <p-carousel [value]="animesRange" [numVisible]="numVisible" [numScroll]="1" [circular]="true" [showIndicators]="false">
-            <ng-template let-cardAnime pTemplate="item">
-                <div class="cardCircule">
-                    <img (click)="openModal(cardAnime)"  class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#"  />
-                  </div>
-            </ng-template>
-        </p-carousel>
-
-
+      </div>
 
         <h4>Lista de Animes</h4>
+        <div class="row nbar col-lg-12 col-12"  style="margin-bottom: 3%;">
+          <div class="col-lg-6 col-4 col-md-6" style="text-align: left;">
+        
+              <i  (click)="restNumber()" class="uil buttonNav uil-angle-left"></i>
+              <i  (click)="aumentarNumero();" class="uil buttonNav uil-angle-right"></i>
+             
+          </div>
+          <div class="col-lg-5 col-4 col-md-5">
+              <input [(ngModel)]="search"  class="form-control me-2" type="search" aria-label="Search" name="search" style="background-color: transparent; color: white;"> 
+          </div>
+          <div class="col-lg-1 col-2 col-md-1">
+              <button class="b1 btn" (click)="searchData()">Buscar</button>
+          </div>
+      </div>
+
         <div class="table-container">
 
 
           <div class="row">
-            <div *ngFor="let cardAnime of animes" class="col-lg-2 col-6 col-md-4">
+            <div *ngFor="let cardData of data" class="col-lg-2 col-6 col-md-4">
               <div class="card">
-                <img (click)="openModal(cardAnime)" class="imagen" [src]="cardAnime.images.jpg.image_url" alt="#">
-                <p class="title">{{cardAnime.title}}</p>
+                <img (click)="openModal(cardData)" class="imagen" [src]="cardData.image" alt="#">
+                <p class="title">{{cardData.name}}</p>
               </div>
             </div>
           </div>
           
-         
-
-                
           </div>
-
-       
-
 
     </div>
 </div>

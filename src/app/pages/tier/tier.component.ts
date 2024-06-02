@@ -12,14 +12,14 @@ import { SeriesService } from 'src/app/core/service/series.service';
   templateUrl: './tier.component.html',
   styleUrls: ['./tier.component.css']
 })
-export class TierComponent implements OnInit{
+export class TierComponent implements OnInit {
   //categorias: any[] = ["Olvidables","Malas","Normal","Buenas","God"];
-  categorias: any[] = ["Dioos","Buenas","Normal","Malas","Olvidables"];
-  data: any[]=[];
-  anioActual: string ="";
-  opAnios: any[] = ["2024","2023","2022","2021","2020","2019", "Todos"];
+  categorias: any[] = ["Dioos", "Buenas", "Normal", "Malas", "Olvidables"];
+  data: any[] = [];
+  anioActual: string = "";
+  opAnios: any[] = ["2024", "2023", "2022", "2021", "2020", "2019", "Todos"];
   selectedYear: string = this.opAnios[0];
-  resultFilter: any[]=[];
+  resultFilter: any[] = [];
   resultCount: any = 0;
   tier: any[] = [
     [0, 1, 2, 3, 4],
@@ -27,46 +27,55 @@ export class TierComponent implements OnInit{
   ];
 
 
-  constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService){
-    
+  loading: boolean = false;
+
+  constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
+
   }
-  
+
   ngOnInit(): void {
-   // this.anioActual=new Date().getFullYear()+"";
+    // this.anioActual=new Date().getFullYear()+"";
 
   }
 
-  async loadData(message: any){
-
-      if (message === 'Peliculas') {
+  async loadData(message: any) {
+    try {
+      this.loading = true; // Mostrar animación de carga
+      if (message === 'Movies') {
         this.data = await this.loadDataForType(this.movieService.getMovies());
       } else if (message === 'Series') {
         this.data = await this.loadDataForType(this.seriesService.getSeries());
       } else if (message === 'Animes') {
         this.data = await this.loadDataForType(this.animeService.getAnimes());
-      }else if (message === 'Juegos') {
+      } else if (message === 'Games') {
         this.data = await this.loadDataForType(this.gameService.getGames());
-      }else if (message === 'Libros') {
+      } else if (message === 'Books') {
         this.data = await this.loadDataForType(this.libroService.getBook());
-      }else if (message === 'Musica') {
+      } else if (message === 'Music') {
         this.data = await this.loadDataForType(this.musicService.getMusic());
       }
       console.log(this.selectedYear);
       this.applyFilters();
 
 
-      this.data.forEach((element: any)=>{
-        element.image ='data:image/jpg;base64,' + element.image;
-    });
+      this.data.forEach((element: any) => {
+        element.image = 'data:image/jpg;base64,' + element.image;
+      });
 
-    this.resultFilter=this.data;
-    this.resultCount=this.resultFilter.length;
+      this.resultFilter = this.data;
+      this.resultCount = this.resultFilter.length;
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      this.loading = false; // Ocultar animación de carga
+    }
+
   }
 
   async loadDataForType(service: Promise<any>) {
     const typeData = await service;
     return typeData.map((item: { date: string }) => {
-     // item.date = this.convertDate(item.date);
+      // item.date = this.convertDate(item.date);
       return item;
     });
   }
@@ -75,12 +84,12 @@ export class TierComponent implements OnInit{
   convertYear(item: any) {
     const parts = item.split("-");
     const year = parseInt(parts[0], 10);
-    return year+"";
+    return year + "";
   }
 
-  dataScore(da: any, num: number){
+  dataScore(da: any, num: number) {
     return da.filter((d: { score: number; }) => d.score == num);
-    
+
   }
 
   filterYear(event: any) {
@@ -89,14 +98,14 @@ export class TierComponent implements OnInit{
   }
 
   applyFilters() {
-  
-   // this.resultFilter = this.data.filter(item => this.convertYear(item))
-   
-  // filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
-    if(this.selectedYear==="Todos"){
+
+    // this.resultFilter = this.data.filter(item => this.convertYear(item))
+
+    // filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+    if (this.selectedYear === "Todos") {
       this.resultFilter = this.data;
       console.log(1);
-    }else{
+    } else {
       this.data = this.data.filter((d: { date: string; }) => this.convertYear(d.date) == this.selectedYear);
       console.log(2);
     }
@@ -104,7 +113,7 @@ export class TierComponent implements OnInit{
 
 
 
-  navegarHome(){
+  navegarHome() {
     this.router.navigate(['./']);
   }
 

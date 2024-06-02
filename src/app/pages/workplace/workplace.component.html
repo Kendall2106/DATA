@@ -2,85 +2,98 @@
 
 
 
+<div class="body" [style.background]="color">
+    <header>
+        <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
+        <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
+        <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
+        <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
+        <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
+        <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
 
+    </header>
 
+    <div class=" d-flex flex-wrap">
+       
 
-     
-<div class="menu px-4 text-center">
-    <div class="row gx-3">
-        <div class="column col-lg-3">
-            <app-sidebar></app-sidebar>
-        </div>
+        <div class="list" style="display: flex; flex-wrap: wrap; "> <!-- Adjusted column size to col-lg-6 -->
+            <div style="margin-left: 2%; margin-top: 3%;">
+                <h1>Lista de {{message}}</h1>
+            </div>
 
+            <div class=" row filter col-lg-12 col-12" style="margin-top: 3%; margin-bottom: 3%;">
+                <div class="col-lg-2 col-12">
+                    <p>Total: {{resultCount}}</p>
+                </div>
+                <div class="col-lg-10 col-12" style="text-align: end;">
+                    <select id="opTipos" (change)="filterType($event)">
+                        <option disabled selected style="display:none;">Categoria</option>
+                        <option>Todos</option>
+                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <select id="opAnios" (change)="filterYear($event)">
+                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{
+                            opcion }}</option>
+                    </select>
+                    <select id="opCalificacion" (change)="filterScore($event)">
+                        <option disabled selected style="display:none;">Calificacion</option>
+                        <option>Todos</option>
+                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <button (click)="sortDataByScore()">
+                        <i class="uil"
+                            [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i>
+                    </button>
+                </div>
+            </div>
 
-        <div class="column col-lg-9" >
-            <div class="body">
-                <div class="d-flex flex-wrap" >
-                  
-                        <div class="list" style="display: flex; flex-wrap: wrap; "> <!-- Adjusted column size to col-lg-6 -->
-                            <div style="margin-left: 2%; margin-top: 3%;">
-                                <h1>Lista de {{message}}</h1>
-                            </div>
-
-                            <div class=" row filter col-lg-12 col-12" style="margin-top: 3%; margin-bottom: 3%;"> 
-                                <div class="col-lg-2 col-12">
-                                    <p>Total: {{resultCount}}</p> 
-                                </div>
-                                <div class="col-lg-10 col-12" style="text-align: end;">
-                                    <select id="opTipos" (change)="filterType($event)">
-                                        <option disabled selected style="display:none;">Categoria</option>
-                                        <option>Todos</option>
-                                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
-                                    </select>
-                                    <select id="opAnios" (change)="filterYear($event)">
-                                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>
-                                    </select>
-                                    <select id="opCalificacion" (change)="filterScore($event)">
-                                        <option disabled selected style="display:none;">Calificacion</option>
-                                        <option>Todos</option>
-                                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
-                                    </select>
-                                    <button (click)="sortDataByScore()">
-                                        <i class="uil" [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i>
-                                      </button>
-                                </div>
-                            </div>
-
-                            <div class="container">
-                                    <div class="row">
-                                        <div class="card col-lg-3 col-12" [style.border-color]="getColor(d.score)" *ngFor="let d of resultFilter let i = index" >
-                                            <div class="row">
-                                                <div class="left col-lg-4 col-3" style="text-align: center; margin: 1%;">
-                                                    <!--<img class="imagen" src="./assets/img/{{message}}/{{ d.image }}" >-->
-                                                    <img class="imagen" [src]="d.image" alt="#"  />
-                                                </div>
-                                                <div class="right col-lg-6 col-6" style="margin: 1%;">
-                                                    <h5 style="font-size: 1.1rem;"> {{ d.name }}</h5>
-                                                    <p> {{ d.date }}</p>
-                                                    <div class="row" style="margin-top: 10%;">
-                                                        <div class="type col-lg-12 col-12" >
-                                                            <p class="etiqueta"  [style.background-color]="getColorByType(d.type)"> {{ d.type }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="score col-lg-1 col-2">
-                                                    <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= d.score">&#9733;</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="container">
+                <!--<div class="row">
+                    <div class="card col-lg-3 col-12" [style.border-color]="getColor(d.score)"
+                        *ngFor="let d of resultFilter let i = index">
+                        <div class="row">
+                            <div class="left col-lg-4 col-3" style="text-align: center; margin: 1%;">
                                
+                                <img class="imagen" [src]="d.image" alt="#" />
                             </div>
+                            <div class="right col-lg-6 col-6" style="margin: 1%;">
+                                <h5 style="font-size: 1.1rem;"> {{ d.name }}</h5>
+                                <p> {{ d.date }}</p>
+                                <div class="row" style="margin-top: 10%;">
+                                    <div class="type col-lg-12 col-12">
+                                        <p class="etiqueta" [style.background-color]="getColorByType(d.type)"> {{ d.type
+                                            }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="score col-lg-1 col-2">
+                                <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star"
+                                    [class.filled]="star <= d.score">&#9733;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="row">
+                    <div *ngFor="let cardData of resultFilter" class="col-lg-2 col-6 col-md-4">
+                      <div class="card" >
+                        
+
+                          <div class="contenedor">
+                                <img class="imagen" [src]="cardData.image" alt="#" >
+                                <div class="triangulo"></div>
+                                <div class="centrado">
+                                    {{cardData.score}}<span class="star"[class.filled]="1">&#9733;</span>
+                                </div>
+                          </div>
+                          <p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
+                      </div>
                     </div>
                   </div>
-                
 
             </div>
         </div>
-
-
-
     </div>
 
+
 </div>
-            

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -9,6 +9,7 @@ export class ApiAnimeService {
   private apiUrl = 'https://api.jikan.moe/v4/anime'; 
 
   constructor(private http: HttpClient) {}
+
 
   getAnimeByPage(page:number){
     const url = `${this.apiUrl}?page=${page}&limit=24`;
@@ -21,7 +22,7 @@ export class ApiAnimeService {
   }
   
   searchAnimesByName(name: string, page: number) {
-    const url = `${this.apiUrl}?q=${name}&page=${page}`;
+    const url = `${this.apiUrl}?q=${name}&page=1`;
     return this.http.get(url);
   }
 

@@ -9,16 +9,18 @@ import { ListNextComponent } from './pages/list-next/list-next.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { DiscoverPageComponent } from './pages/discover-page/discover-page.component';
+import { PendingListComponent } from './pages/pending-list/pending-list.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent },
+  {path:'', component: DiscoverPageComponent },
   {path:'library', component: LibraryComponent },
   {path:'Sidebar', component: SidebarComponent },
   {path:'Workplace', component: WorkplaceComponent },
   {path:'Create', component: CreateComponent },
   {path:'Tier', component: TierComponent },
   {path:'ListNext', component: ListNextComponent },
-  {path:'DiscoverPage', component: DiscoverPageComponent }
+  {path:'PendingList', component: PendingListComponent },
+  /*{path:'DiscoverPage', component: DiscoverPageComponent }*/
 ];
 
 @NgModule({

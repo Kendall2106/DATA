@@ -32,6 +32,8 @@ import { CarouselModule } from 'primeng/carousel';
 //import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalComponent } from './pages/component/modal/modal.components';
+import { PendingListComponent } from './pages/pending-list/pending-list.component';
 
 
 
@@ -48,7 +50,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TierComponent,
     ListNextComponent,
     HomeComponent,
-    DiscoverPageComponent
+    DiscoverPageComponent,
+    ModalComponent,
+    PendingListComponent
   ],
   imports: [
     BrowserModule,

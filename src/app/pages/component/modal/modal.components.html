@@ -6,7 +6,7 @@
 
   <div class="modalPrin">
     <div class="modal-header">
-        <h4 class="modal-title">{{animeModal.title}}</h4>
+        <h4 class="modal-title">{{data.name}}</h4>
         <button type="button" class="close" aria-label="Cerrar" (click)="closeModal()" >
             <span aria-hidden="true">&times;</span>
         </button>
@@ -14,19 +14,60 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-lg-3">
-                    <img class="imagen" [src]="animeModal.images.jpg.image_url" alt="#">
+                    <img id="myImage" class="imagen" [src]="data.image" alt="#">
                 </div>
                 <div class=" col-lg-9">
                         <div>
-                            <p class="synopsis">{{animeModal.synopsis}}</p>
+                            <p class="synopsis">{{data.info}}</p>
                         </div>
+
+
+
+
+                  
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Calificacion:</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <select id="score" name="score" [(ngModel)]="dataModal.score">
+                                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div *ngIf="type !== 'Games' && type !== 'Music'" class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Tipo:</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <select id="type" name="type" [(ngModel)]="dataModal.type">
+                                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                                    </select>
+                                </div>
+                            </div>   
+                        </div>
+
+                
+
+
                         <div>
-                            <p>Episodios: {{animeModal.episodes}}</p>
-                            <button>CLick</button>
+                            <!--<p>Episodios: {{animeModal.episodes}}</p>-->
+                            <button (click)="this.save()">CLick</button>
+                            <button (click)="this.saveReco()">CLick Reco</button>
                         </div>
                     
                 </div>
             </div>
+
+            <div class="loading-overlay" *ngIf="loading">
+                <!-- Aquí puedes colocar tu animación de carga -->
+                <div class="loading-spinner"></div>
+            </div>
+
         </div>
   </div>
 

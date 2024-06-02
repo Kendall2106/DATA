@@ -32,11 +32,18 @@
             <div class="top col-lg-12" style="margin-bottom: 3%;">
                 <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
             </div>
-            <div class="link"  (click)="navegarAComponenteDestino('Peliculas')" >
+            <div class="link" (click)="navegarCreate()">
+                <h5><i class="uil uil-subject"></i> Descubrir</h5>
+            </div>
+            
+            <div class="link"  (click)="navegarAComponenteDestino('Games')" >
                 <h5><i class="uil uil-subject"></i> Biblioteca</h5>
             </div>
             <div class="link" (click)="navegarTier()">
                 <h5><i class="uil uil-subject"></i> Tier</h5>
+            </div>
+            <div class="link" (click)="navegarPendingList()">
+                <h5><i class="uil uil-subject"></i> Pa ver</h5>
             </div>
             <div class="link" (click)="navegarCreate()">
                 <h5><i class="uil uil-subject"></i> Crear</h5>
@@ -44,28 +51,11 @@
         </div>
 
         <div class="columnDesc col-lg-12" style="background-color: #121212; ">
-            <div style="margin-top: 2%; margin-bottom: 5%;">
-                <h4>Descubrir:</h4>
-            </div>
+           
+            
 
-            <div class="link" (click)="navegarAComponenteDestino('Peliculas')">
-                <h5><i class="uil uil-clapper-board"></i> Peliculas</h5>
-            </div>
-            <div class="link" (click)="navegarAComponenteDestino('Series')">
-                <h5><i class="uil uil-video"></i> Series</h5>
-            </div>
-            <div class="link" (click)="navegarAComponenteDestino('Animes')">
-                <h5><i class="uil uil-subject"></i> Anime</h5>
-            </div>
-            <div class="link" (click)="navegarAComponenteDestino('Juegos')">
-                <h5><i class="uil uil-subject"></i> Juegos</h5>
-            </div>
-            <div class="link" (click)="navegarAComponenteDestino('Libros')">
-                <h5><i class="uil uil-subject"></i> Libros</h5>
-            </div>
-            <div class="link" (click)="navegarAComponenteDestino('Musica')">
-                <h5><i class="uil uil-subject"></i> Musica</h5>
-            </div>
+
         </div>
     </div>
+
 </div>

@@ -1,0 +1,103 @@
+.body{
+    margin-top: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: calc(102vh - 60px);
+}
+
+.list{
+    max-height: calc(95vh - 60px);
+    overflow-y: auto;
+    width: 100%;
+    margin: auto;
+}
+
+.list::-webkit-scrollbar {
+    width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
+
+.card{
+    background-color: #252525;
+    margin-top: 2%;
+}
+
+button{
+    background-color: transparent; 
+    color: white; 
+    margin-right: 2%;
+   border: none;
+  }
+
+  header {
+    background-color: transparent;
+    color: #fff;
+    padding: 5px 20px;
+    text-align: right;
+    border-radius: 10px;
+}
+
+.imagen{
+    width: 80%; 
+    height: 180px;
+   
+    border: 1px solid #000000;
+    border-radius: 10px;
+    
+  }
+
+
+
+  .iconCard{
+    font-size: 15px;
+}
+
+.btnCard{
+    background-color: #807d7d;
+    margin-left: 15%;
+}
+
+.btnCard:hover{
+    color: white;
+    background-color: red;
+}
+
+.b1{
+    background-color: transparent; 
+    color: white; 
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+  }
+
+  .b1:hover{
+    background-color: rgb(229, 255, 0);
+    color: black;
+    border-color: transparent;
+    border-radius: 5px;
+  }
+
+
+
+
+
+
+  .tags {
+    color: #807d7d;
+    font-size: 0.9em;
+}
+
+.release-date {
+    color: #807d7d;
+    font-size: 0.9em;
+}
+
+
+
+
+.liked {
+    background-color: red;
+}
+
+.not-liked {
+    background-color: gray;
+}

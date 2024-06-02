@@ -37,6 +37,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/library']);
   }
 
+  navegarPendingList(){
+    this.router.navigate(['/PendingList']);
+  }
+
   toggleMobileMenu(): void {
     /*const btn = document.getElementById('btnMenu')!;
     if(btn.style.display == 'none'){
