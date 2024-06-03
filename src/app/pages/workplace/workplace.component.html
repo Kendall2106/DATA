@@ -48,31 +48,6 @@
             </div>
 
             <div class="container">
-                <!--<div class="row">
-                    <div class="card col-lg-3 col-12" [style.border-color]="getColor(d.score)"
-                        *ngFor="let d of resultFilter let i = index">
-                        <div class="row">
-                            <div class="left col-lg-4 col-3" style="text-align: center; margin: 1%;">
-                               
-                                <img class="imagen" [src]="d.image" alt="#" />
-                            </div>
-                            <div class="right col-lg-6 col-6" style="margin: 1%;">
-                                <h5 style="font-size: 1.1rem;"> {{ d.name }}</h5>
-                                <p> {{ d.date }}</p>
-                                <div class="row" style="margin-top: 10%;">
-                                    <div class="type col-lg-12 col-12">
-                                        <p class="etiqueta" [style.background-color]="getColorByType(d.type)"> {{ d.type
-                                            }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="score col-lg-1 col-2">
-                                <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star"
-                                    [class.filled]="star <= d.score">&#9733;</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
 
                 <div class="row">
                     <div *ngFor="let cardData of resultFilter" class="col-lg-2 col-6 col-md-4">
@@ -95,5 +70,11 @@
         </div>
     </div>
 
+
+
+    <div class="loading-overlay" *ngIf="loading">
+        <!-- Aquí puedes colocar tu animación de carga -->
+        <div class="loading-spinner"></div>
+    </div>
 
 </div>

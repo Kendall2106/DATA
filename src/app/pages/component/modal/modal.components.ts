@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit {
   opTipos: string[][] = [];
   opCalificacion: string[] = [];
   loading: boolean = false;
+  open:boolean = false;
   
   dataModal: any;
 
@@ -44,6 +45,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     this.dataModal = { ...this.data };
+    this.open = true;
 
   }
 
@@ -129,5 +131,11 @@ async saveReco() {
 }
 
 
+
+stars: boolean[] = Array(5).fill(false);
+
+  rate(score: number) {
+    this.dataModal.score = score;
+  }
 
 }

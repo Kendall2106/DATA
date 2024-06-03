@@ -30,6 +30,8 @@ export class WorkplaceComponent implements OnInit {
   resultCount: any = 0;
   color: any ="";
 
+  loading: boolean = false;
+
   constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
@@ -61,38 +63,50 @@ export class WorkplaceComponent implements OnInit {
 
 
   async loadData(message: any){
-    if (message === 'Movies') {
-      this.color = 'linear-gradient(to bottom, #00913f3b, 20%, #121212)';
-      this.data = await this.loadDataForType(this.movieService.getMovies());
-    } else if (message === 'Series') {
-      this.color = 'linear-gradient(to bottom, #c3e91a33, 20%, #121212)';
-      this.data = await this.loadDataForType(this.seriesService.getSeries());
-    } else if (message === 'Animes') {
-      this.color = 'linear-gradient(to bottom, #4e239481, 20%, #121212)';
-      this.data = await this.loadDataForType(this.animeService.getAnimes());
-    }else if (message === 'Games') {
-      this.color = 'linear-gradient(to bottom, #f8798e3a, 20%, #121212)';
-      this.data = await this.loadDataForType(this.gameService.getGames());
-    }else if (message === 'Books') {
-      this.color = 'linear-gradient(to bottom, #8040003a, 20%, #121212)';
-      this.data = await this.loadDataForType(this.libroService.getBook());
-    }else if (message === 'Music') {
-      this.color = 'linear-gradient(to bottom, #0000ff3f, 20%, #121212)';
-      this.data = await this.loadDataForType(this.musicService.getMusic());
-    }
+try {
+  this.loading = true;
+  if (message === 'Movies') {
+    this.color = 'linear-gradient(to bottom, #00913f3b, 20%, #121212)';
+    this.data = await this.loadDataForType(this.movieService.getMovies());
+  } else if (message === 'Series') {
+    this.color = 'linear-gradient(to bottom, #c3e91a33, 20%, #121212)';
+    this.data = await this.loadDataForType(this.seriesService.getSeries());
+  } else if (message === 'Animes') {
+    this.color = 'linear-gradient(to bottom, #4e239481, 20%, #121212)';
+    this.data = await this.loadDataForType(this.animeService.getAnimes());
+  }else if (message === 'Games') {
+    this.color = 'linear-gradient(to bottom, #f8798e3a, 20%, #121212)';
+    this.data = await this.loadDataForType(this.gameService.getGames());
+  }else if (message === 'Books') {
+    this.color = 'linear-gradient(to bottom, #8040003a, 20%, #121212)';
+    this.data = await this.loadDataForType(this.libroService.getBook());
+  }else if (message === 'Music') {
+    this.color = 'linear-gradient(to bottom, #0000ff3f, 20%, #121212)';
+    this.data = await this.loadDataForType(this.musicService.getMusic());
+  }
 
-    this.message = message;
-    this.resultFilter=this.sortData(this.data);
-    
-    this.resultFilter.forEach((element: any)=>{
-        element.image ='data:image/jpg;base64,' + element.image;
-    });
+  this.message = message;
+  this.resultFilter=this.sortData(this.data);
+  
+  this.resultFilter.forEach((element: any)=>{
+      element.image ='data:image/jpg;base64,' + element.image;
+  });
 
 
-    this.resultCount=this.resultFilter.length;
-    this.applyFilters();
+  this.resultCount=this.resultFilter.length;
+  this.applyFilters();
 
-    console.log(this.data);
+  console.log(this.data);
+
+} catch (error) {
+  console.error("Error:", error);
+}finally {
+  this.loading = false; // Ocultar animación de carga
+}
+
+
+
+   
   }
 
   async loadDataForType(service: Promise<any>) {
