@@ -116,7 +116,7 @@ async saveReco() {
   try {
     await this.obtenerImagen(this.data.image, this.type);
     this.dataModal.date = this.getFormattedDate(new Date);
-    //console.log(this.convertImage());
+   
 
     await this.recoService.createReco(this.dataModal, this.type);
     

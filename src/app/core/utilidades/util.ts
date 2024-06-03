@@ -38,20 +38,11 @@ export class Utils {
   static async imageToByteFromUrl(imageUrl: string, type: any): Promise<string> {
     var response: any;
 
-    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games") {
-      response = await fetch('https://cors-anywhere.herokuapp.com/' + imageUrl);
-
-
-
-  
-
-
-
-
-    } else {
-      response = await fetch(imageUrl);
-    }
-
+      if(type=="Movies" || type=="Series" || type=="Books"|| type=="Games"){
+        response = await fetch('https://corsproxy.io/?' + encodeURIComponent(imageUrl));
+      }else{ 
+        response = await fetch(imageUrl);
+      }
     if (!response.ok) {
       throw new Error('No se pudo cargar la imagen');
     }

@@ -143,7 +143,7 @@ export class DiscoverPageComponent {
         
         this.data.push({
           name: item.title,
-          image: "https://image.tmdb.org/t/p/original"+item.poster_path,
+          image: "https://image.tmdb.org/t/p/w500"+item.poster_path,
           info: item.overview
         });
         //console.log(this.data);
@@ -160,7 +160,7 @@ export class DiscoverPageComponent {
       response.results.forEach((item: any) => {
         this.data.push({
           name: item.name,
-          image: "https://image.tmdb.org/t/p/original"+item.poster_path,
+          image: "https://image.tmdb.org/t/p/w500"+item.poster_path,
           info: item.overview
         });
         //console.log(this.data);
