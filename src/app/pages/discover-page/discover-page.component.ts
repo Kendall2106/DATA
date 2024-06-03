@@ -147,6 +147,7 @@ export class DiscoverPageComponent {
           info: item.overview
         });
         //console.log(this.data);
+        
       });
     });
   }
