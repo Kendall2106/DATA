@@ -29,28 +29,39 @@
     
     <div class="row gx-5">
         <div class="column col-lg-12" style="background-color: #121212;">
-            <div class="top col-lg-12" style="margin-bottom: 3%;">
-                <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
+            <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%;">
+                    <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
+                    <i class="uil uil-user" style="color: white; font-size: 2.5rem;"></i>
+
             </div>
-            <div class="link" (click)="navegarCreate()">
-                <h5><i class="uil uil-subject"></i> Descubrir</h5>
+            <div class="link" (click)="navegarDiscoverPage()">
+                <h5><i class="uil uil-search"></i> Descubrir</h5>
             </div>
             
             <div class="link"  (click)="navegarAComponenteDestino('Games')" >
-                <h5><i class="uil uil-subject"></i> Biblioteca</h5>
-            </div>
-            <div class="link" (click)="navegarTier()">
-                <h5><i class="uil uil-subject"></i> Tier</h5>
+                <h5><i class="uil uil-apps"></i> Biblioteca</h5>
             </div>
             <div class="link" (click)="navegarPendingList()">
-                <h5><i class="uil uil-subject"></i> Pa ver</h5>
+                <h5><i class="iconModal uil uil-bookmark"></i> Pa ver</h5>
             </div>
-            <div class="link" (click)="navegarCreate()">
-                <h5><i class="uil uil-subject"></i> Crear</h5>
-            </div>
+
         </div>
 
         <div class="columnDesc col-lg-12" style="background-color: #121212; ">
+           
+            <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;"  >
+                    <h5>Crea tu propio registro</h5>
+                    <p style="font-size: 0.8rem;">En el caso de no encontrar la informacion en la seccion de descubrimiento, Cree tu propio registro.</p>
+                    <button class="b1 btn" (click)="navegarCreate()">Crear</button>
+            
+            </div>
+
+            <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;"  >
+                <h5>Tier</h5>
+                <p style="font-size: 0.8rem;">Te permite ver una lista de niveles segun la puntuacion dada.</p>
+                <button class="b1 btn" (click)="navegarTier()">Crear</button>
+        
+        </div>
            
             
 

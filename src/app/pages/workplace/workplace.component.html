@@ -32,6 +32,7 @@
                         <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
                     </select>
                     <select id="opAnios" (change)="filterYear($event)">
+                        <option>All</option>
                         <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{
                             opcion }}</option>
                     </select>
@@ -50,18 +51,33 @@
             <div class="container">
 
                 <div class="row">
-                    <div *ngFor="let cardData of resultFilter" class="col-lg-2 col-6 col-md-4">
-                      <div class="card" >
+                    <div *ngFor="let cardData of resultFilter; let i = index" class="col-lg-2 col-6 col-md-4">
+                      <div class="card" (click)="toggleInfo(i)">
                         
 
                           <div class="contenedor">
-                                <img class="imagen" [src]="cardData.image" alt="#" >
+                             
+                                <img [ngClass]="{'imagenMusica': type === 'Music', 'imagen': type !== 'Music'}" [src]="cardData.image" alt="#">
                                 <div class="triangulo"></div>
                                 <div class="centrado">
                                     {{cardData.score}}<span class="star"[class.filled]="1">&#9733;</span>
                                 </div>
+                                <div class="info" [class.visible]="selectedCardIndex === i">
+                                    <div class="row col-lg-12">
+                                        <div class=" col-lg-12">
+                                            <p  class="invert invertTitle" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
+                                        </div>
+                                        <div class=" col-12" style="margin-top: 5%;">
+                                            <p class="invert" >{{cardData.date}}</p> <br>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
+                                    </div> 
+                                </div>
                           </div>
                           <p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
+                          
                       </div>
                     </div>
                   </div>

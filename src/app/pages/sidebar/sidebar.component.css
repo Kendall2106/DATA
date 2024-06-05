@@ -55,7 +55,7 @@ button{
     margin-top: 10px;
     text-align: left;
     border-radius: 10px;
-    height: calc(75vh - 60px);
+    height: calc(79vh - 60px);
 }
 
 
@@ -70,5 +70,28 @@ button{
 .link{
     margin-bottom: 5%;
     cursor: pointer;
+    width: 80%;
 }
 
+.link:hover{
+    background-color: rgba(255, 255, 255, 0.123);
+}
+
+.b1{
+    background-color: transparent; 
+    color: white; 
+    border-radius: 5px;
+    margin-right: 2%;
+    border: 1px solid #ffffff;
+  }
+  
+  button:hover{
+    background-color: rgb(229, 255, 0);
+    color: black;
+    border-color: transparent;
+    border-radius: 5px;
+  }
+
+  i{
+    color: rgba(255, 255, 255, 0.473);
+  }

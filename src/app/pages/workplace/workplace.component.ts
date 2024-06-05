@@ -29,8 +29,10 @@ export class WorkplaceComponent implements OnInit {
   calificacionSelec: any;
   resultCount: any = 0;
   color: any ="";
+  type: string ="";
 
   loading: boolean = false;
+  isInfoVisible = false;
 
   constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
@@ -63,6 +65,7 @@ export class WorkplaceComponent implements OnInit {
 
 
   async loadData(message: any){
+    
 try {
   this.loading = true;
   if (message === 'Movies') {
@@ -102,6 +105,7 @@ try {
   console.error("Error:", error);
 }finally {
   this.loading = false; // Ocultar animación de carga
+  this.type = message;
 }
 
 
@@ -165,7 +169,7 @@ try {
 applyFilters() {
   this.resultFilter = this.data
     .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
-    .filter(item => this.convertYear(item))
+    .filter(item => this.convertYear(item) )
     .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
 
     this.resultCount=this.resultFilter.length;
@@ -173,10 +177,18 @@ applyFilters() {
 }
 
 convertYear(item: any): boolean {
-  const date = item.date.toString().toLowerCase();
-  const parts = date.split("-");
-  const year = parseInt(parts[2], 10);
-  return (year+"") === this.selectedYear;
+  if(this.selectedYear != 'All'){
+    const date = item.date.toString().toLowerCase();
+    const parts = date.split("-");
+    const year = parseInt(parts[2], 10);
+    return (year+"") === this.selectedYear;
+  }else{
+    return true;
+  }
+   
+ 
+    
+
 }
 
 
@@ -222,5 +234,16 @@ getColor(score: any){
 }
  
 
+
+selectedCardIndex: number | null = null;
+
+
+  toggleInfo(index: number): void {
+    if (this.selectedCardIndex === index) {
+      this.selectedCardIndex = null;
+    } else {
+      this.selectedCardIndex = index;
+    }
+  }
 
 }

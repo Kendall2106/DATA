@@ -101,3 +101,71 @@ button{
 .not-liked {
     background-color: gray;
 }
+
+
+
+
+ /* Estilos para la animación de carga */
+ .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.767); /* Fondo oscurecido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima del modal */
+  }
+  
+  
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #333;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+
+  .star-rating {
+    font-size: 2rem; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas sin seleccionar */
+    margin-top: 0%;
+  }
+  
+  .star-rating .selected {
+    color: gold; /* Color de las estrellas seleccionadas */
+  }
+  
+  .star-rating span {
+    cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+  }
+
+
+  select{
+    margin-top: 5%;
+    width: 100%;
+    font-size: 1.2rem;
+    border: none;
+    color: white;
+    background-color: transparent;
+  }
+  
+  select option {
+    
+    background-color: var(--color-1); 
+    color: var(--color-text); 
+  }

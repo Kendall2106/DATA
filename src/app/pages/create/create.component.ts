@@ -92,5 +92,11 @@ export class CreateComponent {
     
   }
 
+  stars: boolean[] = Array(5).fill(false);
+
+  rate(data:any, score: number) {
+    data.score = score;
+  }
+
 
 }

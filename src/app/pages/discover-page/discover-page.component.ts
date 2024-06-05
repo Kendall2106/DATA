@@ -57,7 +57,7 @@ export class DiscoverPageComponent {
   opcionSeleccionada: string = "";
 
   async ngOnInit() {
-    this.getAnime();
+    //this.getAnime();
 
 
     this.numVisible = window.innerWidth <= 768 ? 1 : 6;

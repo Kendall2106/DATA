@@ -22,3 +22,55 @@ select{
     padding: 2%;
     border-radius: 10px;
 }
+
+
+.body{
+    margin-top: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: calc(102vh - 60px);
+   
+}
+
+
+
+.star-rating {
+    font-size: 2rem; /* Tamaño de las estrellas */
+    color: gray; /* Color de las estrellas sin seleccionar */
+    margin-top: 0%;
+  }
+  
+  .star-rating .selected {
+    color: gold; /* Color de las estrellas seleccionadas */
+  }
+  
+  .star-rating span {
+    cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+  }
+
+
+  select{
+    margin-top: 5%;
+    width: 100%;
+    font-size: 1.2rem;
+    border: none;
+    color: white;
+    background-color: transparent;
+  }
+  
+  select option {
+    
+    background-color: var(--color-1); 
+    color: var(--color-text); 
+  }
+
+  .date{
+    margin-top: 4%;
+    width: 100%;
+    font-size: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.39);
+    color: white;
+    background-color: transparent;
+  }
+  
