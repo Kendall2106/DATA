@@ -105,10 +105,11 @@ async save() {
         await this.musicService.createMusic(this.dataModal);
       }
      
-       this.navegarAComponenteDestino(this.type);
+      // this.navegarAComponenteDestino(this.type);
        this.closeModal();
 
     } catch (error) {
+      alert("Error al guardar");
         console.error("Error al guardar el libro:", error);
     }
 }
