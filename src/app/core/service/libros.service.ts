@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Book } from '../model/book.model';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class LibrosService {
   async getBook(): Promise<any> {
     const acollection = collection(this.firestore,'books');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   async createBook(data: Book){
@@ -31,6 +31,16 @@ export class LibrosService {
         'image' : data.image,
         'visible' : true
     });
+  }
+
+  async deleteBook(documentId: string): Promise<void> {
+    const documentRef = doc(this.firestore, `books/${documentId}`);
+    await deleteDoc(documentRef);
+  }
+
+  async updateBook(documentId: string, score: number): Promise<void> {
+    const documentRef = doc(this.firestore, `books/${documentId}`);
+    await updateDoc(documentRef, { score: score });
   }
 
  /* getLibros(): Observable<any[]> {

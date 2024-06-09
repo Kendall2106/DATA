@@ -96,6 +96,8 @@ export class DiscoverPageComponent {
       this.loading = false; // Ocultar animación de carga
     }
 
+    console.log(this.data);
+
   }
 
 

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Game } from '../model/game.model';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class GameService {
   async getGames(): Promise<any> {
     const acollection = collection(this.firestore,'games');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   async createGames(data: Game){
@@ -32,4 +32,16 @@ export class GameService {
         'visible' : true
     });
   }
+
+  async deleteGames(documentId: string): Promise<void> {
+    const documentRef = doc(this.firestore, `games/${documentId}`);
+    await deleteDoc(documentRef);
+  }
+
+  async updateGames(documentId: string, score: number): Promise<void> {
+    const documentRef = doc(this.firestore, `games/${documentId}`);
+    await updateDoc(documentRef, { score: score });
+  }
+
+
 }

@@ -100,9 +100,13 @@ try {
   this.applyFilters();
 
   console.log(this.data);
+  if(this.data.length==0){
+    alert("Error al solicitar los datos");
+  }
 
 } catch (error) {
   console.error("Error:", error);
+  
 }finally {
   this.loading = false; // Ocultar animación de carga
   this.type = message;
@@ -246,4 +250,125 @@ selectedCardIndex: number | null = null;
     }
   }
 
+
+ /* async updateData(recoTemp: any) {
+
+    try {
+      this.loading = true;
+      if (this.type === 'Movies') {
+        await this.movieService.updateMovie(recoTemp.id, recoTemp.score);
+      } else if (this.type === 'Series') {
+        await this.seriesService.updateSerie(recoTemp.id, recoTemp.score);
+        
+      } else if (this.type === 'Animes') {
+        await this.animeService.updateAnime(recoTemp.id, recoTemp.score);
+        
+      }else if (this.type === 'Games') {
+        await this.gameService.updateGames(recoTemp.id, recoTemp.score);
+        
+      }else if (this.type === 'Books') {
+        await this.libroService.updateBook(recoTemp.id, recoTemp.score);
+        
+      }else if (this.type === 'Music') {
+        await this.musicService.updateMusic(recoTemp.id, recoTemp.score);
+        
+      }
+  
+    } catch (error) {
+      console.error("Error:", error);
+      
+    }finally {
+      this.loading = false; // Ocultar animación de carga
+      this.loadData(this.type);
+    }
+  }*/
+
+  
+async deleteData(recoTemp: any) {
+
+  try {
+    this.loading = true;
+    if (this.type === 'Movies') {
+      await this.movieService.deleteMovie(recoTemp.id);
+    } else if (this.type === 'Series') {
+      await this.seriesService.deleteSerie(recoTemp.id);
+      
+    } else if (this.type === 'Animes') {
+      await this.animeService.deleteAnime(recoTemp.id);
+      
+    }else if (this.type === 'Games') {
+      await this.gameService.deleteGames(recoTemp.id);
+      
+    }else if (this.type === 'Books') {
+      await this.libroService.deleteBook(recoTemp.id);
+      
+    }else if (this.type === 'Music') {
+      await this.musicService.deleteMusic(recoTemp.id);
+      
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    
+  }finally {
+    this.loading = false; // Ocultar animación de carga
+    this.loadData(this.type);
+  }
+
+
+
+   
+  
+ 
+  /*const indexToRemove = this.data.findIndex(item => item.id === recoTemp.id);
+
+  if (indexToRemove !== -1) {
+    this.data.splice(indexToRemove, 1);
+  }
+
+  this.getReco();*/
 }
+
+stars: boolean[] = Array(5).fill(false);
+
+async rate(recoTemp:any, score: number) {
+  recoTemp.score = score;  
+
+
+  try {
+    this.loading = true;
+    if (this.type === 'Movies') {
+      await this.movieService.updateMovie(recoTemp.id, recoTemp.score);
+    } else if (this.type === 'Series') {
+      await this.seriesService.updateSerie(recoTemp.id, recoTemp.score);
+      
+    } else if (this.type === 'Animes') {
+      await this.animeService.updateAnime(recoTemp.id, recoTemp.score);
+      
+    }else if (this.type === 'Games') {
+      await this.gameService.updateGames(recoTemp.id, recoTemp.score);
+      
+    }else if (this.type === 'Books') {
+      await this.libroService.updateBook(recoTemp.id, recoTemp.score);
+      
+    }else if (this.type === 'Music') {
+      await this.musicService.updateMusic(recoTemp.id, recoTemp.score);
+      
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    
+  }finally {
+    this.loading = false; // Ocultar animación de carga
+    this.loadData(this.type);
+  }
+
+
+
+
+
+}
+
+}
+

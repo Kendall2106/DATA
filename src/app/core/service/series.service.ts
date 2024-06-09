@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Serie } from '../model/serie.model';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class SeriesService {
   async getSeries(): Promise<any> {
     const acollection = collection(this.firestore,'series');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   async createSeries(serie: Serie){
@@ -30,6 +30,16 @@ export class SeriesService {
         'image' : serie.image,
         'visible' : true
     });
+  }
+
+  async deleteSerie(documentId: string): Promise<void> {
+    const documentRef = doc(this.firestore, `series/${documentId}`);
+    await deleteDoc(documentRef);
+  }
+
+  async updateSerie(documentId: string, score: number): Promise<void> {
+    const documentRef = doc(this.firestore, `series/${documentId}`);
+    await updateDoc(documentRef, { score: score });
   }
 
   /*getSeries(): Observable<any[]> {

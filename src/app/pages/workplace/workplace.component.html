@@ -62,6 +62,9 @@
                                 <div class="centrado">
                                     {{cardData.score}}<span class="star"[class.filled]="1">&#9733;</span>
                                 </div>
+
+
+
                                 <div class="info" [class.visible]="selectedCardIndex === i">
                                     <div class="row col-lg-12">
                                         <div class=" col-lg-12">
@@ -70,11 +73,21 @@
                                         <div class=" col-12" style="margin-top: 5%;">
                                             <p class="invert" >{{cardData.date}}</p> <br>
                                         </div>
+                                        <div class="col-lg-12">
+                                            <div class=" star-rating">
+                                                <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
+                                                    (click)="rate(cardData, i + 1)" [ngClass]="{'selected': (i + 1) <= cardData.score}" >
+                                                    &#9733;
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <button style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
+                                    <div class="col-lg-12" style="margin-top: 5%;">
+                                        <button (click)="deleteData(cardData)" style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
                                     </div> 
                                 </div>
+
+
                           </div>
                           <p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
                           

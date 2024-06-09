@@ -288,3 +288,17 @@ button {
   text-overflow: ellipsis;
   height: 3em;
 }
+
+
+.star-rating {
+  font-size: 1.2rem; /* Tamaño de las estrellas */
+  color: gray; /* Color de las estrellas sin seleccionar */
+}
+
+.star-rating .selected {
+  color: gold; /* Color de las estrellas seleccionadas */
+}
+
+.star-rating span {
+  cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+}

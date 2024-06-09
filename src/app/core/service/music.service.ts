@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Anime } from '../model/anime.model';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class MusicService {
   async getMusic(): Promise<any> {
     const acollection = collection(this.firestore,'music');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   async createMusic(movie: Anime){
@@ -28,6 +28,16 @@ export class MusicService {
         'image' : movie.image,
         'visible' : true
     });
+  }
+
+  async deleteMusic(documentId: string): Promise<void> {
+    const documentRef = doc(this.firestore, `music/${documentId}`);
+    await deleteDoc(documentRef);
+  }
+
+  async updateMusic(documentId: string, score: number): Promise<void> {
+    const documentRef = doc(this.firestore, `music/${documentId}`);
+    await updateDoc(documentRef, { score: score });
   }
 
   /*getAnimes(): Observable<any[]> {

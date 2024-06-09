@@ -84,8 +84,13 @@ async save() {
 
     try {
       await this.obtenerImagen(this.data.image, this.type);
-      this.dataModal.date = this.getFormattedDate(new Date);
-      //console.log(this.convertImage());
+      //this.dataModal.date = this.getFormattedDate(new Date);
+      
+      this.dataModal.date = this.data.date;
+      /*console.log("ima "+this.data.date);
+      console.log("ima2 "+this.dataModal.date);*/
+
+
       if(this.type=="Animes"){
         await this.animeService.createAnimes(this.dataModal);
       }
@@ -107,6 +112,7 @@ async save() {
      
       // this.navegarAComponenteDestino(this.type);
        this.closeModal();
+       alert("Guardado exitosamente");
 
     } catch (error) {
       alert("Error al guardar");
@@ -120,13 +126,15 @@ async saveReco() {
     await this.obtenerImagen(this.data.image, this.type);
     this.dataModal.date = this.getFormattedDate(new Date);
    
-
+    console.log("imaReco "+this.dataModal.image);
     await this.recoService.createReco(this.dataModal, this.type);
     
    
      this.closeModal();
+     alert("Guardado exitosamente");
 
   } catch (error) {
+      alert("Error al guardar");
       console.error("Error al guardar el libro:", error);
   }
 }
