@@ -3,6 +3,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Anime } from 'src/app/core/model/anime.model';
 
 import { Movie } from 'src/app/core/model/movie.model';
+import { AlertService } from 'src/app/core/service/alert.service';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
@@ -34,7 +35,7 @@ export class WorkplaceComponent implements OnInit {
   loading: boolean = false;
   isInfoVisible = false;
 
-  constructor(private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
+  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService,private seriesService: SeriesService, private animeService: AnimeService,private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
@@ -101,7 +102,8 @@ try {
 
   console.log(this.data);
   if(this.data.length==0){
-    alert("Error al solicitar los datos");
+   
+    this.showAlert("Error al solicitar los datos", "error",3000);
   }
 
 } catch (error) {
@@ -308,11 +310,15 @@ async deleteData(recoTemp: any) {
     }
 
   } catch (error) {
-    console.error("Error:", error);
+    //console.error("Error:", error);
+    this.showAlert("Error al eliminar", "error", 3000);
     
   }finally {
     this.loading = false; // Ocultar animación de carga
+    
     this.loadData(this.type);
+    this.showAlert("Dato Eliminado", "success",2000);
+
   }
 
 
@@ -357,17 +363,23 @@ async rate(recoTemp:any, score: number) {
     }
 
   } catch (error) {
-    console.error("Error:", error);
+    this.showAlert("Error al actualizar el score", "error", 3000);
     
   }finally {
     this.loading = false; // Ocultar animación de carga
     this.loadData(this.type);
+    this.showAlert("Dato Actualizado", "success", 2000);
   }
 
 
 
 
 
+}
+
+
+showAlert(messageAlert: string, tipoMessage: any, duration: number) {
+  this.alertService.showAlert(messageAlert, tipoMessage, duration);
 }
 
 }

@@ -1,0 +1,26 @@
+.alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .alert-success {
+    background-color: rgb(75, 136, 75);
+    color: black;
+    border-color: transparent;
+  }
+  .alert-error {
+    background-color: rgb(163, 67, 67);
+    color: black;
+    border-color: transparent;
+  }
+
+  .progress-bar {
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.1s linear;
+  }

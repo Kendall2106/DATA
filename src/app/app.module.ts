@@ -34,6 +34,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './pages/component/modal/modal.components';
 import { PendingListComponent } from './pages/pending-list/pending-list.component';
+import { AlertComponent } from './pages/component/alert/alert.component';
 
 
 
@@ -52,7 +53,8 @@ import { PendingListComponent } from './pages/pending-list/pending-list.componen
     HomeComponent,
     DiscoverPageComponent,
     ModalComponent,
-    PendingListComponent
+    PendingListComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

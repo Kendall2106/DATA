@@ -10,6 +10,7 @@ import { MovieService } from 'src/app/core/service/movie.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { MusicService } from 'src/app/core/service/music.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
+import { AlertService } from 'src/app/core/service/alert.service';
 
 @Component({
   selector: 'app-modal',
@@ -33,6 +34,7 @@ export class ModalComponent implements OnInit {
     private dataService: DataService,
     public modalService: NgbModal,
     private recoService: RecoService,
+    private alertService: AlertService,
     private musicService: MusicService ,private libroService: LibrosService,private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService
   ) {
 
@@ -72,7 +74,7 @@ export class ModalComponent implements OnInit {
         const value = await Utils.imageToByteFromUrl(link, type);
         this.dataModal.image = value;
     } catch (error) {
-        console.error("Error al obtener la imagen:", error);
+        this.showAlert("Error al obtener la imagen", "error");
     } finally {
         this.loading = false; // Ocultar animación de carga
     }
@@ -112,11 +114,10 @@ async save() {
      
       // this.navegarAComponenteDestino(this.type);
        this.closeModal();
-       alert("Guardado exitosamente");
+       this.showAlert("Guardado exitosamente", "success");
 
     } catch (error) {
-      alert("Error al guardar");
-        console.error("Error al guardar el libro:", error);
+      this.showAlert("Error al guardar", "error");
     }
 }
 
@@ -131,11 +132,12 @@ async saveReco() {
     
    
      this.closeModal();
-     alert("Guardado exitosamente");
+    // alert("Guardado exitosamente");
+     this.showAlert("Guardado exitosamente", "success");
 
   } catch (error) {
-      alert("Error al guardar");
-      console.error("Error al guardar el libro:", error);
+      this.showAlert("Error al guardar", "error");
+      //console.error("Error al guardar el libro:", error);
   }
 }
 
@@ -146,5 +148,12 @@ stars: boolean[] = Array(5).fill(false);
   rate(score: number) {
     this.dataModal.score = score;
   }
+
+
+  showAlert(messageAlert: string, tipoMessage: any) {
+    this.alertService.showAlert(messageAlert, tipoMessage);
+  }
+
+
 
 }

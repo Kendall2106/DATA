@@ -10,6 +10,7 @@ import { SpotifyService } from 'src/app/core/service/spotify.service';
 import { ApiSerieService } from 'src/app/core/service/apiSerie.service copy';
 import { ApiMoviesService } from 'src/app/core/service/apiMovies.service';
 import { ApiGamesService } from 'src/app/core/service/apiGames.service';
+import { AlertService } from 'src/app/core/service/alert.service';
 
 @Component({
   selector: 'app-discover-page',
@@ -48,7 +49,7 @@ export class DiscoverPageComponent {
 
   loading: boolean = false;
 
-  constructor(private spotify: SpotifyService, private apiGamesServive: ApiGamesService, private apiMoviesService: ApiMoviesService, private apiSerieService: ApiSerieService, private apiAnimeService: ApiAnimeService, public modalService: NgbModal, private apiBookService: ApiBookService, public dataService: DataService, private router: Router) {
+  constructor(private spotify: SpotifyService, private alertService: AlertService, private apiGamesServive: ApiGamesService, private apiMoviesService: ApiMoviesService, private apiSerieService: ApiSerieService, private apiAnimeService: ApiAnimeService, public modalService: NgbModal, private apiBookService: ApiBookService, public dataService: DataService, private router: Router) {
 
   }
 
@@ -630,7 +631,6 @@ export class DiscoverPageComponent {
     //   console.log(receivedEntry);
     // })
   }
-
 
 
 
