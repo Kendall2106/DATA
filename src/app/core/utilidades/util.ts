@@ -125,8 +125,8 @@ static async resizeImage(blob: Blob): Promise<string> {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    const targetWidth = imgElement.width / 5; // Cambia esto a la resolución deseada
-    const targetHeight = imgElement.height / 5; // Cambia esto a la resolución deseada
+    const targetWidth = imgElement.width / 10; // Cambia esto a la resolución deseada
+    const targetHeight = imgElement.height / 10; // Cambia esto a la resolución deseada
 
     canvas.width = targetWidth;
     canvas.height = targetHeight;
