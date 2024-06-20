@@ -9,7 +9,6 @@
 
     </header>
 
-
     <div class="list" style="width: 80%;">
 
         <div class="card container" *ngFor="let d of data">
@@ -19,14 +18,12 @@
                 </div>
                 <div class="right col-lg-10 d-flex flex-column justify-content-between"
                     style="margin-top: 1%; margin-bottom: 1%; text-align: start;">
-
-
-
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 style="color: white;">{{ d.name }}</h5>
                             <div class="d-flex justify-content-end align-items-center">
-                                <button class="btnCard btn " (click)="deleteReco(d)"><i class="iconCard uil uil-trash-alt"></i></button>
+                                <button class="btnCard btn " (click)="deleteReco(d)"><i
+                                        class="iconCard uil uil-trash-alt"></i></button>
                                 <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
                                     (click)="toggleLike(d)">
                                     <i class="iconCard uil uil-heart"></i>
@@ -34,56 +31,44 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="row col-lg-12">
 
+                    <div class="row col-lg-12">
                         <div class="col-lg-4">
                             <div class=" star-rating">
                                 <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                    (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}" >
+                                    (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
                                     &#9733;
                                 </span>
                             </div>
                         </div>
-
 
                         <div *ngIf="type !== 'Games' && type !== 'Music'" class="col-lg-4">
                             <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
                                 <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
                             </select>
                         </div>
-
-
                     </div>
 
 
                     <div class="mt-auto test d-flex justify-content-between align-items-center">
-                       
-                       
-                            <div>
-                                <p class="release-date">Release date: {{d.releaseDate}}</p>
-                            </div>
-                            <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
-                                <p class="tags">Score: {{d.randomData}}</p>
-                            </div>
-                            <div class="col-lg-6" *ngIf="type == 'Books'">
-                                <p class="tags">Page count: {{d.randomData}}</p>
-                            </div>
-                            <div class="col-lg-6" *ngIf="type == 'Games'">
-                                <p class="tags">Plataform: {{d.randomData}}</p>
-                            </div>
-                            <div class="col-lg-6" *ngIf="type == 'Music'">
-                                <p class="tags">Total Tracks: {{d.randomData}}</p>
-                            </div>
-
-
-
-                            <div class="d-flex justify-content-end align-items-center">
-                                <button class="b1 btn " (click)="save(d)"> viewed</button>
-                            </div>
-
-                       
-
+                        <div>
+                            <p class="release-date">Release date: {{d.releaseDate}}</p>
+                        </div>
+                        <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
+                            <p class="tags">Score: {{d.randomData}}</p>
+                        </div>
+                        <div class="col-lg-6" *ngIf="type == 'Books'">
+                            <p class="tags">Page count: {{d.randomData}}</p>
+                        </div>
+                        <div class="col-lg-6" *ngIf="type == 'Games'">
+                            <p class="tags">Plataform: {{d.randomData}}</p>
+                        </div>
+                        <div class="col-lg-6" *ngIf="type == 'Music'">
+                            <p class="tags">Total Tracks: {{d.randomData}}</p>
+                        </div>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button class="b1 btn " (click)="save(d)"> viewed</button>
+                        </div>
 
                     </div>
                 </div>
@@ -92,9 +77,7 @@
 
     </div>
 
-
     <div class="loading-overlay" *ngIf="loading">
-        <!-- Aquí puedes colocar tu animación de carga -->
         <div class="loading-spinner"></div>
     </div>
 

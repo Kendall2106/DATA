@@ -14,7 +14,9 @@ export class AlertComponent implements OnInit, OnDestroy {
   duration: number = 0;
   private subscription: Subscription = new Subscription();
 
-  constructor(private alertService: AlertService) {}
+
+  constructor(private alertService: AlertService) { }
+
 
   ngOnInit() {
     this.subscription = this.alertService.alert$.subscribe((alert: Alert) => {
@@ -31,9 +33,10 @@ export class AlertComponent implements OnInit, OnDestroy {
     });
   }
 
+
   startProgressBar() {
     this.progress = 100;
-    const interval = 100; // Update every 100ms
+    const interval = 100;
     const steps = this.duration / interval;
     let step = 0;
 
@@ -46,7 +49,10 @@ export class AlertComponent implements OnInit, OnDestroy {
     }, interval);
   }
 
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+
 }

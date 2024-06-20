@@ -1,7 +1,3 @@
-
-
-
-
 <div class="body" [style.background]="color">
     <header>
         <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
@@ -14,9 +10,7 @@
     </header>
 
     <div class=" d-flex flex-wrap">
-       
-
-        <div class="list" style="display: flex; flex-wrap: wrap; "> <!-- Adjusted column size to col-lg-6 -->
+        <div class="list" style="display: flex; flex-wrap: wrap; ">
             <div style="margin-left: 2%; margin-top: 3%;">
                 <h1>Lista de {{message}}</h1>
             </div>
@@ -49,60 +43,54 @@
             </div>
 
             <div class="container">
-
                 <div class="row">
                     <div *ngFor="let cardData of resultFilter; let i = index" class="col-lg-2 col-6 col-md-4">
-                      <div class="card" (click)="toggleInfo(i)">
-                        
+                        <div class="card" (click)="toggleInfo(i)">
 
-                          <div class="contenedor">
-                             
-                                <img [ngClass]="{'imagenMusica': type === 'Music', 'imagen': type !== 'Music'}" [src]="cardData.image" alt="#">
+                            <div class="contenedor">
+                                <img [ngClass]="{'imagenMusica': type === 'Music', 'imagen': type !== 'Music'}"
+                                    [src]="cardData.image" alt="#">
                                 <div class="triangulo"></div>
                                 <div class="centrado">
-                                    {{cardData.score}}<span class="star"[class.filled]="1">&#9733;</span>
+                                    {{cardData.score}}<span class="star" [class.filled]="1">&#9733;</span>
                                 </div>
-
-
 
                                 <div class="info" [class.visible]="selectedCardIndex === i">
                                     <div class="row col-lg-12">
                                         <div class=" col-lg-12">
-                                            <p  class="invert invertTitle" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
+                                            <p class="invert invertTitle" [style.color]="getColor(cardData.score)">
+                                                {{cardData.name}}</p>
                                         </div>
                                         <div class=" col-12" style="margin-top: 5%;">
-                                            <p class="invert" >{{cardData.date}}</p> <br>
+                                            <p class="invert">{{cardData.date}}</p> <br>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class=" star-rating">
-                                                <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                                    (click)="rate(cardData, i + 1)" [ngClass]="{'selected': (i + 1) <= cardData.score}" >
+                                                <span style="margin: 0; padding: 0;"
+                                                    *ngFor="let star of stars; let i = index"
+                                                    (click)="rate(cardData, i + 1)"
+                                                    [ngClass]="{'selected': (i + 1) <= cardData.score}">
                                                     &#9733;
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12" style="margin-top: 5%;">
-                                        <button (click)="deleteData(cardData)" style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
-                                    </div> 
+                                        <button (click)="deleteData(cardData)"
+                                            style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
+                                    </div>
                                 </div>
-
-
-                          </div>
-                          <p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
-                          
-                      </div>
+                            </div>
+                            <p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>
+                        </div>
                     </div>
-                  </div>
+                </div>
 
             </div>
         </div>
     </div>
 
-
-
     <div class="loading-overlay" *ngIf="loading">
-        <!-- Aquí puedes colocar tu animación de carga -->
         <div class="loading-spinner"></div>
     </div>
 

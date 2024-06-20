@@ -26,24 +26,4 @@ async daata(): Promise<any> {
 
 
 
-/*
-  obtenerTarjetas(): Observable<any> {
-    return this.firestore.collection('tarjetas', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
-  }
-
-  eliminarTarjeta(id: string): Promise<any> {
-    return this.firestore.collection('tarjetas').doc(id).delete();
-  }
-
-  editarTarjeta(id: string, tarjeta: any): Promise<any> {
-    return this.firestore.collection('tarjetas').doc(id).update(tarjeta);
-  }
-
-  addTarjetaEdit(tarjeta: TarjetaCredito) {
-    this.tarjeta$.next(tarjeta);
-  }
-
-  getTarjetaEdit(): Observable<TarjetaCredito> {
-    return this.tarjeta$.asObservable();
-  }*/
 }

@@ -10,5 +10,4 @@ export class AuthService {
 
   constructor() { }
 
-  // Aquí puedes implementar métodos para obtener un token de acceso usando las credenciales del cliente
 }

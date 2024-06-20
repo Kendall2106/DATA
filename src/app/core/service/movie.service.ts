@@ -44,31 +44,5 @@ export class MovieService {
 
 
 
- /* async  getMovies(): Promise<any> {
-    const acollection = collection(this.firestore, 'movies');
-    const querySnapshot = await getDocs(acollection);
-  
-    const movies: Movie[] = querySnapshot.docs.map((doc) => {
-      const movieData: Movie = doc.data() as Movie;
-  
-      // Verificar si el campo 'date' está presente y es una fecha válida
-     /* if (movieData.date instanceof Date && !isNaN(movieData.date.getTime())) {
-        // Formatear la fecha como día/mes/año
-        const formattedDate = `${movieData.date.getDate()}/${movieData.date.getMonth() + 1}/${movieData.date.getFullYear()}`;
-  
-        // Devolver los datos con la fecha formateada
-        return { ...movieData, formattedDate };
-      }
-
-      /*movieData.date = `${movieData.date.getDate()}/${movieData.date.getMonth() + 1}/${movieData.date.getFullYear()}`;
-      
-     
-      // Si no hay un campo 'date' o no es una fecha válida, devolver los datos sin cambios
-      return movieData;
-    });
-  
-    return movies;
-  }*/
-  
   
 }

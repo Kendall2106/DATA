@@ -13,7 +13,6 @@ import { SeriesService } from 'src/app/core/service/series.service';
   styleUrls: ['./tier.component.css']
 })
 export class TierComponent implements OnInit {
-  //categorias: any[] = ["Olvidables","Malas","Normal","Buenas","God"];
   categorias: any[] = ["Dioos", "Buenas", "Normal", "Malas", "Olvidables"];
   data: any[] = [];
   anioActual: string = "";
@@ -23,24 +22,23 @@ export class TierComponent implements OnInit {
   resultCount: any = 0;
   tier: any[] = [
     [0, 1, 2, 3, 4],
-    ["#FF7F7F", "#FFBF7F", "#FFDF7F", "#FFFF7F", "#BFFF7F"] // Colores correspondientes
+    ["#FF7F7F", "#FFBF7F", "#FFDF7F", "#FFFF7F", "#BFFF7F"]
   ];
-
-
   loading: boolean = false;
 
   constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
 
   }
 
+  
   ngOnInit(): void {
-    // this.anioActual=new Date().getFullYear()+"";
 
   }
 
+
   async loadData(message: any) {
     try {
-      this.loading = true; // Mostrar animación de carga
+      this.loading = true;
       if (message === 'Movies') {
         this.data = await this.loadDataForType(this.movieService.getMovies());
       } else if (message === 'Series') {
@@ -67,15 +65,13 @@ export class TierComponent implements OnInit {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      this.loading = false; // Ocultar animación de carga
+      this.loading = false;
     }
-
   }
 
   async loadDataForType(service: Promise<any>) {
     const typeData = await service;
     return typeData.map((item: { date: string }) => {
-      // item.date = this.convertDate(item.date);
       return item;
     });
   }
@@ -87,21 +83,19 @@ export class TierComponent implements OnInit {
     return year + "";
   }
 
+
   dataScore(da: any, num: number) {
     return da.filter((d: { score: number; }) => d.score == num);
-
   }
+
 
   filterYear(event: any) {
     this.selectedYear = event.target.value;
     this.applyFilters();
   }
 
+
   applyFilters() {
-
-    // this.resultFilter = this.data.filter(item => this.convertYear(item))
-
-    // filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
     if (this.selectedYear === "Todos") {
       this.resultFilter = this.data;
       console.log(1);
@@ -112,16 +106,9 @@ export class TierComponent implements OnInit {
   }
 
 
-
   navegarHome() {
     this.router.navigate(['./']);
   }
 
-  /*convertYear(item: any): boolean {
-    const date = item.date.toString().toLowerCase();
-    const parts = date.split("-");
-    const year = parseInt(parts[2], 10);
-    return (year+"") === this.selectedYear;
-  }*/
 
 }

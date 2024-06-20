@@ -23,22 +23,22 @@
                 </div>
 
                 <div class="row col-lg-12">
-                   
-                   <div class="col-lg-6">
-                    <p>Release date: {{data.releaseDate}}</p>
-                   </div>
-                   <div class="col-lg-6"  *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'" >
-                    <p>Score: {{data.randomData}}</p>
-                   </div>
-                   <div class="col-lg-6"  *ngIf="type == 'Books'" >
-                    <p>Page count: {{data.randomData}}</p>
-                   </div>
-                   <div class="col-lg-6"  *ngIf="type == 'Games'" >
-                    <p>Plataform: {{data.randomData}}</p>
-                   </div>
-                   <div class="col-lg-6"  *ngIf="type == 'Music'" >
-                    <p>Total Tracks: {{data.randomData}}</p>
-                   </div>
+
+                    <div class="col-lg-6">
+                        <p>Release date: {{data.releaseDate}}</p>
+                    </div>
+                    <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
+                        <p>Score: {{data.randomData}}</p>
+                    </div>
+                    <div class="col-lg-6" *ngIf="type == 'Books'">
+                        <p>Page count: {{data.randomData}}</p>
+                    </div>
+                    <div class="col-lg-6" *ngIf="type == 'Games'">
+                        <p>Plataform: {{data.randomData}}</p>
+                    </div>
+                    <div class="col-lg-6" *ngIf="type == 'Music'">
+                        <p>Total Tracks: {{data.randomData}}</p>
+                    </div>
                 </div>
 
                 <div class="row col-lg-12">
@@ -63,7 +63,7 @@
                         </select>
                     </div>
 
-                    
+
                 </div>
 
             </div>
@@ -74,7 +74,6 @@
         </div>
 
         <div class="loading-overlay" *ngIf="loading">
-            <!-- Aquí puedes colocar tu animación de carga -->
             <div class="loading-spinner"></div>
         </div>
 

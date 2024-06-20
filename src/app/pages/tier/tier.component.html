@@ -1,55 +1,48 @@
-
-
-            <div class="body">
-                <header>
-                    <div class="row">
-                        <div class="col-lg-3" style="text-align: start;">
-                            <p>Total: {{resultCount}}</p>
-                        </div>
-                        <div class="col-lg-2" style="text-align: end;">
-                            <div>
-                                <select id="opAnios" (change)="filterYear($event)">
-                                    <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{ opcion }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            
-                            <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
-                            <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
-                            <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
-                            <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
-                            <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
-                            <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
-                        </div>
-                    </div>
-          
-                   
-                   
-                </header>
-                <div class="container list col-lg-12">
-                    <div  *ngFor="let i of tier[0]">
-                        <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
-                            <div class="izq col-lg-2" [style.background-color]="tier[1][i]">
-                                <h5>{{categorias[i]}}</h5>
-                            </div>
-                            <div class="der col-lg-10">
-                                <div *ngFor="let anime of dataScore(this.resultFilter, categorias.length - i)"  style="display: inline;">
-                                    <img title="{{anime.name}}" class="imagen" [src]="anime.image" alt="#"  />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-
-
-                <div class="loading-overlay" *ngIf="loading">
-                    <!-- Aquí puedes colocar tu animación de carga -->
-                    <div class="loading-spinner"></div>
-                </div>
-
+<div class="body">
+    <header>
+        <div class="row">
+            <div class="col-lg-3" style="text-align: start;">
+                <p>Total: {{resultCount}}</p>
             </div>
-            
+            <div class="col-lg-2" style="text-align: end;">
+                <div>
+                    <select id="opAnios" (change)="filterYear($event)">
+                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{
+                            opcion }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
+                <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
+                <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
+                <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
+                <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
+                <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
+            </div>
+        </div>
 
+    </header>
+    <div class="container list col-lg-12">
+        <div *ngFor="let i of tier[0]">
+            <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+                <div class="izq col-lg-2" [style.background-color]="tier[1][i]">
+                    <h5>{{categorias[i]}}</h5>
+                </div>
+                <div class="der col-lg-10">
+                    <div *ngFor="let anime of dataScore(this.resultFilter, categorias.length - i)"
+                        style="display: inline;">
+                        <img title="{{anime.name}}" class="imagen" [src]="anime.image" alt="#" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="loading-overlay" *ngIf="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+</div>

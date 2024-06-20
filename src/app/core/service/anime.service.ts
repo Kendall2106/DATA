@@ -43,35 +43,5 @@ export class AnimeService {
     await updateDoc(documentRef, { score: score });
   }
 
-  /*getAnimes(): Observable<any[]> {
-    return this.http.get(this.xmlUrl, { responseType: 'text' }).pipe(
-      map((xmlString: string) => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-        const object = xmlDoc.querySelectorAll('anime');
-
-        return Array.from(object).map(obj => {
-          const id = obj.querySelector('id');
-          const name = obj.querySelector('name');
-          const date = obj.querySelector('date');
-          const score = obj.querySelector('score');
-          const type = obj.querySelector('type');
-          const numTemp = obj.querySelector('numTemp');
-          const image = obj.querySelector('image');
-          const visible = obj.querySelector('visible');
-        
-          return {
-            id: id ? id.textContent : '',
-            name: name ? name.textContent : '',
-            date: date ? date.textContent : '',
-            score: score ? score.textContent : '',
-            type: type ? type.textContent : '',
-            numTemp: numTemp ? numTemp.textContent : '',
-            image: image ? image.textContent : '',
-            visible: visible ? visible.textContent : ''
-          };
-        });
-      })
-    );
-  }*/
+ 
 }

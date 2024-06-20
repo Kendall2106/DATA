@@ -10,12 +10,7 @@
   </header>
 
   <div class="container list col-lg-12">
-
-
     <h4>Airing</h4>
-
-
-
     <div *ngIf="animesAiring.length === 0">No animes available</div>
     <div *ngIf="animesAiring.length > 0">
       <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true"
@@ -46,8 +41,6 @@
     </div>
 
     <div class="table-container">
-
-
       <div class="row">
         <div *ngFor="let cardData of data" class="col-lg-2 col-6 col-md-4">
           <div class="card">
@@ -60,11 +53,9 @@
     </div>
   </div>
 
-
   <div class="loading-overlay" *ngIf="loading">
-    <!-- Aquí puedes colocar tu animación de carga -->
     <div class="loading-spinner"></div>
-</div>
+  </div>
 
 
 
