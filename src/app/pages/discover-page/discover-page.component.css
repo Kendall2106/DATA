@@ -70,12 +70,17 @@ h4{
 }
 
 
-header {
-    background-color: transparent;
-    color: #fff;
-    padding: 5px 20px;
-    text-align: right;
-    border-radius: 10px;
+.navbar {
+  background-color: transparent;
+}
+
+.navbar-nav .nav-link {
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ccc;
 }
 
 /* Estilos para el botón */
@@ -163,10 +168,12 @@ button:hover{
 }
 
 
+.navbar-brand{
+  display: none;
+}
 
 
-
-@media (max-width:1000px) {
+@media (max-width: 767.98px) {
 
  
      .imagen{
@@ -181,6 +188,22 @@ button:hover{
 
       margin-left: 20%;
     }
+
+    .navbar-nav{
+      margin-top: 2%;
+      background-color: #242424;
+      border-radius: 5%;
+    }
+
+    .navbar-brand{
+      display: block;
+      color: #fff;
+    }
+
+    .CarrouselClass{
+      display: none;
+    }
+
  
  }
 

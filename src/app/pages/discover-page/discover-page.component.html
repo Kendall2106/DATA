@@ -1,5 +1,5 @@
 <div class="body">
-  <header>
+  <!--<header>
     <button (click)="loadData('Animes');"><i class="uil uil-letter-japanese-a"></i> Anime</button>
     <button (click)="loadData('Movies');"><i class="uil uil-ticket"></i> Peliculas</button>
     <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
@@ -7,21 +7,55 @@
     <button (click)="loadData('Games');"><i class="uil uil-basketball-hoop"></i> Juegos</button>
     <button (click)="loadData('Music');"><i class="uil uil-music"></i> Musica</button>
 
-  </header>
+  </header>-->
+  <nav class="navbar navbar-expand-sm ">
+    <div class="container">
+      <a class="navbar-brand" href="#">{{this.message}}</a>
+      <button class="navbar-toggler" type="button" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse justify-content-end" [ngClass]="{ 'show': navbarOpen }" id="navbarContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Animes');"><i class="uil uil-letter-japanese-a"></i> Anime</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Movies');"><i class="uil uil-ticket"></i> Peliculas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Books');"><i class="uil uil-book-alt"></i> Libros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Games');"><i class="uil uil-basketball-hoop"></i> Juegos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="loadData('Music');"><i class="uil uil-music"></i> Musica</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="container list col-lg-12">
-    <h4>Airing</h4>
-    <div *ngIf="animesAiring.length === 0">No animes available</div>
-    <div *ngIf="animesAiring.length > 0">
-      <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true"
-        [showIndicators]="false">
-        <ng-template let-cardData pTemplate="item">
-          <div class="cardCircule" (click)="openModal(cardData)">
-            <img class="imagen" [src]="cardData.image" [alt]="cardData.name" />
-          </div>
-        </ng-template>
-      </p-carousel>
+    <div class="CarrouselClass">
+      <h4>Airing</h4>
+      <div *ngIf="animesAiring.length === 0">No animes available</div>
+      <div *ngIf="animesAiring.length > 0">
+        <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true"
+          [showIndicators]="false">
+          <ng-template let-cardData pTemplate="item">
+            <div class="cardCircule" (click)="openModal(cardData)">
+              <img class="imagen" [src]="cardData.image" [alt]="cardData.name" />
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
     </div>
+    
 
     <h4>Lista de Animes</h4>
     <div class="row nbar col-lg-12 col-12" style="margin-bottom: 3%;">

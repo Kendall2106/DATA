@@ -76,6 +76,7 @@ export class DiscoverPageComponent {
       console.error("Error:", error);
     } finally {
       this.loading = false;
+      this.closeNavbar();
     }
   }
 
@@ -537,6 +538,16 @@ export class DiscoverPageComponent {
     const modalRef = this.modalService.open(ModalComponent, { centered: true });
     modalRef.componentInstance.data = infoData;
     modalRef.componentInstance.type = this.message;
+  }
+
+  navbarOpen = false;
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
+
+  closeNavbar() {
+    this.navbarOpen = false;
   }
 
 }
