@@ -119,7 +119,41 @@ button{
     z-index: 1000; /* Asegura que esté por encima del modal */
   }
   
+
+  .cardQuadrature {
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .quadrature{
+    max-height: calc(95vh - 60px);
+    overflow-y: auto;
+    width: 100%;
+    margin: auto;
+  }
+
+
+  .quadrature::-webkit-scrollbar {
+    width: 0; 
+  }
   
+  .form-check-label + .form-check-label {
+    margin-left: 10px; /* Ajusta este valor según tus necesidades */
+  }
+  
+
+  .imagenQuadrature{
+    width: 100%; 
+    height: 250px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+  }
+
+  .togle{
+    margin-right: 3%;
+  }
   
   @keyframes spin {
     0% {

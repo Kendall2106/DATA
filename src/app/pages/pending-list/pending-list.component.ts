@@ -20,6 +20,8 @@ export class PendingListComponent implements OnInit {
   loading: boolean = false;
   opTipos: string[][] = [];
   stars: boolean[] = Array(5).fill(false);
+  resultCount: any = 0;
+  isListView = true;
 
 
   constructor(private recoService: RecoService,
@@ -36,6 +38,10 @@ export class PendingListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getReco();
+  }
+
+  toggleView() {
+    this.isListView = !this.isListView;
   }
 
 
@@ -95,6 +101,7 @@ export class PendingListComponent implements OnInit {
     }
 
     this.orderData();
+    this.resultCount = this.data.length;
   }
 
 
