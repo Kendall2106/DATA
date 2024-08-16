@@ -9,28 +9,8 @@
 
 
 
-.card {
-    padding: 5px;
-    margin: 5px;
-    background-color: transparent;
-    border: none;
-  }
 
 
-  .cardCircule {
-    width: 170px; /* ajusta el tamaño del contenedor según tus necesidades */
-    height: 170px; /* ajusta el tamaño del contenedor según tus necesidades */
-    border-radius: 50%; /* establece el borde redondeado para hacer el círculo */
-    overflow: hidden; /* asegura que la imagen se ajuste al círculo */
-    margin-left: 4%;
-    border: 0.5px solid #ffffff;
-  }
-  
-  .cardCircule img {
-    width: 100%; /* asegura que la imagen ocupe todo el contenedor */
-    height: auto; /* ajusta la altura automáticamente para mantener la proporción */
-    display: block; /* asegura que la imagen no tenga espacio extra alrededor */
-  }
 
 
 
@@ -43,14 +23,6 @@ nav {
     background-color: #121212; /* Cambia #2c3e50 por el color que desees */
   }
 
-.imagen{
-  width: 100%; 
-  height: 250px;
- 
-  border: 1px solid #000000;
-  border-radius: 10px;
-  
-}
 
 
 h4{
@@ -84,52 +56,9 @@ h4{
 }
 
 /* Estilos para el botón */
-.perfil-button {
-    background-color: transparent; /* Azul */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.title{
-    color: white; 
-    text-align: left;
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
-    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
-    max-width: 200px;
-}
-
-
-.buttonNav{
-  font-size: 30px;
-}
 
 
 
-button{
-  background-color: transparent; 
-  color: white; 
-  margin-right: 2%;
- border: none;
-}
-
-.b1{
-  background-color: transparent; 
-  color: white; 
-  border-radius: 5px;
-  margin-right: 2%;
-  border: 1px solid #ffffff;
-}
-
-button:hover{
-  background-color: rgb(229, 255, 0);
-  color: black;
-  border: none;
-  border-radius: 5px;
-}
 
 
 
@@ -208,3 +137,33 @@ button:hover{
  }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+ .intro {
+  text-align: left;
+  margin-top: 15%;
+  margin-left: 10%;
+}
+.intro h1 {
+  font-size: 4em;
+  margin: 0;
+}
+.intro h2 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.intro p {
+  font-size: 1.2em;
+  margin-top: 1em;
+}

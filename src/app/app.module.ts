@@ -23,6 +23,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './pages/component/modal/modal.components';
 import { PendingListComponent } from './pages/pending-list/pending-list.component';
 import { AlertComponent } from './pages/component/alert/alert.component';
+import { CarrouselInfoComponent } from './pages/component/carrousel-info/carrousel-info.component';
+import { AnimeListDiscoverComponent } from './pages/lists/anime-list-discover/anime-list-discover.component';
+import { MovieListDiscoverComponent } from './pages/lists/movie-list-discover/movie-list-discover.component';
+import { SerieListDiscoverComponent } from './pages/lists/serie-list-discover/serie-list-discover.component';
+import { BookListDiscoverComponent } from './pages/lists/book-list-discover/book-list-discover.component';
+import { GameListDiscoverComponent } from './pages/lists/game-list-discover/game-list-discover.component';
+import { MusicListDiscoverComponent } from './pages/lists/music-list-discover/music-list-discover.component';
+
+
 
 
 
@@ -38,7 +47,14 @@ import { AlertComponent } from './pages/component/alert/alert.component';
     DiscoverPageComponent,
     ModalComponent,
     PendingListComponent,
-    AlertComponent
+    AlertComponent,
+    CarrouselInfoComponent,
+    AnimeListDiscoverComponent,
+    MovieListDiscoverComponent,
+    SerieListDiscoverComponent,
+    BookListDiscoverComponent,
+    GameListDiscoverComponent,
+    MusicListDiscoverComponent
   ],
   imports: [
     BrowserModule,

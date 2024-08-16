@@ -1,0 +1,56 @@
+.cardCircule {
+    width: 170px; /* ajusta el tamaño del contenedor según tus necesidades */
+    height: 170px; /* ajusta el tamaño del contenedor según tus necesidades */
+    border-radius: 50%; /* establece el borde redondeado para hacer el círculo */
+    overflow: hidden; /* asegura que la imagen se ajuste al círculo */
+    margin-left: 4%;
+    border: 0.5px solid #ffffff;
+  }
+  
+  .cardCircule img {
+    width: 100%; /* asegura que la imagen ocupe todo el contenedor */
+    height: auto; /* ajusta la altura automáticamente para mantener la proporción */
+    display: block; /* asegura que la imagen no tenga espacio extra alrededor */
+  }
+
+  .card {
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .title{
+    color: white; 
+    text-align: left;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+    max-width: 200px;
+}
+
+.imagen{
+    width: 80%; 
+    height: 250px;
+   
+    border: 1px solid #000000;
+    border-radius: 10px;
+    
+  }
+
+
+  .see-more-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegúrate de que ocupe el espacio adecuado */
+  }
+  
+  .btn-see-more {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

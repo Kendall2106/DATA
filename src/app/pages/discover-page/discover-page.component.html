@@ -40,21 +40,39 @@
     </div>
   </nav>
 
+  <div class="intro" *ngIf="introVisible">
+    <h1>TIME</h1>
+    <h1>CAPSULE</h1>
+    <h3>2019-{{actualYear}}</h3>
+    <p>"I want to be free, but I dont know who I am without the walls around me." - Evangelion</p>
+</div>
+  
+
   <div class="container list col-lg-12">
-    <div class="CarrouselClass">
-      <h4>Airing</h4>
-      <div *ngIf="animesAiring.length === 0">No animes available</div>
-      <div *ngIf="animesAiring.length > 0">
-        <p-carousel [value]="animesAiring" [numVisible]="numVisible" [numScroll]="1" [circular]="true"
-          [showIndicators]="false">
-          <ng-template let-cardData pTemplate="item">
-            <div class="cardCircule" (click)="openModal(cardData)">
-              <img class="imagen" [src]="cardData.image" [alt]="cardData.name" />
-            </div>
-          </ng-template>
-        </p-carousel>
-      </div>
+    <div *ngIf="showAnimeList">
+      <app-anime-list-discover></app-anime-list-discover>
     </div>
+    <div *ngIf="showMovieList">
+      <app-movie-list-discover></app-movie-list-discover>
+    </div>
+    <div *ngIf="showSeriesList">
+      <app-serie-list-discover></app-serie-list-discover>
+    </div>
+    <div *ngIf="showGameList">
+      <app-game-list-discover></app-game-list-discover>
+    </div>
+    <div *ngIf="showBookList">
+      <app-book-list-discover></app-book-list-discover>
+    </div>
+    <div *ngIf="showMusicList">
+      <app-music-list-discover></app-music-list-discover>
+    </div>
+  </div>
+
+  <!--<div class="container list col-lg-12">
+   
+    <app-carrousel-info [type]= "'Terror'" [data]="data"></app-carrousel-info>
+    <app-carrousel-info [type]= "'Ultimo'" [data]="animesAiring"></app-carrousel-info>
     
 
     <h4>Lista de Animes</h4>
@@ -93,4 +111,4 @@
 
 
 
-</div>
+</div>-->

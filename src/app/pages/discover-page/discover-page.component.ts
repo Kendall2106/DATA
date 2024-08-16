@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiAnimeService } from 'src/app/core/service/apiAnime.service';
 import { ModalComponent } from '../component/modal/modal.components';
@@ -15,8 +15,10 @@ import { AlertService } from 'src/app/core/service/alert.service';
   selector: 'app-discover-page',
   templateUrl: './discover-page.component.html',
   styleUrls: ['./discover-page.component.css']
+
 })
 export class DiscoverPageComponent {
+  data2: { name: string, image: string}[] = [];
   recomendaciones: any[] = [];
   animes: any[] = [];
   animesRange: any[] = [];
@@ -42,11 +44,23 @@ export class DiscoverPageComponent {
   opcionSeleccionada: string = "";
 
 
-  constructor(private spotify: SpotifyService, private alertService: AlertService, private apiGamesServive: ApiGamesService, private apiMoviesService: ApiMoviesService, private apiSerieService: ApiSerieService, private apiAnimeService: ApiAnimeService, public modalService: NgbModal, private apiBookService: ApiBookService, public dataService: DataService, private router: Router) {
+  showAnimeList: boolean = false;
+  showMovieList: boolean = false;
+  showSeriesList: boolean = false;
+  showGameList: boolean = false;
+  showBookList: boolean = false;
+  showMusicList:boolean = false;
+  introVisible: boolean= true;
+
+  actualYear: number = 0;
+
+  constructor( private spotify: SpotifyService, private alertService: AlertService, private apiGamesServive: ApiGamesService, private apiMoviesService: ApiMoviesService, private apiSerieService: ApiSerieService, private apiAnimeService: ApiAnimeService, public modalService: NgbModal, private apiBookService: ApiBookService, public dataService: DataService, private router: Router) {
   }
 
 
   async ngOnInit() {
+   this.actualYear = new Date().getFullYear();
+
     this.numVisible = window.innerWidth <= 768 ? 1 : 6;
 
     window.addEventListener('resize', () => {
@@ -54,24 +68,72 @@ export class DiscoverPageComponent {
     });
   }
 
+  loadData(type: string){
+      this.introVisible = false;
 
+      if (type == "Animes"){
+        this.showAnimeList = true;
+        this.showMovieList = false;
+        this.showSeriesList  = false;
+        this.showGameList  = false;
+        this.showBookList  = false;
+        this.showMusicList =false;
+      } else if (type == "Books"){
+        this.showAnimeList = false;
+        this.showMovieList = false;
+        this.showSeriesList  = false;
+        this.showGameList  = false;
+        this.showBookList  = true;
+        this.showMusicList =false;
+      }else if (type == "Games"){
+        this.showAnimeList = false;
+        this.showMovieList = false;
+        this.showSeriesList  = false;
+        this.showGameList  = true;
+        this.showBookList  = false;
+        this.showMusicList =false;
+      }else if (type == "Movies"){
+        this.showAnimeList = false;
+        this.showMovieList = true;
+        this.showSeriesList  = false;
+        this.showGameList  = false;
+        this.showBookList  = false;
+        this.showMusicList =false;
+      }else if (type == "Series"){
+        this.showAnimeList = false;
+        this.showMovieList = false;
+        this.showSeriesList  = true;
+        this.showGameList  = false;
+        this.showBookList  = false;
+        this.showMusicList =false;
+      }else if (type == "Music"){
+        this.showAnimeList = false;
+        this.showMovieList = false;
+        this.showSeriesList  = false;
+        this.showGameList  = false;
+        this.showBookList  = false;
+        this.showMusicList = true;
+      }
+
+  }
+
+/*
   async loadData(message: any) {
     try {
       this.loading = true;
       if (message === 'Movies') {
-        await this.getMovies();
+        this.getMovies();
       } else if (message === 'Series') {
-        await this.getSeries();
+        this.getSeries();
       } else if (message === 'Animes') {
-        await this.getAnime();
+        this.getAnime();
       } else if (message === 'Games') {
-        await this.getGames();
+        this.getGames();
       } else if (message === 'Books') {
-        await this.getBooks();
+        this.getBooks();
       } else if (message === 'Music') {
-        await this.getMusic();
+        this.getMusic();
       }
-
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -81,251 +143,43 @@ export class DiscoverPageComponent {
   }
 
 
-  getMusic() {
-    this.message = "Music";
-    this.dataAiring();
-    this.spotify.getAlbums(this.startIndexMusic, this.maxResultsMusic).subscribe((response: any) => {
-      this.data = [];
-      console.log(response);
-      response.albums.items.forEach((item: any) => {
-        this.data.push({
-          name: item.name,
-          image: item.images[0].url,
-          info: "Artist: " + item.artists[0].name + ", Fecha Salida: " + item.release_date,
-          releaseDate: item.release_date,
-          randomData: item.total_tracks
-        });
-      });
-    });
-  }
+  
+
+  
 
 
-  async getAnime() {
-    this.message = "Animes";
-    this.dataAiring();
-    try {
-      this.loading = true;
-      await this.apiAnimeService.getAnimeByPage(this.numPage).subscribe((response: any) => {
-        this.data = [];
-        console.log(response);
-        response.data.forEach((item: any) => {
-          this.data.push({
-            name: item.title,
-            image: item.images.jpg.image_url,
-            info: item.synopsis,
-            releaseDate: item.year,
-            randomData: item.score
-          });
-        });
-      });
-    } catch (error) {
-      console.error("Error getAnime:", error);
-    } finally {
-      this.loading = false;
-    }
-  }
 
 
-  async getBooks() {
-    this.loading = true;
-    this.message = "Books";
-    this.dataAiring();
-    await this.apiBookService.getBooks(this.startIndex, this.maxResults).subscribe((response: any) => {
-      const booksWithImages = response.items.filter((book: any) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
-      this.data = [];
-      console.log(response);
-      booksWithImages.forEach((item: any) => {
-        this.data.push({
-          name: item.volumeInfo.title,
-          image: item.volumeInfo.imageLinks.thumbnail,
-          info: item.volumeInfo.description,
-          releaseDate: item.volumeInfo.publishedDate,
-          randomData: item.volumeInfo.pageCount
-        });
-      });
-    });
-  }
+  
+
+  
 
 
-  async getMovies() {
-    this.message = "Movies";
-    this.dataAiring();
-    await this.apiMoviesService.getMovies(this.numPageMovie).subscribe((response: any) => {
-      const moviesWithImages = response.results.filter((m: any) => m.poster_path);
-      this.data = [];
-      console.log(response);
-      moviesWithImages.forEach((item: any) => {
-        this.data.push({
-          name: item.title,
-          image: "https://image.tmdb.org/t/p/w500" + item.poster_path,
-          info: item.overview,
-          releaseDate: item.release_date,
-          randomData: item.vote_average
-        });
-      });
-    });
-  }
+ 
 
 
-  async getSeries() {
-    this.message = "Series";
-    this.dataAiring();
-    await this.apiSerieService.getSeries(this.numPageSeries).subscribe((response: any) => {
-      this.data = [];
-      console.log(response);
-      response.results.forEach((item: any) => {
-        this.data.push({
-          name: item.name,
-          image: "https://image.tmdb.org/t/p/w500" + item.poster_path,
-          info: item.overview,
-          releaseDate: item.first_air_date,
-          randomData: item.vote_average
-        });
-      });
-    });
-  }
 
 
-  async getGames() {
-    this.message = "Games";
-    this.dataAiring();
-    await this.apiGamesServive.getGames(this.numPageGames).subscribe((response: any) => {
-      this.data = [];
-      console.log(response);
-      console.log(response);
-      response.forEach((item: any) => {
-        this.data.push({
-          name: item.title,
-          image: item.image_url,
-          info: item.overview,
-          releaseDate: 'NC',
-          randomData: item.platform_name
-        });
-      });
-    });
-  }
-
-  async getAnimeAiring() {
-    await this.apiAnimeService.getAnimeAiring().subscribe((response: any) => {
-      this.animesAiring = [];
-      response.data.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.title,
-          image: item.images.jpg.image_url,
-          info: item.synopsis
-        });
-      });
-    });
-  }
+  
 
 
-  async getBooksByNew() {
-    await this.apiBookService.getBooksByNew().subscribe((response: any) => {
-      const booksWithImages = response.items.filter((book: any) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
-      this.animesAiring = [];
-      booksWithImages.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.volumeInfo.title,
-          image: item.volumeInfo.imageLinks.thumbnail,
-          info: item.volumeInfo.description
-        });
-      });
-    });
-  }
 
 
-  getFormattedDate(date: Date): string {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
-  }
+
+  
 
 
-  getCurrentMonth(month: number): string {
-    const now = new Date();
-    const firstDayCurrentMonth = new Date(now.getFullYear(), now.getMonth() + month, 1);
-    console.log(this.getFormattedDate(firstDayCurrentMonth));
-    return this.getFormattedDate(firstDayCurrentMonth);
-  }
 
 
-  async getMoviesAiring() {
-    await this.apiMoviesService.getMoviesAiring(this.getCurrentMonth(0), this.getCurrentMonth(1)).subscribe((response: any) => {
-      this.animesAiring = [];
-      console.log(response);
-      const moviesWithImages = response.results.filter((m: any) => m.poster_path);
-      moviesWithImages.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.title,
-          image: "https://image.tmdb.org/t/p/original" + item.poster_path,
-          info: item.overview
-        });
-      });
-    });
-  }
+  
 
 
-  async getSeriesAiring() {
-    await this.apiSerieService.getSeriesAiring(this.getCurrentMonth(0), this.getCurrentMonth(1)).subscribe((response: any) => {
-      this.animesAiring = [];
-      console.log(response);
-      const seriesWithImages = response.results.filter((m: any) => m.poster_path);
-      seriesWithImages.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.name,
-          image: "https://image.tmdb.org/t/p/original" + item.poster_path,
-          info: item.overview
-        });
-      });
-    });
-  }
 
 
-  async getGamesByPc() {
-    await this.apiGamesServive.getGamesByPC(1).subscribe((response: any) => {
-      this.animesAiring = [];
-      response.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.title,
-          image: item.image_url,
-          info: item.overview
-        });
-      });
-    });
-  }
+  
 
 
-  async getMusicAiring() {
-    await this.spotify.getAlbumsAiring().subscribe((response: any) => {
-      this.animesAiring = [];
-      console.log(response);
-      response.artists.items.forEach((item: any) => {
-        this.animesAiring.push({
-          name: item.name,
-          image: item.images[0].url,
-          info: " "
-        });
-      });
-    });
-  }
-
-
-  async searchAnimesByName() {
-    this.data = [];
-    await this.apiAnimeService.searchAnimesByName(this.search, this.numPage).subscribe((response: any) => {
-      response.data.forEach((item: any) => {
-        this.data.push({
-          name: item.title,
-          image: item.images.jpg.image_url,
-          info: item.synopsis,
-          releaseDate: item.year,
-          randomData: item.score
-        });
-      });
-    });
-  }
-
+ 
 
   async getBooksByName() {
     this.data = [];
@@ -346,21 +200,7 @@ export class DiscoverPageComponent {
   }
 
 
-  async searchMoviesByName() {
-    await this.apiMoviesService.seachMovies(this.search).subscribe((response: any) => {
-      const moviesWithImages = response.results.filter((m: any) => m.poster_path);
-      this.data = [];
-      moviesWithImages.forEach((item: any) => {
-        this.data.push({
-          name: item.title,
-          image: "https://image.tmdb.org/t/p/original" + item.poster_path,
-          info: item.overview,
-          releaseDate: item.release_date,
-          randomData: item.vote_average
-        });
-      });
-    });
-  }
+  
 
 
   async searchSeriesByName() {
@@ -412,39 +252,9 @@ export class DiscoverPageComponent {
   }
 
 
-  dataAiring() {
-    console.log("wait" + this.message);
-    if (this.message == "Animes") {
-      this.getAnimeAiring();
-    }
-
-    if (this.message == "Books") {
-
-      this.getBooksByNew();
-    }
-
-    if (this.message == "Movies") {
-      this.getMoviesAiring();
-    }
-
-    if (this.message == "Series") {
-      this.getSeriesAiring();
-    }
-
-    if (this.message == "Games") {
-      this.getGamesByPc();
-    }
-
-    if (this.message == "Music") {
-      this.getMusicAiring();
-    }
-  }
-
+  
 
   searchData() {
-    if (this.message == "Animes") {
-      this.searchAnimesByName();
-    }
 
     if (this.message == "Books") {
       this.getBooksByName();
@@ -469,10 +279,6 @@ export class DiscoverPageComponent {
 
 
   aumentarNumero() {
-    if (this.message == "Animes") {
-      this.numPage++;
-      this.getAnime();
-    }
 
     if (this.message == "Movies") {
       this.numPageMovie++;
@@ -502,10 +308,6 @@ export class DiscoverPageComponent {
 
 
   restNumber() {
-    if (this.message == "Animes") {
-      this.numPage--;
-      this.getAnime();
-    }
 
     if (this.message == "Movies") {
       this.numPageMovie--;
@@ -548,6 +350,15 @@ export class DiscoverPageComponent {
 
   closeNavbar() {
     this.navbarOpen = false;
+  }*/
+
+    navbarOpen = false;
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
+  closeNavbar() {
+    this.navbarOpen = false;
+  }
 }

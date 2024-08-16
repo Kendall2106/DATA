@@ -1,0 +1,17 @@
+<div class="CarrouselClass">
+    <h4>{{type}} </h4>
+    
+    <div *ngIf="data.length === 0">No animes available</div>
+    <div *ngIf="data.length > 0">
+      <p-carousel [value]="data" [numVisible]="5" [numScroll]="1" [circular]="true"
+        [showIndicators]="false">
+        <ng-template let-cardData pTemplate="item">
+          <div class="card">
+            <img (click)="openModal(cardData)" class="imagen" [src]="cardData.image" alt="#">
+            <p class="title">{{cardData.name}}</p>
+          </div>
+          
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>

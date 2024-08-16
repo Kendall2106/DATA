@@ -1,0 +1,93 @@
+
+.card {
+    padding: 5px;
+    margin: 5px;
+    background-color: transparent;
+    border: none;
+  }
+
+  .imagen{
+    width: 100%; 
+    height: 250px;
+   
+    border: 1px solid #000000;
+    border-radius: 10px;
+    
+  }
+
+  .title{
+    color: white; 
+    text-align: left;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+    max-width: 200px;
+}
+
+button{
+    background-color: transparent; 
+    color: white; 
+    margin-right: 2%;
+   border: none;
+  }
+  
+  .b1{
+    background-color: transparent; 
+    color: white; 
+    border-radius: 5px;
+    margin-right: 2%;
+    border: 1px solid #ffffff;
+  }
+  
+  button:hover{
+    background-color: rgb(229, 255, 0);
+    color: black;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .perfil-button {
+    background-color: transparent; /* Azul */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.buttonNav{
+  font-size: 30px;
+}
+
+
+
+
+.contenedor {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+  }
+  
+
+  
+  .centrado {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #fff;
+    transform: translate(0, 0);
+    background-color: #4e2394;
+    padding: 2%;
+    border-radius: 20px;
+  }
+  
+
+
+
+
+
+
+
+
