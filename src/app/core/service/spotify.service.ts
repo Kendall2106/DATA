@@ -40,10 +40,8 @@ export class SpotifyService {
           'Authorization': 'Bearer ' + token
         });
 
-        const genre = "pop";
-
         const params = {
-            query: 'genre%reggaeton',
+            query: 'year:2024',
             type: 'album',
             limit: limit,
             offset: offset
@@ -56,7 +54,7 @@ export class SpotifyService {
   }
 
 
-  getAlbumsByName(title: string, limit: number): Observable<any> {
+  getAlbumsByName(title: string, offset: number, limit: number): Observable<any> {
     return this.getToken().pipe(
       switchMap(token => {
         const headers = new HttpHeaders({
@@ -66,7 +64,7 @@ export class SpotifyService {
             query: title,
             type: 'album',
             limit: limit,
-            offset: 0
+            offset: offset
           };
           return this.http.get(this.apiUrl, { headers, params});
 
@@ -81,16 +79,19 @@ export class SpotifyService {
           'Authorization': 'Bearer ' + token
         });
         const params = {
-            query: 'genre%reggaeton',
-            type: 'artist',
-            limit: 24,
-            offset: 0
-          };
+          query: 'year:2024',
+          type: 'album',
+          limit: 24,
+          offset: 0
+        };
+        
           return this.http.get(this.apiUrl, { headers, params});
 
       })
     );
   }
+
+
   
 
 }

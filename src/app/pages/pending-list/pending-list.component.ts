@@ -22,6 +22,8 @@ export class PendingListComponent implements OnInit {
   stars: boolean[] = Array(5).fill(false);
   resultCount: any = 0;
   isListView = true;
+  introVisible: boolean= true;
+  actualYear: number = 0;
 
 
   constructor(private recoService: RecoService,
@@ -37,6 +39,7 @@ export class PendingListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.actualYear = new Date().getFullYear();
     this.getReco();
   }
 
@@ -46,6 +49,7 @@ export class PendingListComponent implements OnInit {
 
 
   async loadData(message: any) {
+    this.introVisible=false;
     this.type = message;
     if (message === 'Animes') {
       this.data = [];

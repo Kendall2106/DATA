@@ -86,7 +86,18 @@ button{
 
 
 
+  select{
+    width: 80%;
+    font-size: 1.2rem;
+    border: none;
+    color: white;
+    background-color: transparent;
+}
 
+select option {
+    background-color: var(--color-1); 
+    color: var(--color-text); 
+  }
 
 
 

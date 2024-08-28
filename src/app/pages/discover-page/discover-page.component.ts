@@ -6,7 +6,7 @@ import { ApiBookService } from 'src/app/core/service/apiBook.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { Router } from '@angular/router';
 import { SpotifyService } from 'src/app/core/service/spotify.service';
-import { ApiSerieService } from 'src/app/core/service/apiSerie.service copy';
+import { ApiSerieService } from 'src/app/core/service/apiSerie.service';
 import { ApiMoviesService } from 'src/app/core/service/apiMovies.service';
 import { ApiGamesService } from 'src/app/core/service/apiGames.service';
 import { AlertService } from 'src/app/core/service/alert.service';
@@ -181,43 +181,13 @@ export class DiscoverPageComponent {
 
  
 
-  async getBooksByName() {
-    this.data = [];
-    await this.apiBookService.getBooksByName(this.search).subscribe((response: any) => {
-      if (response.items) {
-        const booksWithImages = response.items.filter((book: any) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
-        booksWithImages.forEach((item: any) => {
-          this.data.push({
-            name: item.volumeInfo.title,
-            image: item.volumeInfo.imageLinks.thumbnail,
-            info: item.volumeInfo.description,
-            releaseDate: item.volumeInfo.publishedDate,
-            randomData: item.volumeInfo.pageCount
-          });
-        });
-      }
-    });
-  }
+
 
 
   
 
 
-  async searchSeriesByName() {
-    await this.apiSerieService.seachSeries(this.search).subscribe((response: any) => {
-      const seriesWithImages = response.results.filter((m: any) => m.poster_path);
-      this.data = [];
-      seriesWithImages.forEach((item: any) => {
-        this.data.push({
-          name: item.name,
-          image: "https://image.tmdb.org/t/p/original" + item.poster_path,
-          info: item.overview,
-          releaseDate: item.first_air_date,
-          randomData: item.vote_average
-        });
-      });
-    });
-  }
+ 
 
 
   async seachGamesByName() {

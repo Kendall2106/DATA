@@ -6,7 +6,7 @@
       <p-carousel [value]="data" [numVisible]="5" [numScroll]="1" [circular]="true"
         [showIndicators]="false">
         <ng-template let-cardData pTemplate="item">
-          <div class="card">
+          <div class="cardCircule">
             <img (click)="openModal(cardData)" class="imagen" [src]="cardData.image" alt="#">
             <p class="title">{{cardData.name}}</p>
           </div>

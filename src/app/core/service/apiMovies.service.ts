@@ -37,8 +37,8 @@ export class ApiMoviesService {
     return this.http.get(url, { headers});
   }
 
-  seachMovies(title: string): Observable<any> {
-    const url = `${this.apiUrl}/search/movie?query=${title}`;
+  seachMovies(title: string, page: number): Observable<any> {
+    const url = `${this.apiUrl}/search/movie?query=${title}&page=${page}`;
     const headers = new HttpHeaders({
         'Content-Type': '"accept", "application/json"',
         'Authorization': this.apiKey

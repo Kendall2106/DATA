@@ -23,8 +23,8 @@ export class ApiGamesService {
     return this.http.get(url, { headers});
   }
 
-  seachGames(title: string): Observable<any> {
-    const url = `${this.apiUrl}/title-search?title=${title}`;
+  seachGames(title: string, page: number): Observable<any> {
+    const url = `${this.apiUrl}/title-search?title=${title}&page=${page}`;
     const headers = new HttpHeaders({
       'X-RapidAPI-Key': this.apiKey,
       'X-RapidAPI-Host': this.host
@@ -35,8 +35,18 @@ export class ApiGamesService {
 
 
 
-  getGamesByPC(page: number): Observable<any> {
-    const url = `${this.apiUrl}/by-platform/PC`;
+  getGamesByPlataform(plataformName: string, page: number): Observable<any> {
+    const url = `${this.apiUrl}/by-platform/${plataformName}?page=${page}`;
+    const headers = new HttpHeaders({
+        'X-RapidAPI-Key': this.apiKey,
+        'X-RapidAPI-Host': this.host
+      });
+
+    return this.http.get(url, { headers});
+  }
+
+  getAllPlataform(): Observable<any> {
+    const url = `https://video-games-api2.p.rapidapi.com/platform/all`;
     const headers = new HttpHeaders({
         'X-RapidAPI-Key': this.apiKey,
         'X-RapidAPI-Host': this.host

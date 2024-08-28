@@ -15,8 +15,8 @@ export class ApiBookService {
     return this.http.get(`${this.API_URL}?q=""+subject:fantasy&startIndex=${startIndex}&maxResults=24&printType=books`);
   }
 
-  getBooksByName(name: string) {
-    const url = `${this.API_URL}?q=${name}&maxResults=24&printType=books`;
+  getBooksByName(name: string,startIndex: number) {
+    const url = `${this.API_URL}?q=${name}&startIndex=${startIndex}&maxResults=24&printType=books`;
     return this.http.get(url);
   }
 

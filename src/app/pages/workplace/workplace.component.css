@@ -137,7 +137,7 @@ button {
 
 
 .container {
-  height: calc(71vh - 60px);
+  height: calc(75vh - 60px);
   align-items: end;
 }
 
@@ -301,4 +301,30 @@ button {
 
 .star-rating span {
   cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+}
+
+
+
+.genre-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap; /* Para que las cajas se acomoden en varias filas si es necesario */
+}
+
+.genre-box {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-basis: calc(20% - 20px); /* Ajuste del tamaño para que quepan 5 cajas en una fila */
+    margin: 10px;
+    font-size: 1.5em;
+}
+
+.genre-box:hover {
+    background-color: #333;
 }

@@ -24,7 +24,7 @@ export class WorkplaceComponent implements OnInit {
   animes: Anime[] = [];
   message: string = '';
   opTipos: string[][] = [];
-  opAnios: string[] = [];
+  opAnios: any[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
   resultCount: any = 0;
@@ -44,7 +44,7 @@ export class WorkplaceComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
     ];
-    this.opAnios = ["2024", "2023", "2022", "2021", "2020", "2019"];
+   // this.opAnios = ["All", "2024", "2023", "2022", "+"];
     this.opCalificacion = ["0", "1", "2", "3", "4", "5"];
   }
 
@@ -60,7 +60,19 @@ export class WorkplaceComponent implements OnInit {
 
     });
 
-    this.selectedYear = this.opAnios[0];
+    this.updateYearOptions();
+    this.selectedYear = this.opAnios[1];
+  }
+
+  updateYearOptions(): void {
+    const currentYear = new Date().getFullYear();
+    this.opAnios = [
+      'All',
+      currentYear.toString(),
+      (currentYear - 1).toString(),
+      (currentYear - 2).toString(),
+      '+'
+    ];
   }
 
 
@@ -169,13 +181,16 @@ export class WorkplaceComponent implements OnInit {
 
 
   convertYear(item: any): boolean {
-    if (this.selectedYear != 'All') {
-      const date = item.date.toString().toLowerCase();
-      const parts = date.split("-");
-      const year = parseInt(parts[2], 10);
-      return (year + "") === this.selectedYear;
-    } else {
+    const date = item.date.toString().toLowerCase();
+    const parts = date.split("-");
+    const year = parseInt(parts[2], 10);
+  
+    if (this.selectedYear === 'All') {
       return true;
+    } else if (this.selectedYear === '+') {
+      return year < this.opAnios[3];
+    } else {
+      return (year + "") === this.selectedYear;
     }
   }
 
@@ -187,9 +202,14 @@ export class WorkplaceComponent implements OnInit {
 
 
   filterYear(event: any) {
-    this.selectedYear = event.target.value;
+    this.selectedYear = event;
     this.applyFilters();
   }
+
+  /*filterYear(event: any) {
+    this.selectedYear = event.target.value;
+    this.applyFilters();
+  }*/
 
 
   filterScore(event: any) {

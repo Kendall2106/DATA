@@ -13,8 +13,19 @@ export class ApiSerieService {
 
   constructor(private http: HttpClient) {}
 
+  getGenres(){
+    const url = `https://api.themoviedb.org/3/genre/tv/list`;
+    const headers = new HttpHeaders({
+      'Content-Type': '"accept", "application/json"',
+      'Authorization': this.apiKey
+    });
+
+  return this.http.get(url, { headers});
+ 
+  }
+
   getSeries(page:number): Observable<any> {
-    const url = `${this.apiUrl}/discover/tv?page=${page}`;
+    const url = `${this.apiUrl}/discover/tv?page=${page}&sort_by=vote_count.desc`;
     const headers = new HttpHeaders({
         'Content-Type': '"accept", "application/json"',
         'Authorization': this.apiKey
@@ -23,8 +34,8 @@ export class ApiSerieService {
     return this.http.get(url, { headers});
   }
 
-  seachSeries(title: string): Observable<any> {
-    const url = `${this.apiUrl}/search/tv?query=${title}`;
+  seachSeries(title: string,page:number): Observable<any> {
+    const url = `${this.apiUrl}/search/tv?query=${title}&page=${page}`;
     const headers = new HttpHeaders({
         'Content-Type': '"accept", "application/json"',
         'Authorization': this.apiKey
@@ -42,5 +53,14 @@ export class ApiSerieService {
     return this.http.get(url, { headers});
   }
 
+
+  getSerieByGenre(genre: string, page:number){
+    const url = `${this.apiUrl}/discover/tv?page=${page}&with_genres=${genre}&sort_by=vote_count.desc`;
+    const headers = new HttpHeaders({
+      'Content-Type': '"accept", "application/json"',
+      'Authorization': this.apiKey
+    });
+    return this.http.get(url, { headers});
+  }
 
 }

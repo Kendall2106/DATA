@@ -41,6 +41,7 @@ export class MovieListDiscoverComponent {
 
   async getMovies() {
     this.message = "Movies";
+    this.currentSearchType = 'all'; 
    // this.dataAiring();
     await this.apiMoviesService.getMovies(this.numPage).subscribe((response: any) => {
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
@@ -92,7 +93,8 @@ export class MovieListDiscoverComponent {
 
 
   async searchMoviesByName() {
-    await this.apiMoviesService.seachMovies(this.search).subscribe((response: any) => {
+    this.currentSearchType = 'search';
+    await this.apiMoviesService.seachMovies(this.search, this.numPage).subscribe((response: any) => {
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
       this.data = [];
       moviesWithImages.forEach((item: any) => {

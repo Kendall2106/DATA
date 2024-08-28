@@ -18,7 +18,12 @@
         </div>
     </div>
 
-
+    <div class="intro" *ngIf="introVisible">
+        <h1>TIME</h1>
+        <h1>CAPSULE</h1>
+        <h3>2019-{{actualYear}}</h3>
+        <p>"I want to be free, but I dont know who I am without the walls around me." - Evangelion</p>
+    </div>
 
 
     <div *ngIf="isListView" class="list" style="width: 80%;">
