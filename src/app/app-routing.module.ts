@@ -7,6 +7,8 @@ import { TierComponent } from './pages/tier/tier.component';
 import { FormsModule } from '@angular/forms';
 import { DiscoverPageComponent } from './pages/discover-page/discover-page.component';
 import { PendingListComponent } from './pages/pending-list/pending-list.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
 
 const routes: Routes = [
   {path:'', component: DiscoverPageComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   {path:'Workplace', component: WorkplaceComponent },
   {path:'Create', component: CreateComponent },
   {path:'Tier', component: TierComponent },
-  {path:'PendingList', component: PendingListComponent }
+  {path:'PendingList', component: PendingListComponent },
+  {path:'Profile', component: ProfilePageComponent },
+  {path:'Graphics', component: GraphicsPageComponent },
 ];
 
 @NgModule({

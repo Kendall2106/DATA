@@ -24,25 +24,19 @@
     max-width: 200px;
 }
 
-button{
-    background-color: transparent; 
-    color: white; 
-    margin-right: 2%;
-   border: none;
-  }
+
   
   .b1{
-    background-color: transparent; 
-    color: white; 
+    background-color: var(--color-2);
+    color: rgb(0, 0, 0); 
     border-radius: 5px;
     margin-right: 2%;
-    border: 1px solid #ffffff;
+    border: 1px solid #0a0909;
   }
   
-  button:hover{
-    background-color: rgb(229, 255, 0);
-    color: black;
-    border: none;
+  .b1:hover{
+    color: rgb(255, 255, 255);
+    border-color:  transparent;
     border-radius: 5px;
   }
   

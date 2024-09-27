@@ -1,0 +1,61 @@
+.body{
+    margin-top: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: calc(102vh - 60px); 
+}
+
+
+
+.header{
+  margin-top: 3%;
+  background-color: blue;
+}
+
+.TopSeccion{
+  background-color: blue;
+  margin-top: 3%;
+}
+
+.BottonSeccion{
+  background-color: blue;
+  margin-top: 3%;
+}
+
+.profile{
+  background-color: aqua;
+}
+
+.profileTime{
+  background-color: chocolate;
+}
+
+.graphicsBox{
+  background-color: darkgrey;
+}
+
+.BoxIntern{
+  background-color: aliceblue;
+  margin: 1%;
+}
+
+
+
+
+img{
+  width: 100%;
+  height: 100%;
+}
+
+.menuOption{
+  width: 10%;
+  border-style:solid;
+  border-color: black;
+}
+
+.nav-item{
+  border-style: solid;
+  border-color: black;
+}
+

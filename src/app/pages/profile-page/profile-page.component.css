@@ -1,0 +1,121 @@
+.body{
+  margin-top: 10px;
+  background-color: rgb(18, 18, 18);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: calc(102vh - 60px); 
+
+}
+
+
+.container{
+  width: 90%;
+  height: calc(102vh - 60px); 
+}
+
+
+.TopSeccion{
+
+}
+
+.BarrasSeccion{
+  height: 100%;
+}
+
+.BottonSeccion{
+margin-top: 3%;
+
+}
+
+.profile{
+
+}
+
+.profileTime {
+  position: relative;
+  z-index: 0;
+}
+
+.profileTime::before {
+  position: absolute;
+  z-index: -1; /* Envía la imagen detrás del contenido */
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(18, 18, 18) 100%), url('../../../assets/cuadricula.png');
+  opacity: 0.2;
+}
+
+
+.graphicsBox{
+  display: flex;
+  flex-direction: column; /* Organiza los hijos en una columna */
+  justify-content: flex-end; /* Alinea el contenido al final (parte inferior) */
+}
+
+.BoxIntern{
+  margin: 1%;
+}
+
+
+
+
+h1{
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.Underlined{
+  background-color: var(--color-2);
+  text-align: right;
+  color: black;
+}
+
+
+
+
+img{
+width: 100%;
+height: 100%;
+}
+
+.menuOption{
+width: 10%;
+border-style:solid;
+border-color: black;
+}
+
+.nav-item{
+border-style: solid;
+border-color: black;
+}
+
+
+
+.imagen-circular {
+  width: 85%; /* Ajusta el tamaño según sea necesario */
+  height: 100%; /* Debe ser igual al ancho para mantener la forma circular */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+  border-radius: 50%; /* Hace que el contenedor sea circular */
+  display: flex; /* Usar Flexbox para centrar el contenido */
+    align-items: center; /* Centra verticalmente el contenido dentro del contenedor */
+    justify-content: center;
+    border: 10px double var(--color-2);
+
+}
+
+.imagen-circular img {
+  width: 100%; /* Asegura que la imagen ocupe todo el contenedor */
+  height: 100%; /* Mantiene la relación de aspecto de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+}
+
+.title{
+  color: var(--color-2);
+}
+
+
+
+ 
+

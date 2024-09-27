@@ -30,6 +30,8 @@ import { SerieListDiscoverComponent } from './pages/lists/serie-list-discover/se
 import { BookListDiscoverComponent } from './pages/lists/book-list-discover/book-list-discover.component';
 import { GameListDiscoverComponent } from './pages/lists/game-list-discover/game-list-discover.component';
 import { MusicListDiscoverComponent } from './pages/lists/music-list-discover/music-list-discover.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
 
 
 
@@ -54,7 +56,9 @@ import { MusicListDiscoverComponent } from './pages/lists/music-list-discover/mu
     SerieListDiscoverComponent,
     BookListDiscoverComponent,
     GameListDiscoverComponent,
-    MusicListDiscoverComponent
+    MusicListDiscoverComponent,
+    ProfilePageComponent,
+    GraphicsPageComponent
   ],
   imports: [
     BrowserModule,

@@ -78,16 +78,17 @@ button{
 }
 
 .b1{
-    background-color: transparent; 
-    color: white; 
+    background-color: var(--color-2);
+    color: black; 
     border-radius: 5px;
     margin-right: 2%;
-    border: 1px solid #ffffff;
+    border: 1px solid #000000;
   }
+
   
   button:hover{
-    background-color: rgb(229, 255, 0);
-    color: black;
+    
+    color: white;
     border-color: transparent;
     border-radius: 5px;
   }

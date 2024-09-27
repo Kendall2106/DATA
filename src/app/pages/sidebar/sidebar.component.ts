@@ -50,6 +50,14 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  navegarProfilePage() {
+    this.router.navigate(['/Profile']);
+  }
+
+  navegarGraphicsPage() {
+    this.router.navigate(['/Graphics']);
+  }
+
 
   toggleMobileMenu(): void {
     const menu = document.getElementById('menu')!;
