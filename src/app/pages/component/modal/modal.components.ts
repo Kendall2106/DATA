@@ -118,8 +118,9 @@ export class ModalComponent implements OnInit {
     console.log("tipe"+this.type);
     try {
       await this.obtenerImagen(this.data.image, this.type);
+      
       this.dataModal.date = this.getFormattedDate(new Date);
-
+      console.log("fecha "+ this.dataModal.date);
       console.log("imaReco " + this.dataModal.image);
       await this.recoService.createReco(this.dataModal, this.type);
       this.closeModal();

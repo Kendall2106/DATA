@@ -179,6 +179,7 @@ export class PendingListComponent implements OnInit {
   async save(data: any) {
 
     var dataTemp: any = { ...data };
+    dataTemp.date = this.getFormattedDate(new Date);
 
     try {
       dataTemp.image = dataTemp.image.split('base64,')[1];

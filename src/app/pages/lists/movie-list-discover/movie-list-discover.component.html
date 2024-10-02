@@ -23,13 +23,6 @@
 
       <div class="collapse navbar-collapse" id="navbarsExample05" >
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            
-            <i (click)="restNumber()" class="uil buttonNav uil-angle-left"></i>
-          </li>
-          <li class="nav-item">
-            <i (click)="aumentarNumero();" class="uil buttonNav uil-angle-right"></i>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle " href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">Dropdown</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown05">
@@ -93,5 +86,16 @@
         </div>
   
       </div>
-   
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a (click)="restNumber()" class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            
+          </li>
+          <li class="page-item">
+            <a (click)="aumentarNumero()" class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
 </div>

@@ -119,3 +119,31 @@ border-color: black;
 
  
 
+
+
+.table-container {
+  width: 100%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+ 
+  text-align: left;
+  
+}
+
+td{
+  font-size: 12px;
+}
+
+th {
+  font-weight: 700;
+}
+
