@@ -33,6 +33,12 @@ export class AnimeService {
     });
   }
 
+  async loadNumAnimes(): Promise<Number>{
+    const acollection = collection(this.firestore,'animes');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.length;
+  }
+
   async deleteAnime(documentId: string): Promise<void> {
     const documentRef = doc(this.firestore, `animes/${documentId}`);
     await deleteDoc(documentRef);

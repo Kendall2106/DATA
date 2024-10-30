@@ -32,6 +32,12 @@ export class SeriesService {
     });
   }
 
+  async loadNumSeries(): Promise<Number>{
+    const acollection = collection(this.firestore,'series');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.length;
+  }
+
   async deleteSerie(documentId: string): Promise<void> {
     const documentRef = doc(this.firestore, `series/${documentId}`);
     await deleteDoc(documentRef);

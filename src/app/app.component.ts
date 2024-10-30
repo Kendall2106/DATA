@@ -18,8 +18,16 @@ export class AppComponent {
       });
   }
 
+  ngOnInit() {
+    const savedColor = localStorage.getItem('colorLocal');
+    if (savedColor) {
+      document.documentElement.style.setProperty('--color-2', savedColor);
+    }
+  }
+
   toggleMenu() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
   }
+
 }
 

@@ -30,6 +30,12 @@ export class MusicService {
     });
   }
 
+  async loadNumMusic(): Promise<Number>{
+    const acollection = collection(this.firestore,'music');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.length;
+  }
+
   async deleteMusic(documentId: string): Promise<void> {
     const documentRef = doc(this.firestore, `music/${documentId}`);
     await deleteDoc(documentRef);

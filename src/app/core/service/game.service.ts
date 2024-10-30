@@ -33,6 +33,12 @@ export class GameService {
     });
   }
 
+  async loadNumGames(): Promise<Number>{
+    const acollection = collection(this.firestore,'games');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.length;
+  }
+
   async deleteGames(documentId: string): Promise<void> {
     const documentRef = doc(this.firestore, `games/${documentId}`);
     await deleteDoc(documentRef);

@@ -33,6 +33,12 @@ export class LibrosService {
     });
   }
 
+  async loadNumBooks(): Promise<Number>{
+    const acollection = collection(this.firestore,'books');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.length;
+  }
+
   async deleteBook(documentId: string): Promise<void> {
     const documentRef = doc(this.firestore, `books/${documentId}`);
     await deleteDoc(documentRef);

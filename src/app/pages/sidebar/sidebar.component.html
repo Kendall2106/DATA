@@ -1,9 +1,9 @@
 <div class="menu px-4">
     <div class="row gx-5">
         <div class="column col-lg-12" style="background-color: #121212;">
-            <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%;" (click)="navegarProfilePage()">
+            <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%;">
                 <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
-                <i class="uil uil-user" style="color: white; font-size: 2.5rem;"></i>
+                <i class="uil uil-user" style="color: white; font-size: 2.5rem;"  (click)="navegarProfilePage()"></i>
             </div>
             <div class="link" (click)="navegarDiscoverPage()">
                 <h5><i class="uil uil-search"></i> Descubrir</h5>
@@ -17,14 +17,14 @@
             </div>
         </div>
 
-        <div class="columnDesc col-lg-12" style="background-color: #121212; ">
+        <div class="columnDesc col-lg-12" style="background-color: #121212; display: flex; flex-direction: column;">
 
-            <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
+            <!--<div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
                 <h5>Crea tu propio registro</h5>
                 <p style="font-size: 0.8rem;">En el caso de no encontrar la informacion en la seccion de descubrimiento,
                     Cree tu propio registro.</p>
                 <button class="b1 btn" (click)="navegarCreate()">Crear</button>
-            </div>
+            </div>-->
 
             <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
                 <h5><strong>Tier</strong></h5>
@@ -36,6 +36,19 @@
                 <h5><strong>Graphics</strong></h5>
                 <p style="font-size: 0.8rem;">Te permite ver una lista de niveles segun la puntuacion dada.</p>
                 <button class="b1 btn" (click)="navegarGraphicsPage()">Ver</button>
+            </div>
+            <div class="d-flex justify-content-end" style="margin-top: auto; margin-bottom: 5%;">
+
+                <input #colorInput type="color" [(ngModel)]="colorSeleccionado" style="display: none;" (change)="cambiarColor()"/>
+                
+
+                
+                  
+                <button (click)="colorInput.click()" style="background-color: transparent; border: none;"> 
+                   
+                    <i class="uil uil-palette" style="color: #ded8cf; font-size: 1.5rem;"></i>
+                </button>
+                <button (click)="navegarCreate()" style="background-color: transparent; border: none;"> <i class="uil uil-setting" style="color: #ded8cf; font-size: 1.5rem;"></i></button>
             </div>
         </div>
     </div>

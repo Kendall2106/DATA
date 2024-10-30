@@ -9,12 +9,14 @@ import { DataService } from 'src/app/core/service/data.service';
 })
 export class SidebarComponent implements OnInit {
   anioActual: string = "";
+  colorSeleccionado: string = ''; // Color inicial
 
 
   constructor(private router: Router, private dataService: DataService) {
   }
 
 
+  
   ngOnInit(): void {
     this.anioActual = new Date().getFullYear() + "";
   }
@@ -62,6 +64,11 @@ export class SidebarComponent implements OnInit {
   toggleMobileMenu(): void {
     const menu = document.getElementById('menu')!;
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+
+  cambiarColor() {
+    localStorage.setItem('colorLocal', this.colorSeleccionado );
+    document.documentElement.style.setProperty('--color-2', this.colorSeleccionado);
   }
 
 
