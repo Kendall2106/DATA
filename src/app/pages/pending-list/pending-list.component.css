@@ -233,14 +233,6 @@ button{
 
 
 
-
-
-  :root {
-    --bg-color: #1e1e1e;
-    --text-color: #f0f0f0;
-    --accent-color: #3a3a3a;
-    --hover-color: #333333;
-  }
   
   .table-container {
     display: flex;
@@ -252,8 +244,8 @@ button{
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color:#1e1e1e;
+    color: #f0f0f0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     overflow: hidden;
@@ -268,7 +260,7 @@ button{
   }
   
   .movie-table th {
-    background-color: var(--accent-color);
+    background-color: #3a3a3a;
     font-weight: bold;
     font-size: 16px;
     background-color: #252525;
@@ -283,7 +275,7 @@ button{
   }
   
   .movie-table tbody tr:hover {
-    background-color: var(--hover-color);
+    background-color: #333333;
   }
   
   .movie-image {
@@ -315,7 +307,7 @@ button{
       margin-bottom: 15px;
       border-bottom: 1px solid #444;
       padding: 10px;
-      background-color: var(--bg-color);
+      background-color: #1e1e1e;
     }
   
     .movie-table td {
