@@ -119,8 +119,6 @@ export class PendingListComponent implements OnInit {
   }
 
   viewDataList(dataTotal: any){
-    console.log("test");
-    console.log(dataTotal);
     this.viewData = [];
 
     for (let index = 0; index < dataTotal.length; index++) {
