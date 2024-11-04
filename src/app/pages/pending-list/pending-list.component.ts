@@ -24,6 +24,7 @@ export class PendingListComponent implements OnInit {
   isListView = true;
   introVisible: boolean= true;
   actualYear: number = 0;
+  viewData: any[] = [];
 
 
   constructor(private recoService: RecoService,
@@ -41,12 +42,19 @@ export class PendingListComponent implements OnInit {
   ngOnInit(): void {
     this.actualYear = new Date().getFullYear();
     this.getReco();
+    
   }
 
   toggleView() {
     this.isListView = !this.isListView;
   }
 
+  goHome(){
+    this.introVisible=true;
+    this.isListView=true;
+
+    this.viewDataList(this.dataOriginal);
+  }
 
   async loadData(message: any) {
     this.introVisible=false;
@@ -106,6 +114,21 @@ export class PendingListComponent implements OnInit {
 
     this.orderData();
     this.resultCount = this.data.length;
+
+   
+  }
+
+  viewDataList(dataTotal: any){
+    console.log("test");
+    console.log(dataTotal);
+    this.viewData = [];
+
+    for (let index = 0; index < dataTotal.length; index++) {
+      if(dataTotal[index].liked == true){
+        this.viewData.push(dataTotal[index]);
+        console.log(this.viewData);
+      }
+    }
   }
 
 
@@ -129,6 +152,7 @@ export class PendingListComponent implements OnInit {
       this.dataOriginal.forEach((element: any) => {
         element.image = 'data:image/jpg;base64,' + element.image;
       });
+      this.viewDataList(this.dataOriginal);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -137,7 +161,16 @@ export class PendingListComponent implements OnInit {
   }
 
 
-  async toggleLike(dataLiked: any) {
+  async toggleLike(dataLiked: any, dataTemp: any) {
+
+    for (let index = 0; index < this.data.length; index++) {
+      if(this.data[index].liked == true){
+        this.data[index].liked = false;
+        await this.recoService.updateReco(this.data[index].id, this.data[index].liked);
+        break;
+      }
+    }
+
     if (dataLiked.liked == false) {
       dataLiked.liked = true;
     } else {
