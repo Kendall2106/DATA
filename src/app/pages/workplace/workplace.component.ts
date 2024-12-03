@@ -39,6 +39,8 @@ export class WorkplaceComponent implements OnInit {
   selectedCardIndex: number | null = null;
   stars: boolean[] = Array(5).fill(false);
 
+  isListView = true;
+
   constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
@@ -71,7 +73,9 @@ export class WorkplaceComponent implements OnInit {
       currentYear.toString(),
       (currentYear - 1).toString(),
       (currentYear - 2).toString(),
-      '+'
+      (currentYear - 3).toString(),
+      (currentYear - 4).toString(),
+      (currentYear - 5).toString(),
     ];
   }
 
@@ -123,6 +127,10 @@ export class WorkplaceComponent implements OnInit {
       this.loading = false;
       this.type = message;
     }
+  }
+
+  toggleView() {
+    this.isListView = !this.isListView;
   }
 
   async loadDataForType(service: Promise<any>) {
@@ -202,7 +210,8 @@ export class WorkplaceComponent implements OnInit {
 
 
   filterYear(event: any) {
-    this.selectedYear = event;
+    this.selectedYear = event.target.value;
+    /*console.log(this.selectedYear);*/
     this.applyFilters();
   }
 

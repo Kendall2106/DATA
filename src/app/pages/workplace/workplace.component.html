@@ -9,20 +9,59 @@
 
     </header>
 
-    
+
 
     <div class=" d-flex flex-wrap">
         <div class="list" style="display: flex; flex-wrap: wrap;">
 
-           
+            <div class="filter-container">
 
-            <div class="genre-row col-lg-12">
+                <div class="filter-options">
+                    <!--<select class="filter-dropdown">
+                    <option value="todos">Género: Todos</option>
+                  </select>-->
+                    <select class="filter-dropdown" id="opTipos" (change)="filterType($event)">
+                        <option value="Todos">Categoria: Todos</option>
+                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                    </select>
+
+                    <select class="filter-dropdown" id="opAnios" (change)="filterYear($event)">
+                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[1]">{{
+                            opcion }}</option>
+                    </select>
+
+                    <select class="filter-dropdown" id="opCalificacion" (change)="filterScore($event)">
+                        <option value="Todos">Calificacion: Todos</option>
+                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
+                    </select>
+
+                    <!--<select class="filter-dropdown">
+                        <option value="todos">Tipo: Todos</option>
+                    </select>
+
+                    <select class="filter-dropdown">
+                        <option value="todos">Estado: Todos</option>
+                    </select>
+
+                    <select class="filter-dropdown">
+                        <option value="por-defecto">Orden: Por Defecto</option>
+                    </select>-->
+
+                    <button (click)="sortDataByScore()" class="filter-button"><i class="uil"
+                            [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i></button>
+                    <!--<button (click)="toggleView()" class="filter-button">a</button>-->
+                </div>
+            </div>
+
+            <!--<div class="genre-row col-lg-12">
                 <div *ngFor="let anios of opAnios" class="genre-box" (click)="filterYear(anios)">
                   {{ anios }}
                 </div>
-              </div>
+              </div>-->
 
-           <!-- <div class=" row filter col-lg-12 col-12" style="margin-top: 3%; margin-bottom: 3%;">
+
+
+            <!-- <div class=" row filter col-lg-12 col-12" style="margin-top: 3%; margin-bottom: 3%;">
                 <div class="col-lg-2 col-12">
                     <p style="margin-left: 15%;">Total: {{resultCount}}</p>
                 </div>
@@ -50,6 +89,11 @@
             </div>-->
 
             <div class="container">
+
+
+
+
+               <!--  <div *ngIf="isListView" style="width: 100%;">-->
                 <div class="row">
                     <div *ngFor="let cardData of resultFilter; let i = index" class="col-lg-2 col-6 col-md-4">
                         <div class="card" (click)="toggleInfo(i)">
@@ -88,10 +132,118 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<p class="title" [style.color]="getColor(cardData.score)">{{cardData.name}}</p>-->
+                            
                         </div>
                     </div>
                 </div>
+                <!--</div>-->
+
+
+
+                <!--<div *ngIf="!isListView" style="width: 100%;">
+                    
+
+                     <div class="table-container">
+                        <table class="movie-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th class="name-column">Name</th>
+                                    <th>Year</th>
+        
+                                    <th *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">Score</th>
+                                    <th *ngIf="type == 'Books'">Pages</th>
+                                    <th *ngIf="type == 'Games'">Plataform</th>
+                                    <th *ngIf="type == 'Music'">Tracks</th>
+                                    <th>Rating</th>
+                                    <th>Type</th>
+                                    <th>Viewed</th>
+                                    <th>Delete</th>
+                                    <th>Save</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let d of data">
+                                    <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
+                                    <td class="name-column">{{ d.name }}</td>
+                                    <td>{{d.releaseDate}}</td>
+                                    <td>{{d.randomData}}</td>
+                                    <td>
+                                        <div class="star-rating">
+                                            <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
+                                                (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
+                                                &#9733;
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
+                                            <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                     
+                                    </td>
+                                    <td>
+                                       
+                                    <td>
+                                        
+                                    </td>
+        
+                                </tr>
+        
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>-->
+
+
+
+                <!--<div class="row">
+                    <div *ngFor="let cardData of resultFilter; let i = index" class="col-lg-2 col-6 col-md-4">
+                        <div class="card" (click)="toggleInfo(i)">
+
+                            <div class="contenedor">
+                                <img [ngClass]="{'imagenMusica': type === 'Music', 'imagen': type !== 'Music'}"
+                                    [src]="cardData.image" alt="#">
+                                <div class="triangulo"></div>
+                                <div class="centrado">
+                                    {{cardData.score}}<span class="star" [class.filled]="1">&#9733;</span>
+                                </div>
+
+                                <div class="info" [class.visible]="selectedCardIndex === i">
+                                    <div class="row col-lg-12">
+                                        <div class=" col-lg-12">
+                                            <p class="invert invertTitle" [style.color]="getColor(cardData.score)">
+                                                {{cardData.name}}</p>
+                                        </div>
+                                        <div class=" col-12" style="margin-top: 5%;">
+                                            <p class="invert">{{cardData.date}}</p> <br>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class=" star-rating">
+                                                <span style="margin: 0; padding: 0;"
+                                                    *ngFor="let star of stars; let i = index"
+                                                    (click)="rate(cardData, i + 1)"
+                                                    [ngClass]="{'selected': (i + 1) <= cardData.score}">
+                                                    &#9733;
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 5%;">
+                                        <button (click)="deleteData(cardData)"
+                                            style="margin-top: 5%; width: 100%;  border: 1px solid #ffffff;">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>-->
 
             </div>
         </div>
@@ -105,7 +257,7 @@
                     [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i>
             </button>
         </div>
-        
+
     </div>
 
     <div class="loading-overlay" *ngIf="loading">

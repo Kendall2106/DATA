@@ -342,5 +342,15 @@ button{
     height: 100%;
     background-size: cover;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(18, 18, 18) 100%), url('../../../assets/banner.jpg');
+    filter: grayscale(100%);
+    
     opacity: 0.2;
+  }
+
+  .filter{
+    filter: grayscale(100%);
+  }
+
+  .filter:hover{
+    filter: none;
   }
