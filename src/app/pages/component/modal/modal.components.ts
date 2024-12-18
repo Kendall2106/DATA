@@ -76,6 +76,7 @@ export class ModalComponent implements OnInit {
       this.loading = true;
       const value = await Utils.imageToByteFromUrl(link, type);
       this.dataModal.image = value;
+      console.log("convert: "+ value);
     } catch (error) {
       this.showAlert("Error al obtener la imagen", "error");
     } finally {
@@ -117,6 +118,7 @@ export class ModalComponent implements OnInit {
   async saveReco() {
     console.log("tipe"+this.type);
     try {
+      console.log("Orrgignal: "+ this.data.image);
       await this.obtenerImagen(this.data.image, this.type);
       
       this.dataModal.date = this.getFormattedDate(new Date);

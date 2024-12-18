@@ -44,7 +44,7 @@ export class Utils {
     var response: any;
 
     if (type == "Movies" || type == "Series" || type == "Books" || type == "Games") {
-      response = await fetch('https://corsproxy.io/?' + encodeURIComponent(imageUrl));
+      response = await fetch('https://corsproxy.io/' + encodeURIComponent(imageUrl));
     } else {
       response = await fetch(imageUrl);
     }
