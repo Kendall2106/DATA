@@ -7,14 +7,6 @@
    
 }
 
-
-
-
-
-
-
-
-
 mat-icon {
   margin-right: 10px;
 }
@@ -54,6 +46,16 @@ h4{
 .navbar-nav .nav-link:hover {
   color: #ccc;
 }
+
+.navbar-nav .nav-link.active {
+  border-radius: 5px;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: var(--color-2);
+  
+}
+
+
 
 /* Estilos para el botón */
 

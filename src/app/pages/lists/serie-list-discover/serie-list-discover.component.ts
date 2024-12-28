@@ -125,8 +125,8 @@ export class SerieListDiscoverComponent {
 
   }
 
-  onOptionSelected(event: Event): void {
-    const selectedValue = (event.target as HTMLSelectElement).value;
+  onOptionSelected(event: any): void {
+    const selectedValue = event;
     this.numPage = 1;
     console.log(selectedValue);
     this.getSerieByGenre(selectedValue);

@@ -93,6 +93,59 @@ select option {
     color: var(--color-text); 
   }
 
+  
+  .form-control{
+    color: white;
+    background-color: transparent;
+  }
 
+  .form-control::placeholder {
+    color: #b7b7b89f;
+  }
+
+  .input-group-text{
+    background-color: var(--color-2);
+  }
+
+  .form-control:focus{
+    box-shadow: none;
+    border-color: white;
+  }
+
+  .page-link{
+    color: #b7b7b89f;
+    background-color: transparent;
+  }
+
+
+/* Estilo para dividir el dropdown en 6 columnas */
+.dropdown-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px; /* Espacio entre las columnas */
+}
+
+.dropdown-columns li {
+  width: 15%; /* Cada columna ocupará un 16.66% del ancho (6 columnas) */
+  list-style-type: none;
+  font-size: 12px;
+}
+
+/* Fondo rojo para el espacio entre las columnas */
+.dropdown-menu{
+  width: 800px;
+}
+
+.dropdown-item{
+  overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+  }
+
+/* Ajuste para pantallas pequeñas (opcional) */
+@media (max-width: 768px) {
+  .dropdown-columns li {
+    width: 100%; /* En pantallas pequeñas, las opciones ocuparán el 100% */
+  }
+}
 
 

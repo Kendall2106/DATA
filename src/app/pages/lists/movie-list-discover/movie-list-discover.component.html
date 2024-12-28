@@ -2,7 +2,7 @@
   <div class="col-lg-2" style="margin-top: 2%;">
     <h3 class="title" style="font-weight: 700; ">ニュース</h3>
     <p style="word-wrap: break-word; font-size: 12px; margin-top: 30%;">
-      En esta sección encontrará las últimas novedades. Explore las diferentes categorías para descubrir más contenido.
+      In this section, you will find the latest updates. Explore the different categories to discover more content.
     </p>
   </div>
   <div class="col-lg-10">
@@ -14,33 +14,37 @@
 
 <div>
  
-  <nav class="navbar navbar-expand-lg " aria-label="Fifth navbar example" style="margin-bottom: 2%;">
+  <nav class="navbar navbar-expand-lg" aria-label="Fifth navbar example" style="margin-bottom: 2%;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#" style="color: white;">Movies</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample05" >
+      <div class="collapse navbar-collapse" id="navbarsExample05">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle " href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">Dropdown</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown"
+              style="color: white;">
+              Default
+            </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown05">
-              <li *ngFor="let g of genres">
-                <a class="dropdown-item" href="#" (click)="onOptionSelected(g.id)">{{ g.name }}</a>
-              </li>
+              <div class="dropdown-columns">
+                <li *ngFor="let g of genres">
+                  <a class="dropdown-item" href="#" (click)="onOptionSelected(g.id)">
+                    {{ g.name }}
+                  </a>
+                </li>
+              </div>
             </ul>
           </li>
-
-      
-
-
         </ul>
-        <form (submit)="searchAnime()">
-          <input [(ngModel)]="search" name="searchField" class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <form style="width: 50%;" (submit)="searchData()">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input [(ngModel)]="search" name="searchField" class="form-control" type="text" placeholder="Search"
+              aria-label="Search" />
+          </div>
         </form>
-
-        
       </div>
     </div>
   </nav>

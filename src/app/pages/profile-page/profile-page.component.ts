@@ -13,6 +13,8 @@ import { SeriesService } from 'src/app/core/service/series.service';
 })
 export class ProfilePageComponent implements OnInit {
 
+  loading: boolean = false;
+
   numMovies: any = 0;
   numSeries: any = 0;
   numAnimes: any = 0;
@@ -30,14 +32,28 @@ export class ProfilePageComponent implements OnInit {
     this.loadNumTotal();
   }
 
-  async loadNumTotal(){
-    this.numAnimes = await this.animeService.loadNumAnimes();
-    this.numMovies = await this.movieService.loadNumMovies();
-    this.numSeries = await this.seriesService.loadNumSeries();
-    this.numGames = await this.gameService.loadNumGames();
-    this.numBooks = await this.libroService.loadNumBooks();
-    this.numMusic = await this.musicService.loadNumMusic();
+  async loadNumTotal() {
+
+    try {
+      this.loading = true;
+
+      this.numAnimes = await this.animeService.loadNumAnimes();
+      this.numMovies = await this.movieService.loadNumMovies();
+      this.numSeries = await this.seriesService.loadNumSeries();
+      this.numGames = await this.gameService.loadNumGames();
+      this.numBooks = await this.libroService.loadNumBooks();
+      this.numMusic = await this.musicService.loadNumMusic();
+
+    } catch (error) {
+      console.error("Error:", error);
+
+    } finally {
+      this.loading = false;
+    }
+
   }
+
+
 
 
 }

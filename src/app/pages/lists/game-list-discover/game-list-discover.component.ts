@@ -110,8 +110,8 @@ export class GameListDiscoverComponent {
 
   }
 
-  onOptionSelected(event: Event): void {
-    const selectedValue = (event.target as HTMLSelectElement).value;
+  onOptionSelected(event: any): void {
+    const selectedValue = event;
     this.numPage = 0;
     console.log(selectedValue);
     this.getGamesByPlataform(selectedValue);

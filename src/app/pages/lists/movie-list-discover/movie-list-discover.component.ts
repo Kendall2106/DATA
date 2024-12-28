@@ -148,7 +148,7 @@ export class MovieListDiscoverComponent {
     modalRef.componentInstance.type = "Movies";
   }
 
-  searchAnime(){
+  searchData(){
     this.numPage = 1;
     this.searchMoviesByName();
   }

@@ -1,14 +1,5 @@
 <div class="body">
-  <!--<header>
-    <button (click)="loadData('Animes');"><i class="uil uil-letter-japanese-a"></i> Anime</button>
-    <button (click)="loadData('Movies');"><i class="uil uil-ticket"></i> Peliculas</button>
-    <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
-    <button (click)="loadData('Books');"><i class="uil uil-book-alt"></i> Libros</button>
-    <button (click)="loadData('Games');"><i class="uil uil-basketball-hoop"></i> Juegos</button>
-    <button (click)="loadData('Music');"><i class="uil uil-music"></i> Musica</button>
-
-  </header>-->
-  <nav class="navbar navbar-expand-sm ">
+  <nav class="navbar navbar-expand-sm " >
     <div class="container">
       <a class="navbar-brand" href="#">{{this.message}}</a>
       <button class="navbar-toggler" type="button" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
@@ -20,22 +11,22 @@
         <ul class="navbar-nav ml-auto">
           
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Animes');"><i class="uil uil-letter-japanese-a"></i> Anime</a>
+            <a class="nav-link" href="#" (click)="loadData('Animes');" [class.active]="selectedItem === 'Animes'"><i class="uil uil-letter-japanese-a"></i> Animes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Movies');"><i class="uil uil-ticket"></i> Peliculas</a>
+            <a class="nav-link" href="#" (click)="loadData('Movies');" [class.active]="selectedItem === 'Movies'"><i class="uil uil-ticket"></i> Movies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</a>
+            <a class="nav-link" href="#" (click)="loadData('Series')" [class.active]="selectedItem === 'Series'" ><i class="uil uil-files-landscapes"></i> Shows</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Books');"><i class="uil uil-book-alt"></i> Libros</a>
+            <a class="nav-link" href="#" (click)="loadData('Books');" [class.active]="selectedItem === 'Books'"><i class="uil uil-book-alt"></i> Books</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Games');"><i class="uil uil-basketball-hoop"></i> Juegos</a>
+            <a class="nav-link" href="#" (click)="loadData('Games');" [class.active]="selectedItem === 'Games'"><i class="uil uil-basketball-hoop"></i> Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="loadData('Music');"><i class="uil uil-music"></i> Musica</a>
+            <a class="nav-link" href="#" (click)="loadData('Music');" [class.active]="selectedItem === 'Music'"><i class="uil uil-music"></i> Music</a>
           </li>
         </ul>
       </div>
@@ -70,47 +61,3 @@
       <app-music-list-discover></app-music-list-discover>
     </div>
   </div>
-
-  <!--<div class="container list col-lg-12">
-   
-    <app-carrousel-info [type]= "'Terror'" [data]="data"></app-carrousel-info>
-    <app-carrousel-info [type]= "'Ultimo'" [data]="animesAiring"></app-carrousel-info>
-    
-
-    <h4>Lista de Animes</h4>
-    <div class="row nbar col-lg-12 col-12" style="margin-bottom: 3%;">
-      <div class="col-lg-6 col-4 col-md-6" style="text-align: left;">
-
-        <i (click)="restNumber()" class="uil buttonNav uil-angle-left"></i>
-        <i (click)="aumentarNumero();" class="uil buttonNav uil-angle-right"></i>
-
-      </div>
-      <div class="col-lg-5 col-4 col-md-5">
-        <input [(ngModel)]="search" class="form-control me-2" type="search" aria-label="Search" name="search"
-          style="background-color: transparent; color: white;">
-      </div>
-      <div class="col-lg-1 col-2 col-md-1">
-        <button class="b1 btn" (click)="searchData()">Buscar</button>
-      </div>
-    </div>
-
-    <div class="table-container">
-      <div class="row">
-        <div *ngFor="let cardData of data" class="col-lg-2 col-6 col-md-4">
-          <div class="card">
-            <img (click)="openModal(cardData)" class="imagen" [src]="cardData.image" alt="#">
-            <p class="title">{{cardData.name}}</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="loading-overlay" *ngIf="loading">
-    <div class="loading-spinner"></div>
-  </div>
-
-
-
-</div>-->

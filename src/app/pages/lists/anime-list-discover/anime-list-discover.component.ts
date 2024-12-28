@@ -118,8 +118,8 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
   }
 
 
-  onOptionSelected(event: Event): void {
-    const selectedValue = (event.target as HTMLSelectElement).value;
+  onOptionSelected(event: any): void {
+    const selectedValue = event;
     this.numPage = 1;
     this.getAnimeByGenre(selectedValue);
     // Aquí puedes ejecutar cualquier lógica que desees al seleccionar una opción
@@ -131,7 +131,7 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
     modalRef.componentInstance.type = "Animes";
   }
 
-  searchAnime(){
+  searchData(){
     this.numPage = 1;
     this.searchAnimesByName();
   }

@@ -87,3 +87,28 @@ select option {
     background-color: var(--color-1); 
     color: var(--color-text); 
   }
+
+  
+  .form-control{
+    color: white;
+    background-color: transparent;
+  }
+
+  .form-control::placeholder {
+    color: #b7b7b89f;
+  }
+
+  .input-group-text{
+    background-color: var(--color-2);
+  }
+
+  .form-control:focus{
+    box-shadow: none;
+    border-color: white;
+  }
+
+  .page-link{
+    color: #b7b7b89f;
+    background-color: transparent;
+  }
+

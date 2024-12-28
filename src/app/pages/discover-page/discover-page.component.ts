@@ -52,6 +52,8 @@ export class DiscoverPageComponent {
   showMusicList:boolean = false;
   introVisible: boolean= true;
 
+  selectedItem: string = '';
+
   actualYear: number = 0;
 
   constructor( private spotify: SpotifyService, private alertService: AlertService, private apiGamesServive: ApiGamesService, private apiMoviesService: ApiMoviesService, private apiSerieService: ApiSerieService, private apiAnimeService: ApiAnimeService, public modalService: NgbModal, private apiBookService: ApiBookService, public dataService: DataService, private router: Router) {
@@ -70,6 +72,7 @@ export class DiscoverPageComponent {
 
   loadData(type: string){
       this.introVisible = false;
+      this.selectedItem = type;
 
       if (type == "Animes"){
         this.showAnimeList = true;
@@ -116,211 +119,6 @@ export class DiscoverPageComponent {
       }
 
   }
-
-/*
-  async loadData(message: any) {
-    try {
-      this.loading = true;
-      if (message === 'Movies') {
-        this.getMovies();
-      } else if (message === 'Series') {
-        this.getSeries();
-      } else if (message === 'Animes') {
-        this.getAnime();
-      } else if (message === 'Games') {
-        this.getGames();
-      } else if (message === 'Books') {
-        this.getBooks();
-      } else if (message === 'Music') {
-        this.getMusic();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      this.loading = false;
-      this.closeNavbar();
-    }
-  }
-
-
-  
-
-  
-
-
-
-
-  
-
-  
-
-
- 
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-  
-
-
-
-
-  
-
-
- 
-
-
-
-
-  
-
-
- 
-
-
-  async seachGamesByName() {
-    await this.apiGamesServive.seachGames(this.search).subscribe((response: any) => {
-      this.data = [];
-      response.forEach((item: any) => {
-        this.data.push({
-          name: item.title,
-          image: item.image_url,
-          info: item.overview,
-          releaseDate: 'NC',
-          randomData: item.platform_name
-        });
-      });
-    });
-  }
-
-
-  async seachMusicByName() {
-    await this.spotify.getAlbumsByName(this.search, this.maxResultsMusic).subscribe((response: any) => {
-      this.data = [];
-      response.albums.items.forEach((item: any) => {
-        this.data.push({
-          name: item.name,
-          image: item.images[0].url,
-          info: "Artist: " + item.artists[0].name,
-          releaseDate: item.release_date,
-          randomData: item.total_tracks
-        });
-      });
-    });
-  }
-
-
-  
-
-  searchData() {
-
-    if (this.message == "Books") {
-      this.getBooksByName();
-    }
-
-    if (this.message == "Movies") {
-      this.searchMoviesByName();
-    }
-
-    if (this.message == "Series") {
-      this.searchSeriesByName();
-    }
-
-    if (this.message == "Games") {
-      this.seachGamesByName();
-    }
-
-    if (this.message == "Music") {
-      this.seachMusicByName();
-    }
-  }
-
-
-  aumentarNumero() {
-
-    if (this.message == "Movies") {
-      this.numPageMovie++;
-      this.getMovies();
-    }
-
-    if (this.message == "Series") {
-      this.numPageSeries++;
-      this.getSeries();
-    }
-
-    if (this.message == "Books") {
-      this.startIndex += this.maxResults;
-      this.getBooks();
-    }
-
-    if (this.message == "Games") {
-      this.numPageGames++;
-      this.getGames();
-    }
-
-    if (this.message == "Music") {
-      this.startIndexMusic += this.maxResultsMusic;
-      this.getMusic();
-    }
-  }
-
-
-  restNumber() {
-
-    if (this.message == "Movies") {
-      this.numPageMovie--;
-      this.getMovies();
-    }
-
-    if (this.message == "Series") {
-      this.numPageSeries--;
-      this.getSeries();
-    }
-
-    if (this.message == "Games") {
-      this.numPageGames--;
-      this.getGames();
-    }
-
-    if (this.message == "Books") {
-      this.startIndex -= this.maxResults;
-      this.getBooks();
-    }
-
-    if (this.message == "Music") {
-      this.startIndexMusic -= this.maxResultsMusic;
-      this.getMusic();
-    }
-  }
-
-
-  openModal(infoData: any) {
-    const modalRef = this.modalService.open(ModalComponent, { centered: true });
-    modalRef.componentInstance.data = infoData;
-    modalRef.componentInstance.type = this.message;
-  }
-
-  navbarOpen = false;
-
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-  }
-
-  closeNavbar() {
-    this.navbarOpen = false;
-  }*/
 
     navbarOpen = false;
 
