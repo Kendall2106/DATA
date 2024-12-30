@@ -26,6 +26,7 @@ export class PendingListComponent implements OnInit {
   actualYear: number = 0;
   viewData: any[] = [];
   selectedItem: string = '';
+  selectedData: any = []; 
 
   constructor(private recoService: RecoService,
     private router: Router,
@@ -166,11 +167,13 @@ export class PendingListComponent implements OnInit {
   async toggleLike(dataLiked: any, dataTemp: any) {
 
     for (let index = 0; index < this.data.length; index++) {
+
       if(this.data[index].liked == true){
         this.data[index].liked = false;
         await this.recoService.updateReco(this.data[index].id, this.data[index].liked);
-        break;
+       // break;
       }
+
     }
 
     if (dataLiked.liked == false) {
@@ -248,5 +251,44 @@ export class PendingListComponent implements OnInit {
   rate(data: any, score: number) {
     data.score = score;
   }
+
+  chooseData(dataTemp: any[]): Promise<number> {
+    return new Promise<number>((resolve) => {
+      let count = 0;
+      let randomIndex = 0;
+      const usedIndices: Set<number> = new Set();
+      this.selectedData = [];
+
+      const audio = new Audio('../assets/music/8bit.mp3');
+    
+      // Reproducir la música al inicio
+      audio.play();
+  
+      const interval = setInterval(() => {
+        if (count >= 5 || usedIndices.size === dataTemp.length) {
+          clearInterval(interval); 
+          resolve(randomIndex); 
+          audio.pause();
+          return;
+        }
+  
+        do {
+          randomIndex = Math.floor(Math.random() * dataTemp.length);
+        } while (usedIndices.has(randomIndex)); 
+  
+        usedIndices.add(randomIndex);
+        this.selectedData = dataTemp[randomIndex];
+        console.log('Índice generado:', randomIndex);
+        count++;
+      }, 500); 
+    });
+  }
+
+  async getRandomItem(): Promise<void> {
+   const randomIndex = await this.chooseData(this.data);
+   this.toggleLike(this.data[randomIndex], this.data);
+  }
+
+  
 
 }

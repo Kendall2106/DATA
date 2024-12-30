@@ -35,7 +35,7 @@ export class MovieService {
   async loadNumMovies(): Promise<Number>{
     const acollection = collection(this.firestore,'movies');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.length;
+    return querySnapshot.size;
   }
 
   async deleteMovie(documentId: string): Promise<void> {

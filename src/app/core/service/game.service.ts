@@ -36,7 +36,7 @@ export class GameService {
   async loadNumGames(): Promise<Number>{
     const acollection = collection(this.firestore,'games');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.length;
+    return querySnapshot.size;
   }
 
   async deleteGames(documentId: string): Promise<void> {

@@ -36,7 +36,7 @@ export class LibrosService {
   async loadNumBooks(): Promise<Number>{
     const acollection = collection(this.firestore,'books');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.length;
+    return querySnapshot.size;
   }
 
   async deleteBook(documentId: string): Promise<void> {

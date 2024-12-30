@@ -36,7 +36,7 @@ export class AnimeService {
   async loadNumAnimes(): Promise<Number>{
     const acollection = collection(this.firestore,'animes');
     const querySnapshot = await getDocs(acollection);
-    return querySnapshot.docs.length;
+    return querySnapshot.size;
   }
 
   async deleteAnime(documentId: string): Promise<void> {

@@ -32,27 +32,33 @@ export class ProfilePageComponent implements OnInit {
     this.loadNumTotal();
   }
 
-  async loadNumTotal() {
 
+  async loadNumTotal() {
     try {
       this.loading = true;
-
-      this.numAnimes = await this.animeService.loadNumAnimes();
-      this.numMovies = await this.movieService.loadNumMovies();
-      this.numSeries = await this.seriesService.loadNumSeries();
-      this.numGames = await this.gameService.loadNumGames();
-      this.numBooks = await this.libroService.loadNumBooks();
-      this.numMusic = await this.musicService.loadNumMusic();
-
+  
+      const [numAnimes,numMovies,numSeries,numGames,numBooks,numMusic] = await Promise.all([
+        this.animeService.loadNumAnimes(),
+        this.movieService.loadNumMovies(),
+        this.seriesService.loadNumSeries(),
+        this.gameService.loadNumGames(),
+        this.libroService.loadNumBooks(),
+        this.musicService.loadNumMusic(),
+      ]);
+  
+      this.numAnimes = numAnimes;
+      this.numMovies = numMovies;
+      this.numSeries = numSeries;
+      this.numGames = numGames;
+      this.numBooks = numBooks;
+      this.numMusic = numMusic;
+  
     } catch (error) {
       console.error("Error:", error);
-
     } finally {
       this.loading = false;
     }
-
   }
-
 
 
 

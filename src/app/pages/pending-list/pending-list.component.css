@@ -113,6 +113,11 @@ header {
   border: none;
 }
 
+.cardQuadratureActive {
+  border: 1px solid #92ac03;
+  border-radius: 10px;
+}
+
 .quadrature{
   /*max-height: calc(60vh - 60px);*/
   overflow-y: auto;

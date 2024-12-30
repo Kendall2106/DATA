@@ -206,13 +206,16 @@
                                 <button class="filter-button" (click)="loadData('Music')"
                                     [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
                                 <button class="filter-button" [class.active]="true"><i class="uil">10</i></button>
+                                <button *ngIf="!introVisible" class="filter-button" [class.active]="true" (click)="getRandomItem()">Randomizer</button>
 
-                                <div *ngIf="!introVisible" class="d-flex justify-content-end align-items-center form-check form-switch">
+                                <div *ngIf="!introVisible" class="form-check form-switch ms-auto">
                                     <div class="togle">
-                                        <label class="form-check-label ml-2" for="flexSwitchCheckDefault"> <i class="uil uil-apps"></i> </label>
+                                        
                                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="toggleView()" />
                                     </div>
                                 </div>
+
+                                
 
                             </div>
                         </div>
@@ -246,7 +249,7 @@
             <div *ngIf="isListView" class="quadrature" style="width: 90%;">
                 <div class="row" style="margin-top: 1%;">
                     <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
-                        <div class="cardQuadrature">
+                        <div class="cardQuadrature" [ngClass]="{'cardQuadratureActive': cardData.name === selectedData.name}">
                             <img class="imagenQuadrature" [src]="cardData.image" alt="#">
                         </div>
                     </div>
