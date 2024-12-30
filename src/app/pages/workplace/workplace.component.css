@@ -1,12 +1,8 @@
 .list {
   max-height: calc(105vh - 60px);
-  /* Ajusta el valor según tus necesidades */
   overflow-y: auto;
-  width: 100%;
-
-  
+  width: 100%; 
 }
-
 
 .contenedor {
   position: relative;
@@ -24,7 +20,6 @@
   border-bottom: 90px solid #1212129a;
 }
 
-
 .centrado {
   position: absolute;
   bottom: 10px;
@@ -32,7 +27,6 @@
   color: #fff;
   transform: translate(0, 0);
 }
-
 
 header {
   background-color: transparent;
@@ -57,12 +51,11 @@ s .etiqueta {
 .title{
   color: white; 
   text-align: left;
-  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-  overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
-  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
   max-width: 200px;
 }
-
 
 .star {
   font-size: 18px;
@@ -87,8 +80,6 @@ select option {
   color: var(--color-text);
 }
 
-
-
 button {
   border: none;
   background: none;
@@ -97,20 +88,13 @@ button {
   margin-left: 1%;
 }
 
-
 .body {
-  /*background: linear-gradient(to bottom, #4e239481, 20%, #121212);*/
   margin-top: 10px;
   background-color: #121212;
-  
   margin-bottom: 10px;
   border-radius: 10px;
   height: calc(102vh - 60px);
-
 }
-
-
-
 
 .container {
   height: calc(85vh - 60px);
@@ -118,19 +102,14 @@ button {
 }
 
 .list::-webkit-scrollbar {
-  width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+  width: 0;
 }
-
-
-
-
 
 .card {
   padding: 5px;
   margin: 5px;
   background-color: transparent;
   border: none;
-  
 }
 
 .imagen{
@@ -147,21 +126,18 @@ button {
   border-radius: 10px;
 }
 
-
- /* Estilos para la animación de carga */
  .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.767); /* Fondo oscurecido */
+  background-color: rgba(0, 0, 0, 0.767);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté por encima del modal */
+  z-index: 1000;
 }
-
 
 
 @keyframes spin {
@@ -182,12 +158,10 @@ button {
   animation: spin 1s linear infinite;
 }
 
-
-
 .info {
   position: absolute;
   top: 0;
-  right: 0px; /* Adjust the value to move it outside the card initially */
+  right: 0px; 
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.9);
@@ -195,7 +169,7 @@ button {
   transition: right 0.3s ease;
   opacity: 0;
   border-radius: 10px;
-  pointer-events: none; /* Makes it unclickable when hidden */
+  pointer-events: none;
   text-align: left;
   padding: 10%;
 }
@@ -203,7 +177,7 @@ button {
 .info.visible {
   right: 0;
   opacity: 1;
-  pointer-events: auto; /* Makes it clickable when visible */
+  pointer-events: auto;
 }
 
 .invert{
@@ -219,27 +193,24 @@ button {
   height: 3em;
 }
 
-
 .star-rating {
-  font-size: 1.2rem; /* Tamaño de las estrellas */
-  color: gray; /* Color de las estrellas sin seleccionar */
+  font-size: 1.2rem;
+  color: gray; 
 }
 
 .star-rating .selected {
-  color: gold; /* Color de las estrellas seleccionadas */
+  color: gold; 
 }
 
 .star-rating span {
-  cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+  cursor: pointer; 
 }
-
-
 
 .genre-row {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    flex-wrap: wrap; /* Para que las cajas se acomoden en varias filas si es necesario */
+    flex-wrap: wrap;
 }
 
 .genre-box {
@@ -250,7 +221,7 @@ button {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    flex-basis: calc(20% - 20px); /* Ajuste del tamaño para que quepan 5 cajas en una fila */
+    flex-basis: calc(20% - 20px); 
     margin: 10px;
     font-size: 1.5em;
 }
@@ -259,16 +230,6 @@ button {
     background-color: #333;
 }
 
-
-
-
-
-
-
-
-
-
-/* Contenedor general del filtro */
 .filter-container {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -278,15 +239,12 @@ button {
   width: 100%;
 }
 
-
-/* Opciones del filtro */
 .filter-options {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-/* Dropdowns */
 .filter-dropdown {
   padding: 8px 12px;
   font-size: 14px;
@@ -302,7 +260,6 @@ button {
   border-color: #999;
 }
 
-/* Botón de filtrar */
 .filter-button {
   padding: 8px 16px;
   font-size: 14px;
