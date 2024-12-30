@@ -8,9 +8,6 @@
 }
 
 
-
-
-
 .contenedor {
   position: relative;
   display: inline-block;
@@ -37,22 +34,6 @@
 }
 
 
-
-
-/*.card {
-  background-color: #252525;
-
-  color: var(--color-text);
-  border-style: solid;
-  border-color: var(--color-text);
-
-  font-size: 0.8rem;
-  margin-bottom: 3%;
-  margin-left: 4%;
-  margin-right: 4%;
-}*/
-
-
 header {
   background-color: transparent;
   color: #fff;
@@ -72,11 +53,6 @@ s .etiqueta {
   text-decoration: none;
 }
 
-/*.imagen {
-  width: 90%;
-  height: 130px;
-
-}*/
 
 .title{
   color: white; 
@@ -170,45 +146,6 @@ button {
   border: 1px solid #000000;
   border-radius: 10px;
 }
-
-
-
-/*
-@media (max-width:1000px) {
-
-
-  .card {
-    width: 100%;
-    margin: 0%;
-    margin-bottom: 2%;
-  }
-
-
-  .imagen{
-    height: 180px;
-  }
-
-  .title{
-     display: none;
-  }
-
-
-
-
-  .etiqueta {
-    font-size: 0.8rem;
-  }
-
-  select {
-    font-size: 1rem;
-  }
-
-
-
-}*/
-
-
-
 
 
  /* Estilos para la animación de carga */

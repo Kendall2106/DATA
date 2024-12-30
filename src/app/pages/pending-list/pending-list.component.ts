@@ -25,7 +25,7 @@ export class PendingListComponent implements OnInit {
   introVisible: boolean= true;
   actualYear: number = 0;
   viewData: any[] = [];
-
+  selectedItem: string = '';
 
   constructor(private recoService: RecoService,
     private router: Router,
@@ -42,6 +42,7 @@ export class PendingListComponent implements OnInit {
   ngOnInit(): void {
     this.actualYear = new Date().getFullYear();
     this.getReco();
+    this.goHome('Home');
     
   }
 
@@ -49,7 +50,8 @@ export class PendingListComponent implements OnInit {
     this.isListView = !this.isListView;
   }
 
-  goHome(){
+  goHome(message: any){
+    this.selectedItem = message;
     this.introVisible=true;
     this.isListView=true;
 
@@ -59,6 +61,8 @@ export class PendingListComponent implements OnInit {
   async loadData(message: any) {
     this.introVisible=false;
     this.type = message;
+    this.selectedItem = message;
+
     if (message === 'Animes') {
       this.data = [];
       for (let index = 0; index < this.dataOriginal.length; index++) {

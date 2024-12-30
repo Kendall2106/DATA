@@ -7,11 +7,19 @@ header {
   }
 
 .imagen{
-    width: 80px; 
-    height: 130px;
+    width: 70px; 
+    height: 120px;
     margin-right: 1%;
     margin-bottom: 1%;;
     margin-top: 1%;
+}
+
+.imagen2{
+  width: 80px; 
+  height: 80px;
+  margin-right: 1%;
+  margin-bottom: 1%;;
+  margin-top: 1%;
 }
 
 .izq {
@@ -30,39 +38,6 @@ header {
     background-color: #252525;
 }
 
-/*.card{
-    border-style: solid;
-    border-color: black;
-}*/
-
-/*button{
-    width: 100%;
-    border-style: solid;
-    border-color: white;
-    color: white;
-    background-color: transparent;
-}*/
-
-button {
-    border: none;
-    background: none;
-    font-size: 1.2rem;
-    color: var(--color-text);
-    margin-left: 1%;
-  }
-
-select{
-    width: 100%;
-    font-size: 1.2rem;
-    border: none;
-    color: white;
-    background-color: transparent;
-}
-
-select option {
-    background-color: var(--color-1); 
-    color: var(--color-text); 
-  }
 
   .resultCount{
     text-align: right;
@@ -112,16 +87,13 @@ select option {
   }
 
 .list{
-    height: calc(95vh - 60px); /* Ajusta el valor según tus necesidades */
+    height: calc(90vh - 60px); /* Ajusta el valor según tus necesidades */
     overflow-y: auto;
   }
 
   .list::-webkit-scrollbar {
     width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
 }
-
-
-
 
 
  /* Estilos para la animación de carga */
@@ -158,3 +130,72 @@ select option {
     animation: spin 1s linear infinite;
   }
   
+
+
+  
+
+/* Contenedor general del filtro */
+.filter-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+
+/* Opciones del filtro */
+.filter-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Dropdowns */
+.filter-dropdown {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+
+.filter-dropdown:hover {
+  border-color: #999;
+}
+
+/* Botón de filtrar */
+.filter-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-button:hover {
+  color: #dddbdb;
+}
+
+
+.filter-button.active {
+  color: #000000;
+  background-color: var(--color-2);
+}
+
+select:disabled {
+  background-color: #f0f0f0; /* Color de fondo gris */
+  color: #999; /* Texto gris */
+  cursor: not-allowed; /* Cursor indicando que está desactivado */
+  opacity: 0.6; /* Reduce la opacidad */
+}

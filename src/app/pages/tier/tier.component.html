@@ -1,38 +1,45 @@
 <div class="body">
     <header>
         <div class="row">
-            <div class="col-lg-3" style="text-align: start;">
-                <p>Total: {{resultCount}}</p>
-            </div>
-            <div class="col-lg-2" style="text-align: end;">
-                <div>
-                    <select id="opAnios" (change)="filterYear($event)">
+
+
+            <div class="filter-container">
+
+                <div class="filter-options">
+                  <button class="filter-button" (click)="loadData('Animes')" [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
+                  <button class="filter-button" (click)="loadData('Movies')" [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
+                  <button class="filter-button" (click)="loadData('Series')" [class.active]="selectedItem === 'Series'"><i class="uil">Shows</i></button>
+                  <button class="filter-button" (click)="loadData('Books')" [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
+                  <button class="filter-button" (click)="loadData('Games')" [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
+                  <button class="filter-button" (click)="loadData('Music')" [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
+
+                    <select [disabled]="selectedItem==='Music' || selectedItem==='Games'" class="filter-dropdown"  id="opTipos" (change)="filterType($event)">
+                        <option value="Todos">Categoria: Todos</option>
+                        <option *ngFor="let opcion of opTipos" [value]="opcion">{{ opcion }}</option>
+                    </select>
+
+                    <select class="filter-dropdown" id="opAnios" (change)="filterYear($event)">
                         <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[0]">{{
                             opcion }}</option>
                     </select>
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
-                <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
-                <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
-                <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
-                <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
-                <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
+
+                    <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
+              </div>
             </div>
         </div>
 
     </header>
     <div class="container list col-lg-12">
         <div *ngFor="let i of tier[0]">
-            <div class="row" style="margin-top: 1%; margin-bottom: 1%;">
+            <div class="row" style="margin-bottom: 0.5%;">
                 <div class="izq col-lg-2" [style.background-color]="tier[1][i]">
                     <h5>{{categorias[i]}}</h5>
+                    <p>[{{dataScore(this.resultFilter, categorias.length - i).length}}]</p>
                 </div>
                 <div class="der col-lg-10">
                     <div *ngFor="let anime of dataScore(this.resultFilter, categorias.length - i)"
                         style="display: inline;">
-                        <img title="{{anime.name}}" class="imagen" [src]="anime.image" alt="#" />
+                        <img title="{{anime.name}}" [ngClass]="{'imagen': selectedItem !== 'Music', 'imagen2': selectedItem === 'Music'}"  [src]="anime.image" alt="#" />
                     </div>
                 </div>
             </div>

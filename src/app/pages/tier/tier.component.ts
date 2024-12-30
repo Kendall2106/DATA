@@ -13,7 +13,7 @@ import { SeriesService } from 'src/app/core/service/series.service';
   styleUrls: ['./tier.component.css']
 })
 export class TierComponent implements OnInit {
-  categorias: any[] = ["Dioos", "Buenas", "Normal", "Malas", "Olvidables"];
+  categorias: any[] = ["Masterpiece", "Re-watch", "Meh", "Forgettable", "trash"];
   data: any[] = [];
   anioActual: string = "";
   opAnios: any[] = ["2024", "2023", "2022", "2021", "2020", "2019", "Todos"];
@@ -25,18 +25,27 @@ export class TierComponent implements OnInit {
     ["#FF7F7F", "#FFBF7F", "#FFDF7F", "#FFFF7F", "#BFFF7F"]
   ];
   loading: boolean = false;
+  opTipos: any = [];
+  hobbyType: any = [];
+  selectedCategory: string = 'Todos';
+  selectedItem: string = '';
+
 
   constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
-
+    this.opTipos =["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"];
+    this.hobbyType =["Animes", "Movies", "Series", "Books", "Games", "Music"];
   }
 
-  
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    this.loadData(this.hobbyType[0]);
   }
 
 
   async loadData(message: any) {
+   // console.log(message);
+    //const message = event.target.value;
+    this.selectedItem = message;
     try {
       this.loading = true;
       if (message === 'Movies') {
@@ -52,7 +61,7 @@ export class TierComponent implements OnInit {
       } else if (message === 'Music') {
         this.data = await this.loadDataForType(this.musicService.getMusic());
       }
-      console.log(this.selectedYear);
+      console.log("first "+this.selectedYear);
       this.applyFilters();
 
 
@@ -60,7 +69,7 @@ export class TierComponent implements OnInit {
         element.image = 'data:image/jpg;base64,' + element.image;
       });
 
-      this.resultFilter = this.data;
+      //this.resultFilter = this.data;
       this.resultCount = this.resultFilter.length;
     } catch (error) {
       console.error("Error:", error);
@@ -78,9 +87,18 @@ export class TierComponent implements OnInit {
 
 
   convertYear(item: any) {
-    const parts = item.split("-");
+    const date = item.date.toString().toLowerCase();
+    const parts = date.split("-");
     const year = parseInt(parts[0], 10);
-    return year + "";
+
+    console.log("inYEAR "+ year)
+  
+    if (this.selectedYear === 'Todos') {
+      return true;
+    } else {
+      return (year + "") === this.selectedYear;
+    }
+
   }
 
 
@@ -94,15 +112,26 @@ export class TierComponent implements OnInit {
     this.applyFilters();
   }
 
+  
+  filterType(event: any) {
+    this.selectedCategory = event.target.value;
+    this.applyFilters();
+  }
 
   applyFilters() {
-    if (this.selectedYear === "Todos") {
+   /* if (this.selectedYear === "Todos") {
       this.resultFilter = this.data;
       console.log(1);
     } else {
       this.data = this.data.filter((d: { date: string; }) => this.convertYear(d.date) == this.selectedYear);
       console.log(2);
-    }
+    }*/
+    console.log("Hola "+this.selectedYear);
+      this.resultFilter = this.data
+      .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
+      .filter(item => this.convertYear(item))
+
+      this.resultCount = this.resultFilter.length;
   }
 
 

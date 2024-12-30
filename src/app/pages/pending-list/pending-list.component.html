@@ -1,184 +1,39 @@
-<!--<div class="body">
-        <header>
-            <button (click)="loadData('Animes')"><i class="uil uil-letter-japanese-a"></i> Anime</button>
-            <button (click)="loadData('Movies')"><i class="uil uil-ticket"></i> Peliculas</button>
-            <button (click)="loadData('Series')"><i class="uil uil-files-landscapes"></i> Series</button>
-            <button (click)="loadData('Books')"><i class="uil uil-book-alt"></i> Libros</button>
-            <button (click)="loadData('Games')"><i class="uil uil-basketball-hoop"></i> Juegos</button>
-            <button (click)="loadData('Music')"><i class="uil uil-music"></i> Musica</button>
-
-        </header>
-
-        <div class="d-flex justify-content-end align-items-center form-check form-switch">
-            <div class="togle">
-                <label class="form-check-label">{{resultCount}}</label>
-                <label class="form-check-label ml-2" for="flexSwitchCheckDefault"> <i class="uil uil-apps"></i></label>
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="toggleView()" />
-
-            </div>
-        </div>
-
-        <div class="intro" *ngIf="introVisible">
-            <h1>TIME</h1>
-            <h1>CAPSULE</h1>
-            <div *ngIf="isListView" class="quadrature" style="width: 100%;">
-                <div class="row" style="margin-top: 1%;">
-                    <div *ngFor="let cardData of viewData" class="col-lg-2 col-3 col-md-4">
-                        <div class="cardQuadrature">
-                            <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-
-
-        <div *ngIf="isListView" class="quadrature" style="width: 90%;">
-            <div class="row" style="margin-top: 1%;">
-                <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
-                    <div class="cardQuadrature">
-                        <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div *ngIf="!isListView" class="list" style="width: 100%;">
-            <div class="table-container">
-                <table class="movie-table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th class="name-column">Name</th>
-                            <th>Year</th>
-                           
-                            <th *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">Score</th>
-                            <th *ngIf="type == 'Books'">Pages</th>
-                            <th *ngIf="type == 'Games'">Plataform</th>
-                            <th *ngIf="type == 'Music'">Tracks</th>
-                            <th>Rating</th>
-                            <th>Type</th>
-                            <th>Viewed</th>
-                            <th>Delete</th>
-                            <th>Save</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let d of data">
-                            <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
-                            <td class="name-column">{{ d.name }}</td>
-                            <td>{{d.releaseDate}}</td>
-                            <td>{{d.randomData}}</td>
-                            <td>
-                                <div class="star-rating">
-                                    <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                        (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
-                                        &#9733;
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
-                                    <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
-                                    (click)="toggleLike(d)">
-                                    <i class="iconCard uil uil-heart"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btnCard btn" (click)="deleteReco(d)"><i
-                                        class="iconCard uil uil-trash-alt"></i></button>
-                            </td>
-                            <td>
-                                <button class="b1 btn" (click)="save(d)">viewed</button>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <!--<div class="card container" *ngFor="let d of data">
-            <div class="row">
-                <div class="left col-lg-2" style="text-align: center; margin-top: 1%; margin-bottom: 1%;">
-                    <img class="imagen" [src]="d.image" alt="#" />
-                </div>
-                <div class="right col-lg-10 d-flex flex-column justify-content-between"
-                    style="margin-top: 1%; margin-bottom: 1%; text-align: start;">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 style="color: white;">{{ d.name }}</h5>
-                            <div class="d-flex justify-content-end align-items-center">
-                                <button class="btnCard btn" (click)="deleteReco(d)"><i
-                                        class="iconCard uil uil-trash-alt"></i></button>
-                                <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
-                                    (click)="toggleLike(d)">
-                                    <i class="iconCard uil uil-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row col-lg-12">
-                        <div class="col-lg-4">
-                            <div class="star-rating">
-                                <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                    (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
-                                    &#9733;
-                                </span>
-                            </div>
-                        </div>
-
-                        <div *ngIf="type !== 'Games' && type !== 'Music'" class="col-lg-4">
-                            <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
-                                <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mt-auto test d-flex justify-content-between align-items-center">
-                        <div>
-                            <p class="release-date">Release date: {{d.releaseDate}}</p>
-                        </div>
-                        <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
-                            <p class="tags">Score: {{d.randomData}}</p>
-                        </div>
-                        <div class="col-lg-6" *ngIf="type == 'Books'">
-                            <p class="tags">Page count: {{d.randomData}}</p>
-                        </div>
-                        <div class="col-lg-6" *ngIf="type == 'Games'">
-                            <p class="tags">Plataform: {{d.randomData}}</p>
-                        </div>
-                        <div class="col-lg-6" *ngIf="type == 'Music'">
-                            <p class="tags">Total Tracks: {{d.randomData}}</p>
-                        </div>
-                        <div class="d-flex justify-content-end align-items-center">
-                            <button class="b1 btn" (click)="save(d)">viewed</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-
-
-
-
-        <div class="loading-overlay" *ngIf="loading">
-            <div class="loading-spinner"></div>
-        </div>
-
-    </div>
--->
-
+<!-- 
 <div class="body">
 
     <div *ngIf="introVisible">
+
+        <header>
+            <div class="row">
+    
+    
+                <div class="filter-container">
+    
+                    <div class="filter-options">
+                      <button class="filter-button" (click)="loadData('Animes')" [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
+                      <button class="filter-button" (click)="loadData('Movies')" [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
+                      <button class="filter-button" (click)="loadData('Series')" [class.active]="selectedItem === 'Series'"><i class="uil">Shows</i></button>
+                      <button class="filter-button" (click)="loadData('Books')" [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
+                      <button class="filter-button" (click)="loadData('Games')" [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
+                      <button class="filter-button" (click)="loadData('Music')" [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
+    
+                        <select [disabled]="selectedItem==='Music' || selectedItem==='Games'" class="filter-dropdown"  id="opTipos" >
+                            <option value="Todos">Categoria: Todos</option>
+                            
+                        </select>
+    
+                        <select class="filter-dropdown" id="opAnios">
+                            <option value="Todos">2024</option>
+                        </select>
+    
+                        <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
+                  </div>
+                </div>
+            </div>
+    
+        </header>
+
+
         <div class="bannerArea workingArea">
             <div style="margin: 2%;">
                 <h1>To Watch</h1>
@@ -322,5 +177,150 @@
         <div class="loading-spinner"></div>
     </div>
 
+
+</div>
+
+-->
+
+<div class="body">
+    <div class="workplace">
+        <div class="bannerArea workingArea">
+            <div>
+                <header>
+                    <div class="row">
+                        <div class="filter-container">
+
+                            <div class="filter-options">
+                                <button class="filter-button" (click)="goHome('Home')"
+                                    [class.active]="selectedItem === 'Home'"><i class="uil">Home</i></button>
+                                <button class="filter-button" (click)="loadData('Animes')"
+                                    [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
+                                <button class="filter-button" (click)="loadData('Movies')"
+                                    [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
+                                <button class="filter-button" (click)="loadData('Series')"
+                                    [class.active]="selectedItem === 'Series'"><i class="uil">Shows</i></button>
+                                <button class="filter-button" (click)="loadData('Books')"
+                                    [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
+                                <button class="filter-button" (click)="loadData('Games')"
+                                    [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
+                                <button class="filter-button" (click)="loadData('Music')"
+                                    [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
+                                <button class="filter-button" [class.active]="true"><i class="uil">10</i></button>
+
+                                <div *ngIf="!introVisible" class="d-flex justify-content-end align-items-center form-check form-switch">
+                                    <div class="togle">
+                                        <label class="form-check-label ml-2" for="flexSwitchCheckDefault"> <i class="uil uil-apps"></i> </label>
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="toggleView()" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </header>
+
+            </div>
+            <div style="margin: 5% 2%;">
+                <h3>To Watch</h3>
+                <p style="width: 50%;">Pending Movies, Series, Animes, Books, Games and Music.</p>
+            </div>
+        </div>
+
+        <div *ngIf="introVisible">
+            <div class="currentlyArea workingArea">
+                <h5>Currently Viewing</h5>
+                <div *ngIf="isListView" class="quadrature" style="width: 100%;">
+                    <div class="row" style="margin-top: 1%;">
+                        <div *ngFor="let cardData of viewData" class="col-lg-2 col-3 col-md-4">
+                            <div class="cardQuadrature filter">
+                                <img class="imagenQuadrature" [src]="cardData.image" alt="#">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mainData" *ngIf="!introVisible">
+            <div *ngIf="isListView" class="quadrature" style="width: 90%;">
+                <div class="row" style="margin-top: 1%;">
+                    <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
+                        <div class="cardQuadrature">
+                            <img class="imagenQuadrature" [src]="cardData.image" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!isListView" class="list" style="width: 100%;">
+                <div class="table-container">
+                    <table class="movie-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th class="name-column">Name</th>
+                                <th>Year</th>
+
+                                <th *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">Score</th>
+                                <th *ngIf="type == 'Books'">Pages</th>
+                                <th *ngIf="type == 'Games'">Plataform</th>
+                                <th *ngIf="type == 'Music'">Tracks</th>
+                                <th>Rating</th>
+                                <th>Type</th>
+                                <th>Viewed</th>
+                                <th>Delete</th>
+                                <th>Save</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let d of data">
+                                <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
+                                <td class="name-column">{{ d.name }}</td>
+                                <td>{{d.releaseDate}}</td>
+                                <td>{{d.randomData}}</td>
+                                <td>
+                                    <div class="star-rating">
+                                        <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
+                                            (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
+                                            &#9733;
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
+                                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
+                                        (click)="toggleLike(d, data)">
+                                        <i class="iconCard uil uil-heart"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btnCard btn" (click)="deleteReco(d)"><i
+                                            class="iconCard uil uil-trash-alt"></i></button>
+                                </td>
+                                <td>
+                                    <button class="b1 btn" (click)="save(d)">viewed</button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="loading-overlay" *ngIf="loading">
+        <div class="loading-spinner"></div>
+    </div>
 
 </div>
