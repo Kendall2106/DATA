@@ -259,7 +259,7 @@ export class PendingListComponent implements OnInit {
       const usedIndices: Set<number> = new Set();
       this.selectedData = [];
 
-      const audio = new Audio('../assets/music/8bit.mp3');
+      const audio = new Audio('assets/music/8bit.mp3');
     
       // Reproducir la música al inicio
       audio.play();
