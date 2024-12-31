@@ -1,10 +1,7 @@
 <div class="body">
     <header>
         <div class="row">
-
-
             <div class="filter-container">
-
                 <div class="filter-options">
                   <button class="filter-button" (click)="loadData('Animes')" [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
                   <button class="filter-button" (click)="loadData('Movies')" [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
@@ -29,6 +26,7 @@
         </div>
 
     </header>
+    
     <div class="container list col-lg-12">
         <div *ngFor="let i of tier[0]">
             <div class="row" style="margin-bottom: 0.5%;">
@@ -44,7 +42,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 

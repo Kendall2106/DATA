@@ -38,8 +38,10 @@ export class WorkplaceComponent implements OnInit {
   currentSortOrder: 'asc' | 'desc' = 'desc';
   selectedCardIndex: number | null = null;
   stars: boolean[] = Array(5).fill(false);
+  selectedItem: string ='';
+  isDateView = false;
 
-  isListView = true;
+  tier: any = [12, 11, 10, 9, 8,7,6,5,4,3,2,1];
 
   constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService) {
     this.opTipos = [
@@ -82,6 +84,7 @@ export class WorkplaceComponent implements OnInit {
 
   async loadData(message: any) {
     try {
+      this.selectedItem = message;
       this.loading = true;
       if (message === 'Movies') {
         this.color = 'linear-gradient(to bottom, #00913f3b, 20%, #121212)';
@@ -103,6 +106,7 @@ export class WorkplaceComponent implements OnInit {
         this.data = await this.loadDataForType(this.musicService.getMusic());
       }
 
+
       this.message = message;
       this.resultFilter = this.sortData(this.data);
 
@@ -113,6 +117,8 @@ export class WorkplaceComponent implements OnInit {
 
       this.resultCount = this.resultFilter.length;
       this.applyFilters();
+
+      this.loadAllMonth();
 
       console.log(this.data);
       if (this.data.length == 0) {
@@ -129,9 +135,7 @@ export class WorkplaceComponent implements OnInit {
     }
   }
 
-  toggleView() {
-    this.isListView = !this.isListView;
-  }
+
 
   async loadDataForType(service: Promise<any>) {
     const typeData = await service;
@@ -185,6 +189,7 @@ export class WorkplaceComponent implements OnInit {
       .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
 
     this.resultCount = this.resultFilter.length;
+    this.loadAllMonth();
   }
 
 
@@ -334,5 +339,52 @@ export class WorkplaceComponent implements OnInit {
   }
 
 
-}
+  comparatedMonth(itemTemp: any) {
+     const [day, month, year] = itemTemp.date.split('-');
+      const date = new Date(`${year}-${month}-${day}`);
+      const monthYear = `${date.getMonth() + 1}`;
+      return monthYear;
+  }
 
+
+  dataFilterByDate(da: any, dateTemp: any) {
+    return da.filter((d: { date: string; }) => this.comparatedMonth(d) == dateTemp);
+  }
+
+  months: { number: number, name: string }[] = [];
+
+
+  loadAllMonth(){
+    this.months = [];
+    
+    const monthNames = [
+      "", "January", "February", "March", "April", "May", "June", "July", 
+      "August", "September", "October", "November", "December"
+    ];
+
+
+    this.resultFilter.forEach(rf => {
+      const monthName = monthNames[Number(this.comparatedMonth(rf))];
+
+      // Agrega el mes a la matriz, si no está ya
+      if (!this.months.some(month => month.name === monthName)) {
+        this.months.push({ number: Number(this.comparatedMonth(rf)), name: monthName });
+      }
+    });
+    console.log(this.months);
+
+  }
+
+  dateView() {
+
+    this.isDateView = !this.isDateView;
+  }
+
+  // Método para convertir un objeto en un iterable de claves y valores
+  objectEntries(obj: any): [string, any][] {
+    return Object.entries(obj);
+  }
+
+
+
+}

@@ -1,9 +1,225 @@
-.list {
-  max-height: calc(105vh - 60px);
-  overflow-y: auto;
-  width: 100%; 
+/* General Body Styling */
+.body {
+  margin-top: 10px;
+  background-color: #121212;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: calc(102vh - 60px);
+  text-align: start;
+  color: #fff;
 }
 
+/* Header Styling */
+header {
+  background-color: transparent;
+  color: #fff;
+  padding: 5px 20px;
+  text-align: right;
+  border-radius: 10px;
+}
+
+/* Contenedor General del Filtro */
+.filter-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* Opciones del Filtro */
+.filter-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Dropdowns */
+.filter-dropdown {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filter-dropdown:hover {
+  border-color: #999;
+}
+
+/* Botón de Filtrar */
+.filter-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-button:hover {
+  color: #dddbdb;
+}
+
+.filter-button.active {
+  color: #000000;
+  background-color: var(--color-2);
+}
+
+/* Contenedor de la Galería */
+.gallery-container {
+
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, 120px);  */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  /*grid-template-columns: repeat(auto-fill, 120px);*/
+  gap: 1rem;
+  padding-left: 2rem;
+  width: 100%; /* Ensure Full Width */
+}
+
+/* Tarjetas de Películas */
+.movie-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Imágenes en las Tarjetas */
+.movie-card img {
+  width: 120px;
+  height: 180px; /* Fixed Height for Uniformity */
+  object-fit: cover; /* Preserve Aspect Ratio */
+  border-radius: 8px;
+  display: block;
+}
+
+
+
+/* Contenedor de Estrellas */
+.stars {
+  display: flex;
+  justify-content: center;
+  
+}
+
+/* Estilo de las Estrellas */
+.star {
+  font-size: 1.3rem;
+  color: #cccccc44; /* Color for Empty Stars */
+  margin: 0 0.1rem;
+  transition: color 0.3s;
+}
+
+
+.star.filled {
+  color: #ffc1077c; /* Color for Filled Stars */
+}
+
+.movie-card:hover .star.filled {
+  color: #ffc107; /* Las estrellas se vuelven opacas durante el hover */
+}
+
+.list{
+  height: calc(90vh - 60px); /* Ajusta el valor según tus necesidades */
+  overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+  width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
+
+/* Overlay de Carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.767);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Spinner de Carga */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(160, 157, 157, 0.7); /* Rojo con algo de transparencia */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: none; /* Ocultamos el botón por defecto */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+
+/* Mostrar el botón de eliminar cuando se hace hover sobre la tarjeta */
+.movie-card:hover .delete-button {
+  display: flex; /* Mostrar el botón en hover */
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 1); /* Cambiar a rojo sólido cuando el ratón pasa sobre el botón */
+}
+
+
+
+.month-header {
+  margin-top: 30px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.movie-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/*
 .contenedor {
   position: relative;
   display: inline-block;
@@ -28,13 +244,7 @@
   transform: translate(0, 0);
 }
 
-header {
-  background-color: transparent;
-  color: #fff;
-  padding: 5px 20px;
-  text-align: right;
-  border-radius: 10px;
-}
+
 
 s .etiqueta {
   width: 50%;
@@ -67,38 +277,16 @@ s .etiqueta {
   color: gold;
 }
 
-select {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  color: var(--color-text);
-  margin-left: 1%;
-}
-
-select option {
-  background-color: var(--color-1);
-  color: var(--color-text);
-}
-
-button {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  color: var(--color-text);
-  margin-left: 1%;
-}
-
-.body {
-  margin-top: 10px;
-  background-color: #121212;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  height: calc(102vh - 60px);
-}
 
 .container {
-  height: calc(85vh - 60px);
+  height: calc(90vh - 60px);
   align-items: end;
+}
+
+.list {
+  max-height: calc(105vh - 60px);
+  overflow-y: auto;
+  width: 100%; 
 }
 
 .list::-webkit-scrollbar {
@@ -158,6 +346,7 @@ button {
   animation: spin 1s linear infinite;
 }
 
+
 .info {
   position: absolute;
   top: 0;
@@ -205,77 +394,4 @@ button {
 .star-rating span {
   cursor: pointer; 
 }
-
-.genre-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    flex-wrap: wrap;
-}
-
-.genre-box {
-    background-color: #1e1e1e;
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex-basis: calc(20% - 20px); 
-    margin: 10px;
-    font-size: 1.5em;
-}
-
-.genre-box:hover {
-    background-color: #333;
-}
-
-.filter-container {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: transparent;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.filter-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.filter-dropdown {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.filter-dropdown:hover {
-  border-color: #999;
-}
-
-.filter-button {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  background-color: #00b7ff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.filter-button:hover {
-  background-color: #008ecc;
-}
-
-
-
-
+*/
