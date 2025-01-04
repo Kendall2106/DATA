@@ -40,6 +40,7 @@ export class WorkplaceComponent implements OnInit {
   stars: boolean[] = Array(5).fill(false);
   selectedItem: string ='';
   isDateView = false;
+  isActualRelease = false;
 
   tier: any = [12, 11, 10, 9, 8,7,6,5,4,3,2,1];
 
@@ -186,7 +187,8 @@ export class WorkplaceComponent implements OnInit {
     this.resultFilter = this.data
       .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
       .filter(item => this.convertYear(item))
-      .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore);
+      .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore)
+      .filter(item => this.isActualRelease === false || item.releaseDate === Number(this.selectedYear));
 
     this.resultCount = this.resultFilter.length;
     this.loadAllMonth();
@@ -385,6 +387,20 @@ export class WorkplaceComponent implements OnInit {
     return Object.entries(obj);
   }
 
+  watchActualRelease() {
+    this.isActualRelease = !this.isActualRelease;
+    this.applyFilters();
+  }
+
+/*
+  loadAchievements() {
+    this.resultFilter = this.data
+    .filter(item => item.achievements === true);
+
+  this.resultCount = this.resultFilter.length;
+  this.loadAllMonth();
+  }
+*/
 
 
 }

@@ -29,6 +29,7 @@ export class GameService {
         'score' : data.score,
         'type' : null,
         'image' : data.image,
+        'achievements': false,
         'visible' : true
     });
   }

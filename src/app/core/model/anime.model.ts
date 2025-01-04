@@ -6,6 +6,7 @@ export interface Anime {
   type: string;
   numTemp: number;
   image: string;
+  releaseDate: number;
   visible: boolean;
 }
 

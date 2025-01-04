@@ -29,6 +29,7 @@ export class AnimeService {
         'score' : movie.score,
         'type' : movie.type,
         'image' : movie.image,
+        'releaseDate' : movie.releaseDate,
         'visible' : true
     });
   }

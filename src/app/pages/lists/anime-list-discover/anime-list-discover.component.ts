@@ -61,6 +61,8 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
        releaseDate: item.year,
        randomData: item.score
      }));
+
+     console.log(this.data);
      
     });
   }
