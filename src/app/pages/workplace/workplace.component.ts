@@ -184,6 +184,7 @@ export class WorkplaceComponent implements OnInit {
 
 
   applyFilters() {
+    console.log(this.resultFilter);
     this.resultFilter = this.data
       .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
       .filter(item => this.convertYear(item))

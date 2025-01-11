@@ -10,7 +10,7 @@ import { ModalComponent } from '../../component/modal/modal.components';
 })
 export class SerieListDiscoverComponent {
   message: string = "";
-  data: { name: string, image: string, info: string, releaseDate: string, randomData: string }[] = [];
+  data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
   animesAiring: any[] =[];
   numPage: number = 1;
   search: string = "";
@@ -51,7 +51,7 @@ export class SerieListDiscoverComponent {
           name: item.name,
           image: "https://image.tmdb.org/t/p/w500" + item.poster_path,
           info: item.overview,
-          releaseDate: item.first_air_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
       });
@@ -67,7 +67,8 @@ export class SerieListDiscoverComponent {
         this.animesAiring.push({
           name: item.name,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
-          info: item.overview
+          info: item.overview,
+          releaseDate: this.getYear(item),
         });
       });
     });
@@ -83,7 +84,7 @@ export class SerieListDiscoverComponent {
           name: item.name,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           info: item.overview,
-          releaseDate: item.first_air_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
       });
@@ -116,7 +117,7 @@ export class SerieListDiscoverComponent {
           name: item.name,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           info: item.overview,
-          releaseDate: item.first_air_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
         
@@ -167,6 +168,11 @@ loadBasedOnContext() {
   } else if (this.currentSearchType === 'search') {
     this.searchSeriesByName();
   }
+}
+
+getYear(itemTemp:any){
+    const [year, month, day] = itemTemp.first_air_date.split('-');
+     return Number(year);
 }
 
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
-import { Anime } from '../model/anime.model';
+import { Music } from '../model/music.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +19,15 @@ export class MusicService {
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
-  async createMusic(movie: Anime){
+  async createMusic(music: Music){
     const acollection = collection(this.firestore,'music');
     addDoc(acollection,{
-        'name' : movie.name,
-        'date' : movie.date,
-        'score' : movie.score,
-        'image' : movie.image,
+        'name' : music.name,
+        'date' : music.date,
+        'score' : music.score,
+        'image' : music.image,
+        'releaseDate' : music.releaseDate,
+        'artist': music.artist,
         'visible' : true
     });
   }

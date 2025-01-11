@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MusicListDiscoverComponent {
   message: string = "";
-  data: { name: string, image: string, info: string, releaseDate: string, randomData: string }[] = [];
+  data: { name: string, image: string, info: string, releaseDate: number, randomData: string, artist: string }[] = [];
   animesAiring: any[] =[];
   startIndex: number = 0;
   maxResults: number = 24;
@@ -46,13 +46,15 @@ export class MusicListDiscoverComponent {
             name: item.name,
             image: item.images[0].url,
             info: "Artist: " + item.artists[0].name + ", Fecha Salida: " + item.release_date,
-            releaseDate: item.release_date,
-            randomData: item.total_tracks
+            releaseDate: this.getYear(item),
+            randomData: item.total_tracks,
+            artist: item.artists[0].name
           });
      
-        
+          console.log(this.data);
       });
     });
+   
   }
 
   async getMusicAiring() {
@@ -64,8 +66,9 @@ export class MusicListDiscoverComponent {
           name: item.name,
           image: item.images[0].url,
           info: "Artist: " + item.artists[0].name,
-          releaseDate: item.release_date,
-          randomData: item.total_tracks
+          releaseDate: this.getYear(item),
+          randomData: item.total_tracks,
+          artist: item.artists[0].name
         });
       });
     });
@@ -80,8 +83,9 @@ export class MusicListDiscoverComponent {
           name: item.name,
           image: item.images[0].url,
           info: "Artist: " + item.artists[0].name,
-          releaseDate: item.release_date,
-          randomData: item.total_tracks
+          releaseDate: this.getYear(item),
+          randomData: item.total_tracks,
+          artist: item.artists[0].name
         });
       });
     });
@@ -130,6 +134,11 @@ export class MusicListDiscoverComponent {
   } else if (this.currentSearchType === 'search') {
     this.seachMusicByName();
   }
+}
+
+getYear(itemTemp:any){
+  const [year, month, day] = itemTemp.release_date.split('-');
+   return Number(year);
 }
 
 }

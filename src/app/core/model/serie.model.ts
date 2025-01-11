@@ -5,6 +5,7 @@ export interface Serie {
     score: number;
     type: string;
     image: string;
+    releaseDate: number;
     visible: boolean;
   }
   
