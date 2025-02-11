@@ -7,10 +7,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #121212;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.699);
     
  
   }
@@ -20,20 +20,19 @@
   /* Estilos para el título del modal */
   .modal-title {
     margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;          /* Oculta el texto que se sale del contenedor */
+    text-overflow: ellipsis; 
+    width: 80%;
   }
 
   .imagen{
     width: 100%; 
     height: 100%;
-   
     border: 1px solid #000000;
     border-radius: 10px;
+    max-height: 350px;
   }
-
-
-
-
-
 
 
 
@@ -122,7 +121,7 @@
   overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
   text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
   overflow-y: auto;
-  height: 225px;
+  height: 190px;
 }
 
 .synopsis::-webkit-scrollbar {
@@ -130,18 +129,24 @@
 }
 
 .btnModal{
-  background-color: transparent;
-  color: white;
+  background-color: var(--color-2);
+  color: rgb(0, 0, 0);
   border: none;
-  margin-bottom: 25%;
+  width: 100%; 
+  max-width: 150px; 
 }
 
-.btnModal:hover{
-  background-color: rgba(222, 255, 37, 0.212);
+.btnPending{
+  background-color: var(--color-2);
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 60%; 
+  max-width: 150px; 
 }
+
 
 .iconModal{
-  font-size: 30px;
+  font-size: 100%;
 }
 
 select{

@@ -45,10 +45,11 @@ export class GameService {
     await deleteDoc(documentRef);
   }
 
-  async updateGames(documentId: string, score: number): Promise<void> {
+  async updateGames(documentId: string, rd: number): Promise<void> {
     const documentRef = doc(this.firestore, `games/${documentId}`);
-    await updateDoc(documentRef, { score: score });
+    await updateDoc(documentRef, { releaseDate: rd });
   }
+
 
 
 }

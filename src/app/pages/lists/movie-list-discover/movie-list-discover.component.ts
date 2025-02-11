@@ -10,7 +10,7 @@ import { ModalComponent } from '../../component/modal/modal.components';
 })
 export class MovieListDiscoverComponent {
   message: string = "";
-  data: { name: string, image: string, info: string, releaseDate: string, randomData: string }[] = [];
+  data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
   animesAiring: any[] =[];
   numPage = 1;
   search: string = "";
@@ -52,7 +52,7 @@ export class MovieListDiscoverComponent {
           name: item.title,
           image: "https://image.tmdb.org/t/p/w500" + item.poster_path,
           info: item.overview,
-          releaseDate: item.release_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
       });
@@ -70,11 +70,17 @@ export class MovieListDiscoverComponent {
         this.animesAiring.push({
           name: item.title,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
+          releaseDate: this.getYear(item),
           info: item.overview
         });
       });
     });
   }
+
+  getYear(itemTemp:any){
+    const [year, month, day] = itemTemp.release_date.split('-');
+     return Number(year);
+}
 
   getFormattedDate(date: Date): string {
     const day = String(date.getDate()).padStart(2, '0');
@@ -102,7 +108,7 @@ export class MovieListDiscoverComponent {
           name: item.title,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           info: item.overview,
-          releaseDate: item.release_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
       });
@@ -120,7 +126,7 @@ export class MovieListDiscoverComponent {
           name: item.title,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           info: item.overview,
-          releaseDate: item.release_date,
+          releaseDate: this.getYear(item),
           randomData: item.vote_average
         });
         

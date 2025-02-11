@@ -24,6 +24,7 @@ export class WorkplaceComponent implements OnInit {
   animes: Anime[] = [];
   message: string = '';
   opTipos: string[][] = [];
+  opKind: string[] = [];
   opAnios: any[] = [];
   opCalificacion: string[] = [];
   calificacionSelec: any;
@@ -33,6 +34,7 @@ export class WorkplaceComponent implements OnInit {
   loading: boolean = false;
   isInfoVisible = false;
   selectedCategory: string = 'Todos';
+  selectedKind: string = 'Todos';
   selectedYear: string = this.opAnios[0];
   selectedScore: string = 'Todos';
   currentSortOrder: 'asc' | 'desc' = 'desc';
@@ -49,6 +51,7 @@ export class WorkplaceComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
     ];
+    this.opKind =["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
    // this.opAnios = ["All", "2024", "2023", "2022", "+"];
     this.opCalificacion = ["0", "1", "2", "3", "4", "5"];
   }
@@ -71,15 +74,11 @@ export class WorkplaceComponent implements OnInit {
 
   updateYearOptions(): void {
     const currentYear = new Date().getFullYear();
-    this.opAnios = [
-      'All',
-      currentYear.toString(),
-      (currentYear - 1).toString(),
-      (currentYear - 2).toString(),
-      (currentYear - 3).toString(),
-      (currentYear - 4).toString(),
-      (currentYear - 5).toString(),
-    ];
+    this.opAnios = ['All'];
+  
+    for (let year = currentYear; year >= 2019; year--) {
+      this.opAnios.push(year.toString());
+    }
   }
 
 
@@ -121,7 +120,6 @@ export class WorkplaceComponent implements OnInit {
 
       this.loadAllMonth();
 
-      console.log(this.data);
       if (this.data.length == 0) {
 
         this.showAlert("Error al solicitar los datos", "error", 3000);
@@ -184,9 +182,9 @@ export class WorkplaceComponent implements OnInit {
 
 
   applyFilters() {
-    console.log(this.resultFilter);
     this.resultFilter = this.data
       .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
+      .filter(item => this.selectedKind === 'Todos' || item.kind === this.selectedKind)
       .filter(item => this.convertYear(item))
       .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore)
       .filter(item => this.isActualRelease === false || item.releaseDate === Number(this.selectedYear));
@@ -213,6 +211,12 @@ export class WorkplaceComponent implements OnInit {
 
   filterType(event: any) {
     this.selectedCategory = event.target.value;
+    this.applyFilters();
+  }
+
+  filterKind(event: any) {
+    this.selectedKind = event.target.value;
+    console.log(this.selectedKind);
     this.applyFilters();
   }
 
@@ -402,6 +406,24 @@ export class WorkplaceComponent implements OnInit {
   this.loadAllMonth();
   }
 */
+
+async actualizarTodo(){
+  console.log(this.resultFilter);
+  try {
+    this.loading = true;
+  for (let index = 0; index < this.resultFilter.length; index++) {
+    await this.gameService.updateGames(this.resultFilter[index].id, this.resultFilter[index].releaseDate);
+  }
+} catch (error) {
+  this.showAlert("Error al actualizar el score", "error", 3000);
+
+} finally {
+  this.loading = false; 
+  this.loadData(this.type);
+  this.showAlert("Dato Actualizado", "success", 2000);
+}
+  //await this.movieService.updateMovie(recoTemp.id, recoTemp.score);
+}
 
 
 }

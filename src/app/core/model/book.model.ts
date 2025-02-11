@@ -6,6 +6,8 @@ export interface Book {
     type: string;
     image: string;
     visible: boolean;
+    author: string;
+    kind: string;
   }
   
   export class Book implements Book {

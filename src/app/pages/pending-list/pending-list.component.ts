@@ -15,10 +15,12 @@ import { SeriesService } from 'src/app/core/service/series.service';
 })
 export class PendingListComponent implements OnInit {
   dataOriginal: any[] = [];
+
   data: any[] = [];
   type: string = "";
   loading: boolean = false;
   opTipos: string[][] = [];
+  opKind: string[] = [];
   stars: boolean[] = Array(5).fill(false);
   resultCount: any = 0;
   isListView = true;
@@ -37,6 +39,7 @@ export class PendingListComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
     ];
+    this.opKind =["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
   }
 
 
@@ -132,6 +135,7 @@ export class PendingListComponent implements OnInit {
         console.log(this.viewData);
       }
     }
+    this.resultCount = this.viewData.length;
   }
 
 
@@ -234,6 +238,7 @@ export class PendingListComponent implements OnInit {
         await this.juegosService.createGames(dataTemp);
       }
       if (this.type == "Books") {
+        console.log(dataTemp);
         await this.libroService.createBook(dataTemp);
       }
       if (this.type == "Music") {

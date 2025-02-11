@@ -22,6 +22,7 @@ export class ModalComponent implements OnInit {
   @Input() public type: any;
 
   opTipos: string[][] = [];
+  opKind: string[] = [];
   opCalificacion: string[] = [];
   loading: boolean = false;
   open: boolean = false;
@@ -41,12 +42,14 @@ export class ModalComponent implements OnInit {
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
     ];
+    this.opKind =["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
     this.opCalificacion = ["0", "1", "2", "3", "4", "5"];
   }
 
 
   ngOnInit() {
     this.dataModal = { ...this.data };
+    
     this.open = true;
   }
 
@@ -124,6 +127,7 @@ export class ModalComponent implements OnInit {
       this.dataModal.date = this.getFormattedDate(new Date);
       console.log("fecha "+ this.dataModal.date);
       console.log("imaReco " + this.dataModal.image);
+
       await this.recoService.createReco(this.dataModal, this.type);
       this.closeModal();
       this.showAlert("Guardado exitosamente", "success");

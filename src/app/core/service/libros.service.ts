@@ -29,7 +29,9 @@ export class LibrosService {
         'score' : data.score,
         'type' : data.type,
         'image' : data.image,
-        'visible' : true
+        'visible' : true,
+        'author': data.author,
+        'kind' : data.kind
     });
   }
 

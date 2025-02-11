@@ -70,6 +70,11 @@
                     <button class="filter-button" (click)="loadData('Music')"
                         [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
 
+                    <select *ngIf="selectedItem == 'Books'" class="filter-dropdown" id="opKind" (change)="filterKind($event)">
+                        <option value="Todos">Tipo: Todos</option>
+                        <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
+                    </select>
+
                     <select class="filter-dropdown" id="opTipos" (change)="filterType($event)">
                         <option value="Todos">Categoria: Todos</option>
                         <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
@@ -90,10 +95,12 @@
 
                     <button (click)="dateView()" class="filter-button" [class.active]="isDateView === true"><i class="uil uil-calendar-alt"></i></button>
     
-                    <button (click)="watchActualRelease()" [class.active]="isActualRelease === true" class="filter-button">Release</button>
+                    <button *ngIf="selectedItem !== 'Books'" (click)="watchActualRelease()" [class.active]="isActualRelease === true" class="filter-button">Release</button>
                     <!--<button  (click)="loadAchievements()"  *ngIf="selectedItem === 'Games'" class="filter-button" ><i class="uil uil-award"></i></button>-->
 
                     <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
+
+
                 </div>
             </div>
         </div>
@@ -105,6 +112,7 @@
           <div class="movie-card" *ngFor="let movie of resultFilter">
             <div class="cardImage">
               <img title="{{movie.name}}" [src]="movie.image" [alt]="movie.name" />
+             <!-- <input type="number" id="date" name="date" [(ngModel)]="movie.releaseDate" required style="width: 100%;">-->
             </div>
 
             <button class="delete-button" (click)="deleteData(movie)">

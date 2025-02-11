@@ -21,7 +21,20 @@ export class RecoService {
 
   async createReco(reco: any, tipo:any){
     const acollection = collection(this.firestore,'recomendacion');
-    addDoc(acollection,{
+    if(tipo == 'Books'){
+      addDoc(acollection,{
+        'name' : reco.name,
+        'date' : reco.date,
+        'image' : reco.image,
+        'visible' : true,
+        'liked' : false,
+        'type' : tipo,
+        'releaseDate' : reco.releaseDate,
+        'randomData' : reco.randomData,
+        'author': reco.author
+    });
+    }else{
+      addDoc(acollection,{
         'name' : reco.name,
         'date' : reco.date,
         'image' : reco.image,
@@ -31,6 +44,8 @@ export class RecoService {
         'releaseDate' : reco.releaseDate,
         'randomData' : reco.randomData,
     });
+    }
+
   }
 
   async updateReco(documentId: string, dataLiked: boolean): Promise<void> {

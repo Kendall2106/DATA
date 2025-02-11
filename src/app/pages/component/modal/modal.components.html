@@ -11,18 +11,18 @@
                 <img id="myImage" class="imagen" [src]="data.image" alt="#">
             </div>
 
-            <div class="row col-lg-9">
+            <div class="col-lg-9" >
                 <div class="row col-lg-12">
-                    <div class="col-lg-11">
+                    <div class="col-lg-10">
                         <p class="synopsis">{{data.info}}</p>
                     </div>
-                    <div class="col-lg-1">
-                        <button class="btnModal btn" (click)="this.saveReco()"><i
+                    <div class="col-lg-2" style="text-align: right;">
+                        <button class="btnPending btn" (click)="this.saveReco()"><i
                                 class="iconModal uil uil-bookmark"></i></button>
                     </div>
                 </div>
 
-                <div class="row col-lg-12">
+                <div class="row col-lg-12" >
 
                     <div class="col-lg-6">
                         <p>Release date: {{data.releaseDate}}</p>
@@ -32,6 +32,7 @@
                     </div>
                     <div class="col-lg-6" *ngIf="type == 'Books'">
                         <p>Page count: {{data.randomData}}</p>
+                        <p>Author: {{data.author}}</p>
                     </div>
                     <div class="col-lg-6" *ngIf="type == 'Games'">
                         <p>Plataform: {{data.randomData}}</p>
@@ -40,37 +41,45 @@
                         <p>Total Tracks: {{data.randomData}}</p>
                     </div>
                 </div>
+            </div>
 
+
+            <div class="col-lg-12">
                 <div class="row col-lg-12">
-
-                    <div class="col-lg-4">
-                        <div class=" star-rating">
-                            <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                (click)="rate(i + 1)" [ngClass]="{'selected': (i + 1) <= dataModal.score}">
-                                &#9733;
-                            </span>
+                    <div class="col-lg-3 star-rating" style="text-align: center;">
+                        <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
+                            (click)="rate(i + 1)" [ngClass]="{'selected': (i + 1) <= dataModal.score}">
+                            &#9733;
+                        </span>
+                    </div>
+                    <div class="col-lg-1">
+                        <div *ngIf="type == 'Books'" >
+                            <select id="kind" name="kind" [(ngModel)]="dataModal.kind" style="width: 100%;">
+                                <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <input class="date" type="date" id="date" name="date" [(ngModel)]="data.date" required
                             style="width: 100%;">
                     </div>
 
-                    <div *ngIf="type !== 'Games' && type !== 'Music'" class="col-lg-4">
-                        <select id="type" name="type" [(ngModel)]="dataModal.type" style="width: 100%;">
-                            <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
-                        </select>
+                    <div class="col-lg-3">
+                        <div *ngIf="type !== 'Games' && type !== 'Music'" >
+                            <select id="type" name="type" [(ngModel)]="dataModal.type" style="width: 100%;">
+                                <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                            </select>
+                        </div>
                     </div>
 
-
+                    <div class="col-lg-2" style="display: flex; align-items: center; justify-content: center;">
+                        <button class="btn btnModal" (click)="this.save()"><i  class="iconModal uil uil-save"> Save</i></button>
+                    </div>
                 </div>
-
             </div>
 
-            <div class="d-flex justify-content-end">
-                <button class="btnModal btn" (click)="this.save()"><i class="iconModal uil uil-save"> Save</i></button>
-            </div>
+            
         </div>
 
         <div class="loading-overlay" *ngIf="loading">

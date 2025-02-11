@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class BookListDiscoverComponent implements OnInit {
   message: string = "";
-  data: { name: string, image: string, info: string, releaseDate: string, randomData: string }[] = [];
+  data: { name: string, image: string, info: string, releaseDate: string, randomData: string, author: string }[] = [];
   animesAiring: any[] =[];
   startIndex: number = 0;
   maxResults: number = 24;
@@ -39,7 +39,8 @@ export class BookListDiscoverComponent implements OnInit {
           image: item.volumeInfo.imageLinks.thumbnail,
           info: item.volumeInfo.description,
           releaseDate: item.volumeInfo.publishedDate,
-          randomData: item.volumeInfo.pageCount
+          randomData: item.volumeInfo.pageCount,
+          author: item.volumeInfo.authors[0]
         });
       });
     });
@@ -53,7 +54,8 @@ export class BookListDiscoverComponent implements OnInit {
         this.animesAiring.push({
           name: item.volumeInfo.title,
           image: item.volumeInfo.imageLinks.thumbnail,
-          info: item.volumeInfo.description
+          info: item.volumeInfo.description,
+          author: item.volumeInfo.authors[0]
         });
       });
     });
@@ -71,7 +73,8 @@ export class BookListDiscoverComponent implements OnInit {
             image: item.volumeInfo.imageLinks.thumbnail,
             info: item.volumeInfo.description,
             releaseDate: item.volumeInfo.publishedDate,
-            randomData: item.volumeInfo.pageCount
+            randomData: item.volumeInfo.pageCount,
+            author: item.volumeInfo.authors[0]
           });
         });
       }

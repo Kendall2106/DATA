@@ -28,7 +28,8 @@ export class MovieService {
         'score' : movie.score,
         'type' : movie.type,
         'image' : movie.image,
-        'visible' : true
+        'visible' : true,
+        'releaseDate': movie.releaseDate
     });
   }
 
@@ -43,9 +44,9 @@ export class MovieService {
     await deleteDoc(documentRef);
   }
 
-  async updateMovie(documentId: string, score: number): Promise<void> {
+  async updateMovie(documentId: string, rd: number): Promise<void> {
     const documentRef = doc(this.firestore, `movies/${documentId}`);
-    await updateDoc(documentRef, { score: score });
+    await updateDoc(documentRef, { releaseDate: rd });
   }
 
 

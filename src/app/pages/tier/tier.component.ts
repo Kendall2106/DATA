@@ -16,7 +16,7 @@ export class TierComponent implements OnInit {
   categorias: any[] = ["Masterpiece", "Re-watch", "Meh", "Forgettable", "trash"];
   data: any[] = [];
   anioActual: string = "";
-  opAnios: any[] = ["2024", "2023", "2022", "2021", "2020", "2019", "Todos"];
+  opAnios: any[] = [];
   selectedYear: string = this.opAnios[0];
   resultFilter: any[] = [];
   resultCount: any = 0;
@@ -38,7 +38,20 @@ export class TierComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
+    this.updateYearOptions();
+    this.selectedYear = this.opAnios[0];
     this.loadData(this.hobbyType[0]);
+  }
+
+  updateYearOptions(): void {
+    const currentYear = new Date().getFullYear();
+  
+    for (let year = currentYear; year >= 2019; year--) {
+      this.opAnios.push(year.toString());
+    }
+
+    this.opAnios.push('Todos');
   }
 
 

@@ -6,6 +6,7 @@ export interface Movie {
   type: string;
   image: string;
   visible: boolean;
+  releaseDate: number;
 }
 
 export class Movie implements Movie {
