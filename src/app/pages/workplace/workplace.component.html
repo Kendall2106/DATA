@@ -111,8 +111,19 @@
         <div class="gallery-container">
           <div class="movie-card" *ngFor="let movie of resultFilter">
             <div class="cardImage">
-              <img title="{{movie.name}}" [src]="movie.image" [alt]="movie.name" />
+          
              <!-- <input type="number" id="date" name="date" [(ngModel)]="movie.releaseDate" required style="width: 100%;">-->
+             <div *ngIf="movie.score === 5" class="golden-container">
+                <img class="image golden-image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                <div class="golden-overlay"></div>
+                <div class="golden-shine"></div>
+            </div>
+            
+            <div *ngIf="movie.score !== 5">
+                <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+            </div>
+
+            
             </div>
 
             <button class="delete-button" (click)="deleteData(movie)">
@@ -133,35 +144,12 @@
       </div>
 
       
-   <div *ngIf="isDateView"  class="list" >
-    <div *ngFor="let item of months; let i = index">
-
-        <div style=" padding-left: 2%;" >
-            <p>-- {{item.name}} --</p>
-        </div>
-
-            <div class="gallery-container">
-                <div class="movie-card" *ngFor="let movie of dataFilterByDate(resultFilter, item.number)">
-                    <div class="cardImage">
-                        <img title="{{movie.name}}" [src]="movie.image" [alt]="movie.name" />
-                    </div>
-
-                    <button class="delete-button" (click)="deleteData(movie)">
-                        ×
-                    </button>
-
-                    <div class="stars">
-                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                            <i class="star" [ngClass]="{'filled': i < movie.score}" aria-hidden="true">★</i>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-    </div>
-</div>
+ 
 
     <div class="loading-overlay" *ngIf="loading">
         <div class="loading-spinner"></div>
     </div>
 
 </div>
+
+

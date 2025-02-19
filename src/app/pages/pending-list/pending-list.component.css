@@ -306,3 +306,8 @@ select:disabled {
   opacity: 0.6; /* Reduce la opacidad */
 }
 
+
+.inputDate{
+  width: 80px;
+  height: 25px;
+}

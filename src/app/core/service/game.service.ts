@@ -30,7 +30,8 @@ export class GameService {
         'type' : null,
         'image' : data.image,
         'achievements': false,
-        'visible' : true
+        'visible' : true,
+        'releaseDate': data.releaseDate
     });
   }
 

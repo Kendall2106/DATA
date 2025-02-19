@@ -11,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class GameListDiscoverComponent {
 
   message: string = "";
-  data: { name: string, image: string, info: string, releaseDate: string, randomData: string }[] = [];
+  data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
   animesAiring: any[] =[];
   startIndex: number = 0;
   maxResults: number = 24;
@@ -55,7 +55,7 @@ export class GameListDiscoverComponent {
           name: item.title,
           image: item.image_url,
           info: item.overview,
-          releaseDate: 'NC',
+          releaseDate: 0,
           randomData: item.platform_name
         });
       });
@@ -84,7 +84,7 @@ export class GameListDiscoverComponent {
           name: item.title,
           image: item.image_url,
           info: item.overview,
-          releaseDate: 'NC',
+          releaseDate: 0,
           randomData: item.platform_name
         });
       });
@@ -102,7 +102,7 @@ export class GameListDiscoverComponent {
           name: item.title,
           image: item.image_url,
           info: item.overview,
-          releaseDate: 'NC',
+          releaseDate: 0,
           randomData: item.platform_name
         });
       });

@@ -263,15 +263,17 @@
                             <tr>
                                 <th>Image</th>
                                 <th class="name-column">Name</th>
-                                <th *ngIf="type !== 'Books'">Year</th>
+                                <th>Rating</th>
+                                <th *ngIf="type !== 'Books' && type !== 'Games'">Year</th>
                                 
 
                                 <th *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">Score</th>
                                 <th *ngIf="type == 'Books'">Pages</th>
                                 <th *ngIf="type == 'Games'">Plataform</th>
                                 <th *ngIf="type == 'Music'">Tracks</th>
-                                <th>Rating</th>
+                      
                                 <th *ngIf="type == 'Books'">Kind</th>
+                                <th *ngIf="type == 'Games'">Year</th>
                                 <th>Type</th>
                                 <th>Viewed</th>
                                 <th>Delete</th>
@@ -282,8 +284,6 @@
                             <tr *ngFor="let d of data">
                                 <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
                                 <td class="name-column">{{ d.name }}</td>
-                                <td *ngIf="type !== 'Books'">{{d.releaseDate}}</td>
-                                <td>{{d.randomData}}</td>
                                 <td>
                                     <div class="star-rating">
                                         <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
@@ -292,10 +292,18 @@
                                         </span>
                                     </div>
                                 </td>
+
+
+                                <td *ngIf="type !== 'Books' && type !== 'Games'">{{d.releaseDate}}</td>
+                                <td style="width: 10%;">{{d.randomData}}</td>
+                                
                                 <td *ngIf="type == 'Books'">
                                     <select id="kind" name="kind" [(ngModel)]="d.kind" style="width: 100%;">
                                         <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
                                     </select>
+                                </td>
+                                <td *ngIf="type == 'Games'">
+                                    <input class="inputDate" type="number" id="dateR" name="dateR" [(ngModel)]="d.releaseDate" required>
                                 </td>
                                 <td>
                                     <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>

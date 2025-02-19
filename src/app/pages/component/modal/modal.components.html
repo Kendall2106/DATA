@@ -24,7 +24,7 @@
 
                 <div class="row col-lg-12" >
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-6"  *ngIf="type !== 'Games'" >
                         <p>Release date: {{data.releaseDate}}</p>
                     </div>
                     <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
@@ -66,10 +66,14 @@
                     </div>
 
                     <div class="col-lg-3">
-                        <div *ngIf="type !== 'Games' && type !== 'Music'" >
+                        <div *ngIf="type !== 'Music' && type !== 'Games'" >
                             <select id="type" name="type" [(ngModel)]="dataModal.type" style="width: 100%;">
                                 <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
                             </select>
+                        </div>
+                        <div *ngIf="type == 'Games'" >
+                            <input class="date" type="number" id="dateR" name="dateR" [(ngModel)]="dataModal.releaseDate" required
+                            style="width: 100%;">
                         </div>
                     </div>
 

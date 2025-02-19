@@ -186,7 +186,7 @@ export class WorkplaceComponent implements OnInit {
       .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
       .filter(item => this.selectedKind === 'Todos' || item.kind === this.selectedKind)
       .filter(item => this.convertYear(item))
-      .filter(item => this.selectedScore === 'Todos' || item.score === this.selectedScore)
+      .filter(item => this.selectedScore === 'Todos' || item.score === Number(this.selectedScore))
       .filter(item => this.isActualRelease === false || item.releaseDate === Number(this.selectedYear));
 
     this.resultCount = this.resultFilter.length;
