@@ -14,6 +14,12 @@ export class AnimeService {
 
   constructor(private http: HttpClient) {}
 
+  async getCategoriesAnime(): Promise<any> {
+    const acollection = collection(this.firestore,'categoriesAnime');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
+
   async getAnimes(): Promise<any> {
     const acollection = collection(this.firestore,'animes');
     const querySnapshot = await getDocs(acollection);
@@ -45,9 +51,9 @@ export class AnimeService {
     await deleteDoc(documentRef);
   }
 
-  async updateAnime(documentId: string, score: number): Promise<void> {
+  async updateAnime(documentId: string, type: string): Promise<void> {
     const documentRef = doc(this.firestore, `animes/${documentId}`);
-    await updateDoc(documentRef, { score: score });
+    await updateDoc(documentRef, { type: type });
   }
 
  

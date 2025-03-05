@@ -15,11 +15,18 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
+  async getCategoriesGame(): Promise<any> {
+    const acollection = collection(this.firestore,'categoriesGame');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
+
   async getGames(): Promise<any> {
     const acollection = collection(this.firestore,'games');
     const querySnapshot = await getDocs(acollection);
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
+
 
   async createGames(data: Game){
     const acollection = collection(this.firestore,'games');
@@ -27,7 +34,7 @@ export class GameService {
         'name' : data.name,
         'date' : data.date,
         'score' : data.score,
-        'type' : null,
+        'type' : data.type,
         'image' : data.image,
         'achievements': false,
         'visible' : true,
@@ -46,9 +53,9 @@ export class GameService {
     await deleteDoc(documentRef);
   }
 
-  async updateGames(documentId: string, rd: number): Promise<void> {
+  async updateGames(documentId: string, rd: string): Promise<void> {
     const documentRef = doc(this.firestore, `games/${documentId}`);
-    await updateDoc(documentRef, { releaseDate: rd });
+    await updateDoc(documentRef, { type: rd });
   }
 
 

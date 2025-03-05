@@ -14,6 +14,12 @@ export class SeriesService {
 
   constructor(private http: HttpClient) {}
 
+  async getCategoriesShow(): Promise<any> {
+    const acollection = collection(this.firestore,'categoriesShow');
+    const querySnapshot = await getDocs(acollection);
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
+
   async getSeries(): Promise<any> {
     const acollection = collection(this.firestore,'series');
     const querySnapshot = await getDocs(acollection);
@@ -44,9 +50,9 @@ export class SeriesService {
     await deleteDoc(documentRef);
   }
 
-  async updateSerie(documentId: string, score: number): Promise<void> {
+  async updateSerie(documentId: string, type: string): Promise<void> {
     const documentRef = doc(this.firestore, `series/${documentId}`);
-    await updateDoc(documentRef, { score: score });
+    await updateDoc(documentRef, { type: type });
   }
 
 

@@ -67,6 +67,8 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
     });
   }
 
+  
+
 
   async getAnimeAiring() {
     await this.apiAnimeService.getAnimeAiring().subscribe((response: any) => {

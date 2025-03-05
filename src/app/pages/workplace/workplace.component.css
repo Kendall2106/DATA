@@ -75,21 +75,21 @@ header {
 
 /* Contenedor de la Galería */
 .gallery-container {
-
+ 
   display: grid;
   /*grid-template-columns: repeat(auto-fit, 120px);  */
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   /*grid-template-columns: repeat(auto-fill, 120px);*/
   gap: 1rem;
   padding-left: 2rem;
-  width: 100%; /* Ensure Full Width */
+  width: 98%; /* Ensure Full Width */
 }
 
 /* Tarjetas de Películas */
 .movie-card {
   width: 100%;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -101,13 +101,18 @@ header {
 
 
 /* Imágenes en las Tarjetas */
-.movie-card img {
+.image {
   width: 120px;
   height: 180px; 
   object-fit: cover; 
-  border-radius: 8px;
   display: block;
- 
+}
+
+.imageMusic {
+  width: 150px;
+  height: 150px; 
+  object-fit: cover; 
+  display: block;
 }
 
 

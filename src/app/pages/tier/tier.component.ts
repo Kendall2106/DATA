@@ -29,7 +29,7 @@ export class TierComponent implements OnInit {
   hobbyType: any = [];
   selectedCategory: string = 'Todos';
   selectedItem: string = '';
-
+  categories: any[] = [];
 
   constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
     this.opTipos =["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"];
@@ -74,6 +74,8 @@ export class TierComponent implements OnInit {
       } else if (message === 'Music') {
         this.data = await this.loadDataForType(this.musicService.getMusic());
       }
+
+      this.loadCategories(message);
       console.log("first "+this.selectedYear);
       this.applyFilters();
 
@@ -90,6 +92,22 @@ export class TierComponent implements OnInit {
       this.loading = false;
     }
   }
+
+  async loadCategories(message: any) {
+    if (message === 'Series' || message === 'Movies') { 
+      this.categories = await this.seriesService.getCategoriesShow();
+    } else if (message === 'Animes') {     
+      this.categories = await this.animeService.getCategoriesAnime();
+    } else if (message === 'Games') {
+      this.categories = await this.gameService.getCategoriesGame();
+    } else if (message === 'Books') {    
+      this.categories = await this.libroService.getCategoriesBook();
+    } else if (message === 'Music') {
+    //  this.data = await this.loadDataForType(this.musicService.getMusic());
+    }
+
+
+}
 
   async loadDataForType(service: Promise<any>) {
     const typeData = await service;

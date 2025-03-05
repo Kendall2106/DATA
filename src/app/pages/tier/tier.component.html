@@ -10,9 +10,9 @@
                   <button class="filter-button" (click)="loadData('Games')" [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
                   <button class="filter-button" (click)="loadData('Music')" [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
 
-                    <select [disabled]="selectedItem==='Music' || selectedItem==='Games'" class="filter-dropdown"  id="opTipos" (change)="filterType($event)">
+                    <select [disabled]="selectedItem==='Music'" class="filter-dropdown"  id="opTipos" (change)="filterType($event)">
                         <option value="Todos">Categoria: Todos</option>
-                        <option *ngFor="let opcion of opTipos" [value]="opcion">{{ opcion }}</option>
+                        <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                     </select>
 
                     <select class="filter-dropdown" id="opAnios" (change)="filterYear($event)">

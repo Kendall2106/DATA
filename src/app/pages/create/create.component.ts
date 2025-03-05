@@ -59,6 +59,9 @@ export class CreateComponent {
     }
 
     if (this.tipo == "Juegos") {
+      this.data.type = "01";
+      this.data.date = "2025-03-04";
+      this.data.releaseDate = 2024;
       this.juegosService.createGames(this.data);
     }
 

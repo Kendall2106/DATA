@@ -19,6 +19,7 @@ import { SeriesService } from 'src/app/core/service/series.service';
 })
 export class WorkplaceComponent implements OnInit {
   data: any[] = [];
+  categories: any[] = [];
   resultFilter: any[] = [];
   movies: Movie[] = [];
   animes: Anime[] = [];
@@ -86,6 +87,7 @@ export class WorkplaceComponent implements OnInit {
     try {
       this.selectedItem = message;
       this.loading = true;
+
       if (message === 'Movies') {
         this.color = 'linear-gradient(to bottom, #00913f3b, 20%, #121212)';
         this.data = await this.loadDataForType(this.movieService.getMovies());
@@ -108,6 +110,7 @@ export class WorkplaceComponent implements OnInit {
 
 
       this.message = message;
+      this.loadCategories(message);
       this.resultFilter = this.sortData(this.data);
 
       this.resultFilter.forEach((element: any) => {
@@ -133,6 +136,25 @@ export class WorkplaceComponent implements OnInit {
       this.type = message;
     }
   }
+
+
+  async loadCategories(message: any) {
+      var categoriesTemp: any[] = [];
+       if (message === 'Series' || message === 'Movies') { 
+        this.categories = await this.seriesService.getCategoriesShow();
+      } else if (message === 'Animes') {     
+        this.categories = await this.animeService.getCategoriesAnime();
+      } else if (message === 'Games') {
+        this.categories = await this.gameService.getCategoriesGame();
+      } else if (message === 'Books') {    
+        this.categories = await this.libroService.getCategoriesBook();
+      } else if (message === 'Music') {
+      //  this.data = await this.loadDataForType(this.musicService.getMusic());
+      }
+
+  
+  }
+
 
 
 
@@ -412,7 +434,7 @@ async actualizarTodo(){
   try {
     this.loading = true;
   for (let index = 0; index < this.resultFilter.length; index++) {
-    await this.gameService.updateGames(this.resultFilter[index].id, this.resultFilter[index].releaseDate);
+    await this.movieService.updateMovie(this.resultFilter[index].id, this.resultFilter[index].type);
   }
 } catch (error) {
   this.showAlert("Error al actualizar el score", "error", 3000);

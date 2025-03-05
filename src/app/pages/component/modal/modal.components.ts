@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit {
   opTipos: string[][] = [];
   opKind: string[] = [];
   opCalificacion: string[] = [];
+  categories: any[] = [];
   loading: boolean = false;
   open: boolean = false;
   dataModal: any;
@@ -49,7 +50,9 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     this.dataModal = { ...this.data };
-    
+    console.log(this.type);
+    this.loadCategories(this.type);
+
     this.open = true;
   }
 
@@ -63,6 +66,22 @@ export class ModalComponent implements OnInit {
     this.dataService.typeData = data;
     this.router.navigate(['/Workplace']);
   }
+
+  async loadCategories(message: any) {
+    if (message === 'Series' || message === 'Movies') { 
+      this.categories = await this.serieServicio.getCategoriesShow();
+    } else if (message === 'Animes') {     
+      this.categories = await this.animeService.getCategoriesAnime();
+    } else if (message === 'Games') {
+      this.categories = await this.juegosService.getCategoriesGame();
+    } else if (message === 'Books') {    
+      this.categories = await this.libroService.getCategoriesBook();
+    } else if (message === 'Music') {
+    //  this.data = await this.loadDataForType(this.musicService.getMusic());
+    }
+
+
+}
 
 
   getFormattedDate(date: Date): string {

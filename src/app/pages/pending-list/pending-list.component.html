@@ -307,7 +307,7 @@
                                 </td>
                                 <td>
                                     <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
-                                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                                        <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                                     </select>
                                 </td>
                                 <td>

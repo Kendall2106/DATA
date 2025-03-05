@@ -17,6 +17,7 @@ export class PendingListComponent implements OnInit {
   dataOriginal: any[] = [];
 
   data: any[] = [];
+  categories: any[] = [];
   type: string = "";
   loading: boolean = false;
   opTipos: string[][] = [];
@@ -120,11 +121,30 @@ export class PendingListComponent implements OnInit {
       }
     }
 
+    this.loadCategories(message);
     this.orderData();
     this.resultCount = this.data.length;
 
    
   }
+
+
+  async loadCategories(message: any) {
+    var categoriesTemp: any[] = [];
+    if (message === 'Series' || message === 'Movies') { 
+      this.categories = await this.serieServicio.getCategoriesShow();
+    } else if (message === 'Animes') {     
+      this.categories = await this.animeService.getCategoriesAnime();
+    } else if (message === 'Games') {
+      this.categories = await this.juegosService.getCategoriesGame();
+    } else if (message === 'Books') {    
+      this.categories = await this.libroService.getCategoriesBook();
+    } else if (message === 'Music') {
+    //  this.data = await this.loadDataForType(this.musicService.getMusic());
+    }
+
+
+}
 
   viewDataList(dataTotal: any){
     this.viewData = [];

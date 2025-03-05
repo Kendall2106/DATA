@@ -44,9 +44,9 @@ export class MovieService {
     await deleteDoc(documentRef);
   }
 
-  async updateMovie(documentId: string, rd: number): Promise<void> {
+  async updateMovie(documentId: string, rd: string): Promise<void> {
     const documentRef = doc(this.firestore, `movies/${documentId}`);
-    await updateDoc(documentRef, { releaseDate: rd });
+    await updateDoc(documentRef, { type: rd });
   }
 
 
