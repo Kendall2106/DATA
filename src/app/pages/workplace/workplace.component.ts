@@ -329,7 +329,7 @@ export class WorkplaceComponent implements OnInit {
   }
 
  
-  async rate(recoTemp: any, score: number) {
+  /*async rate(recoTemp: any, score: number) {
     recoTemp.score = score;
     try {
       this.loading = true;
@@ -360,7 +360,7 @@ export class WorkplaceComponent implements OnInit {
       this.loadData(this.type);
       this.showAlert("Dato Actualizado", "success", 2000);
     }
-  }
+  }*/
 
 
   showAlert(messageAlert: string, tipoMessage: any, duration: number) {

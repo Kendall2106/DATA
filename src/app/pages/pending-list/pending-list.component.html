@@ -246,14 +246,43 @@
         </div>
 
         <div class="mainData" *ngIf="!introVisible">
+            
             <div *ngIf="isListView" class="quadrature" style="width: 90%;">
-                <div class="row" style="margin-top: 1%;">
+               <!-- <div class="row" style="margin-top: 1%;">
                     <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
                         <div class="cardQuadrature" [ngClass]="{'cardQuadratureActive': cardData.name === selectedData.name}">
                             <img class="imagenQuadrature" [src]="cardData.image" alt="#">
                         </div>
                     </div>
+                </div>-->
+                <div *ngIf="selectedItem === 'Animes'" style="padding: 30px;">
+                    <button class="filter-button" (click)="changeList()"  [class.active]="listSeasonActivate === true">Season</button>
                 </div>
+                
+                <div class="gallery-container">
+                    
+
+                    <div class="movie-card" *ngFor="let movie of resultFilter">
+                      <div class="cardImage">
+                      
+                          <div *ngIf="selectedItem !== 'Music'">
+                              <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                          </div>
+                          <div *ngIf="selectedItem === 'Music'">
+                              <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                          </div>
+                      
+                      </div>
+
+                      <button class="delete-button" (click)="addListSeason(movie)">
+                        <i class="uil uil-eye"></i>
+                    </button>
+          
+                      <div class="stars">
+                        <p class="title">{{movie.name}}</p>
+                      </div>
+                    </div>
+                  </div>
             </div>
 
             <div *ngIf="!isListView" class="list" style="width: 100%;">
@@ -281,7 +310,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let d of data">
+                            <tr *ngFor="let d of resultFilter">
                                 <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
                                 <td class="name-column">{{ d.name }}</td>
                                 <td>

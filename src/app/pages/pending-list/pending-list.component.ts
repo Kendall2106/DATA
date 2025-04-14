@@ -17,6 +17,7 @@ export class PendingListComponent implements OnInit {
   dataOriginal: any[] = [];
 
   data: any[] = [];
+  resultFilter: any[] = [];
   categories: any[] = [];
   type: string = "";
   loading: boolean = false;
@@ -30,6 +31,8 @@ export class PendingListComponent implements OnInit {
   viewData: any[] = [];
   selectedItem: string = '';
   selectedData: any = []; 
+  listSeason: any[] = [];
+  listSeasonActivate: boolean = false;
 
   constructor(private recoService: RecoService,
     private router: Router,
@@ -123,6 +126,8 @@ export class PendingListComponent implements OnInit {
 
     this.loadCategories(message);
     this.orderData();
+    this.resultFilter = this.data;
+    this.filterSeaon();
     this.resultCount = this.data.length;
 
    
@@ -131,6 +136,7 @@ export class PendingListComponent implements OnInit {
 
   async loadCategories(message: any) {
     var categoriesTemp: any[] = [];
+    this.listSeasonActivate = false;
     if (message === 'Series' || message === 'Movies') { 
       this.categories = await this.serieServicio.getCategoriesShow();
     } else if (message === 'Animes') {     
@@ -314,6 +320,37 @@ export class PendingListComponent implements OnInit {
    this.toggleLike(this.data[randomIndex], this.data);
   }
 
-  
+   async addListSeason(dataTemp: any){
+    console.log(dataTemp.id)
+    dataTemp.season = true;
+    this.filterSeaon();
+    await this.recoService.updateReco(dataTemp.id, dataTemp.season);
+
+  }
+
+  changeList(){
+   
+    this.listSeasonActivate = !this.listSeasonActivate;
+   /* if(this.listSeasonActivate==true){
+      this.data = this.listSeason;
+    }else{
+      this.data = this.dataOriginal;
+    }*/
+  this.filterSeaon();
+
+  }
+
+  filterSeaon(){
+    this.resultFilter = this.data.filter(d =>
+      this.listSeasonActivate ? d.season === true :  d.season !== true
+    );
+  }
+
+ /* applyFilters() {
+    this.resultFilter = this.data
+      .filter(item => this.listSeasonActivate === false || item.season === true);
+
+    this.resultCount = this.resultFilter.length;
+  }*/
 
 }

@@ -146,6 +146,9 @@ export class ModalComponent implements OnInit {
       this.dataModal.date = this.getFormattedDate(new Date);
       console.log("fecha "+ this.dataModal.date);
       console.log("imaReco " + this.dataModal.image);
+      if(this.type == "Animes"){
+        this.dataModal.season == false;
+      }
 
       await this.recoService.createReco(this.dataModal, this.type);
       this.closeModal();

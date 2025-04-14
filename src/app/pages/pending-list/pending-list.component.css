@@ -311,3 +311,89 @@ select:disabled {
   width: 80px;
   height: 25px;
 }
+
+
+
+
+
+
+
+
+/* Contenedor de la Galería */
+.gallery-container {
+ 
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, 120px);  */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  /*grid-template-columns: repeat(auto-fill, 120px);*/
+  gap: 1rem;
+  padding-left: 2rem;
+  width: 98%; /* Ensure Full Width */
+}
+
+/* Tarjetas de Películas */
+.movie-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 15%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Imágenes en las Tarjetas */
+.image {
+  width: 120px;
+  height: 180px; 
+  object-fit: cover; 
+  display: block;
+}
+
+.imageMusic {
+  width: 150px;
+  height: 150px; 
+  object-fit: cover; 
+  display: block;
+}
+
+.title{
+  color: white; 
+  text-align: left;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+  max-width: 200px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(160, 157, 157, 0.7); /* Rojo con algo de transparencia */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: none; /* Ocultamos el botón por defecto */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+
+/* Mostrar el botón de eliminar cuando se hace hover sobre la tarjeta */
+.movie-card:hover .delete-button {
+  display: flex; /* Mostrar el botón en hover */
+}
+
+.delete-button:hover {
+  background-color: var(--color-2); /* Cambiar a rojo sólido cuando el ratón pasa sobre el botón */
+}
