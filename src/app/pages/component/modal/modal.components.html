@@ -26,6 +26,11 @@
 
                     <div class="col-lg-6"  *ngIf="type !== 'Games'" >
                         <p>Release date: {{data.releaseDate}}</p>
+                        <div *ngIf="type == 'Books'" >
+                            <select id="kind" name="kind" [(ngModel)]="dataModal.kind" style="width: 50%;">
+                                <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-lg-6" *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">
                         <p>Score: {{data.randomData}}</p>
@@ -40,6 +45,10 @@
                     <div class="col-lg-6" *ngIf="type == 'Music'">
                         <p>Total Tracks: {{data.randomData}}</p>
                     </div>
+                    <div class="col-lg-6"  *ngIf="type == 'Games'" >
+                            <input class="date" type="number" id="dateR" name="dateR" [(ngModel)]="dataModal.releaseDate" required
+                            style="width: 50%;">
+                    </div>
                 </div>
             </div>
 
@@ -53,11 +62,7 @@
                         </span>
                     </div>
                     <div class="col-lg-1">
-                        <div *ngIf="type == 'Books'" >
-                            <select id="kind" name="kind" [(ngModel)]="dataModal.kind" style="width: 100%;">
-                                <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
-                            </select>
-                        </div>
+                       
                     </div>
 
                     <div class="col-lg-3">
@@ -70,10 +75,6 @@
                             <select id="type" name="type" [(ngModel)]="dataModal.type" style="width: 100%;">
                                 <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                             </select>
-                        </div>
-                        <div *ngIf="type == 'Games'" >
-                            <input class="date" type="number" id="dateR" name="dateR" [(ngModel)]="dataModal.releaseDate" required
-                            style="width: 100%;">
                         </div>
                     </div>
 

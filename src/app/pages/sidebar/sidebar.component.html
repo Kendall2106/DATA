@@ -1,30 +1,33 @@
 <div class="menu px-4">
     <div class="row gx-5">
-        <div class="column col-lg-12" style="background-color: #121212;">
+        <div class="column col-lg-12" style="background-color: #121212; padding-bottom: 2%;" >
             <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%;">
                 <a href="./"><img class="imgTitle" src="./assets/img/prisma4.png" style="height: 90%;"></a>
                 <i class="uil uil-user" style="color: white; font-size: 2.5rem;"  (click)="navegarProfilePage()"></i>
             </div>
-            <div class="link" (click)="navegarDiscoverPage()">
+           <!-- <div class="link" (click)="navegarDiscoverPage()">
                 <h5><i class="uil uil-search"></i> Discover</h5>
+            </div>-->
+
+            <div class="menuprin" (click)="navegarDiscoverPage()">
+                <h5><strong><i class="uil uil-search"></i>  Discover</strong></h5>
+            </div>
+            <div class="menuprin" (click)="navegarAComponenteDestino('Games')">
+                <h5><strong> <i class="uil uil-apps"></i> Library</strong></h5>
+            </div>
+            <div class="menuprin" (click)="navegarPendingList()">
+                <h5><strong><i class="iconModal uil uil-bookmark"></i>  Pending</strong></h5>
             </div>
 
-            <div class="link" (click)="navegarAComponenteDestino('Games')">
+           <!-- <div class="link" (click)="navegarAComponenteDestino('Games')">
                 <h5><i class="uil uil-apps"></i> Library</h5>
             </div>
             <div class="link" (click)="navegarPendingList()">
                 <h5><i class="iconModal uil uil-bookmark"></i> Pending</h5>
-            </div>
+            </div>-->
         </div>
 
         <div class="columnDesc col-lg-12" style="background-color: #121212; display: flex; flex-direction: column;">
-
-            <!--<div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
-                <h5>Crea tu propio registro</h5>
-                <p style="font-size: 0.8rem;">En el caso de no encontrar la informacion en la seccion de descubrimiento,
-                    Cree tu propio registro.</p>
-                <button class="b1 btn" (click)="navegarCreate()">Crear</button>
-            </div>-->
 
             <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
                 <h5><strong>Tier</strong></h5>

@@ -45,6 +45,18 @@ button{
     }
 }*/
 
+.menuprin{
+    background-color: transparent; 
+    border-radius: 2%; 
+    padding: 1%; 
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+
+.menuprin:hover{
+    background-color: #252525; 
+}
+
 .column{
     margin-top: 10px;
     text-align: left;
@@ -55,7 +67,8 @@ button{
     margin-top: 10px;
     text-align: left;
     border-radius: 10px;
-    height: calc(79vh - 60px);
+    height: calc(76.5vh - 60px);
+   
 }
 
 

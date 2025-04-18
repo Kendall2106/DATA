@@ -69,6 +69,7 @@ export class SerieListDiscoverComponent {
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           info: item.overview,
           releaseDate: this.getYear(item),
+          randomData: item.vote_average
         });
       });
     });

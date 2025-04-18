@@ -71,7 +71,8 @@ export class MovieListDiscoverComponent {
           name: item.title,
           image: "https://image.tmdb.org/t/p/original" + item.poster_path,
           releaseDate: this.getYear(item),
-          info: item.overview
+          info: item.overview,
+          randomData: item.vote_average
         });
       });
     });

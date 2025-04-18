@@ -55,6 +55,8 @@ export class BookListDiscoverComponent implements OnInit {
           name: item.volumeInfo.title,
           image: item.volumeInfo.imageLinks.thumbnail,
           info: item.volumeInfo.description,
+          releaseDate: item.volumeInfo.publishedDate,
+          randomData: item.volumeInfo.pageCount,
           author: item.volumeInfo.authors[0]
         });
       });

@@ -15,7 +15,7 @@ export class GameListDiscoverComponent {
   animesAiring: any[] =[];
   startIndex: number = 0;
   maxResults: number = 24;
-  numPage = 0;
+  numPage = 1;
   search: string = "";
   plataform: {id: number, name: string }[] = [];
   currentSearchType: 'all' | 'genre' | 'search' = 'all';

@@ -82,7 +82,6 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
           randomData: item.score
         });
       });
-      
     });
   }
 

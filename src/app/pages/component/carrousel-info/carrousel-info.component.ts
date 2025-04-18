@@ -29,9 +29,11 @@ export class CarrouselInfoComponent  {
 
 
   openModal(infoData: any) {
+    console.log(infoData);
+    console.log(this.type);
     const modalRef = this.modalService.open(ModalComponent, { centered: true });
     modalRef.componentInstance.data = infoData;
-    modalRef.componentInstance.type = this.message;
+    modalRef.componentInstance.type = this.type;
   }
 }
 
