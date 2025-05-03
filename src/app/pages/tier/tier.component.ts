@@ -30,6 +30,7 @@ export class TierComponent implements OnInit {
   selectedCategory: string = 'Todos';
   selectedItem: string = '';
   categories: any[] = [];
+  SK: boolean = false;
 
   constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
     this.opTipos =["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"];
@@ -149,6 +150,11 @@ export class TierComponent implements OnInit {
     this.applyFilters();
   }
 
+  FilterSK() {
+    this.SK = !this.SK;
+    this.applyFilters();
+  }
+
   applyFilters() {
    /* if (this.selectedYear === "Todos") {
       this.resultFilter = this.data;
@@ -160,9 +166,12 @@ export class TierComponent implements OnInit {
     console.log("Hola "+this.selectedYear);
       this.resultFilter = this.data
       .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
+      .filter(item => this.SK === false || item.author.toLowerCase() === "stephen king")
       .filter(item => this.convertYear(item))
-
+      
       this.resultCount = this.resultFilter.length;
+
+      console.log(this.resultFilter);
   }
 
 
