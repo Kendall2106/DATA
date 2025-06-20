@@ -32,6 +32,9 @@ import { GameListDiscoverComponent } from './pages/lists/game-list-discover/game
 import { MusicListDiscoverComponent } from './pages/lists/music-list-discover/music-list-discover.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
+import { GraphicsByscoreComponent } from './pages/component/graphics-byscore/graphics-byscore.component';
+import { GraphicsByyearComponent } from './pages/component/graphics-byyear/graphics-byyear.component';
+import { GraphicsBytypeComponent } from './pages/component/graphics-bytype/graphics-bytype.component';
 
 
 
@@ -58,7 +61,10 @@ import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.compo
     GameListDiscoverComponent,
     MusicListDiscoverComponent,
     ProfilePageComponent,
-    GraphicsPageComponent
+    GraphicsPageComponent,
+    GraphicsByscoreComponent,
+    GraphicsByyearComponent,
+    GraphicsBytypeComponent
   ],
   imports: [
     BrowserModule,

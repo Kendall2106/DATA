@@ -50,6 +50,11 @@ export class RecoService {
 
   async updateReco(documentId: string, season: boolean): Promise<void> {
     const documentRef = doc(this.firestore, `recomendacion/${documentId}`);
+    await updateDoc(documentRef, { liked: season });
+  }
+
+  async updateSeason(documentId: string, season: boolean): Promise<void> {
+    const documentRef = doc(this.firestore, `recomendacion/${documentId}`);
     await updateDoc(documentRef, { season: season });
   }
 

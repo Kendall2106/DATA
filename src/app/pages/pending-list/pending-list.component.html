@@ -81,19 +81,19 @@
                 <div class="gallery-container">
                     
 
-                    <div class="movie-card" *ngFor="let movie of resultFilter">
+                    <div class="movie-card" *ngFor="let movie of resultFilter" >
                       <div class="cardImage">
                       
-                          <div *ngIf="selectedItem !== 'Music'">
-                              <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                          <div *ngIf="selectedItem !== 'Music'" >
+                              <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}"/>
                           </div>
-                          <div *ngIf="selectedItem === 'Music'">
-                              <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                          <div *ngIf="selectedItem === 'Music'" >
+                              <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}"/>
                           </div>
                       
                       </div>
 
-                      <button class="delete-button" (click)="addListSeason(movie)">
+                      <button  *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)">
                         <i class="uil uil-eye"></i>
                     </button>
           

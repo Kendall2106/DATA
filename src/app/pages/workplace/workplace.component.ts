@@ -448,4 +448,27 @@ async actualizarTodo(){
 }
 
 
+getBorderStyle(score: any): { [key: string]: string } {
+  const opacity = 0.8;
+
+  let borderColor = `rgba(255, 0, 0, ${opacity})`; 
+
+  if (score == 1) {
+    borderColor = `rgba(255, 255, 255, ${opacity})`; 
+  } else if (score == 2) {
+    borderColor = `rgba(204, 85, 0, ${opacity})`; 
+  } else if (score == 3) {
+    borderColor = `rgba(255, 153, 204, ${opacity})`; 
+  } else if (score == 4) {
+    borderColor = `rgba(102, 153, 204, ${opacity})`;
+  } else if (score == 5) {
+    borderColor = `rgba(204, 153, 0, ${opacity})`; 
+  }
+
+  return {
+    border: `5px solid ${borderColor}`
+  }
+}
+
+
 }

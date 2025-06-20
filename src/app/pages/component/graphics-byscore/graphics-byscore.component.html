@@ -1,0 +1,68 @@
+<!--<div style="width: 100%; height: 250px;">
+<ngx-charts-pie-chart
+  [scheme]="colorScheme"
+  [results]="data"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  autoScale
+>
+</ngx-charts-pie-chart>
+</div>-->
+
+
+
+
+<div class="BoxIntern col-lg-12 row">
+  <div class="col-lg-6">
+    Masterpiece [5⭐]
+  </div>
+  <div class="col-lg-6 Underlined">
+    <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(5) + '%', backgroundColor: darkColor}">
+      {{ getScoreValue(5) }}
+    </div>
+  </div>
+</div>
+
+<div class="BoxIntern col-lg-12 row">
+  <div class="col-lg-6">
+    Re-watch [4⭐]
+  </div>
+  <div class="col-lg-6 Underlined">
+    <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(4) + '%',backgroundColor: darkColor}">
+      {{ getScoreValue(4) }}
+    </div>
+  </div>
+</div>
+
+<div class="BoxIntern col-lg-12 row">
+  <div class="col-lg-6">
+    Meh [3⭐]
+  </div>
+  <div class="col-lg-6 Underlined">
+    <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(3) + '%',backgroundColor: darkColor}">
+      {{ getScoreValue(3) }}
+    </div>
+  </div>
+</div>
+
+<div class="BoxIntern col-lg-12 row">
+  <div class="col-lg-6">
+    Forgettable [2⭐]
+  </div>
+  <div class="col-lg-6 Underlined">
+    <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(2) + '%',backgroundColor: darkColor}">
+      {{ getScoreValue(2) }}
+    </div>
+  </div>
+</div>
+
+<div class="BoxIntern col-lg-12 row">
+  <div class="col-lg-6">
+    Trash [1⭐]
+  </div>
+  <div class="col-lg-6 Underlined">
+    <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(1) + '%',backgroundColor: darkColor}">
+      {{ getScoreValue(1) }}
+    </div>
+  </div>
+</div>

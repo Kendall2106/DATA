@@ -19,18 +19,59 @@ export class Utils {
   }
 
 
-  static imageToByte(file: File | Blob): any {
-    var byteImagePromise: Promise<string> =
-      new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          resolve(e.target.result.split('base64,')[1] as string);
+  static imageToByte(file: File | Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        const img = new Image();
+        img.onload = () => {
+          const MAX_WIDTH = 800; // Cambia esto según lo que necesites
+          const MAX_HEIGHT = 800;
+  
+          let width = img.width;
+          let height = img.height;
+  
+          // Redimensionar manteniendo proporciones
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+  
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+  
+          if (!ctx) {
+            reject('No se pudo obtener el contexto del canvas');
+            return;
+          }
+  
+          ctx.drawImage(img, 0, 0, width, height);
+  
+          // Comprimir a JPEG con calidad 0.7
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7); // puedes ajustar la calidad
+  
+          // Extraer solo la parte base64
+          const base64 = compressedDataUrl.split('base64,')[1];
+          resolve(base64);
         };
-
-        reader.readAsDataURL(file);
-        reader.onerror = reject;
-      });
-    return byteImagePromise;
+  
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+  
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
 

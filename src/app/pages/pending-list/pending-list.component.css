@@ -114,9 +114,10 @@ header {
 }
 
 .cardQuadratureActive {
-  border: 1px solid #92ac03;
+  border: 3px solid #92ac03;
   border-radius: 10px;
 }
+
 
 .quadrature{
   overflow-y: auto;

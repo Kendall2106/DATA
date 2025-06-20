@@ -111,16 +111,10 @@
         <div class="gallery-container">
           <div class="movie-card" *ngFor="let movie of resultFilter">
             <div class="cardImage">
-          
-            <!--  <input id="date" name="date" [(ngModel)]="movie.type" required style="width: 100%;">-->
-            <!--  <div *ngIf="movie.score === 5" class="golden-container">
-                <img class="image golden-image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
-                <div class="golden-overlay"></div>
-                <div class="golden-shine"></div>
-            </div>-->
             
                 <div *ngIf="selectedItem !== 'Music'">
-                    <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                    <img class="image ${getScoreClass(movie.score)}" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+                    
                 </div>
                 <div *ngIf="selectedItem === 'Music'">
                     <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />

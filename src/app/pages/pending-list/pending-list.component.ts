@@ -200,6 +200,7 @@ export class PendingListComponent implements OnInit {
 
       if(this.data[index].liked == true){
         this.data[index].liked = false;
+        console.log("entro");
         await this.recoService.updateReco(this.data[index].id, this.data[index].liked);
        // break;
       }
@@ -217,7 +218,7 @@ export class PendingListComponent implements OnInit {
 
   async deleteReco(recoTemp: any) {
 
-    await this.recoService.deleteReco(recoTemp.id);
+    /*await this.recoService.deleteReco(recoTemp.id);
 
     const indexToRemove = this.data.findIndex(item => item.id === recoTemp.id);
 
@@ -225,7 +226,32 @@ export class PendingListComponent implements OnInit {
       this.data.splice(indexToRemove, 1);
     }
 
-    this.getReco();
+    this.getReco();*/
+
+
+
+
+try {
+      this.loading = true;
+      await this.recoService.deleteReco(recoTemp.id);
+
+      const indexToRemove = this.data.findIndex(item => item.id === recoTemp.id);
+
+      if (indexToRemove !== -1) {
+        this.data.splice(indexToRemove, 1);
+      }
+
+     
+
+    } catch (error) {
+
+    } finally {
+      this.loading = false; 
+      this.getReco();
+      //this.getReco();
+
+    }
+
   }
 
 
@@ -324,7 +350,7 @@ export class PendingListComponent implements OnInit {
     console.log(dataTemp.id)
     dataTemp.season = true;
     this.filterSeaon();
-    await this.recoService.updateReco(dataTemp.id, dataTemp.season);
+    await this.recoService.updateSeason(dataTemp.id, dataTemp.season);
 
   }
 
