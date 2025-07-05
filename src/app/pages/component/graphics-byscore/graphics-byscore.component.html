@@ -7,7 +7,7 @@
   autoScale
 >
 </ngx-charts-pie-chart>
-</div>-->
+</div>
 
 
 
@@ -65,4 +65,88 @@
       {{ getScoreValue(1) }}
     </div>
   </div>
+</div>
+
+
+
+
+
+<div style="width: 100%; height: 250px;">
+  <ngx-charts-number-card
+  [results]="cardData"
+  [scheme]="colorScheme"
+  [cardColor]="cardColor"
+  [animations]="true">
+</ngx-charts-number-card>
+</div>
+
+-->
+<div class="row" >
+  <div class="col-md-6" >
+
+    <div class="chart">
+      <div>
+        <h6>{{ getScoreValue(5) }}</h6>
+      </div>
+      <div>
+        ⭐⭐⭐⭐⭐
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bloque: gráfico 2 -->
+  <div class="col-md-6">
+
+    <div class="chart">
+      <div>
+        <h6>{{ getScoreValue(4) }}</h6>
+      </div>
+      <div>
+        ⭐⭐⭐⭐☆
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-6">
+
+    <div class="chart">
+      <div>
+        <h6>{{ getScoreValue(3) }}</h6>
+      </div>
+      <div>
+        ⭐⭐⭐☆☆
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="chart">
+      <div>
+        <h6>{{ getScoreValue(2) }}</h6>
+      </div>
+      <div>
+        ⭐⭐☆☆☆
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="chart">
+      <div>
+        <h6>{{ getScoreValue(1) }}</h6>
+      </div>
+      <div>
+        ⭐☆☆☆☆
+      </div>
+    </div>
+
+  </div>
+
 </div>

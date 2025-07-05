@@ -1,0 +1,79 @@
+<div class="body">
+  <div class="container">
+    <div class="row">
+
+
+
+
+      <div class="container py-1 infoBody">
+        <div class="row g-4">
+
+          <!-- Columna de 4 dividida verticalmente -->
+          <div class="col-4 d-flex flex-column">
+
+            <!-- Bloque pequeño (arriba) -->
+            <div class="info-block p-3 mb-3" style="height: 20%;  border-radius: 10px;">
+              <h5 class="mb-2"><strong><i class="uil uil-align-center"></i> Completed Books</strong></h5>
+              <div class="row" >
+                <div class="col-md-8">
+                 <h3 class="numTotal">{{data.length}}</h3>
+                </div>
+                <div class="col-md-4">
+                  <button class="filter-button" (click)="navegarAComponenteDestino('Games')">Library</button>
+                </div>
+              </div>
+
+
+            </div>
+
+            <!-- Bloque grande (abajo) -->
+            <div class="info-block block-gallery flex-grow-1 p-3" style="height: 75%; border-radius: 10px;">
+              
+
+            
+            </div>
+          </div>
+
+          <!-- Columna de 8 al lado -->
+          <div class="col-8">
+            
+          </div>
+
+
+
+
+          <!-- Bloque: gráfico 1 -->
+          <div class="col-md-4">
+            <div class="info-block block-chart">
+
+              <app-graphics-byscore [data]="data"></app-graphics-byscore>
+            </div>
+          </div>
+
+          <!-- Bloque: gráfico 2 -->
+          <div class="col-md-4">
+            <div class="info-block block-chart">
+              <app-graphics-byyear [data]="data"></app-graphics-byyear>
+            </div>
+          </div>
+
+          <!-- Bloque: gráfico 3 -->
+          <div class="col-md-4">
+            <div class="info-block block-chart">
+              <app-graphics-bytype [data]="data"></app-graphics-bytype>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+</div>

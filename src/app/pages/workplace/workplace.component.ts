@@ -65,7 +65,7 @@ export class WorkplaceComponent implements OnInit {
     this.router.events.subscribe(event => {
 
       this.message = this.dataService.typeData;
-      this.loadData('Animes');
+      this.loadData(this.message);
 
     });
 

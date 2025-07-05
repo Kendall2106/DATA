@@ -1,3 +1,17 @@
-::ng-deep ngx-charts-bar-vertical text {
+::ng-deep ngx-charts-line-chart text {
     fill: white !important;
   }
+
+::ng-deep ngx-charts-line-chart{
+    padding: 0%;
+  }
+
+::ng-deep g.grid-panel line {
+  stroke: #882323 !important; /* Cambia el color aquí */
+  stroke-opacity: 1 !important;
+}
+
+::ng-deep g.axis line, 
+::ng-deep g.axis path {
+  stroke: rgba(255, 255, 255, 0.1) !important; /* Cambia a tu color preferido */
+}

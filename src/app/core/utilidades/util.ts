@@ -85,7 +85,7 @@ export class Utils {
     var response: any;
 
     if (type == "Movies" || type == "Series" || type == "Books" || type == "Games") {
-      response = await fetch('https://corsproxy.io/?key=577d7de5&url=' + encodeURIComponent(imageUrl));
+      response = await fetch('https://corsproxy.io/?url=' + encodeURIComponent(imageUrl)); //key=577d7de5&
     } else {
       response = await fetch(imageUrl);
     }
@@ -107,7 +107,7 @@ export class Utils {
 
     let base64String = await byteImagePromise;
 
-    if ((base64String.length * 3 / 4) > 1 * 1000 * 1000) {
+    if ((base64String.length * 3 / 4) > 1 * 900 * 900) {
       console.log("deberia entrar");
       base64String = await this.resizeImage(blob);
     }

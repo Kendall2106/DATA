@@ -35,6 +35,10 @@ import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.compo
 import { GraphicsByscoreComponent } from './pages/component/graphics-byscore/graphics-byscore.component';
 import { GraphicsByyearComponent } from './pages/component/graphics-byyear/graphics-byyear.component';
 import { GraphicsBytypeComponent } from './pages/component/graphics-bytype/graphics-bytype.component';
+import { GameGraphicsComponent } from './pages/lists-graphics/game-graphics/game-graphics.component';
+import { AnimeGraphicsComponent } from './pages/lists-graphics/anime-graphics/anime-graphics.component';
+import { GraphicsBytype2Component } from './pages/component/graphics-bytype2/graphics-bytype2.component';
+import { BooksGraphicsComponent } from './pages/lists-graphics/books-graphics/books-graphics.component';
 
 
 
@@ -64,7 +68,11 @@ import { GraphicsBytypeComponent } from './pages/component/graphics-bytype/graph
     GraphicsPageComponent,
     GraphicsByscoreComponent,
     GraphicsByyearComponent,
-    GraphicsBytypeComponent
+    GraphicsBytypeComponent,
+    GameGraphicsComponent,
+    AnimeGraphicsComponent,
+    GraphicsBytype2Component,
+    BooksGraphicsComponent
   ],
   imports: [
     BrowserModule,

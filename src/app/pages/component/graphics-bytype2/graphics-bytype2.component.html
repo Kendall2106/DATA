@@ -1,0 +1,13 @@
+<div>
+    <div class="BoxIntern col-lg-12 row" *ngFor="let d of processedData">
+        <div class="col-lg-6">
+            {{d.name}}
+        </div>
+        <div class="col-lg-6 Underlined"  >
+            <div class="UnderlinedShadow" [ngStyle]="{width: getScorePercentage(d.value) + '%', backgroundColor: darkColor}">
+                {{ d.value }}
+            </div>
+        </div>
+    </div>
+</div>
+

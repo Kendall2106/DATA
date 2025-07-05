@@ -1,0 +1,119 @@
+.body{
+    margin-top: 10px;
+    background-color: #121212;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: calc(89vh - 60px); 
+}
+
+
+
+/* PARA LOS PLATINOS */
+.gallery-container {
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, 120px);  */
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  /*grid-template-columns: repeat(auto-fill, 120px);*/
+  gap: 1rem;
+  width: 100%; /* Ensure Full Width */
+}
+
+/* Tarjetas de Películas */
+.movie-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Imágenes en las Tarjetas */
+.image {
+  width: 70px;
+  height: 100px; 
+  object-fit: cover; 
+  display: block;
+}
+
+
+
+/* PARA LA GALERIA */
+.gallery {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+ 
+}
+
+
+
+
+/* PARA LOS BLOQUES */
+    .numTotal{
+    color: var(--color-2);
+    text-align: left;
+    font-weight: bold;
+    }
+
+
+    .info-block {
+      background-color: #2525257c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .block-gallery {
+      height: 500px;
+    }
+
+
+    .info-block.block-gallery {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* pega el primer hijo arriba y el último abajo */
+
+    }
+
+    .block-large-image {
+      height: 500px;
+    }
+
+    .block-chart {
+      height: 240px;
+    }
+
+    .block {
+      height: 100px;
+    }
+
+
+
+
+
+    /* Botón de filtrar */
+.filter-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-button:hover {
+  color: #000000;
+  background-color: var(--color-2);
+}
+
+

@@ -2,14 +2,11 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-graphics-byscore',
-  templateUrl: './graphics-byscore.component.html',
-  styleUrls: ['./graphics-byscore.component.css']
+  selector: 'app-graphics-bytype2',
+  templateUrl: './graphics-bytype2.component.html',
+  styleUrls: ['./graphics-bytype2.component.css']
 })
-export class GraphicsByscoreComponent implements OnChanges, OnInit, OnDestroy  {
-
-
-
+export class GraphicsBytype2Component implements OnChanges, OnInit, OnDestroy {
   @Input() data: any[] = [];
 
   view: [number, number] = [500, 300];
@@ -26,7 +23,7 @@ export class GraphicsByscoreComponent implements OnChanges, OnInit, OnDestroy  {
   darkColor = "";
   observer!: MutationObserver;
 
-  processedData: { score: number; value: number }[] = [];
+  processedData: any = [];
 
   ngOnInit() {
     this.updateDarkColor();
@@ -43,11 +40,13 @@ export class GraphicsByscoreComponent implements OnChanges, OnInit, OnDestroy  {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && this.data) {
-      this.processedData = this.getScoreDistribution(this.data);
+      this.processedData = this.getTopTypeDistribution(this.data);
+      console.log(this.processedData);
     }
+
   }
 
-  
+
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
@@ -59,48 +58,34 @@ export class GraphicsByscoreComponent implements OnChanges, OnInit, OnDestroy  {
     this.darkColor = this.darkenColor(baseColor, 0.35);
   }
 
-  getScoreDistribution(datatemp: any): { score: number; value: number }[] {
-    const distribution: { [key: number]: number } = {
-      0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0
-    };
+  getTopTypeDistribution(datatemp: any[]): { name: string; value: number }[] {
+    const distribution: { [type: string]: number } = {};
 
     for (const d of datatemp) {
-      const score = d.score;
-      if (score >= 0 && score <= 5) {
-        distribution[score]++;
+      const type = d.type;
+      if (type) {
+        distribution[type] = (distribution[type] || 0) + 1;
       }
     }
 
-    return Object.entries(distribution).map(([score, count]) => ({
-      score: Number(score),
-      value: count
-    }));
-  }
+    const temp = Object.entries(distribution).map(([name, count]) => ({
+     name: name,
+     value: count
+     }));
 
-  getScoreValue(score: number): number {
-    const item = this.processedData.find(d => d.score === score);
-    return item ? item.value : 0;
-  }
-
-  get totalCount(): number {
-    return this.data?.length || 0;
-  }
-
-  getScorePercentage(score: number): number {
-    const total = this.totalCount;
-    const scoreValue = this.getScoreValue(score);
-    return total > 0 ? (scoreValue / total) * 100 : 0;
+    return temp.sort((a, b) => b.value - a.value);;
   }
 
 
 
 
+getScorePercentage(score: number): number {
+  const total = this.data.length;
+  return total > 0 ? (score / total) * 100 : 0;
+}
 
 
-
-
-
-  darkenColor(color: string, percent: number): string {
+darkenColor(color: string, percent: number): string {
   const num = parseInt(color.replace('#', ''), 16);
   let r = (num >> 16) & 0xff;
   let g = (num >> 8) & 0xff;
@@ -120,8 +105,5 @@ export class GraphicsByscoreComponent implements OnChanges, OnInit, OnDestroy  {
 getCssVariableValue(variableName: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
 }
-
-
-
 
 }
