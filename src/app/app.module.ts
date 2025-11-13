@@ -39,6 +39,7 @@ import { GameGraphicsComponent } from './pages/lists-graphics/game-graphics/game
 import { AnimeGraphicsComponent } from './pages/lists-graphics/anime-graphics/anime-graphics.component';
 import { GraphicsBytype2Component } from './pages/component/graphics-bytype2/graphics-bytype2.component';
 import { BooksGraphicsComponent } from './pages/lists-graphics/books-graphics/books-graphics.component';
+import { ModalDetallesComponent } from './pages/component/modal-detalles/modal-detalles.component';
 
 
 
@@ -72,7 +73,8 @@ import { BooksGraphicsComponent } from './pages/lists-graphics/books-graphics/bo
     GameGraphicsComponent,
     AnimeGraphicsComponent,
     GraphicsBytype2Component,
-    BooksGraphicsComponent
+    BooksGraphicsComponent,
+    ModalDetallesComponent
   ],
   imports: [
     BrowserModule,

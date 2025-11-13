@@ -52,9 +52,9 @@ export class LibrosService {
     await deleteDoc(documentRef);
   }
 
-  async updateBook(documentId: string, score: string): Promise<void> {
+  async updateBook(documentId: string, data: any): Promise<void> {
     const documentRef = doc(this.firestore, `books/${documentId}`);
-    await updateDoc(documentRef, { type: score });
+    await updateDoc(documentRef, data);
   }
 
 

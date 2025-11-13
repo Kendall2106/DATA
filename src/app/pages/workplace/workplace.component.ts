@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Anime } from 'src/app/core/model/anime.model';
 
 import { Movie } from 'src/app/core/model/movie.model';
@@ -11,6 +13,8 @@ import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
+import { ModalComponent } from '../component/modal/modal.components';
+import { ModalDetallesComponent } from '../component/modal-detalles/modal-detalles.component';
 
 @Component({
   selector: 'app-workplace',
@@ -47,7 +51,7 @@ export class WorkplaceComponent implements OnInit {
 
   tier: any = [12, 11, 10, 9, 8,7,6,5,4,3,2,1];
 
-  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService) {
+  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService, public modalService: NgbModal) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
@@ -469,6 +473,17 @@ getBorderStyle(score: any): { [key: string]: string } {
     border: `5px solid ${borderColor}`
   }
 }
+
+
+  openModal(infoData: any) {
+    const modalRef = this.modalService.open(ModalDetallesComponent, { centered: true });
+    modalRef.componentInstance.data = infoData;
+    modalRef.componentInstance.type = this.type;
+
+    modalRef.componentInstance.peliculaEliminada.subscribe(() => {
+      this.loadData(this.type);
+    });
+  }
 
 
 }

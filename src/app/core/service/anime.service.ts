@@ -51,9 +51,9 @@ export class AnimeService {
     await deleteDoc(documentRef);
   }
 
-  async updateSeasonAnime(documentId: string, data:boolean): Promise<void> {
+  async updateSeasonAnime(documentId: string, data: any): Promise<void> {
     const documentRef = doc(this.firestore, `animes/${documentId}`);
-    await updateDoc(documentRef, { season: data });
+    await updateDoc(documentRef, data);
   }
 
  

@@ -50,10 +50,10 @@ export class SeriesService {
     await deleteDoc(documentRef);
   }
 
-  async updateSerie(documentId: string, type: string): Promise<void> {
-    const documentRef = doc(this.firestore, `series/${documentId}`);
-    await updateDoc(documentRef, { type: type });
-  }
+  async updateSerie(documentId: string, data: any): Promise<void> {
+  const documentRef = doc(this.firestore, `series/${documentId}`);
+  await updateDoc(documentRef, data);
+}
 
 
 }

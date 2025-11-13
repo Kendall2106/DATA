@@ -53,9 +53,9 @@ export class GameService {
     await deleteDoc(documentRef);
   }
 
-  async updateGames(documentId: string, rd: string): Promise<void> {
+  async updateGames(documentId: string, data: any): Promise<void> {
     const documentRef = doc(this.firestore, `games/${documentId}`);
-    await updateDoc(documentRef, { type: rd });
+    await updateDoc(documentRef, data);
   }
 
 

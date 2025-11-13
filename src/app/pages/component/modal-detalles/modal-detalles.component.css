@@ -1,0 +1,200 @@
+
+
+.modalPrin {
+    width: 60%;
+    height: 60%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.699);
+    
+ 
+  }
+  
+
+  
+  /* Estilos para el título del modal */
+  .modal-title {
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;          /* Oculta el texto que se sale del contenedor */
+    text-overflow: ellipsis; 
+    width: 80%;
+  }
+
+  .imagen{
+    width: 100%; 
+    height: 100%;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    max-height: 350px;
+  }
+
+
+
+
+ /* Estilos para la animación de carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.767); /* Fondo oscurecido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima del modal */
+}
+
+/* Ajusta estilos si es necesario */
+.loading-overlay p {
+  color: white;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+
+
+
+  
+  @media (max-width:1000px) {
+
+    .modalPrin {
+        width: 100%;
+        height: 100%;
+      }
+
+    .imagen{
+      display: none;
+    }
+
+
+    .synopsis {
+        max-height: 150px;
+    }
+
+
+}
+
+
+
+
+.btnClose {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.btnClose:focus {
+  outline: none;
+}
+
+.synopsis {
+  color: white; 
+  text-align: left;
+  overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
+  overflow-y: auto;
+  height: 190px;
+}
+
+.synopsis::-webkit-scrollbar {
+  width: 0; /* Oculta la barra de desplazamiento vertical en navegadores webkit */
+}
+
+.btnModal{
+  background-color: var(--color-2);
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 100%; 
+  max-width: 150px; 
+}
+
+.btnModalDelete{
+  background-color: red;
+  color: white;
+  border: none;
+  width: 100%; 
+  max-width: 150px; 
+}
+
+.btnPending{
+  background-color: var(--color-2);
+  color: rgb(0, 0, 0);
+  border: none;
+  width: 60%; 
+  max-width: 150px; 
+}
+
+
+.iconModal{
+  font-size: 100%;
+}
+
+select{
+  margin-top: 5%;
+  width: 100%;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  background-color: transparent;
+}
+
+select option {
+  
+  background-color: var(--color-1); 
+  color: var(--color-text); 
+}
+
+.date{
+  margin-top: 4%;
+  width: 100%;
+  font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.39);
+  color: white;
+  background-color: transparent;
+}
+
+
+
+
+
+.star-rating {
+  font-size: 2rem; /* Tamaño de las estrellas */
+  color: gray; /* Color de las estrellas sin seleccionar */
+  margin-top: 0%;
+}
+
+.star-rating .selected {
+  color: gold; /* Color de las estrellas seleccionadas */
+}
+
+.star-rating span {
+  cursor: pointer; /* El cursor cambia cuando se pasa por encima */
+}

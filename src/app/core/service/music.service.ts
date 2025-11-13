@@ -43,9 +43,9 @@ export class MusicService {
     await deleteDoc(documentRef);
   }
 
-  async updateMusic(documentId: string, score: number): Promise<void> {
+  async updateMusic(documentId: string, data: any): Promise<void> {
     const documentRef = doc(this.firestore, `music/${documentId}`);
-    await updateDoc(documentRef, { score: score });
+    await updateDoc(documentRef, data);
   }
 
   
