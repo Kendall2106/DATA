@@ -76,17 +76,17 @@
                         <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
                     </select>
 
-                    <select class="filter-dropdown" id="opTipos" (change)="filterType($event)">
+                    <select [(ngModel)]="selectedCategory"  class="filter-dropdown" id="opTipos" (change)="filterType($event)">
                         <option value="Todos">Categoria: Todos</option>
                         <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                     </select>
 
-                    <select class="filter-dropdown" id="opAnios" (change)="filterYear($event)">
+                    <select  [(ngModel)]="selectedYear" class="filter-dropdown" id="opAnios" (change)="filterYear($event)">
                         <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[1]">{{
                             opcion }}</option>
                     </select>
 
-                    <select class="filter-dropdown" id="opCalificacion" (change)="filterScore($event)">
+                    <select [(ngModel)]="selectedScore" class="filter-dropdown" id="opCalificacion" (change)="filterScore($event)">
                         <option value="Todos">Calificacion: Todos</option>
                         <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
                     </select>
@@ -179,7 +179,7 @@
     <div>
         <div class="progress-container">
             <div class="progress-bar" [style.width.%]="percentage">
-                {{ resultCount }} / {{ goalAmount }} ( {{ percentage | number:'1.0-0' }}% )
+                {{ goalActualYear }} / {{ goalAmount }} ( {{ percentage | number:'1.0-0' }}% )
             </div>
         </div>
     </div>

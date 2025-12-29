@@ -50,6 +50,8 @@ export class WorkplaceComponent implements OnInit {
   isDateView = false;
   isActualRelease = false;
   settings: any[] = [];
+  goalActualYear: number = 0;
+  lastTypeLoaded: string | null = null;
 
   tier: any = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
@@ -88,9 +90,18 @@ export class WorkplaceComponent implements OnInit {
     }
   }
 
+resetFilters() {
+  this.selectedCategory = 'Todos';
+  this.selectedKind = 'Todos';
+  this.selectedScore = 'Todos';
+  this.selectedYear = this.opAnios[1];
+  this.isActualRelease = false;
+}
 
   async loadData(message: any) {
     try {
+      this.resetFilters();
+
       this.selectedItem = message;
       this.loading = true;
 
@@ -126,6 +137,9 @@ export class WorkplaceComponent implements OnInit {
 
 
       this.resultCount = this.resultFilter.length;
+
+
+
       this.applyFilters();
 
       this.loadAllMonth();
@@ -134,6 +148,15 @@ export class WorkplaceComponent implements OnInit {
 
         this.showAlert("Error al solicitar los datos", "error", 3000);
       }
+
+      if (this.lastTypeLoaded !== message) {
+        this.goalActualYear = this.resultCount;
+        this.lastTypeLoaded = message;
+      }
+
+
+
+
 
     } catch (error) {
       console.error("Error:", error);
@@ -217,6 +240,7 @@ export class WorkplaceComponent implements OnInit {
       .filter(item => this.convertYear(item))
       .filter(item => this.selectedScore === 'Todos' || item.score === Number(this.selectedScore))
       .filter(item => this.isActualRelease === false || item.releaseDate === Number(this.selectedYear));
+
 
     this.resultCount = this.resultFilter.length;
     this.loadAllMonth();
@@ -501,33 +525,33 @@ export class WorkplaceComponent implements OnInit {
 
 
 
-percentage:number = 0;
+  percentage: number = 0;
 
 
 
- async loadSettings() {
-  console.log("this.type", this.type);
-  this.settings = await this.settingsService.getSettings();
+  async loadSettings() {
+    console.log("this.type", this.type);
+    this.settings = await this.settingsService.getSettings();
 
-  const settingX = this.settings.find(s => s.name === this.type);
+    const settingX = this.settings.find(s => s.name === this.type);
 
-  if (!settingX) {
-    this.percentage = 0;
-    return;
+    if (!settingX) {
+      this.percentage = 0;
+      return;
+    }
+
+    this.goalAmount = Number(settingX.value);
+
+    if (this.goalAmount === 0) {
+      this.percentage = 0;
+      return;
+    }
+
+    this.percentage = Math.min(
+      (this.goalActualYear / this.goalAmount) * 100,
+      100
+    );
   }
-
-  this.goalAmount = Number(settingX.value);
-
-  if (this.goalAmount === 0) {
-    this.percentage = 0;
-    return;
-  }
-
-  this.percentage = Math.min(
-    (this.resultCount / this.goalAmount) * 100,
-    100
-  );
-}
 
 
 }
