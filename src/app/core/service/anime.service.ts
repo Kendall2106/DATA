@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, deleteField, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Anime } from '../model/anime.model';
 
 @Injectable({
@@ -56,5 +56,6 @@ export class AnimeService {
     await updateDoc(documentRef, data);
   }
 
+ 
  
 }

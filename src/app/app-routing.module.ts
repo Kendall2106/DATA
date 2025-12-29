@@ -9,6 +9,7 @@ import { DiscoverPageComponent } from './pages/discover-page/discover-page.compo
 import { PendingListComponent } from './pages/pending-list/pending-list.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
+import { CollectionsComponent } from './pages/collections/collections.component';
 
 const routes: Routes = [
   {path:'', component: DiscoverPageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'PendingList', component: PendingListComponent },
   {path:'Profile', component: ProfilePageComponent },
   {path:'Graphics', component: GraphicsPageComponent },
+  {path:'Collections', component: CollectionsComponent },
 ];
 
 @NgModule({

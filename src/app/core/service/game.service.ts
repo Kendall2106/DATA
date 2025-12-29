@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, deleteField, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Game } from '../model/game.model';
 
 @Injectable({
@@ -57,6 +57,8 @@ export class GameService {
     const documentRef = doc(this.firestore, `games/${documentId}`);
     await updateDoc(documentRef, data);
   }
+
+ 
 
 
 

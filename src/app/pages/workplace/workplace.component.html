@@ -70,7 +70,8 @@
                     <button class="filter-button" (click)="loadData('Music')"
                         [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
 
-                    <select *ngIf="selectedItem == 'Books'" class="filter-dropdown" id="opKind" (change)="filterKind($event)">
+                    <select *ngIf="selectedItem == 'Books'" class="filter-dropdown" id="opKind"
+                        (change)="filterKind($event)">
                         <option value="Todos">Tipo: Todos</option>
                         <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
                     </select>
@@ -90,12 +91,15 @@
                         <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
                     </select>
 
-                    <button (click)="sortDataByScore()" class="filter-button" [class.active]="currentSortOrder === 'asc'"><i class="uil"
+                    <button (click)="sortDataByScore()" class="filter-button"
+                        [class.active]="currentSortOrder === 'asc'"><i class="uil"
                             [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i></button>
 
-                    <button (click)="dateView()" class="filter-button" [class.active]="isDateView === true"><i class="uil uil-calendar-alt"></i></button>
-    
-                    <button *ngIf="selectedItem !== 'Books'" (click)="watchActualRelease()" [class.active]="isActualRelease === true" class="filter-button">Release</button>
+                    <button (click)="dateView()" class="filter-button" [class.active]="isDateView === true"><i
+                            class="uil uil-calendar-alt"></i></button>
+
+                    <button *ngIf="selectedItem !== 'Books'" (click)="watchActualRelease()"
+                        [class.active]="isActualRelease === true" class="filter-button">Release</button>
                     <!--<button  (click)="loadAchievements()"  *ngIf="selectedItem === 'Games'" class="filter-button" ><i class="uil uil-award"></i></button>-->
 
                     <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
@@ -109,74 +113,80 @@
 
     <div *ngIf="!isDateView" class="list">
         <div class="gallery-container">
-          <div class="movie-card" *ngFor="let movie of resultFilter">
-            <div class="cardImage">
-            
-                <div *ngIf="selectedItem !== 'Music'">
-                    <img (click)="openModal(movie)"  class="image ${getScoreClass(movie.score)}" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
-                    
-                </div>
-                <div *ngIf="selectedItem === 'Music'">
-                    <img (click)="openModal(movie)"  class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
-                </div>
-            
-            </div>
+            <div class="movie-card" *ngFor="let movie of resultFilter">
+                <div class="cardImage">
 
-            
+                    <div *ngIf="selectedItem !== 'Music'">
+                        <img (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
+                            title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
 
-            <div class="stars">
-              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                <i
-                  class="star"
-                  [ngClass]="{'filled': i < movie.score}"
-                  aria-hidden="true"
-                >★</i>
-              </ng-container>
+                    </div>
+                    <div *ngIf="selectedItem === 'Music'">
+                        <img (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}" [src]="movie.image"
+                            [alt]="movie.name" />
+                    </div>
+
+                </div>
+
+
+
+                <div class="stars">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                        <i class="star" [ngClass]="{'filled': i < movie.score}" aria-hidden="true">★</i>
+                    </ng-container>
+                </div>
             </div>
-          </div>
         </div>
     </div>
 
-      <div *ngIf="isDateView"  class="list" >
+    <div *ngIf="isDateView" class="list">
         <div *ngFor="let item of months; let i = index">
-    
-            <div style=" padding-left: 2%;" >
+
+            <div style=" padding-left: 2%;">
                 <p>-- {{item.name}} --</p>
             </div>
-    
-                <div class="gallery-container">
-                    <div class="movie-card" *ngFor="let movie of dataFilterByDate(resultFilter, item.number)">
-                        <div class="cardImage">
-            
-                <div *ngIf="selectedItem !== 'Music'">
-                    <img (click)="openModal(movie)"  class="image ${getScoreClass(movie.score)}" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
-                    
-                </div>
-                <div *ngIf="selectedItem === 'Music'">
-                    <img (click)="openModal(movie)"  class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
-                </div>
-            
-            </div>
-    
 
-    
-                        <div class="stars">
-                            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
-                                <i class="star" [ngClass]="{'filled': i < movie.score}" aria-hidden="true">★</i>
-                            </ng-container>
+            <div class="gallery-container">
+                <div class="movie-card" *ngFor="let movie of dataFilterByDate(resultFilter, item.number)">
+                    <div class="cardImage">
+
+                        <div *ngIf="selectedItem !== 'Music'">
+                            <img (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
+                                title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
+
                         </div>
+                        <div *ngIf="selectedItem === 'Music'">
+                            <img (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}"
+                                [src]="movie.image" [alt]="movie.name" />
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stars">
+                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                            <i class="star" [ngClass]="{'filled': i < movie.score}" aria-hidden="true">★</i>
+                        </ng-container>
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
 
-      
- 
+    </div>
+
+
+    <div>
+        <div class="progress-container">
+            <div class="progress-bar" [style.width.%]="percentage">
+                {{ resultCount }} / {{ goalAmount }} ( {{ percentage | number:'1.0-0' }}% )
+            </div>
+        </div>
+    </div>
+
 
     <div class="loading-overlay" *ngIf="loading">
         <div class="loading-spinner"></div>
     </div>
 
 </div>
-
-

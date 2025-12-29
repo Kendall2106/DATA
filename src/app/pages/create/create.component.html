@@ -1,5 +1,5 @@
 <div class="body">
-    <div class="top d-flex flex-column" style=" height: 210px; border-bottom: 1px solid #000;">
+    <!--- <div class="top d-flex flex-column" style=" height: 210px; border-bottom: 1px solid #000;">
         <div class="mt-auto d-flex" style="padding-left: 5%;">
             <a href="./"><img class="imgTitle" src="./assets/img/prisma2.png" style="height: 90%;"></a>
         </div>
@@ -75,5 +75,31 @@
                 <button type="submit" [disabled]="!movieForm.valid">Submit</button>
             </div>
         </form>
+    </div>-->
+
+
+    <div>
+        <div class="container mt-4">
+            <div class="row g-4">
+                <div class="col-12 col-md-6 col-lg-4" *ngFor="let setting of settings">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">
+                                {{ setting.name }}
+                            </h5>
+
+                            <input type="text" class="form-control" [(ngModel)]="setting.value"
+                                (blur)="saveSetting(setting)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-end mt-3">
+            <button class="btn btn-primary" (click)="saveAll()">
+                Guardar cambios
+            </button>
+        </div>
     </div>
 </div>

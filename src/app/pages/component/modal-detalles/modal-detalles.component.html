@@ -41,6 +41,18 @@
                         style="width: 100%;">
                     </div>
 
+                    <div class="col-lg-6"> 
+                        <select 
+                            class="filter-dropdown" 
+                            id="opC" 
+                            [(ngModel)]="selectedCollection">
+                            <option value="Todos" selected>Colección: Ninguna</option>
+                            <option *ngFor="let opcion of collections" [value]="opcion.id">
+                            {{ opcion.name }}
+                            </option>
+                        </select>
+                        </div>
+
                
             </div>
 

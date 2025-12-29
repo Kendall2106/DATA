@@ -1,0 +1,52 @@
+<div class="body">
+    <header>
+
+
+    </header>
+
+    <div style="margin-bottom: 2%;">
+        <h2 style="color: white; margin-left: 2%;">Collections</h2>
+        <button>Crear Coleccion</button>
+    </div>
+
+    <div class="list">
+        <div class="gallery-container">
+          <div class="movie-card-collection" *ngFor="let d of collections">
+            <div class="card" (click)="selectCollection(d.id)" style="margin: 0;"  style="height: 60%;" >
+                <img class="image" title="{{ d.name }}" src="./assets/img/folder.png" [alt]="d.name"/>
+            </div>
+            <p style="margin: 0;">{{d.name}}</p>
+          </div>
+        </div>
+
+
+         <div class="gallery-container" style="margin-top: 2%; ;">
+          <div class="movie-card" *ngFor="let d of data">
+            <div class="cardImage">
+                <img   class="image" title="{{ d.name }}" [src]="d.image" [alt]="d.name" />
+            </div>
+
+            <div class="stars">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                <i
+                  class="star"
+                  [ngClass]="{'filled': i < d.score}"
+                  aria-hidden="true"
+                >★</i>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+
+    
+
+
+
+    <div class="loading-overlay" *ngIf="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+</div>

@@ -15,6 +15,7 @@ import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 import { ModalComponent } from '../component/modal/modal.components';
 import { ModalDetallesComponent } from '../component/modal-detalles/modal-detalles.component';
+import { SettingsService } from 'src/app/core/service/settings.service';
 
 @Component({
   selector: 'app-workplace',
@@ -45,19 +46,20 @@ export class WorkplaceComponent implements OnInit {
   currentSortOrder: 'asc' | 'desc' = 'desc';
   selectedCardIndex: number | null = null;
   stars: boolean[] = Array(5).fill(false);
-  selectedItem: string ='';
+  selectedItem: string = '';
   isDateView = false;
   isActualRelease = false;
+  settings: any[] = [];
 
-  tier: any = [12, 11, 10, 9, 8,7,6,5,4,3,2,1];
+  tier: any = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService, public modalService: NgbModal) {
+  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService, public modalService: NgbModal, public settingsService: SettingsService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
     ];
-    this.opKind =["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
-   // this.opAnios = ["All", "2024", "2023", "2022", "+"];
+    this.opKind = ["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
+    // this.opAnios = ["All", "2024", "2023", "2022", "+"];
     this.opCalificacion = ["0", "1", "2", "3", "4", "5"];
   }
 
@@ -80,7 +82,7 @@ export class WorkplaceComponent implements OnInit {
   updateYearOptions(): void {
     const currentYear = new Date().getFullYear();
     this.opAnios = ['All'];
-  
+
     for (let year = currentYear; year >= 2019; year--) {
       this.opAnios.push(year.toString());
     }
@@ -112,6 +114,7 @@ export class WorkplaceComponent implements OnInit {
         this.data = await this.loadDataForType(this.musicService.getMusic());
       }
 
+      this.loadSettings();
 
       this.message = message;
       this.loadCategories(message);
@@ -143,20 +146,20 @@ export class WorkplaceComponent implements OnInit {
 
 
   async loadCategories(message: any) {
-      var categoriesTemp: any[] = [];
-       if (message === 'Series' || message === 'Movies') { 
-        this.categories = await this.seriesService.getCategoriesShow();
-      } else if (message === 'Animes') {     
-        this.categories = await this.animeService.getCategoriesAnime();
-      } else if (message === 'Games') {
-        this.categories = await this.gameService.getCategoriesGame();
-      } else if (message === 'Books') {    
-        this.categories = await this.libroService.getCategoriesBook();
-      } else if (message === 'Music') {
+    var categoriesTemp: any[] = [];
+    if (message === 'Series' || message === 'Movies') {
+      this.categories = await this.seriesService.getCategoriesShow();
+    } else if (message === 'Animes') {
+      this.categories = await this.animeService.getCategoriesAnime();
+    } else if (message === 'Games') {
+      this.categories = await this.gameService.getCategoriesGame();
+    } else if (message === 'Books') {
+      this.categories = await this.libroService.getCategoriesBook();
+    } else if (message === 'Music') {
       //  this.data = await this.loadDataForType(this.musicService.getMusic());
-      }
+    }
 
-  
+
   }
 
 
@@ -224,7 +227,7 @@ export class WorkplaceComponent implements OnInit {
     const date = item.date.toString().toLowerCase();
     const parts = date.split("-");
     const year = parseInt(parts[2], 10);
-  
+
     if (this.selectedYear === 'All') {
       return true;
     } else if (this.selectedYear === '+') {
@@ -264,7 +267,7 @@ export class WorkplaceComponent implements OnInit {
     this.applyFilters();
   }
 
- 
+
   sortDataByScore() {
     this.resultFilter = this.resultFilter.sort((a, b) => {
       const scoreA = a.score;
@@ -325,14 +328,14 @@ export class WorkplaceComponent implements OnInit {
       this.showAlert("Error al eliminar", "error", 3000);
 
     } finally {
-      this.loading = false; 
+      this.loading = false;
 
       this.loadData(this.type);
       this.showAlert("Dato Eliminado", "success", 2000);
     }
   }
 
- 
+
   /*async rate(recoTemp: any, score: number) {
     recoTemp.score = score;
     try {
@@ -373,10 +376,10 @@ export class WorkplaceComponent implements OnInit {
 
 
   comparatedMonth(itemTemp: any) {
-     const [day, month, year] = itemTemp.date.split('-');
-      const date = new Date(`${year}-${month}-${day}`);
-      const monthYear = `${date.getMonth() + 1}`;
-      return monthYear;
+    const [day, month, year] = itemTemp.date.split('-');
+    const date = new Date(`${year}-${month}-${day}`);
+    const monthYear = `${date.getMonth() + 1}`;
+    return monthYear;
   }
 
 
@@ -387,11 +390,11 @@ export class WorkplaceComponent implements OnInit {
   months: { number: number, name: string }[] = [];
 
 
-  loadAllMonth(){
+  loadAllMonth() {
     this.months = [];
-    
+
     const monthNames = [
-      "", "January", "February", "March", "April", "May", "June", "July", 
+      "", "January", "February", "March", "April", "May", "June", "July",
       "August", "September", "October", "November", "December"
     ];
 
@@ -423,56 +426,56 @@ export class WorkplaceComponent implements OnInit {
     this.applyFilters();
   }
 
-/*
-  loadAchievements() {
-    this.resultFilter = this.data
-    .filter(item => item.achievements === true);
+  /*
+    loadAchievements() {
+      this.resultFilter = this.data
+      .filter(item => item.achievements === true);
+  
+    this.resultCount = this.resultFilter.length;
+    this.loadAllMonth();
+    }
+  */
 
-  this.resultCount = this.resultFilter.length;
-  this.loadAllMonth();
-  }
-*/
+  async actualizarTodo() {
+    console.log(this.resultFilter);
+    try {
+      this.loading = true;
+      for (let index = 0; index < this.resultFilter.length; index++) {
+        await this.movieService.updateMovie(this.resultFilter[index].id, this.resultFilter[index].type);
+      }
+    } catch (error) {
+      this.showAlert("Error al actualizar el score", "error", 3000);
 
-async actualizarTodo(){
-  console.log(this.resultFilter);
-  try {
-    this.loading = true;
-  for (let index = 0; index < this.resultFilter.length; index++) {
-    await this.movieService.updateMovie(this.resultFilter[index].id, this.resultFilter[index].type);
-  }
-} catch (error) {
-  this.showAlert("Error al actualizar el score", "error", 3000);
-
-} finally {
-  this.loading = false; 
-  this.loadData(this.type);
-  this.showAlert("Dato Actualizado", "success", 2000);
-}
-  //await this.movieService.updateMovie(recoTemp.id, recoTemp.score);
-}
-
-
-getBorderStyle(score: any): { [key: string]: string } {
-  const opacity = 0.8;
-
-  let borderColor = `rgba(255, 0, 0, ${opacity})`; 
-
-  if (score == 1) {
-    borderColor = `rgba(255, 255, 255, ${opacity})`; 
-  } else if (score == 2) {
-    borderColor = `rgba(204, 85, 0, ${opacity})`; 
-  } else if (score == 3) {
-    borderColor = `rgba(255, 153, 204, ${opacity})`; 
-  } else if (score == 4) {
-    borderColor = `rgba(102, 153, 204, ${opacity})`;
-  } else if (score == 5) {
-    borderColor = `rgba(204, 153, 0, ${opacity})`; 
+    } finally {
+      this.loading = false;
+      this.loadData(this.type);
+      this.showAlert("Dato Actualizado", "success", 2000);
+    }
+    //await this.movieService.updateMovie(recoTemp.id, recoTemp.score);
   }
 
-  return {
-    border: `5px solid ${borderColor}`
+
+  getBorderStyle(score: any): { [key: string]: string } {
+    const opacity = 0.8;
+
+    let borderColor = `rgba(255, 0, 0, ${opacity})`;
+
+    if (score == 1) {
+      borderColor = `rgba(255, 255, 255, ${opacity})`;
+    } else if (score == 2) {
+      borderColor = `rgba(204, 85, 0, ${opacity})`;
+    } else if (score == 3) {
+      borderColor = `rgba(255, 153, 204, ${opacity})`;
+    } else if (score == 4) {
+      borderColor = `rgba(102, 153, 204, ${opacity})`;
+    } else if (score == 5) {
+      borderColor = `rgba(204, 153, 0, ${opacity})`;
+    }
+
+    return {
+      border: `5px solid ${borderColor}`
+    }
   }
-}
 
 
   openModal(infoData: any) {
@@ -484,6 +487,47 @@ getBorderStyle(score: any): { [key: string]: string } {
       this.loadData(this.type);
     });
   }
+
+  goalAmount: number = 0;
+
+  //currentAmount: number = 50;
+
+
+
+
+
+
+
+
+
+
+percentage:number = 0;
+
+
+
+ async loadSettings() {
+  console.log("this.type", this.type);
+  this.settings = await this.settingsService.getSettings();
+
+  const settingX = this.settings.find(s => s.name === this.type);
+
+  if (!settingX) {
+    this.percentage = 0;
+    return;
+  }
+
+  this.goalAmount = Number(settingX.value);
+
+  if (this.goalAmount === 0) {
+    this.percentage = 0;
+    return;
+  }
+
+  this.percentage = Math.min(
+    (this.resultCount / this.goalAmount) * 100,
+    100
+  );
+}
 
 
 }
