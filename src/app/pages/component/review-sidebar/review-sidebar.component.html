@@ -1,0 +1,20 @@
+<div class="overlay" (click)="closePanel()"></div>
+
+
+
+
+<div class="sidebar">
+  <header>
+    <h3>Review</h3>
+    <button  class="btnClose" (click)="closePanel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </header>
+
+  <textarea
+    [(ngModel)]="review"
+    placeholder="Write review..."
+  ></textarea>
+
+  <button class="send" (click)="send()">Send</button>
+</div>

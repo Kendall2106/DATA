@@ -37,7 +37,8 @@ export class LibrosService {
         'image' : data.image,
         'visible' : true,
         'author': data.author,
-        'kind' : data.kind
+        'kind' : data.kind,
+        'review' : data.review,
     });
   }
 

@@ -41,6 +41,7 @@ import { GraphicsBytype2Component } from './pages/component/graphics-bytype2/gra
 import { BooksGraphicsComponent } from './pages/lists-graphics/books-graphics/books-graphics.component';
 import { ModalDetallesComponent } from './pages/component/modal-detalles/modal-detalles.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
+import { ReviewSidebarComponent } from './pages/component/review-sidebar/review-sidebar.component';
 
 
 
@@ -76,7 +77,8 @@ import { CollectionsComponent } from './pages/collections/collections.component'
     GraphicsBytype2Component,
     BooksGraphicsComponent,
     ModalDetallesComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    ReviewSidebarComponent
   ],
   imports: [
     BrowserModule,

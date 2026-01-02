@@ -38,7 +38,8 @@ export class GameService {
         'image' : data.image,
         'achievements': false,
         'visible' : true,
-        'releaseDate': data.releaseDate
+        'releaseDate': data.releaseDate,
+        'review' : data.review,
     });
   }
 

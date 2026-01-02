@@ -20,55 +20,51 @@
                         </span>
                     </div>
 
-                    <div class="col-lg-6" *ngIf="type !== 'Music'"> 
+                    <div class="col-lg-6" *ngIf="type !== 'Music'">
                         <select class="filter-dropdown" id="opTipos" [(ngModel)]="dataModal.type">
                             <option value="Todos">Categoria: Todos</option>
                             <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                         </select>
-                        </div>
+                    </div>
 
                 </div>
 
-                <div class="col-lg-3" style="margin-top: 6%;"> 
+                <div class="col-lg-3" style="margin-top: 6%;">
                     <small>{{ fechaTemp | date:'dd/MM/yyyy' }}</small>
-                    <input 
-                        class="date" 
-                        type="date" 
-                        id="date" 
-                        name="date" 
-                        [(ngModel)]="dataModal.date"    
-                        required 
+                    <input class="date" type="date" id="date" name="date" [(ngModel)]="dataModal.date" required
                         style="width: 100%;">
-                    </div>
+                </div>
 
-                    <div class="col-lg-6"> 
-                        <select 
-                            class="filter-dropdown" 
-                            id="opC" 
-                            [(ngModel)]="selectedCollection">
-                            <option value="Todos" selected>Colección: Ninguna</option>
-                            <option *ngFor="let opcion of collections" [value]="opcion.id">
+                <div class="col-lg-6">
+                    <select class="filter-dropdown" id="opC" [(ngModel)]="selectedCollection">
+                        <option value="Todos" selected>Colección: Ninguna</option>
+                        <option *ngFor="let opcion of collections" [value]="opcion.id">
                             {{ opcion.name }}
-                            </option>
-                        </select>
-                        </div>
+                        </option>
+                    </select>
+                </div>
 
-               
+
+                <button (click)="editReview()">
+                    Abrir reseña
+                </button>
+
+
             </div>
 
 
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-end">
-                    <button class="btn btnModalDelete" (click)="deleteData()" style="margin-right: 2%;">
-                        <i class="iconModal uil uil-save"> Delete</i>
-                    </button>
-                    <button class="btn btnModal" (click)="saveChanges()">
-                        <i class="iconModal uil uil-save"> Save</i>
-                    </button>
+                        <button class="btn btnModalDelete" (click)="deleteData()" style="margin-right: 2%;">
+                            <i class="iconModal uil uil-save"> Delete</i>
+                        </button>
+                        <button class="btn btnModal" (click)="saveChanges()">
+                            <i class="iconModal uil uil-save"> Save</i>
+                        </button>
                     </div>
                 </div>
-                </div>
+            </div>
 
 
         </div>

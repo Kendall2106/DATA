@@ -29,7 +29,8 @@ export class MovieService {
         'type' : movie.type,
         'image' : movie.image,
         'visible' : true,
-        'releaseDate': movie.releaseDate
+        'releaseDate': movie.releaseDate,
+        'review' : movie.review,
     });
   }
 

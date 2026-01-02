@@ -11,6 +11,7 @@ import { GameService } from 'src/app/core/service/game.service';
 import { MusicService } from 'src/app/core/service/music.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
 import { AlertService } from 'src/app/core/service/alert.service';
+import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
 
 @Component({
   selector: 'app-modal',
@@ -35,7 +36,7 @@ export class ModalComponent implements OnInit {
     private dataService: DataService,
     public modalService: NgbModal,
     private recoService: RecoService,
-    private alertService: AlertService,
+    private alertService: AlertService, private reviewSidebar: ReviewSidebarService,
     private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService
   ) {
 
@@ -168,6 +169,13 @@ export class ModalComponent implements OnInit {
   showAlert(messageAlert: string, tipoMessage: any) {
     this.alertService.showAlert(messageAlert, tipoMessage);
   }
+
+  openReviewSidebar() {
+    this.reviewSidebar.open('', text => {
+      this.dataModal.review = text;
+    });
+  }
+
 
 
 }

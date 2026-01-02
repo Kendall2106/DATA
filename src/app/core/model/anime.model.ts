@@ -8,6 +8,7 @@ export interface Anime {
   image: string;
   releaseDate: number;
   visible: boolean;
+  review:string;
 }
 
 export class Anime implements Anime {

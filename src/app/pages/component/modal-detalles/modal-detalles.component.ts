@@ -7,6 +7,7 @@ import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { MusicService } from 'src/app/core/service/music.service';
+import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
@@ -36,7 +37,7 @@ export class ModalDetallesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public modalService: NgbModal, public dataService: DataService,
+    public modalService: NgbModal, public dataService: DataService, private reviewSidebar: ReviewSidebarService,
     private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService
   ) {
 
@@ -198,6 +199,15 @@ export class ModalDetallesComponent implements OnInit {
     }
   }
 
+
+  editReview() {
+    this.reviewSidebar.open(
+      this.dataModal.review || '',  // 👈 pasa la existente
+      text => {
+        this.dataModal.review = text;
+      }
+    );
+  }
 
 
 }

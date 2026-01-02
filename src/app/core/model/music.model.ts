@@ -8,6 +8,7 @@ export interface Music {
     releaseDate: number;
     artist: string;
     visible: boolean;
+    review: string;
   }
   
   export class Music implements Music {

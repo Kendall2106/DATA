@@ -7,6 +7,7 @@ export interface Serie {
     image: string;
     releaseDate: number;
     visible: boolean;
+    review: string;
   }
   
   export class Serie implements Serie {

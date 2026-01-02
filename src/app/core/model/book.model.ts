@@ -8,6 +8,7 @@ export interface Book {
     visible: boolean;
     author: string;
     kind: string;
+    review: string;
   }
   
   export class Book implements Book {

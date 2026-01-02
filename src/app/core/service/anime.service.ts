@@ -36,7 +36,8 @@ export class AnimeService {
         'type' : movie.type,
         'image' : movie.image,
         'releaseDate' : movie.releaseDate,
-        'visible' : true
+        'visible' : true,
+        'review' : movie.review,
     });
   }
 

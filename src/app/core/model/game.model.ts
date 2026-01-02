@@ -7,6 +7,7 @@ export interface Game {
     image: string;
     visible: boolean;
     releaseDate: number
+    review: string;
   }
   
   export class Game implements Game {

@@ -28,7 +28,8 @@ export class MusicService {
         'image' : music.image,
         'releaseDate' : music.releaseDate,
         'artist': music.artist,
-        'visible' : true
+        'visible' : true,
+        'review' : music.review,
     });
   }
 

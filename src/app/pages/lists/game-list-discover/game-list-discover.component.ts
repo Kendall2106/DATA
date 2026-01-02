@@ -30,7 +30,7 @@ export class GameListDiscoverComponent {
   }
 
   async getPlataform() {
-    await this.apiGamesServive.getAllPlataform().subscribe((response: any) => { 
+    /*await this.apiGamesServive.getAllPlataform().subscribe((response: any) => { 
       this.plataform = [];
       console.log(response);
       this.plataform = response.map((p: any) => ({
@@ -38,7 +38,7 @@ export class GameListDiscoverComponent {
        name: p.platform_name,
      }));
      console.log(response);
-    });
+    });*/
   }
 
 
@@ -48,12 +48,11 @@ export class GameListDiscoverComponent {
    // this.dataAiring();
     await this.apiGamesServive.getGames(this.numPage).subscribe((response: any) => {
       this.data = [];
-      console.log(response);
-      console.log(response);
-      response.forEach((item: any) => {
+      console.log(response.results);
+      response.results.forEach((item: any) => {
         this.data.push({
-          name: item.title,
-          image: item.image_url,
+          name: item.name,
+          image: item.background_image,
           info: item.overview,
           releaseDate: 0,
           randomData: item.platform_name
@@ -76,7 +75,7 @@ export class GameListDiscoverComponent {
   }*/
 
   async seachGamesByName() {
-    this.currentSearchType = 'search';
+   /* this.currentSearchType = 'search';
     await this.apiGamesServive.seachGames(this.search, this.numPage).subscribe((response: any) => {
       this.data = [];
       response.forEach((item: any) => {
@@ -88,11 +87,11 @@ export class GameListDiscoverComponent {
           randomData: item.platform_name
         });
       });
-    });
+    });*/
   }
 
   async getGamesByPlataform(plataform: any) {
-    this.currentSearchType = 'genre'; 
+ /*   this.currentSearchType = 'genre'; 
     this.currentGenre = plataform;
     this.data = [];
     await this.apiGamesServive.getGamesByPlataform(plataform, this.numPage).subscribe((response: any) => {
@@ -107,7 +106,7 @@ export class GameListDiscoverComponent {
         });
       });
     });
-
+*/
   }
 
   onOptionSelected(event: any): void {
