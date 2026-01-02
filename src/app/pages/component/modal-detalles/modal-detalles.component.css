@@ -121,7 +121,7 @@
   overflow: hidden; /* Oculta cualquier texto que desborde del contenedor */
   text-overflow: ellipsis; /* Muestra puntos suspensivos (...) al final del texto */
   overflow-y: auto;
-  height: 190px;
+  height: 80px;
 }
 
 .synopsis::-webkit-scrollbar {

@@ -29,6 +29,7 @@ export class GameService {
 
 
   async createGames(data: Game){
+    console.log(data);
     const acollection = collection(this.firestore,'games');
     addDoc(acollection,{
         'name' : data.name,
@@ -39,7 +40,7 @@ export class GameService {
         'achievements': false,
         'visible' : true,
         'releaseDate': data.releaseDate,
-        'review' : data.review,
+        'review' : data.review ?? '',
     });
   }
 

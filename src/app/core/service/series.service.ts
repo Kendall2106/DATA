@@ -36,7 +36,7 @@ export class SeriesService {
         'image' : serie.image,
         'releaseDate' : serie.releaseDate,
         'visible' : true,
-        'review' : serie.review,
+        'review' : serie.review ?? '',
     });
   }
 

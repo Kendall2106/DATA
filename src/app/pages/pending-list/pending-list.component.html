@@ -93,6 +93,8 @@
                       
                       </div>
 
+                      
+
                       <button  *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)">
                         <i class="uil uil-eye"></i>
                     </button>
@@ -123,6 +125,7 @@
                                 <th *ngIf="type == 'Books'">Kind</th>
                                 <th *ngIf="type == 'Games'">Year</th>
                                 <th>Type</th>
+                                <th>Review</th>
                                 <th>Viewed</th>
                                 <th>Delete</th>
                                 <th>Save</th>
@@ -157,6 +160,10 @@
                                     <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
                                         <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
                                     </select>
+                                </td>
+                                <td>
+                                    <button class="btnCard btn" (click)="openReviewSidebar(d)"><i
+                                            class="iconCard uil uil-edit"></i></button>
                                 </td>
                                 <td>
                                     <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"

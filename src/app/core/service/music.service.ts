@@ -29,7 +29,7 @@ export class MusicService {
         'releaseDate' : music.releaseDate,
         'artist': music.artist,
         'visible' : true,
-        'review' : music.review,
+        'review' : music.review ?? '',
     });
   }
 

@@ -280,7 +280,7 @@ header {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #6c63ff, #9f9cff);
+  background: linear-gradient(90deg, #008687, #027a7a);
   border-radius: 10px;
   transition: width 0.4s ease;
 }

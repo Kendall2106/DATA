@@ -30,7 +30,7 @@ export class MovieService {
         'image' : movie.image,
         'visible' : true,
         'releaseDate': movie.releaseDate,
-        'review' : movie.review,
+        'review' : movie.review ?? '',
     });
   }
 

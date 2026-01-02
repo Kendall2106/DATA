@@ -6,6 +6,7 @@ import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service'; import { MusicService } from 'src/app/core/service/music.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
+import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
@@ -36,7 +37,7 @@ export class PendingListComponent implements OnInit {
 
   constructor(private recoService: RecoService,
     private router: Router,
-    private dataService: DataService,
+    private dataService: DataService,private reviewSidebar: ReviewSidebarService,
     private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService
   ) {
     this.opTipos = [
@@ -378,5 +379,11 @@ try {
 
     this.resultCount = this.resultFilter.length;
   }*/
+
+    openReviewSidebar(datatemp: any) {
+    this.reviewSidebar.open('', text => {
+      datatemp.review = text;
+    });
+  }
 
 }
