@@ -85,7 +85,7 @@ export class Utils {
     var response: any;
 
     if (type == "Movies" || type == "Series" || type == "Books" || type == "Games") {
-      response = await fetch('https://corsproxy.io/?url=' + encodeURIComponent(imageUrl)); //key=577d7de5&
+      response = await fetch('https://corsproxy.io/?key=577d7de5&url=' + encodeURIComponent(imageUrl)); //key=577d7de5&
     } else {
       response = await fetch(imageUrl);
     }

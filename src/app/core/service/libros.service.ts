@@ -38,7 +38,7 @@ export class LibrosService {
         'visible' : true,
         'author': data.author,
         'kind' : data.kind,
-        'review' : data.review,
+        'review' : data.review ?? '',
     });
   }
 
