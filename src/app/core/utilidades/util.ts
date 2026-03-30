@@ -84,7 +84,7 @@ export class Utils {
   static async imageToByteFromUrl(imageUrl: string, type: any): Promise<string> {
     var response: any;
 
-    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games") {
+    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {
       response = await fetch('https://corsproxy.io/?key=577d7de5&url=' + encodeURIComponent(imageUrl)); //key=577d7de5&
     } else {
       response = await fetch(imageUrl);
@@ -93,6 +93,18 @@ export class Utils {
     if (!response.ok) {
       throw new Error('No se pudo cargar la imagen');
     }
+
+  /*    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {
+  response = await fetch(
+    'https://igdb-proxy.data-igdb.workers.dev/' + encodeURIComponent(imageUrl)
+  );
+} else {
+  response = await fetch(imageUrl);
+}*/
+
+if (!response.ok) {
+  throw new Error('No se pudo cargar la imagen');
+}
 
     const blob = await response.blob();
 
