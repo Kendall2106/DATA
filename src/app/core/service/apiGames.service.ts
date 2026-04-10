@@ -21,26 +21,25 @@ export class ApiGamesService {
 
   // 🔹 Obtener juegos (listado)
   getGames(offset: number, limit: number): Observable<any[]> {
-    const body = `
-      fields id, name, summary, rating, first_release_date, cover.url,platforms.abbreviation,created_at;
-      sort rating_count desc;
-      where rating_count > 50;
-      limit ${limit};
-      offset ${offset};
-    `;
+  const body = `
+    fields id, name, summary, rating, first_release_date, cover.url, platforms.abbreviation, created_at;
+    sort rating_count desc;
+    where rating_count > 50;
+    limit ${limit};
+    offset ${offset};
+  `;
 
-    // 🔹 Si tu proxy requiere headers, los puedes poner así
-    const headers = new HttpHeaders({
-      'Accept': 'application/json'
-    });
+  const headers = new HttpHeaders({
+    'Content-Type': 'text/plain',
+    'Accept': 'application/json'
+  });
 
-    //return this.http.post<any[]>(this.apiUrl, body, { headers });
-    return this.http.post<any[]>(
-      `${this.apiUrl}?endpoint=games`,
-      body
-    );
-  }
-
+  return this.http.post<any[]>(
+    `${this.apiUrl}?endpoint=games`,
+    body,
+    { headers }
+  );
+}
 
 
   /*
