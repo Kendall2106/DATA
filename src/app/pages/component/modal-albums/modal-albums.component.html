@@ -1,0 +1,31 @@
+<div class="modalPrin">
+
+    <div class="modal-body">
+        <div class="row">
+
+
+            <div class="gallery-container">
+                <div class="movie-card" *ngFor="let albums of albums">
+                    <div class="cardImage"  *ngIf="sentence == 'save'">
+                            <img (click)="saveInfoAlbum(albums.id)" class="image" title="{{ albums.name }}" [src]="albums.image" [alt]="albums.name" />
+                    </div>
+
+                    <div class="cardImage"  *ngIf="sentence == 'open'">
+                            <img (click)="navegarCollection(albums.id)" class="image" title="{{ albums.name }}" [src]="albums.image" [alt]="albums.name" />
+                    </div>
+                    <div class="stars">
+                    <p class="title">{{albums.name}}</p>
+                </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+
+        <div class="loading-overlay" *ngIf="loading">
+            <div class="loading-spinner"></div>
+        </div>
+
+    </div>
+</div>

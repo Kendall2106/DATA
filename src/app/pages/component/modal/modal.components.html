@@ -17,8 +17,38 @@
                         <p class="synopsis">{{data.info}}</p>
                     </div>
                     <div class="col-lg-2" style="text-align: right;">
-                        <button class="btnPending btn" (click)="this.saveReco()"><i
-                                class="iconModal uil uil-bookmark"></i></button>
+
+                                <!-- Si es true -->
+                    <button *ngIf="!pendiente" class="btnPending btn" (click)="saveReco()">
+                        <i class="iconModal uil uil-bookmark"></i>
+                    </button>
+
+
+
+                    <button *ngIf="pendiente"  class="btnPending btn" >
+                                                <i class="iconCard uil uil-heart"></i>
+                    </button>
+
+    <!--
+                     <select class="filter-dropdown" id="opC" [(ngModel)]="selectedAlbum">
+                        <option value="Todos" selected>Álbum: Ninguno</option>
+                        <option *ngFor="let opcion of albums" [value]="opcion.id">
+                            {{ opcion.name }}
+                        </option>
+                    </select> -->
+                    
+                     <button class="btnPending btn" (click)="openModalAlbums()">
+                        <i class="iconModal uil uil-save"></i>
+                    </button>
+
+                    <!--
+                    <button *ngIf="pendiente"  class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
+                                                (click)="toggleLike(d, data)"
+                                                >
+                                                <i class="iconCard uil uil-heart"></i>
+                    </button>
+                    -->
+
                     </div>
                 </div>
 

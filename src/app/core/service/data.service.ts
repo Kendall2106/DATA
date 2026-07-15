@@ -19,6 +19,22 @@ export class DataService {
       return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
+  async getAlbums(): Promise<any> {
+      const acollection = collection(this.firestore,'albums');
+      const querySnapshot = await getDocs(acollection);
+      return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
+
+  async createinfoAlbums(movie: any){
+      const acollection = collection(this.firestore,'infoAlbums');
+      addDoc(acollection,{
+          'idAlbum' : movie.id,
+          'name' : movie.name,
+          'image' : movie.image,
+          'watched' : false
+      });
+    }
+
   async getByMarca(coll: string) {
     const collections = ['animes', 'books', 'games', 'movies', 'music', 'series'];
     const results: any[] = [];

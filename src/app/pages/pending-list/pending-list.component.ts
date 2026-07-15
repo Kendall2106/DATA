@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
@@ -8,6 +9,7 @@ import { MovieService } from 'src/app/core/service/movie.service'; import { Musi
 import { RecoService } from 'src/app/core/service/recomendacion.service';
 import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
 import { SeriesService } from 'src/app/core/service/series.service';
+import { ModalComponent } from '../component/modal/modal.components';
 
 @Component({
   selector: 'app-pending-list',
@@ -36,7 +38,7 @@ export class PendingListComponent implements OnInit {
   listSeasonActivate: boolean = false;
 
   constructor(private recoService: RecoService,
-    private router: Router,
+    private router: Router,  public modalService: NgbModal,
     private dataService: DataService,private reviewSidebar: ReviewSidebarService,
     private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService
   ) {
@@ -219,18 +221,6 @@ export class PendingListComponent implements OnInit {
 
   async deleteReco(recoTemp: any) {
 
-    /*await this.recoService.deleteReco(recoTemp.id);
-
-    const indexToRemove = this.data.findIndex(item => item.id === recoTemp.id);
-
-    if (indexToRemove !== -1) {
-      this.data.splice(indexToRemove, 1);
-    }
-
-    this.getReco();*/
-
-
-
 
 try {
       this.loading = true;
@@ -384,6 +374,21 @@ try {
     this.reviewSidebar.open('', text => {
       datatemp.review = text;
     });
+  }
+
+  openModal(infoData: any) {
+    const modalRef = this.modalService.open(ModalComponent, { centered: true });
+    modalRef.componentInstance.data = infoData;
+    modalRef.componentInstance.type = "Animes";
+    modalRef.componentInstance.pendiente = true;
+
+    modalRef.componentInstance.accion.subscribe((resp: boolean) => {
+
+    if(resp){
+      this.deleteReco(infoData);
+    }
+
+  });
   }
 
 }

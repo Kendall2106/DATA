@@ -53,56 +53,72 @@
 
 
 <div class="body">
+    <div class="row" style="padding-right: 30px;">
+        <div class="col-lg-6" style="padding-left: 3%; padding-top: 1%;">
+            <h3>My Library</h3>
+            <p style="color: #7a7a7a;">Explore and manage your library</p>
+        </div>
+        <div class="col-lg-6" style="padding-top: 1.5%;">
+            <div class="search-actions">
+                <div class="search-container">
+
+                    <i class="uil uil-search search-icon"></i>
+
+                    <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchText"
+                        (input)="filterSearch()">
+
+                </div>
+
+                <button (click)="dateView()" class="action-button" [class.active]="isDateView === true"><i
+                        class="uil uil-schedule"></i> </button>
+                <button (click)="openSettingsSidebar()" class="action-button"><i class="uil uil-filter"></i> </button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="row">
             <div class="filter-container">
                 <div class="filter-options">
                     <button class="filter-button" (click)="loadData('Animes')"
-                        [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
+                        [class.active]="selectedItem === 'Animes'"><i class="uil"><img src="assets/img/Icons/anime.png"
+                                class="icon">Animes</i></button>
                     <button class="filter-button" (click)="loadData('Movies')"
-                        [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
+                        [class.active]="selectedItem === 'Movies'"><i class="uil"><img src="assets/img/Icons/movie.png"
+                                class="icon">Movies</i></button>
                     <button class="filter-button" (click)="loadData('Series')"
-                        [class.active]="selectedItem === 'Series'"><i class="uil">Shows</i></button>
+                        [class.active]="selectedItem === 'Series'"><i class="uil"><img src="assets/img/Icons/show.png"
+                                class="icon">Shows</i></button>
                     <button class="filter-button" (click)="loadData('Books')"
-                        [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
+                        [class.active]="selectedItem === 'Books'"><i class="uil"><img src="assets/img/Icons/book.png"
+                                class="icon">Books</i></button>
                     <button class="filter-button" (click)="loadData('Games')"
-                        [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
+                        [class.active]="selectedItem === 'Games'"><i class="uil"><img src="assets/img/Icons/game.png"
+                                class="icon">Games</i></button>
                     <button class="filter-button" (click)="loadData('Music')"
-                        [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
+                        [class.active]="selectedItem === 'Music'"><i class="uil"><img src="assets/img/Icons/music.png"
+                                class="icon">Music</i></button>
 
-                    <select *ngIf="selectedItem == 'Books'" class="filter-dropdown" id="opKind"
-                        (change)="filterKind($event)">
-                        <option value="Todos">Tipo: Todos</option>
-                        <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
-                    </select>
 
-                    <select [(ngModel)]="selectedCategory"  class="filter-dropdown" id="opTipos" (change)="filterType($event)">
-                        <option value="Todos">Categoria: Todos</option>
-                        <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
-                    </select>
 
-                    <select  [(ngModel)]="selectedYear" class="filter-dropdown" id="opAnios" (change)="filterYear($event)">
-                        <option *ngFor="let opcion of opAnios" [value]="opcion" [selected]="opcion === opAnios[1]">{{
-                            opcion }}</option>
-                    </select>
+                    <div class="header-actions">
+                        <select class="sort-select" [(ngModel)]="sortOption" (change)="changeSort()">
+                            <option value="recent">
+                                Most Recent
+                            </option>
+                            <option value="highScore">
+                                Highest Rated
+                            </option>
+                            <option value="lowScore">
+                                Lowest Rated
+                            </option>
+                        </select>
 
-                    <select [(ngModel)]="selectedScore" class="filter-dropdown" id="opCalificacion" (change)="filterScore($event)">
-                        <option value="Todos">Calificacion: Todos</option>
-                        <option *ngFor="let opcion of opCalificacion" [value]="opcion">{{ opcion }}</option>
-                    </select>
 
-                    <button (click)="sortDataByScore()" class="filter-button"
-                        [class.active]="currentSortOrder === 'asc'"><i class="uil"
-                            [ngClass]="{'uil-sort-amount-up': currentSortOrder === 'asc', 'uil-sort-amount-down': currentSortOrder === 'desc'}"></i></button>
-
-                    <button (click)="dateView()" class="filter-button" [class.active]="isDateView === true"><i
-                            class="uil uil-calendar-alt"></i></button>
-
-                    <button *ngIf="selectedItem !== 'Books'" (click)="watchActualRelease()"
-                        [class.active]="isActualRelease === true" class="filter-button">Release</button>
-                    <!--<button  (click)="loadAchievements()"  *ngIf="selectedItem === 'Games'" class="filter-button" ><i class="uil uil-award"></i></button>-->
-
-                    <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
+                        <!-- <button (click)="openSettingsSidebar()" class="filter-button">
+                            <i class="uil uil-setting"></i>
+                        </button>-->
+                    </div>
                     <!--<button (click)="actualizarTodo()" >todo</button>-->
 
                 </div>
@@ -176,10 +192,20 @@
     </div>
 
 
-    <div>
-        <div class="progress-container">
-            <div class="progress-bar" [style.width.%]="percentage">
-                {{ goalActualYear }} / {{ goalAmount }} ( {{ percentage | number:'1.0-0' }}% )
+    <div class="row " style="height: 30px;">
+        <div class="col-lg-2" style="padding-left: 3%;">
+            <p style=" margin-top: 2.5%;">
+                <i class="uil uil-info-circle"></i>
+                Total: {{ resultCount }}
+            </p>
+        </div>
+
+        <div class="col-lg-10" *ngIf="isbarraShow === true" style=" margin-top: 0.7%;">
+            <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="percentage">
+                    {{ goalActualYear }} / {{ goalAmount }}
+                    ( {{ percentage | number:'1.0-0' }}% )
+                </div>
             </div>
         </div>
     </div>
@@ -187,6 +213,156 @@
 
     <div class="loading-overlay" *ngIf="loading">
         <div class="loading-spinner"></div>
+    </div>
+
+    <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="closeSettingsSidebar()">
+    </div>
+
+    <!-- Sidebar -->
+    <div class="settings-sidebar" [class.open]="isSidebarOpen">
+
+        <div class="sidebar-header">
+            <h3>Filtros</h3>
+
+            <button class="close-btn" (click)="closeSettingsSidebar()">
+
+                <i class="uil uil-times"></i>
+
+            </button>
+        </div>
+
+        <div class="sidebar-content">
+
+            <div class="filter-group">
+
+                <label>Categoría</label>
+
+                <select [(ngModel)]="selectedCategory" (change)="filterType($event)">
+
+                    <option value="Todos">
+                        Todos
+                    </option>
+
+                    <option *ngFor="let opcion of categories" [value]="opcion.id">
+
+                        {{ opcion.name }}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label>Año</label>
+
+                <select [(ngModel)]="selectedYear" (change)="filterYear($event)">
+
+                    <option *ngFor="let opcion of opAnios" [value]="opcion">
+
+                        {{ opcion }}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <label>Calificación</label>
+
+                <select [(ngModel)]="selectedScore" (change)="filterScore($event)">
+
+                    <option value="Todos">
+                        Todos
+                    </option>
+
+                    <option *ngFor="let opcion of opCalificacion" [value]="opcion">
+
+                        {{ opcion }}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-group" *ngIf="selectedItem === 'Books'">
+
+                <label>Tipo de Libro</label>
+
+                <select (change)="filterKind($event)">
+
+                    <option value="Todos">
+                        Todos
+                    </option>
+
+                    <option *ngFor="let opcion of opKind" [value]="opcion">
+
+                        {{ opcion }}
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- <div class="filter-group">
+
+                <button class="sidebar-button" (click)="sortDataByScore()">
+
+                    <i [ngClass]="{
+                    'uil uil-sort-amount-up': currentSortOrder === 'asc',
+                    'uil uil-sort-amount-down': currentSortOrder === 'desc'
+                }">
+                    </i>
+
+                    Ordenar por Score
+
+                </button>
+
+            </div>
+
+             <div class="filter-group">
+
+                <button class="sidebar-button" (click)="dateView()">
+
+                    <i class="uil uil-calendar-alt"></i>
+
+                    Vista por Fecha
+
+                </button>
+
+            </div>-->
+
+            <div class="filter-group" *ngIf="selectedItem !== 'Books'">
+
+                <button class="sidebar-button" (click)="watchActualRelease()">
+
+                    Release Actual
+
+                </button>
+
+                <button class="sidebar-button" (click)="showBar()">
+                    Show Bar
+                </button>
+
+            </div>
+
+            <!--   <div class="filter-group">
+
+                <button class="sidebar-button">
+
+                    Total: {{ resultCount }}
+
+                </button>
+
+            </div>-->
+
+        </div>
+
     </div>
 
 </div>

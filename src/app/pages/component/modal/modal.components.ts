@@ -12,6 +12,7 @@ import { MusicService } from 'src/app/core/service/music.service';
 import { RecoService } from 'src/app/core/service/recomendacion.service';
 import { AlertService } from 'src/app/core/service/alert.service';
 import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
+import { ModalAlbumsComponent } from '../modal-albums/modal-albums.component';
 
 @Component({
   selector: 'app-modal',
@@ -21,6 +22,9 @@ import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.servic
 export class ModalComponent implements OnInit {
   @Input() public data: any;
   @Input() public type: any;
+  @Input() public pendiente: any;
+
+   @Output() accion = new EventEmitter<boolean>();
 
   opTipos: string[][] = [];
   opKind: string[] = [];
@@ -30,6 +34,9 @@ export class ModalComponent implements OnInit {
   open: boolean = false;
   dataModal: any;
   stars: boolean[] = Array(5).fill(false);
+  selectedAlbum: string = '';
+  
+  albumInfoTemp: any = {};
 
   constructor(
     private router: Router,
@@ -53,7 +60,7 @@ export class ModalComponent implements OnInit {
     this.dataModal = { ...this.data };
     console.log(this.type);
     this.loadCategories(this.type);
-
+    
     this.open = true;
   }
 
@@ -111,6 +118,7 @@ export class ModalComponent implements OnInit {
     try {
       await this.obtenerImagen(this.data.image, this.type);
       this.dataModal.date = this.data.date;
+
       if (this.type == "Animes") {
         await this.animeService.createAnimes(this.dataModal);
       }
@@ -175,6 +183,22 @@ export class ModalComponent implements OnInit {
       this.dataModal.review = text;
     });
   }
+
+   eliminarpendiente() {
+    this.accion.emit(true);
+  }
+
+    
+
+  
+
+   openModalAlbums() {
+       const modalRef =  this.modalService.open(ModalAlbumsComponent, { centered: true });
+        modalRef.componentInstance.image = this.dataModal.image;
+      modalRef.componentInstance.name = this.dataModal.name;
+       modalRef.componentInstance.type = this.type;
+       modalRef.componentInstance.sentence = 'save';
+   }
 
 
 

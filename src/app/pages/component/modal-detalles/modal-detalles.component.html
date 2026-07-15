@@ -13,13 +13,13 @@
 
             <div class="col-lg-9">
 
-                
+
 
                 <div class="row col-lg-12">
                     <div class="row col-lg-12">
                         <p class="synopsis">{{data.review}}</p>
-                </div>
-                
+                    </div>
+
                     <div class="col-lg-6 star-rating" style="text-align: left;">
                         <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
                             (click)="rate(i + 1)" [ngClass]="{'selected': (i + 1) <= dataModal.score}">
@@ -66,6 +66,7 @@
                         <button class="btn btnModalDelete" (click)="deleteData()" style="margin-right: 2%;">
                             <i class="iconModal uil uil-save"> Delete</i>
                         </button>
+
                         <button class="btn btnModal" (click)="saveChanges()">
                             <i class="iconModal uil uil-save"> Save</i>
                         </button>

@@ -10,6 +10,7 @@ import { PendingListComponent } from './pages/pending-list/pending-list.componen
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
+import { AlbumInfoPageComponent } from './pages/album-info-page/album-info-page.component';
 
 const routes: Routes = [
   {path:'', component: DiscoverPageComponent },
@@ -21,6 +22,10 @@ const routes: Routes = [
   {path:'Profile', component: ProfilePageComponent },
   {path:'Graphics', component: GraphicsPageComponent },
   {path:'Collections', component: CollectionsComponent },
+  {
+  path: 'AlbumInfo/:idAlbum',
+  component: AlbumInfoPageComponent
+},
 ];
 
 @NgModule({

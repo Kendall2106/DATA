@@ -1,193 +1,142 @@
-
-
 <div class="body">
-    <div class="workplace">
-        <div class="bannerArea workingArea">
-            <div>
-                <header>
-                    <div class="row">
-                        <div class="filter-container">
 
-                            <div class="filter-options">
-                                <button class="filter-button" (click)="goHome('Home')"
-                                    [class.active]="selectedItem === 'Home'"><i class="uil">Home</i></button>
-                                <button class="filter-button" (click)="loadData('Animes')"
-                                    [class.active]="selectedItem === 'Animes'"><i class="uil">Animes</i></button>
-                                <button class="filter-button" (click)="loadData('Movies')"
-                                    [class.active]="selectedItem === 'Movies'"><i class="uil">Movies</i></button>
-                                <button class="filter-button" (click)="loadData('Series')"
-                                    [class.active]="selectedItem === 'Series'"><i class="uil">Shows</i></button>
-                                <button class="filter-button" (click)="loadData('Books')"
-                                    [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
-                                <button class="filter-button" (click)="loadData('Games')"
-                                    [class.active]="selectedItem === 'Games'"><i class="uil">Games</i></button>
-                                <button class="filter-button" (click)="loadData('Music')"
-                                    [class.active]="selectedItem === 'Music'"><i class="uil">Music</i></button>
-                                <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
-                                <button *ngIf="!introVisible" class="filter-button" [class.active]="true" (click)="getRandomItem()">Randomizer</button>
-
-                                <div *ngIf="!introVisible" class="form-check form-switch ms-auto">
-                                    <div class="togle">
-                                        
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" (change)="toggleView()" />
-                                    </div>
-                                </div>
-
-                                
-
-                            </div>
-                        </div>
-                    </div>
-
-                </header>
-
-            </div>
-            <div style="margin: 5% 2%;">
-                <h3>To Watch</h3>
-                <p style="width: 50%;">Pending Movies, Series, Animes, Books, Games and Music.</p>
-            </div>
+    <div class="row" style="padding-right: 30px;">
+        <div class="col-lg-6" style="padding-left: 3%; padding-top: 1%;">
+            <h3>Pending</h3>
+            <p style="color: #7a7a7a;">Explore and manage your pending items</p>
         </div>
+        <div class="col-lg-6" style="padding-top: 1.5%;">
+            <div class="search-actions">
+                <div class="search-container">
 
-        <div *ngIf="introVisible">
-            <div class="currentlyArea workingArea">
-                <h5>Currently Viewing</h5>
-                <div *ngIf="isListView" class="quadrature" style="width: 100%;">
-                    <div class="row" style="margin-top: 1%;">
-                        <div *ngFor="let cardData of viewData" class="col-lg-2 col-3 col-md-4">
-                            <div class="cardQuadrature filter">
-                                <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+                    <i class="uil uil-search search-icon"></i>
 
-        <div class="mainData" *ngIf="!introVisible">
-            
-            <div *ngIf="isListView" class="quadrature" style="width: 90%;">
-               <!-- <div class="row" style="margin-top: 1%;">
-                    <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
-                        <div class="cardQuadrature" [ngClass]="{'cardQuadratureActive': cardData.name === selectedData.name}">
-                            <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                        </div>
-                    </div>
-                </div>-->
-                <div *ngIf="selectedItem === 'Animes'" style="padding: 30px;">
-                    <button class="filter-button" (click)="changeList()"  [class.active]="listSeasonActivate === true">Season</button>
+                    <input type="text" class="search-input" placeholder="Search..." >
+
                 </div>
+
+                <button *ngIf="!introVisible" (click)="getRandomItem()" class="action-button" [class.active]="false" ><i class="uil uil-dice-five"></i> </button>
                 
-                <div class="gallery-container">
-                    
-
-                    <div class="movie-card" *ngFor="let movie of resultFilter" >
-                      <div class="cardImage">
-                      
-                          <div *ngIf="selectedItem !== 'Music'" >
-                              <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}"/>
-                          </div>
-                          <div *ngIf="selectedItem === 'Music'" >
-                              <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}"/>
-                          </div>
-                      
-                      </div>
-
-                      
-
-                      <button  *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)">
-                        <i class="uil uil-eye"></i>
-                    </button>
-          
-                      <div class="stars">
-                        <p class="title">{{movie.name}}</p>
-                      </div>
+                <div *ngIf="selectedItem === 'Animes'">
+                        <button class="action-button" (click)="changeList()"
+                            [class.active]="listSeasonActivate === true">Season</button>
                     </div>
-                  </div>
+                    
             </div>
-
-            <div *ngIf="!isListView" class="list" style="width: 100%;">
-                <div class="table-container">
-                    <table class="movie-table">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th class="name-column">Name</th>
-                                <th>Rating</th>
-                                <th *ngIf="type !== 'Books' && type !== 'Games'">Year</th>
-                                
-
-                                <th *ngIf="type == 'Animes' || type == 'Movies' || type == 'Series'">Score</th>
-                                <th *ngIf="type == 'Books'">Pages</th>
-                                <th *ngIf="type == 'Games'">Plataform</th>
-                                <th *ngIf="type == 'Music'">Tracks</th>
-                      
-                                <th *ngIf="type == 'Books'">Kind</th>
-                                <th *ngIf="type == 'Games'">Year</th>
-                                <th>Type</th>
-                                <th>Review</th>
-                                <th>Viewed</th>
-                                <th>Delete</th>
-                                <th>Save</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let d of resultFilter">
-                                <td><img [src]="d.image" alt="{{ d.name }}" class="movie-image"></td>
-                                <td class="name-column">{{ d.name }}</td>
-                                <td>
-                                    <div class="star-rating">
-                                        <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                                            (click)="rate(d, i + 1)" [ngClass]="{'selected': (i + 1) <= d.score}">
-                                            &#9733;
-                                        </span>
-                                    </div>
-                                </td>
-
-
-                                <td *ngIf="type !== 'Books' && type !== 'Games'">{{d.releaseDate}}</td>
-                                <td style="width: 10%;">{{d.randomData}}</td>
-                                
-                                <td *ngIf="type == 'Books'">
-                                    <select id="kind" name="kind" [(ngModel)]="d.kind" style="width: 100%;">
-                                        <option *ngFor="let opcion of opKind" [value]="opcion">{{ opcion }}</option>
-                                    </select>
-                                </td>
-                                <td *ngIf="type == 'Games'">
-                                    <input class="inputDate" type="number" id="dateR" name="dateR" [(ngModel)]="d.releaseDate" required>
-                                </td>
-                                <td>
-                                    <select id="type" name="type" [(ngModel)]="d.type" style="width: 100%;" required>
-                                        <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <button class="btnCard btn" (click)="openReviewSidebar(d)"><i
-                                            class="iconCard uil uil-edit"></i></button>
-                                </td>
-                                <td>
-                                    <button class="btnCard btn" [ngClass]="{ 'liked': d.liked, 'not-liked': !d.liked }"
-                                        (click)="toggleLike(d, data)">
-                                        <i class="iconCard uil uil-heart"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btnCard btn" (click)="deleteReco(d)"><i
-                                            class="iconCard uil uil-trash-alt"></i></button>
-                                </td>
-                                <td>
-                                    <button class="b1 btn" (click)="save(d)">viewed</button>
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
     </div>
+
+    <header>
+        <div class="row">
+            <div class="filter-container">
+
+                <div class="filter-options">
+                    <button class="filter-button" (click)="goHome('Home')" [class.active]="selectedItem === 'Home'">
+                        Home
+                    </button>
+                    <button class="filter-button" (click)="loadData('Animes')"
+                        [class.active]="selectedItem === 'Animes'"><i class="uil"><img src="assets/img/Icons/anime.png"
+                                class="icon">Animes</i></button>
+                    <button class="filter-button" (click)="loadData('Movies')"
+                        [class.active]="selectedItem === 'Movies'"><i class="uil"><img src="assets/img/Icons/movie.png"
+                                class="icon">Movies</i></button>
+                    <button class="filter-button" (click)="loadData('Series')"
+                        [class.active]="selectedItem === 'Series'"><i class="uil"><img src="assets/img/Icons/show.png"
+                                class="icon">Shows</i></button>
+                    <button class="filter-button" (click)="loadData('Books')"
+                        [class.active]="selectedItem === 'Books'"><i class="uil"><img src="assets/img/Icons/book.png"
+                                class="icon">Books</i></button>
+                    <button class="filter-button" (click)="loadData('Games')"
+                        [class.active]="selectedItem === 'Games'"><i class="uil"><img src="assets/img/Icons/game.png"
+                                class="icon">Games</i></button>
+                    <button class="filter-button" (click)="loadData('Music')"
+                        [class.active]="selectedItem === 'Music'"><i class="uil"><img src="assets/img/Icons/music.png"
+                                class="icon">Music</i></button>
+
+                   
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <!-- <div *ngIf="introVisible">
+                    <div class="currentlyArea workingArea">
+                        <h5>Currently Viewing</h5>
+                        <div *ngIf="isListView" class="quadrature" style="width: 100%;">
+                            <div class="row" style="margin-top: 1%;">
+                                <div *ngFor="let cardData of viewData" class="col-lg-2 col-3 col-md-4">
+                                    <div class="cardQuadrature filter">
+                                        <img class="imagenQuadrature" [src]="cardData.image" alt="#">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>*/
+
+                <div class="mainData" *ngIf="!introVisible">
+                    
+                    <div *ngIf="isListView" class="quadrature" style="width: 90%;">
+                    <!-- <div class="row" style="margin-top: 1%;">
+                            <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
+                                <div class="cardQuadrature" [ngClass]="{'cardQuadratureActive': cardData.name === selectedData.name}">
+                                    <img class="imagenQuadrature" [src]="cardData.image" alt="#">
+                                </div>
+                            </div>
+                        </div>-->
+    <div class="mainData" *ngIf="!introVisible">
+
+
+        <div class="gallery-container">
+
+
+            <div class="movie-card" *ngFor="let movie of resultFilter">
+                <div class="cardImage" (click)="openModal(movie)">
+
+                    <div *ngIf="selectedItem !== 'Music'">
+                        <img class="image" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name"
+                            [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}" />
+                    </div>
+                    <div *ngIf="selectedItem === 'Music'">
+                        <img class="imageMusic" title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name"
+                            [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}" />
+                    </div>
+
+                </div>
+
+
+
+                <button *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)">
+                    <i class="uil uil-eye"></i>
+                </button>
+
+                <div class="stars">
+                    <p class="title">{{movie.name}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+     <div class="row " style="height: 30px;">
+        <div class="col-lg-2" style="padding-left: 3%;">
+            <p style=" margin-top: 2.5%;">
+                <i class="uil uil-info-circle"></i>
+                Total: {{ resultCount }}
+            </p>
+        </div>
+    </div>
+
 
 
 

@@ -1,0 +1,132 @@
+
+.modalPrin {
+    width: 60%;
+    height: 60%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.699);
+    
+ 
+  }
+  
+
+  
+  /* Estilos para el título del modal */
+  .modal-title {
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;          /* Oculta el texto que se sale del contenedor */
+    text-overflow: ellipsis; 
+    width: 80%;
+  }
+
+
+
+ /* Estilos para la animación de carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.767); /* Fondo oscurecido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté por encima del modal */
+}
+
+/* Ajusta estilos si es necesario */
+.loading-overlay p {
+  color: white;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+
+
+
+  
+  @media (max-width:1000px) {
+
+    .modalPrin {
+        width: 100%;
+        height: 100%;
+      }
+
+    .imagen{
+      display: none;
+    }
+
+
+    .synopsis {
+        max-height: 150px;
+    }
+
+
+}
+
+
+/* Contenedor de la Galería */
+.gallery-container {
+ 
+  display: grid;
+  /*grid-template-columns: repeat(auto-fit, 120px);  */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  /*grid-template-columns: repeat(auto-fill, 120px);*/
+  gap: 1rem;
+  padding-left: 2rem;
+  width: 98%; /* Ensure Full Width */
+}
+
+/* Tarjetas de Películas */
+.movie-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Imágenes en las Tarjetas */
+.image {
+  width: 120px;
+  height: 180px; 
+  object-fit: cover; 
+  display: block;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding: 0;
+}

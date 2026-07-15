@@ -1,0 +1,195 @@
+<div class="modal-overlay">
+
+    <div class="modal-content-custom">
+
+        <!-- IZQUIERDA -->
+        <div class="poster-section">
+
+            <h3>Portada</h3>
+
+            <div class="poster-preview">
+
+                <img
+                    *ngIf="data.image"
+                    [src]="'data:image/png;base64,' + data.image"
+                    alt="Portada">
+
+                <div
+                    *ngIf="!data.image"
+                    class="empty-poster">
+
+                    Sin imagen
+
+                </div>
+
+            </div>
+
+            <input
+                type="file"
+                (change)="obtenerImagen($event)"
+                accept="image/png,.jpg,.jpeg,.gif">
+
+        </div>
+
+        <!-- DERECHA -->
+        <div class="form-section">
+
+            <div class="header">
+
+                <h2>Agregar Contenido</h2>
+
+            </div>
+
+            <!-- CATEGORIAS -->
+            <div class="category-buttons">
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Peliculas'"
+                    (click)="tipo='Peliculas'">
+
+                    🎬 Películas
+
+                </button>
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Series'"
+                    (click)="tipo='Series'">
+
+                    📺 Series
+
+                </button>
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Animes'"
+                    (click)="tipo='Animes'">
+
+                    ⭐ Animes
+
+                </button>
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Juegos'"
+                    (click)="tipo='Juegos'">
+
+                    🎮 Juegos
+
+                </button>
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Libros'"
+                    (click)="tipo='Libros'">
+
+                    📚 Libros
+
+                </button>
+
+                <button
+                    type="button"
+                    [class.active]="tipo === 'Musica'"
+                    (click)="tipo='Musica'">
+
+                    🎵 Música
+
+                </button>
+
+            </div>
+
+            <form
+                (ngSubmit)="onSubmit()"
+                #movieForm="ngForm">
+
+                <div class="form-grid">
+
+                    <div class="field full-width">
+
+                        <label>Nombre</label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            [(ngModel)]="data.name"
+                            required>
+
+                    </div>
+
+                    <div class="field">
+
+                        <label>Fecha</label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            [(ngModel)]="data.date">
+
+                    </div>
+
+                    <div
+                        class="field"
+                        *ngIf="tipo !== 'Juegos' && tipo !== 'Musica'">
+
+                        <label>Género</label>
+
+                        <select
+                            name="type"
+                            [(ngModel)]="data.type">
+
+                            <option
+                                *ngFor="let opcion of opTipos[0]"
+                                [value]="opcion">
+
+                                {{ opcion }}
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- CALIFICACION -->
+                <div class="rating-section">
+
+                    <label>Calificación</label>
+
+                    <div class="star-rating">
+
+                        <span
+                            *ngFor="let star of stars; let i = index"
+                            (click)="rate(data,i+1)"
+                            [class.selected]="(i+1)<=data.score">
+
+                            ★
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- BOTON -->
+                <div class="footer-actions">
+
+                    <button
+                        class="save-btn"
+                        type="submit"
+                        [disabled]="!movieForm.valid">
+
+                        Guardar
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

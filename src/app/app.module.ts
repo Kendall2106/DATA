@@ -42,6 +42,9 @@ import { BooksGraphicsComponent } from './pages/lists-graphics/books-graphics/bo
 import { ModalDetallesComponent } from './pages/component/modal-detalles/modal-detalles.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { ReviewSidebarComponent } from './pages/component/review-sidebar/review-sidebar.component';
+import { ModalCreateItemComponent } from './pages/component/modal-create-item/modal-create-item.component';
+import { AlbumInfoPageComponent } from './pages/album-info-page/album-info-page.component';
+import { ModalAlbumsComponent } from './pages/component/modal-albums/modal-albums.component';
 
 
 
@@ -78,7 +81,10 @@ import { ReviewSidebarComponent } from './pages/component/review-sidebar/review-
     BooksGraphicsComponent,
     ModalDetallesComponent,
     CollectionsComponent,
-    ReviewSidebarComponent
+    ReviewSidebarComponent,
+    ModalCreateItemComponent,
+    AlbumInfoPageComponent,
+    ModalAlbumsComponent
   ],
   imports: [
     BrowserModule,

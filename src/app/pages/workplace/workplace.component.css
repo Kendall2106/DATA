@@ -21,7 +21,7 @@ header {
 /* Contenedor General del Filtro */
 .filter-container {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  padding: 5px 20px 20px 20px;
   background-color: transparent;
   border-radius: 8px;
   width: 100%;
@@ -142,7 +142,7 @@ header {
 }
 
 .list{
-  height: calc(90vh - 60px); /* Ajusta el valor según tus necesidades */
+  height: calc(79vh - 60px); /* Ajusta el valor según tus necesidades */
   overflow-y: auto;
 }
 
@@ -271,9 +271,10 @@ header {
 }
 
 .progress-container {
-  width: 100%;
+  width: 97.5%;
   height: 14px;
-  background: rgba(255, 255, 255, 0.15);
+  background: #1a1a1a;
+  border: 1px solid #252525;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -290,6 +291,270 @@ header {
   font-size: 13px;
   opacity: 0.85;
 }
+
+
+
+.icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+}
+
+.settings-sidebar {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    max-width: 90%;
+    height: 100vh;
+    background: #181818;
+    color: white;
+    z-index: 1000;
+    transition: right .3s ease;
+    box-shadow: -10px 0 25px rgba(0,0,0,.4);
+}
+
+.settings-sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #bdbdbd;
+}
+
+.filter-group select {
+    width: 100%;
+    background: #252525;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.sidebar-button {
+    width: 100%;
+    padding: 12px;
+    background: #252525;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    transition: .2s;
+}
+
+.sidebar-button:hover {
+    background: #333;
+}
+
+
+
+
+
+
+
+
+
+
+.search-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    width: 100%;
+}
+
+/* BUSCADOR */
+
+.search-container {
+    position: relative;
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.search-input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 15px 0 45px;
+
+    border: 1px solid #252525;
+    border-radius: 12px;
+
+    background: #1a1a1a;
+    color: white;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: all .2s ease;
+}
+
+.search-input::placeholder {
+    color: #8a8a8a;
+}
+
+.search-input:focus {
+    border-color: var(--color-2);
+    box-shadow: 0 0 0 3px rgba(0, 134, 135, .15);
+}
+
+/* ICONO */
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #8a8a8a;
+    font-size: 18px;
+
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* BOTÓN */
+
+.action-button {
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 0 18px;
+
+    border: 1px solid #252525;
+    border-radius: 12px;
+
+    background: #1a1a1a;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+
+    flex-shrink: 0;
+
+ 
+}
+
+.action-button:hover {
+    background: #252525;
+    border-color: var(--color-2);
+}
+
+.action-button.active {
+  color: #000000;
+  background-color: var(--color-2);
+}
+
+.action-button i {
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.sort-select {
+    height: 42px;
+    min-width: 250px;
+
+    padding: 0 12px;
+
+    background: #1a1a1a;
+    color: white;
+
+    border: 1px solid #252525;
+    border-radius: 10px;
+
+    outline: none;
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.sort-select:hover {
+    border-color: var(--color-2);
+}
+
+.sort-select:focus {
+    border-color: var(--color-2);
+}
+
+
+
+
+
 
 
 

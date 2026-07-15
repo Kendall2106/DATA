@@ -61,13 +61,14 @@ button{
     margin-top: 10px;
     text-align: left;
     border-radius: 10px;
+    height: calc(45vh - 60px);
 }
 
 .columnDesc{
     margin-top: 10px;
     text-align: left;
     border-radius: 10px;
-    height: calc(76.5vh - 60px);
+    height: calc(62.5vh - 60px);
    
 }
 
@@ -109,3 +110,57 @@ button{
   i{
     color: rgba(255, 255, 255, 0.473);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.menu li {
+  width: 100%;
+}
+
+.menu li a {
+  display: block;
+  padding: 15px 20px;
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+.menu li a:hover {
+  background-color: #1f1f1f;
+  color: #fff;
+  padding-left: 25px;
+}
+
+.section-title {
+    padding: 15px 20px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #7a7a7a;
+    text-transform: uppercase;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #6d6969;
+    
+}

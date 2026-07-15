@@ -6,6 +6,8 @@ import {
     EnvironmentInjector
 } from '@angular/core';
 import { ReviewSidebarComponent } from 'src/app/pages/component/review-sidebar/review-sidebar.component';
+import { SettingsService } from './settings.service';
+
 
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +43,8 @@ export class ReviewSidebarService {
         document.body.appendChild(this.componentRef.location.nativeElement);
         this.appRef.attachView(this.componentRef.hostView);
     }
+
+   
 
     close() {
         if (!this.componentRef) return;

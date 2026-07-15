@@ -1,13 +1,23 @@
 <div class="menu px-4">
     <div class="row gx-5">
-        <div class="column col-lg-12" style="background-color: #121212; padding-bottom: 2%;" >
-            <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%;">
+        <div class="column col-lg-12" style="background-color: #121212; padding-bottom: 2%;">
+            <div class="top col-lg-12 d-flex justify-content-between" style="margin-bottom: 3%; margin-top: 10%;">
                 <a href="./"><img class="imgTitle" src="./assets/img/prisma4.png" style="height: 90%;"></a>
-                <i class="uil uil-user" style="color: white; font-size: 2.5rem;"  (click)="navegarProfilePage()"></i>
+                <!---   <i class="uil uil-user" style="color: white; font-size: 2.5rem;" (click)="navegarProfilePage()"></i>-->
             </div>
-           <!-- <div class="link" (click)="navegarDiscoverPage()">
-                <h5><i class="uil uil-search"></i> Discover</h5>
-            </div>-->
+
+            <hr>
+
+            <div>
+                <ul class="menu">
+                    <li><a (click)="navegarDiscoverPage()"><i class="uil uil-estate"></i> Discover</a></li>
+                    <li><a (click)="navegarAComponenteDestino('Animes')"><i class="uil uil-books"></i> Library</a></li>
+                   <!--- <li><a (click)="navegarCollection()"><i class="uil uil-layer-group"></i> Collections</a></li>*/-->
+                    <li><a (click)="openModalAlbums()"><i class="uil uil-layer-group"></i> Albums</a></li>
+                    <li><a (click)="navegarPendingList()"><i class="iconModal uil uil-bookmark"></i> Pending</a></li>
+                </ul>
+
+                <!--- 
 
             <div class="menuprin" (click)="navegarDiscoverPage()">
                 <h5><strong><i class="uil uil-search"></i>  Discover</strong></h5>
@@ -16,19 +26,14 @@
                 <h5><strong> <i class="uil uil-apps"></i> Library</strong></h5>
             </div>
             <div class="menuprin" (click)="navegarPendingList()">
-                <h5><strong><i class="iconModal uil uil-bookmark"></i>  Pending</strong></h5>
+                <h5><strong>  Pending</strong></h5>
             </div>
-
-           <!-- <div class="link" (click)="navegarAComponenteDestino('Games')">
-                <h5><i class="uil uil-apps"></i> Library</h5>
+-->
             </div>
-            <div class="link" (click)="navegarPendingList()">
-                <h5><i class="iconModal uil uil-bookmark"></i> Pending</h5>
-            </div>-->
         </div>
 
         <div class="columnDesc col-lg-12" style="background-color: #121212; display: flex; flex-direction: column;">
-
+            <!--- 
             <div style="background-color: #252525; border-radius: 2%; padding: 5%; margin-top: 5%;">
                 <h5><strong>Tier</strong></h5>
                 <p style="font-size: 0.8rem;">It allows you to view a list of levels based on the given score.</p>
@@ -40,21 +45,56 @@
                 <p style="font-size: 0.8rem;">It lets you see a list of levels according to the given score.</p>
                 <button class="b1 btn" (click)="navegarGraphicsPage()">View</button>
             </div>
+            -->
+            <div>
+                <div class="section-title">
+                    GESTIÓN
+                </div>
+
+                <ul class="menu">
+                    <li><a (click)="navegarTier()"><i class="uil uil-estate"></i> Tier</a></li>
+                    <li><a (click)="navegarGraphicsPage()"><i class="uil uil-apps"></i> Graphics</a></li>
+                </ul>
+
+                <hr>
+
+
+                <div class="section-title">
+                    GESTIÓN
+                </div>
+
+                <ul class="menu">
+                    <li><a (click)="navegarCreate()"><i class="uil uil-apps"></i> Settings</a></li>
+                    <li><a (click)="openModal()"><i class="uil uil-apps"></i> Create</a></li>
+                </ul>
+
+            </div>
+
+
+
+
+
             <div class="d-flex justify-content-end" style="margin-top: auto; margin-bottom: 5%;">
 
-                <input #colorInput type="color" [(ngModel)]="colorSeleccionado" style="display: none;" (change)="cambiarColor()"/>
-                
 
-                
-                   <button (click)="navegarCollection()" style="background-color: transparent; border: none;"> <i class="uil uil-user" style="color: #ded8cf; font-size: 1.5rem;"></i></button>
-                
-                   <button (click)="colorInput.click()" style="background-color: transparent; border: none;"> 
-                   
+
+                <input #colorInput type="color" [(ngModel)]="colorSeleccionado" style="display: none;"
+                    (change)="cambiarColor()" />
+
+
+
+                <button style="background-color: transparent; border: none;"> <i class="uil uil-user"
+                        style="color: #ded8cf; font-size: 1.5rem;"></i></button>
+
+                <button (click)="colorInput.click()" style="background-color: transparent; border: none;">
+
                     <i class="uil uil-palette" style="color: #ded8cf; font-size: 1.5rem;"></i>
                 </button>
-                <button (click)="navegarCreate()" style="background-color: transparent; border: none;"> <i class="uil uil-setting" style="color: #ded8cf; font-size: 1.5rem;"></i></button>
             </div>
-        </div>
-    </div>
 
-</div>
+
+
+
+        </div>
+
+    </div>

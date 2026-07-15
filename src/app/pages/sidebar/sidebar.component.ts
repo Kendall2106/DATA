@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from 'src/app/core/service/data.service';
+import { ModalCreateItemComponent } from '../component/modal-create-item/modal-create-item.component';
+import { ModalAlbumsComponent } from '../component/modal-albums/modal-albums.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +15,7 @@ export class SidebarComponent implements OnInit {
   colorSeleccionado: string = ''; // Color inicial
 
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, public modalService: NgbModal) {
   }
 
 
@@ -61,8 +64,26 @@ export class SidebarComponent implements OnInit {
   }
 
   navegarCollection() {
-    this.router.navigate(['/Collections']);
+    this.router.navigate(['/AlbumInfo']);
   }
+
+  closeModal() {
+    this.modalService.dismissAll();
+  }
+
+  openModalAlbums() {
+    
+         const modalRef =  this.modalService.open(ModalAlbumsComponent, { centered: true });
+         modalRef.componentInstance.sentence = 'open';
+
+     }
+
+     
+
+   openModal() {
+      const modalRef = this.modalService.open(ModalCreateItemComponent, { centered: true });
+    }
+
 
 
   toggleMobileMenu(): void {

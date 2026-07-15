@@ -16,6 +16,7 @@ import { SeriesService } from 'src/app/core/service/series.service';
 import { ModalComponent } from '../component/modal/modal.components';
 import { ModalDetallesComponent } from '../component/modal-detalles/modal-detalles.component';
 import { SettingsService } from 'src/app/core/service/settings.service';
+import { ReviewSidebarService } from 'src/app/core/service/review-sidebar.service';
 
 @Component({
   selector: 'app-workplace',
@@ -52,10 +53,14 @@ export class WorkplaceComponent implements OnInit {
   settings: any[] = [];
   goalActualYear: number = 0;
   lastTypeLoaded: string | null = null;
+  searchText: string = '';
+  isbarraShow:boolean = true;
 
   tier: any = [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
-  constructor(private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService, public modalService: NgbModal, public settingsService: SettingsService) {
+
+
+  constructor(private reviewSidebar: ReviewSidebarService, private alertService: AlertService, private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService, private router: Router, public dataService: DataService, public modalService: NgbModal, public settingsService: SettingsService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "lightblue", "lightGreen", "yellow", "Pink", "White", "lightYellow", "green", "Purple"] // Colores correspondientes
@@ -234,17 +239,42 @@ resetFilters() {
 
 
   applyFilters() {
-    this.resultFilter = this.data
-      .filter(item => this.selectedCategory === 'Todos' || item.type === this.selectedCategory)
-      .filter(item => this.selectedKind === 'Todos' || item.kind === this.selectedKind)
-      .filter(item => this.convertYear(item))
-      .filter(item => this.selectedScore === 'Todos' || item.score === Number(this.selectedScore))
-      .filter(item => this.isActualRelease === false || item.releaseDate === Number(this.selectedYear));
 
+  this.resultFilter = this.data
 
-    this.resultCount = this.resultFilter.length;
-    this.loadAllMonth();
-  }
+    .filter(item =>
+      this.selectedCategory === 'Todos' ||
+      item.type === this.selectedCategory
+    )
+
+    .filter(item =>
+      this.selectedKind === 'Todos' ||
+      item.kind === this.selectedKind
+    )
+
+    .filter(item =>
+      this.convertYear(item)
+    )
+
+    .filter(item =>
+      this.selectedScore === 'Todos' ||
+      item.score === Number(this.selectedScore)
+    )
+
+    .filter(item =>
+      this.isActualRelease === false ||
+      item.releaseDate === Number(this.selectedYear)
+    )
+
+    .filter(item =>
+      !this.searchText ||
+      item.name?.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+
+  this.resultCount = this.resultFilter.length;
+
+  this.loadAllMonth();
+}
 
 
   convertYear(item: any): boolean {
@@ -552,6 +582,64 @@ resetFilters() {
       100
     );
   }
+/*
+  openSettingsSidebar() {
+    this.reviewSidebar.openSettingsSidebar('', text => {
+      //this.dataModal.review = text;
+    });
+  }
+*/
+
+
+
+
+
+
+
+
+
+  isSidebarOpen = false;
+
+openSettingsSidebar() {
+  this.isSidebarOpen = true;
+}
+
+closeSettingsSidebar() {
+  this.isSidebarOpen = false;
+}
+
+
+filterSearch() {
+  this.applyFilters();
+}
+
+
+
+
+
+sortOption = 'recent';
+
+changeSort() {
+
+  switch (this.sortOption) {
+
+    case 'recent':
+      this.resultFilter = this.sortData(this.resultFilter);
+      break;
+
+    case 'highScore':
+      this.resultFilter.sort((a, b) => b.score - a.score);
+      break;
+
+    case 'lowScore':
+      this.resultFilter.sort((a, b) => a.score - b.score);
+      break;
+  }
+}
+
+showBar() {
+  this.isbarraShow = !this.isbarraShow; 
+}
 
 
 }
