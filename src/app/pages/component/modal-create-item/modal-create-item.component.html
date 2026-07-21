@@ -1,6 +1,6 @@
-<div class="modal-overlay">
+<div class="modal-overlay" (click)="cerrarModal()">
 
-    <div class="modal-content-custom">
+    <div class="modal-content-custom" (click)="$event.stopPropagation()">
 
         <!-- IZQUIERDA -->
         <div class="poster-section">
@@ -152,7 +152,7 @@
 
                 </div>
 
-                <!-- CALIFICACION -->
+                <!-- CALIFICACIÓN -->
                 <div class="rating-section">
 
                     <label>Calificación</label>
@@ -161,8 +161,8 @@
 
                         <span
                             *ngFor="let star of stars; let i = index"
-                            (click)="rate(data,i+1)"
-                            [class.selected]="(i+1)<=data.score">
+                            (click)="rate(data, i + 1)"
+                            [class.selected]="(i + 1) <= data.score">
 
                             ★
 
@@ -172,7 +172,7 @@
 
                 </div>
 
-                <!-- BOTON -->
+                <!-- BOTÓN -->
                 <div class="footer-actions">
 
                     <button

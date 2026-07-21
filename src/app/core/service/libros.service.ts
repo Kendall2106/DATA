@@ -27,7 +27,7 @@ export class LibrosService {
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
-  async createBook(data: Book){
+  async createBook(data: any){
     const acollection = collection(this.firestore,'books');
     addDoc(acollection,{
         'name' : data.name,
@@ -36,8 +36,8 @@ export class LibrosService {
         'type' : data.type,
         'image' : data.image,
         'visible' : true,
-        'author': data.author,
-        'kind' : data.kind,
+        'author': data.author ?? '',
+        'kind' : data.kind ?? '',
         'review' : data.review ?? '',
     });
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { GameService } from 'src/app/core/service/game.service';
@@ -25,7 +26,7 @@ tipo: any;
   settings: any[] = [];
 
 
-  constructor(private router: Router, private dataService: DataService, private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService, public settingsService: SettingsService) {
+  constructor(public modalService: NgbModal, private router: Router, private dataService: DataService, private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService, public settingsService: SettingsService) {
     this.opTipos = [
       ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
       ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
@@ -80,6 +81,7 @@ tipo: any;
     }
 
     if (this.tipo == "Libros") {
+      console.log(this.data);
       this.libroService.createBook(this.data);
     }
 
@@ -118,5 +120,8 @@ tipo: any;
     }
   }
 
+cerrarModal(): void {
+  this.modalService.dismissAll();
+}
 
 }
