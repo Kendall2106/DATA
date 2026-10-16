@@ -82,16 +82,22 @@ export class Utils {
 
 
   static async imageToByteFromUrl(imageUrl: string, type: any): Promise<string> {
-    var response: any;
+     var response: any;
 
     if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {
-      response = await fetch('https://corsproxy.io/?key=577d7de5&url=' + encodeURIComponent(imageUrl)); //key=577d7de5&
+      const params = new URLSearchParams({
+        url: imageUrl
+      });
+
+      response = await fetch(
+        'https://igdb-proxy.data-igdb.workers.dev/?' + params.toString()
+      );
     } else {
       response = await fetch(imageUrl);
     }
 
     if (!response.ok) {
-      throw new Error('No se pudo cargar la imagen');
+      throw new Error('No se pudo cargar la imagen: HTTP ' + response.status);
     }
 
   /*    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {

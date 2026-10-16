@@ -86,6 +86,9 @@ tipo: any;
     }
 
     if (this.tipo == "Musica") {
+      this.data.date = "2025-09-03";
+      this.data.releaseDate = 2026;
+      this.data.artist = "";
       this.musicService.createMusic(this.data);
     }
 

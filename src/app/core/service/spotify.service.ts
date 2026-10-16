@@ -1,97 +1,158 @@
 // spotify.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, switchMap, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { map, Observable, of, switchMap, throwError } from 'rxjs';
 import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
 })
+
+ 
 export class SpotifyService {
-  private clientId = "9998ee121c5f4a079c5ff6deb08d173b";
-  private clientSecret = "594499dbcc5e4ee7b446e9171ac8536e";
+  private apiUrl = 'https://itunes.apple.com/search';
+  private lookupUrl = 'https://itunes.apple.com/lookup';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-
-  private apiUrl = 'https://api.spotify.com/v1/search?';
-  private tokenUrl = 'https://accounts.spotify.com/api/token';
-  
-  getToken(): Observable<string> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa(this.clientId + ':' + this.clientSecret)
-    });
-
-    const body = 'grant_type=client_credentials';
-
-    return this.http.post<any>(this.tokenUrl, body, { headers: headers }).pipe(
-      switchMap(response => {
-        return response.access_token ? of(response.access_token) : throwError('No se recibió un token de acceso.');
-      })
-    );
-  }
-  
-
+  // Catálogo inicial de Feid para comprobar la conexión
   getAlbums(offset: number, limit: number): Observable<any> {
-    return this.getToken().pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + token
-        });
-
-        const params = {
-            query: 'year:2024',
-            type: 'album',
-            limit: limit,
-            offset: offset
-          };
-         // const url = "https://api.spotify.com/v1/search?q=genre%reggaeton&type=album";
-          return this.http.get(this.apiUrl, { headers, params});
-
-      })
-    );
+    return this.getAlbumsByArtist(194502100, offset, limit);
   }
 
+  // Buscar álbumes por nombre de álbum o artista
+  getAlbumsByName(
+    title: string,
+    offset: number,
+    limit: number
+  ): Observable<any> {
 
-  getAlbumsByName(title: string, offset: number, limit: number): Observable<any> {
-    return this.getToken().pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + token
-        });
-        const params = {
-            query: title,
-            type: 'album',
-            limit: limit,
-            offset: offset
-          };
-          return this.http.get(this.apiUrl, { headers, params});
+    const params = new HttpParams()
+      .set('term', title.trim())
+      .set('media', 'music')
+      .set('entity', 'album')
+      .set('country', 'US')
+      .set('limit', '200');
 
-      })
-    );
-  }
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map(response => {
+        const albums = (response.results || [])
+          .filter((item: any) =>
+            item.wrapperType === 'collection' &&
+            item.collectionType === 'Album' &&
+            item.collectionId &&
+            item.collectionName
+          )
+          .map((item: any) => this.formatAlbum(item));
 
-  getAlbumsAiring(){
-    return this.getToken().pipe(
-      switchMap(token => {
-        const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + token
-        });
-        const params = {
-          query: 'year:2024',
-          type: 'album',
-          limit: 24,
-          offset: 0
+        return {
+          albums: {
+            items: albums.slice(offset, offset + limit),
+            total: albums.length,
+            offset,
+            limit
+          }
         };
-        
-          return this.http.get(this.apiUrl, { headers, params});
-
       })
     );
   }
 
+  // Obtener álbumes de un artista por su ID
+  getAlbumsByArtist(
+    artistId: number,
+    offset: number,
+    limit: number
+  ): Observable<any> {
 
-  
+    const params = new HttpParams()
+      .set('id', artistId.toString())
+      .set('entity', 'album')
+      .set('country', 'US')
+      .set('limit', '200');
 
+    return this.http.get<any>(this.lookupUrl, { params }).pipe(
+      map(response => {
+        const albums = (response.results || [])
+          .filter((item: any) =>
+            item.wrapperType === 'collection' &&
+            item.collectionType === 'Album' &&
+            item.collectionId &&
+            item.collectionName &&
+            item.trackCount > 1
+          )
+          .map((item: any) => this.formatAlbum(item));
+
+        return {
+          albums: {
+            items: albums.slice(offset, offset + limit),
+            total: albums.length,
+            offset,
+            limit
+          }
+        };
+      })
+    );
+  }
+
+  // Obtener novedades musicales
+  getAlbumsAiring(): Observable<any> {
+    return this.getAlbumsByName('new music', 0, 24);
+  }
+
+  // Obtener un álbum específico por ID
+  getAlbumById(id: number): Observable<any> {
+
+    const params = new HttpParams()
+      .set('id', id.toString())
+      .set('entity', 'song')
+      .set('country', 'US');
+
+    return this.http.get<any>(this.lookupUrl, { params }).pipe(
+      map(response => {
+        const album = (response.results || []).find(
+          (item: any) =>
+            item.wrapperType === 'collection' &&
+            item.collectionType === 'Album'
+        );
+
+        return album ? this.formatAlbum(album) : null;
+      })
+    );
+  }
+
+  // Adaptar el formato de Apple al que utiliza tu componente
+  private formatAlbum(item: any): any {
+
+    let image = item.artworkUrl100 || '';
+
+    if (image) {
+      image = image.replace('100x100bb', '600x600bb');
+    }
+
+    return {
+      id: item.collectionId,
+      name: item.collectionName || '',
+      artists: [
+        {
+          name: item.artistName || 'Artista desconocido'
+        }
+      ],
+      images: [
+        {
+          url: image
+        }
+      ],
+      release_date: item.releaseDate
+        ? item.releaseDate.substring(0, 10)
+        : null,
+      album_type: 'album',
+      total_tracks: item.trackCount || 0,
+      genres: item.primaryGenreName
+        ? [item.primaryGenreName]
+        : [],
+      external_urls: {
+        itunes: item.collectionViewUrl || ''
+      }
+    };
+  }
 }

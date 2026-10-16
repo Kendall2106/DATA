@@ -1,33 +1,115 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiBookService {
-  private API_URL = 'https://www.googleapis.com/books/v1/volumes';
-private API_KEY = 'AIzaSyDroAOHJga-Luumr1O7RZjOdppHo9DS7Sk';
 
-constructor(private http: HttpClient) {}
+  private API_URL = 'https://openlibrary.org/search.json';
+  private COVER_URL = 'https://covers.openlibrary.org/b/id/';
 
-getBooks(startIndex: number, maxResults: number): Observable<any> {
-  const url = `${this.API_URL}?q=subject:fantasy&startIndex=${startIndex}&maxResults=${maxResults}&printType=books&key=${this.API_KEY}`;
-  return this.http.get(url);
-}
+  constructor(private http: HttpClient) {}
 
-getBooksByName(name: string, startIndex: number): Observable<any> {
-  const url = `${this.API_URL}?q=${encodeURIComponent(name)}&startIndex=${startIndex}&maxResults=24&printType=books&key=${this.API_KEY}`;
-  return this.http.get(url);
-}
+  // Libros de fantasía para la pantalla inicial
+  getBooks(startIndex: number, maxResults: number): Observable<any> {
 
-getBooksByNew(): Observable<any> {
-  const url = `${this.API_URL}?q=subject:fantasy&maxResults=24&printType=books&orderBy=newest&key=${this.API_KEY}`;
-  return this.http.get(url);
-}
-  
+    const params = new HttpParams()
+      .set('q', 'subject:fantasy')
+      .set('fields', 'key,title,author_name,first_publish_year,cover_i,edition_count,number_of_pages_median,isbn,subject')
+      .set('offset', startIndex.toString())
+      .set('limit', Math.min(maxResults, 100).toString());
 
+    return this.http.get<any>(this.API_URL, { params }).pipe(
+      map(response => this.formatResponse(response))
+    );
+  }
 
+  // Buscar por título o autor
+  getBooksByName(name: string, startIndex: number): Observable<any> {
 
+    const params = new HttpParams()
+      .set('q', name.trim())
+      .set('fields', 'key,title,author_name,first_publish_year,cover_i,edition_count,number_of_pages_median,isbn,subject')
+      .set('offset', startIndex.toString())
+      .set('limit', '24');
+
+    return this.http.get<any>(this.API_URL, { params }).pipe(
+      map(response => this.formatResponse(response))
+    );
+  }
+
+  // Libros publicados recientemente
+  getBooksByNew(): Observable<any> {
+
+    const params = new HttpParams()
+      .set('q', 'subject:fantasy')
+      .set('sort', 'new')
+      .set('fields', 'key,title,author_name,first_publish_year,cover_i,edition_count,number_of_pages_median,isbn,subject')
+      .set('limit', '24');
+
+    return this.http.get<any>(this.API_URL, { params }).pipe(
+      map(response => this.formatResponse(response))
+    );
+  }
+
+  // Adaptar la respuesta al formato esperado por los componentes
+  private formatResponse(response: any): any {
+
+    const books = (response.docs || []).map((book: any) => {
+
+      const cover = book.cover_i
+        ? `${this.COVER_URL}${book.cover_i}-L.jpg`
+        : '';
+
+      return {
+        id: book.key || '',
+        key: book.key || '',
+
+        // Formato compatible con componentes que usan volumeInfo
+        volumeInfo: {
+          title: book.title || 'Título desconocido',
+          authors: book.author_name || [],
+          publishedDate: book.first_publish_year
+            ? String(book.first_publish_year)
+            : '',
+          description: '',
+          pageCount: book.number_of_pages_median || 0,
+          categories: book.subject || [],
+          imageLinks: cover
+            ? { thumbnail: cover }
+            : {},
+          industryIdentifiers: book.isbn?.[0]
+            ? [{
+                type: 'ISBN',
+                identifier: book.isbn[0]
+              }]
+            : []
+        },
+
+        // Campos directos para otros componentes
+        title: book.title || 'Título desconocido',
+        name: book.title || 'Título desconocido',
+        authors: book.author_name || [],
+        author: (book.author_name || []).join(', '),
+        image: cover,
+        releaseDate: book.first_publish_year || 0,
+        pages: book.number_of_pages_median || 0,
+        isbn: book.isbn?.[0] || '',
+        categories: book.subject || [],
+        editions: book.edition_count || 0,
+        openLibraryUrl: book.key
+          ? `https://openlibrary.org${book.key}`
+          : ''
+      };
+    });
+
+    return {
+      ...response,
+      totalItems: response.numFound || 0,
+      items: books
+    };
+  }
 }
