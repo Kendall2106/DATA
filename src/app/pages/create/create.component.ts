@@ -1,114 +1,115 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Movie } from 'src/app/core/model/movie.model';
-import { AnimeService } from 'src/app/core/service/anime.service';
-import { DataService } from 'src/app/core/service/data.service';
-import { GameService } from 'src/app/core/service/game.service';
-import { LibrosService } from 'src/app/core/service/libros.service';
-import { MovieService } from 'src/app/core/service/movie.service';
-import { MusicService } from 'src/app/core/service/music.service';
-import { SeriesService } from 'src/app/core/service/series.service';
+import { FriendService } from 'src/app/core/service/friend.service';
+import { ProfileService } from 'src/app/core/service/profile.service';
 import { SettingsService } from 'src/app/core/service/settings.service';
-import { Utils } from 'src/app/core/utilidades/util';
 
+// Pagina de ajustes: metas del año, amigo y color de la pagina
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  tipo: any;
-  data: any = {}
-  opTipos: string[][] = [];
-  opCalificacion: string[] = [];
-  stars: boolean[] = Array(5).fill(false);
   settings: any[] = [];
+  loading: boolean = false;
+  savedId: string = '';
 
+  friend: any = null;
+  friendInput: string = '';
+  friendError: string = '';
+  linking: boolean = false;
 
-  constructor(private router: Router, private dataService: DataService, private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService, public settingsService: SettingsService) {
-    this.opTipos = [
-      ["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"],
-      ["lightcoral", "gray", "blue", "green", "yellow", "Pink", "White", "lightYellow", "lightblue", "Purple"] // Colores correspondientes
-    ];
-    this.opCalificacion = ["0", "1", "2", "3", "4", "5"];
+  colors: string[] = ['#ff6a13', '#7dff3a', '#2f9bff', '#b46bff', '#ff4d6d', '#ffd24a', '#ffffff'];
+  colorActual: string = '#ff6a13';
+
+  constructor(public settingsService: SettingsService, private friendService: FriendService, private profileService: ProfileService) {
   }
+
   ngOnInit(): void {
+    const saved = localStorage.getItem('hobbies-color');
+    const current = getComputedStyle(document.documentElement).getPropertyValue('--color-2').trim();
+    this.colorActual = saved || current || this.colorActual;
+
     this.loadSettings();
+    this.loadFriend();
   }
 
-
-  obtenerImagen(event: any) {
-    const file = event.target.files[0];
-    var promiseResult = Utils.imageToByte(file);
-    promiseResult.then((value: any) => {
-      this.data.image = value;
-    });
-  }
-
-  navegarAComponenteDestino(data: String) {
-    this.dataService.typeData = data;
-    this.router.navigate(['/Workplace']);
-  }
-
-  onSubmit() {
-    console.log(this.data.image);
-    if (this.tipo == "Peliculas") {
-      this.movieService.createMovies(this.data);
-    }
-
-    if (this.tipo == "Series") {
-      this.serieServicio.createSeries(this.data);
-    }
-
-    if (this.tipo == "Animes") {
-      this.animeService.createAnimes(this.data);
-    }
-
-    if (this.tipo == "Juegos") {
-      this.data.type = "01";
-      this.data.date = "2025-03-04";
-      this.data.releaseDate = 2024;
-      this.juegosService.createGames(this.data);
-    }
-
-    if (this.tipo == "Libros") {
-      this.libroService.createBook(this.data);
-    }
-
-    if (this.tipo == "Musica") {
-      this.musicService.createMusic(this.data);
-    }
-
-    this.navegarAComponenteDestino(this.tipo);
-  }
-
-
-  rate(data: any, score: number) {
-    data.score = score;
-  }
-
-
+  // ---------- Metas del año ----------
   async loadSettings() {
-
-    this.settings = await this.settingsService.getSettings();
-
+    try {
+      this.loading = true;
+      this.settings = await this.settingsService.getSettings();
+    } catch (error) {
+      console.error('Error cargando los ajustes', error);
+    } finally {
+      this.loading = false;
+    }
   }
 
-   async saveSetting(setting: any) {
+  // "metaAnimes" o "meta_animes" se muestra como "Meta animes"
+  prettyName(name: string): string {
+    const text = (name ?? '').replace(/_/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').trim();
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  step(setting: any, delta: number) {
+    const next = Math.max(0, (Number(setting.value) || 0) + delta);
+    setting.value = typeof setting.value === 'number' ? next : String(next);
+    this.saveSetting(setting);
+  }
+
+  async saveSetting(setting: any) {
     try {
       await this.settingsService.updateSettings(setting.id, {
         value: setting.value
       });
+      this.savedId = setting.id;
+      setTimeout(() => {
+        if (this.savedId === setting.id) {
+          this.savedId = '';
+        }
+      }, 1800);
     } catch (error) {
       console.error('Error actualizando setting', error);
     }
   }
 
-  async saveAll() {
-    for (const setting of this.settings) {
-      await this.saveSetting(setting);
+  // ---------- Amigo (se mantiene vinculado hasta que lo quites) ----------
+  async loadFriend() {
+    try {
+      this.friend = await this.friendService.getFriend(true);
+    } catch (error) {
+      console.error('Error al cargar el amigo:', error);
     }
   }
 
+  async linkFriend() {
+    this.friendError = '';
+    try {
+      this.linking = true;
+      await this.friendService.linkByUsername(this.friendInput);
+      this.friendInput = '';
+      await this.loadFriend();
+    } catch (error: any) {
+      this.friendError = error?.message ?? 'No se pudo vincular';
+    } finally {
+      this.linking = false;
+    }
+  }
+
+  async unlinkFriend() {
+    try {
+      await this.friendService.unlink();
+      this.friend = null;
+    } catch (error) {
+      console.error('Error al desvincular:', error);
+    }
+  }
+
+  // ---------- Color de la pagina ----------
+  setColor(color: string) {
+    this.colorActual = color;
+    this.profileService.saveColor(color);
+  }
 
 }

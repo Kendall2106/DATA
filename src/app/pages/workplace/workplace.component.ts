@@ -149,10 +149,6 @@ resetFilters() {
 
       this.loadAllMonth();
 
-      if (this.data.length == 0) {
-
-        this.showAlert("Error al solicitar los datos", "error", 3000);
-      }
 
       if (this.lastTypeLoaded !== message) {
         this.goalActualYear = this.resultCount;

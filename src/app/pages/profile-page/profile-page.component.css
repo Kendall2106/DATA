@@ -1,186 +1,969 @@
-.body{
-  margin-top: 10px;
-  background-color: rgb(18, 18, 18);
-  margin-bottom: 10px;
-  border-radius: 10px;
-  height: calc(102vh - 60px); 
-
-}
-
-
-.container{
-  width: 90%;
-  height: calc(102vh - 60px); 
-}
-
-
-.TopSeccion{
-
-}
-
-.BarrasSeccion{
-  height: 100%;
-}
-
-.BottonSeccion{
-margin-top: 3%;
-
-}
-
-.profile{
-
-}
-
-.profileTime {
-  position: relative;
-  z-index: 0;
-}
-
-.profileTime::before {
-  position: absolute;
-  z-index: -1; /* Envía la imagen detrás del contenido */
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(18, 18, 18) 100%), url('../../../assets/cuadricula.png');
-  opacity: 0.2;
-}
-
-
-.graphicsBox{
+.pf-body {
   display: flex;
-  flex-direction: column; /* Organiza los hijos en una columna */
-  justify-content: flex-end; /* Alinea el contenido al final (parte inferior) */
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100vh - 20px);
+  padding: 10px 14px;
+  overflow: hidden;
+  color: #ded8cf;
+  text-align: left;
 }
 
-.BoxIntern{
-  margin: 1%;
+/* ---------- Cabecera ---------- */
+.pf-banner {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 26px 14px;
+  overflow: hidden;
+  background-color: #121212;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
 }
 
-
-
-
-h1{
-  font-size: 64px;
-  font-weight: 700;
+.pf-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: repeating-linear-gradient(-45deg, var(--color-2, #ff6a13) 0, var(--color-2, #ff6a13) 10px, #121212 10px, #121212 20px);
 }
 
-.Underlined{
-  background-color: var(--color-2);
+.pf-banner-bg {
+  position: absolute;
+  inset: -20px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(24px);
+  opacity: 0.28;
+  transform: translateZ(0);
+}
+
+.pf-banner > *:not(.pf-banner-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.pf-help {
+  position: absolute !important;
+  top: 14px;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 22px;
+  color: #ded8cf;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid #4a4a4a;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pf-help:hover {
+  color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pf-avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 118px;
+  height: 118px;
+  padding: 4px;
+  background-color: var(--color-2, #ff6a13);
+  border-radius: 6px;
+}
+
+.pf-avatar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  border-radius: 3px;
+}
+
+.pf-avatar-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pf-avatar-icon {
+  font-size: 4rem;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-status {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  width: 16px;
+  height: 16px;
+  background-color: #7dff3a;
+  border: 3px solid #121212;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #7dff3a;
+}
+
+.pf-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.pf-tag {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-name {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  line-height: 1.1;
+}
+
+.pf-since {
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+.pf-bio p {
+  display: inline;
+  margin: 0 8px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.pf-bio-edit textarea {
+  width: 100%;
+  max-width: 520px;
+  padding: 6px 10px;
+  color: #ded8cf;
+  background-color: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  outline: none;
+  resize: none;
+}
+
+.pf-bio-edit textarea:focus {
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pf-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px;
+  font-size: 0.75rem;
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.pf-btn:hover:not(:disabled) {
+  color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pf-btn-main {
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pf-btn-main:hover:not(:disabled) {
+  color: #0a0a0a;
+  opacity: 0.85;
+}
+
+.pf-link {
+  padding: 0;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: none;
+  color: var(--color-2, #ff6a13);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pf-error {
+  font-size: 0.7rem;
+  color: #ff4040;
+}
+
+/* ---------- Nivel ---------- */
+.pf-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.pf-level-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--color-2, #ff6a13);
+  background-color: #0a0a0a;
+  border: 3px solid var(--color-2, #ff6a13);
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(255, 106, 19, 0.3);
+}
+
+.pf-level-label {
+  font-size: 0.6rem;
+  letter-spacing: 4px;
+}
+
+.pf-level-bar {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  background-color: #262626;
+  border-radius: 3px;
+}
+
+.pf-level-bar div {
+  height: 100%;
+  background-color: var(--color-2, #ff6a13);
+}
+
+.pf-level-xp {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+/* ---------- Rejilla y paneles ---------- */
+.pf-grid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr 360px;
+  gap: 10px;
+  min-height: 0;
+}
+
+.pf-main,
+.pf-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pf-panel {
+  padding: 12px 16px;
+  min-height: 0;
+  background-color: #121212;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
+}
+
+.pf-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #262626;
+}
+
+.pf-title span {
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-empty {
+  margin: 0;
+  font-size: 0.78rem;
+  opacity: 0.6;
+}
+
+/* ---------- Vitrina ---------- */
+.pf-showcase-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.pf-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.pf-tabs button {
+  padding: 2px 11px;
+  font-size: 0.72rem;
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pf-tabs button.active {
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pf-showcase {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+
+.pf-showcase .pf-empty {
+  grid-column: 1 / -1;
+}
+
+.pf-fav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pf-fav img {
+  flex: 1 1 0;
+  width: 100%;
+  min-height: 0;
+  max-height: 270px;
+  object-fit: cover;
+  background-color: #0a0a0a;
+  border: 1px solid #262626;
+  border-radius: 6px;
+}
+
+.pf-fav span {
+  overflow: hidden;
+  font-size: 0.68rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pf-fav-more {
+  cursor: pointer;
+}
+
+.pf-more-box {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-height: 270px;
+  min-height: 0;
+  color: var(--color-2, #ff6a13);
+  border: 1px dashed var(--color-2, #ff6a13);
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.pf-more-box i {
+  font-size: 1.6rem;
+}
+
+.pf-more-box strong {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.pf-more-box small {
+  font-size: 0.65rem;
+  color: #ded8cf;
+  opacity: 0.6;
+}
+
+.pf-fav-more:hover .pf-more-box {
+  background-color: rgba(255, 106, 19, 0.08);
+}
+
+/* ---------- Estadisticas ---------- */
+.pf-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.pf-stat:last-child {
+  margin-bottom: 0;
+}
+
+.pf-stat i {
+  width: 20px;
+  font-size: 1.05rem;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-stat-label {
+  width: 80px;
+  font-size: 0.75rem;
+}
+
+.pf-stat-bar {
+  flex: 1;
+  height: 7px;
+  overflow: hidden;
+  background-color: #262626;
+  border-radius: 4px;
+}
+
+.pf-stat-bar div {
+  height: 100%;
+  background-color: var(--color-2, #ff6a13);
+  transition: width 0.6s;
+}
+
+.pf-stat strong {
+  width: 40px;
+  font-size: 0.85rem;
+  font-weight: 400;
   text-align: right;
-  color: black;
 }
 
-
-
-
-img{
-width: 100%;
-height: 100%;
+/* ---------- Insignias ---------- */
+.pf-badges-panel {
+  flex: 1;
 }
 
-.menuOption{
-width: 10%;
-border-style:solid;
-border-color: black;
+.pf-badges {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
-.nav-item{
-border-style: solid;
-border-color: black;
+.pf-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px 6px;
+  text-align: center;
+  background-color: #0a0a0a;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  filter: grayscale(1);
+  opacity: 0.45;
 }
 
-
-
-.imagen-circular {
-  width: 85%; /* Ajusta el tamaño según sea necesario */
-  height: 100%; /* Debe ser igual al ancho para mantener la forma circular */
-  overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
-  border-radius: 50%; /* Hace que el contenedor sea circular */
-  display: flex; /* Usar Flexbox para centrar el contenido */
-    align-items: center; /* Centra verticalmente el contenido dentro del contenedor */
-    justify-content: center;
-    border: 10px double var(--color-2);
-
+.pf-badge.unlocked {
+  border-color: var(--tier-color);
+  box-shadow: inset 0 0 14px color-mix(in srgb, var(--tier-color) 18%, transparent);
+  filter: none;
+  opacity: 1;
 }
 
-.imagen-circular img {
-  width: 100%; /* Asegura que la imagen ocupe todo el contenedor */
-  height: 100%; /* Mantiene la relación de aspecto de la imagen */
-  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+.pf-badge.is-platinum {
+  box-shadow: 0 0 14px color-mix(in srgb, var(--tier-color) 45%, transparent), inset 0 0 14px color-mix(in srgb, var(--tier-color) 22%, transparent);
 }
 
-.title{
-  color: var(--color-2);
+.pf-badge i {
+  font-size: 1.5rem;
+  color: var(--tier-color, #777);
 }
 
+.pf-badge strong {
+  font-size: 0.72rem;
+  font-weight: 400;
+}
 
+.pf-badge-tier {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--tier-color, #777);
+}
 
- 
+.pf-badge-bar {
+  width: 80%;
+  height: 4px;
+  margin-top: 3px;
+  overflow: hidden;
+  background-color: #262626;
+  border-radius: 2px;
+}
 
+.pf-badge-bar div {
+  height: 100%;
+  background-color: var(--tier-color, #555);
+}
 
+.pf-badge small {
+  font-size: 0.58rem;
+  opacity: 0.65;
+}
 
-.table-container {
+.pf-pips {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.pf-pips i {
+  width: 6px;
+  height: 6px;
+  font-size: 0;
+  background-color: #2e2e2e;
+  border-radius: 50%;
+}
+
+.pf-pips i.on {
+  background-color: var(--tier-color);
+}
+
+/* ---------- Amigos ---------- */
+.pf-friend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pf-friend-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  overflow: hidden;
+  color: var(--color-2, #ff6a13);
+  background-color: #0a0a0a;
+  border: 2px solid var(--color-2, #ff6a13);
+  border-radius: 4px;
+}
+
+.pf-friend-avatar img {
   width: 100%;
-  margin: auto;
-  margin-top: 2%;
+  height: 100%;
+  object-fit: cover;
 }
 
-table {
+.pf-friend-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pf-friend-name small {
+  font-size: 0.62rem;
+  opacity: 0.6;
+}
+
+/* ---------- Ventanas (todos los favoritos / ayuda) ---------- */
+.pf-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.78);
+}
+
+.pf-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(640px, 100%);
+  max-height: 86vh;
+  background-color: #121212;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+}
+
+.pf-dialog-wide {
+  width: min(1000px, 100%);
+}
+
+.pf-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #262626;
+}
+
+.pf-dialog-head h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.pf-dialog-head h3 span {
+  margin-left: 8px;
+  font-size: 0.7rem;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-close {
+  padding: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pf-dialog-body {
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+}
+
+.pf-dialog-body::-webkit-scrollbar {
+  width: 0;
+}
+
+.pf-all-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.pf-all-grid .pf-fav img {
+  flex: none;
+  max-height: none;
+  aspect-ratio: 2 / 3;
+}
+
+/* Ayuda */
+.pf-help-body h4 {
+  margin: 14px 0 6px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-2, #ff6a13);
+}
+
+.pf-help-body h4:first-child {
+  margin-top: 0;
+}
+
+.pf-help-body p {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.pf-tier-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.pf-tier-legend span {
+  padding: 2px 10px;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  border: 1px solid;
+  border-radius: 20px;
+}
+
+.pf-table {
   width: 100%;
+  margin-bottom: 10px;
+  font-size: 0.75rem;
   border-collapse: collapse;
 }
 
-th, td {
-  padding: 10px;
- 
+.pf-table th,
+.pf-table td {
+  padding: 5px 6px;
+  text-align: center;
+  border-bottom: 1px solid #262626;
+}
+
+.pf-table th:first-child,
+.pf-table td:first-child {
   text-align: left;
-  
 }
 
-td{
-  font-size: 12px;
+.pf-table th {
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-th {
-  font-weight: 700;
+.pf-table td small {
+  display: block;
+  font-size: 0.6rem;
+  opacity: 0.55;
 }
 
+.pf-help-body .pf-note {
+  font-size: 0.68rem;
+  opacity: 0.55;
+}
 
+/* ---------- Pantallas bajas o chicas: se permite desplazar ---------- */
+@media (max-height: 780px), (max-width: 991.98px) {
+  .pf-body {
+    height: auto;
+    overflow: visible;
+  }
 
+  .pf-showcase {
+    grid-template-rows: auto;
+  }
 
+  .pf-fav img,
+  .pf-more-box {
+    flex: none;
+    height: 190px;
+  }
+}
 
- /* Estilos para la animación de carga */
- .loading-overlay {
-  position: fixed;
+@media (max-width: 991.98px) {
+  .pf-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-showcase {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .pf-banner {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pf-info {
+    align-items: center;
+  }
+}
+
+/* ---------- Boton de platinos (pestaña de juegos) ---------- */
+.pf-tab-plat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 12px;
+  font-size: 0.72rem;
+  color: #6fe6ff;
+  background-color: transparent;
+  border: 1px solid #6fe6ff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pf-tab-plat b {
+  font-weight: 400;
+  color: #ded8cf;
+}
+
+.pf-tab-plat:hover {
+  background-color: rgba(111, 230, 255, 0.1);
+}
+
+/* Tarjeta de amigo con enlace a su perfil */
+.pf-friend-link {
+  cursor: pointer;
+}
+
+.pf-friend-link:hover .pf-friend-avatar {
+  box-shadow: 0 0 12px var(--color-2, #ff6a13);
+}
+
+/* ---------- Seccion de platinos ---------- */
+.pf-platinum {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 22px;
+  padding: 12px 22px;
+  overflow: hidden;
+  background: linear-gradient(110deg, #0e1417 0%, #121212 45%, #0e1417 100%);
+  border: 1px solid #6fe6ff;
+  border-radius: 10px;
+  box-shadow: 0 0 22px rgba(111, 230, 255, 0.18), inset 0 0 30px rgba(111, 230, 255, 0.05);
+}
+
+/* brillo que recorre la seccion */
+.pf-platinum::after {
+  content: '';
+  position: absolute;
   top: 0;
-  left: 0;
+  bottom: 0;
+  left: -30%;
+  width: 22%;
+  background: linear-gradient(100deg, transparent, rgba(111, 230, 255, 0.12), transparent);
+  transform: skewX(-20deg);
+  animation: pf-shine 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pf-shine {
+  0%, 55% { left: -30%; }
+  100% { left: 130%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-platinum::after { animation: none; }
+}
+
+.pf-plat-head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 14px;
+}
+
+.pf-plat-trophy {
+  font-size: 2.6rem;
+  color: #6fe6ff;
+  filter: drop-shadow(0 0 10px rgba(111, 230, 255, 0.7));
+}
+
+.pf-plat-count {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.pf-plat-count strong {
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: #bff6ff;
+  text-shadow: 0 0 14px rgba(111, 230, 255, 0.55);
+}
+
+.pf-plat-count span {
+  margin-top: 4px;
+  font-size: 0.62rem;
+  letter-spacing: 4px;
+  color: #6fe6ff;
+}
+
+.pf-plat-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pf-plat-jp {
+  font-size: 1.1rem;
+  letter-spacing: 6px;
+  opacity: 0.35;
+}
+
+.pf-plat-meta small {
+  font-size: 0.68rem;
+  opacity: 0.6;
+}
+
+.pf-plat-strip {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pf-plat-game {
+  position: relative;
+  flex: 0 0 auto;
+  width: 66px;
+  height: 98px;
+}
+
+.pf-plat-game img {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.767); /* Fondo oscurecido */
+  object-fit: cover;
+  border: 1px solid #6fe6ff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(111, 230, 255, 0.35);
+}
+
+.pf-plat-game i {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté por encima del modal */
-}
-
-
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #333;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  color: #0a0a0a;
+  background-color: #6fe6ff;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+}
+
+.pf-plat-all {
+  flex-shrink: 0;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #6fe6ff;
+  background-color: transparent;
+  border: 1px solid #6fe6ff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pf-plat-all:hover {
+  background-color: rgba(111, 230, 255, 0.12);
+}
+
+@media (max-width: 991.98px) {
+  .pf-platinum {
+    flex-wrap: wrap;
+  }
 }

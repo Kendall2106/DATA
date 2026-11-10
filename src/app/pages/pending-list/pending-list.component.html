@@ -7,21 +7,19 @@
         </div>
         <div class="col-lg-6" style="padding-top: 1.5%;">
             <div class="search-actions">
-                <div class="search-container">
-
+                <div class="search-container" *ngIf="!introVisible">
                     <i class="uil uil-search search-icon"></i>
-
-                    <input type="text" class="search-input" placeholder="Search..." >
-
+                    <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchText"
+                        (ngModelChange)="onSearch()">
                 </div>
 
-                <button *ngIf="!introVisible" (click)="getRandomItem()" class="action-button" [class.active]="false" ><i class="uil uil-dice-five"></i> </button>
-                
+                <button *ngIf="!introVisible" (click)="getRandomItem()" class="action-button" title="Elegir al azar"><i
+                        class="uil uil-dice-five"></i> </button>
+
                 <div *ngIf="selectedItem === 'Animes'">
-                        <button class="action-button" (click)="changeList()"
-                            [class.active]="listSeasonActivate === true">Season</button>
-                    </div>
-                    
+                    <button class="action-button" (click)="changeList()"
+                        [class.active]="listSeasonActivate === true">Season</button>
+                </div>
             </div>
         </div>
     </div>
@@ -29,75 +27,47 @@
     <header>
         <div class="row">
             <div class="filter-container">
-
                 <div class="filter-options">
                     <button class="filter-button" (click)="goHome('Home')" [class.active]="selectedItem === 'Home'">
                         Home
+                        <span class="pl-count">{{ dataOriginal.length }}</span>
                     </button>
-                    <button class="filter-button" (click)="loadData('Animes')"
-                        [class.active]="selectedItem === 'Animes'"><i class="uil"><img src="assets/img/Icons/anime.png"
-                                class="icon">Animes</i></button>
-                    <button class="filter-button" (click)="loadData('Movies')"
-                        [class.active]="selectedItem === 'Movies'"><i class="uil"><img src="assets/img/Icons/movie.png"
-                                class="icon">Movies</i></button>
-                    <button class="filter-button" (click)="loadData('Series')"
-                        [class.active]="selectedItem === 'Series'"><i class="uil"><img src="assets/img/Icons/show.png"
-                                class="icon">Shows</i></button>
-                    <button class="filter-button" (click)="loadData('Books')"
-                        [class.active]="selectedItem === 'Books'"><i class="uil"><img src="assets/img/Icons/book.png"
-                                class="icon">Books</i></button>
-                    <button class="filter-button" (click)="loadData('Games')"
-                        [class.active]="selectedItem === 'Games'"><i class="uil"><img src="assets/img/Icons/game.png"
-                                class="icon">Games</i></button>
-                    <button class="filter-button" (click)="loadData('Music')"
-                        [class.active]="selectedItem === 'Music'"><i class="uil"><img src="assets/img/Icons/music.png"
-                                class="icon">Music</i></button>
-
-                   
-
-
-
+                    <button class="filter-button" *ngFor="let c of categoryList" (click)="loadData(c.key)"
+                        [class.active]="selectedItem === c.key"><i class="uil"><img
+                                [src]="'assets/img/Icons/' + c.icon" class="icon">{{ c.label }}</i>
+                        <span class="pl-count">{{ count(c.key) }}</span>
+                    </button>
                 </div>
             </div>
         </div>
-
     </header>
 
+    <!-- ========== Inicio: la proxima eleccion de cada categoria ========== -->
+    <div class="pl-home" *ngIf="introVisible">
+        <div class="pl-tile" *ngFor="let c of categoryList" (click)="loadData(c.key)">
+            <div class="pl-tile-cover">
+                <img *ngIf="nextPick(c.key)" [src]="nextPick(c.key).image" [alt]="nextPick(c.key).name">
+                <div *ngIf="!nextPick(c.key)" class="pl-tile-empty">
+                    <i class="uil uil-dice-five"></i>
+                    <span>Sin elegir</span>
+                </div>
+                <span class="pl-next-badge" *ngIf="nextPick(c.key)">PRÓXIMO</span>
+            </div>
+            <div class="pl-tile-info">
+                <div class="pl-tile-title">
+                    <img [src]="'assets/img/Icons/' + c.icon" class="icon" alt="">
+                    <strong>{{ c.label }}</strong>
+                </div>
+                <small>{{ count(c.key) }} pendientes</small>
+                <span class="pl-tile-name" *ngIf="nextPick(c.key)">{{ nextPick(c.key).name }}</span>
+            </div>
+        </div>
+    </div>
 
-
-    <!-- <div *ngIf="introVisible">
-                    <div class="currentlyArea workingArea">
-                        <h5>Currently Viewing</h5>
-                        <div *ngIf="isListView" class="quadrature" style="width: 100%;">
-                            <div class="row" style="margin-top: 1%;">
-                                <div *ngFor="let cardData of viewData" class="col-lg-2 col-3 col-md-4">
-                                    <div class="cardQuadrature filter">
-                                        <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>*/
-
-                <div class="mainData" *ngIf="!introVisible">
-                    
-                    <div *ngIf="isListView" class="quadrature" style="width: 90%;">
-                    <!-- <div class="row" style="margin-top: 1%;">
-                            <div *ngFor="let cardData of data" class="col-lg-2 col-3 col-md-4">
-                                <div class="cardQuadrature" [ngClass]="{'cardQuadratureActive': cardData.name === selectedData.name}">
-                                    <img class="imagenQuadrature" [src]="cardData.image" alt="#">
-                                </div>
-                            </div>
-                        </div>-->
+    <!-- ========== Categoria ========== -->
     <div class="mainData" *ngIf="!introVisible">
-
-
-        <div class="gallery-container">
-
-
-            <div class="movie-card" *ngFor="let movie of resultFilter">
+        <div class="gallery-container" *ngIf="resultFilter.length > 0">
+            <div class="movie-card" *ngFor="let movie of resultFilter" [class.is-next]="movie.liked">
                 <div class="cardImage" (click)="openModal(movie)">
 
                     <div *ngIf="selectedItem !== 'Music'">
@@ -109,11 +79,23 @@
                             [ngClass]="{'cardQuadratureActive': movie.name === selectedData.name}" />
                     </div>
 
+                    <span class="pl-next-badge" *ngIf="movie.liked">PRÓXIMO</span>
+
+                    <div class="pl-actions">
+                        <button type="button" class="pl-action" [class.on]="movie.liked"
+                            [title]="movie.liked ? 'Quitar de próximo' : 'Marcar como próximo'"
+                            (click)="$event.stopPropagation(); toggleLike(movie, data)">
+                            <i class="uil uil-map-pin"></i>
+                        </button>
+                        <button type="button" class="pl-action pl-action-danger" title="Eliminar de pendientes"
+                            (click)="$event.stopPropagation(); confirmDelete(movie)">
+                            <i class="uil uil-trash-alt"></i>
+                        </button>
+                    </div>
                 </div>
 
-
-
-                <button *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)">
+                <button *ngIf="selectedItem === 'Animes'" class="delete-button" (click)="addListSeason(movie)"
+                    title="Pasar a Season">
                     <i class="uil uil-eye"></i>
                 </button>
 
@@ -123,26 +105,22 @@
             </div>
         </div>
 
-
-
-
+        <div class="pl-empty" *ngIf="resultFilter.length === 0">
+            <i class="uil uil-bookmark"></i>
+            <p *ngIf="searchText">No hay resultados para "{{ searchText }}".</p>
+            <p *ngIf="!searchText">No tienes pendientes en esta categoría.</p>
+        </div>
     </div>
 
-     <div class="row " style="height: 30px;">
+    <div class="row" style="height: 30px;">
         <div class="col-lg-2" style="padding-left: 3%;">
-            <p style=" margin-top: 2.5%;">
+            <p style="margin-top: 2.5%;">
                 <i class="uil uil-info-circle"></i>
-                Total: {{ resultCount }}
+                Total: {{ introVisible ? dataOriginal.length : resultCount }}
             </p>
         </div>
     </div>
 
-
-
-
-
-    <div class="loading-overlay" *ngIf="loading">
-        <div class="loading-spinner"></div>
-    </div>
+    <app-loader *ngIf="loading"></app-loader>
 
 </div>

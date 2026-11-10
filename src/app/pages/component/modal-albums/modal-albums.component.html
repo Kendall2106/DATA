@@ -1,6 +1,19 @@
 <div class="modalPrin">
 
     <div class="modal-body">
+
+        <div class="albums-toolbar">
+            <button type="button" class="albums-add-btn" (click)="toggleForm()">
+                <i class="uil uil-plus"></i> {{ showForm ? 'Cancelar' : 'Nuevo álbum' }}
+            </button>
+        </div>
+
+        <form class="album-form" *ngIf="showForm" (ngSubmit)="saveAlbum()">
+            <input type="text" name="albumName" [(ngModel)]="newAlbum.name" placeholder="Nombre del álbum" autocomplete="off" required>
+            <input type="file" name="albumImage" (change)="obtenerImagenAlbum($event)" accept="image/png,.jpg,.jpeg,.gif">
+            <button type="submit" [disabled]="!newAlbum.name || !newAlbum.image">Guardar</button>
+        </form>
+
         <div class="row">
 
 
@@ -23,9 +36,7 @@
 
         </div>
 
-        <div class="loading-overlay" *ngIf="loading">
-            <div class="loading-spinner"></div>
-        </div>
+        <app-loader *ngIf="loading"></app-loader>
 
     </div>
 </div>

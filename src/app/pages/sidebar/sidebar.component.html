@@ -47,25 +47,20 @@
             </div>
             -->
             <div>
-                <div class="section-title">
-                    GESTIÓN
-                </div>
-
-                <ul class="menu">
-                    <li><a (click)="navegarTier()"><i class="uil uil-estate"></i> Tier</a></li>
-                    <li><a (click)="navegarGraphicsPage()"><i class="uil uil-apps"></i> Graphics</a></li>
-                </ul>
-
+  
+                    
                 <hr>
 
+                <ul class="menu">
+                    <li><a (click)="navegarTier()"><i class="uil uil-sitemap"></i> Tier</a></li>
+                    <li><a (click)="navegarGraphicsPage()"><i class="uil uil-graph-bar"></i> Graphics</a></li>
+                </ul>
 
-                <div class="section-title">
-                    GESTIÓN
-                </div>
+        
 
                 <ul class="menu">
-                    <li><a (click)="navegarCreate()"><i class="uil uil-apps"></i> Settings</a></li>
-                    <li><a (click)="openModal()"><i class="uil uil-apps"></i> Create</a></li>
+                    <li><a (click)="navegarCreate()"><i class="uil uil-setting"></i> Settings</a></li>
+                    <li><a (click)="openModal()"><i class="uil uil-create-dashboard"></i> Create</a></li>
                 </ul>
 
             </div>
@@ -74,22 +69,28 @@
 
 
 
-            <div class="d-flex justify-content-end" style="margin-top: auto; margin-bottom: 5%;">
+            <div class="d-flex justify-content-between align-items-center" style="margin-top: auto; margin-bottom: 5%;">
 
 
 
-                <input #colorInput type="color" [(ngModel)]="colorSeleccionado" style="display: none;"
-                    (change)="cambiarColor()" />
+               
 
 
 
-                <button style="background-color: transparent; border: none;"> <i class="uil uil-user"
-                        style="color: #ded8cf; font-size: 1.5rem;"></i></button>
+                <a class="sidebar-user" (click)="navegarProfilePage()" title="Perfil">
+                    <img *ngIf="photo" class="sidebar-avatar" [src]="photo" alt="">
+                    <i *ngIf="!photo" class="uil uil-user" style="color: #ded8cf; font-size: 1.5rem;"></i>
+                    <span class="sidebar-username">{{ username }}</span>
+                </a>
 
-                <button (click)="colorInput.click()" style="background-color: transparent; border: none;">
+                <div class="d-flex">
 
-                    <i class="uil uil-palette" style="color: #ded8cf; font-size: 1.5rem;"></i>
+                
+
+                <button (click)="cerrarSesion()" title="Cerrar sesión" style="background-color: transparent; border: none;">
+                    <i class="uil uil-signout" style="color: #ded8cf; font-size: 1.5rem;"></i>
                 </button>
+                </div>
             </div>
 
 

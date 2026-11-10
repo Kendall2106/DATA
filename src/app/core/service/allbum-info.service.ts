@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Firestore, addDoc, collection, deleteDoc, deleteField, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
 import { Book } from '../model/book.model';
 
 @Injectable({
@@ -11,13 +12,15 @@ import { Book } from '../model/book.model';
 export class AlbumInfoService {
 
   firestore: Firestore = inject(Firestore);
+  private authService = inject(AuthService);
 
   constructor(private http: HttpClient) {}
 
   async getInfoAlbums(idAlbum: any): Promise<any> {
   const acollection = collection(this.firestore, 'infoAlbums');
+  const uid = await this.authService.getUid();
 
-  const q = query(acollection, where('idAlbum', '==', idAlbum));
+  const q = query(acollection, where('userId', '==', uid), where('idAlbum', '==', idAlbum));
   const querySnapshot = await getDocs(q);
 
   return querySnapshot.docs.map(doc => ({

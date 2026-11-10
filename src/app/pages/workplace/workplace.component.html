@@ -133,14 +133,15 @@
                 <div class="cardImage">
 
                     <div *ngIf="selectedItem !== 'Music'">
-                        <img (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
+                        <img loading="lazy" decoding="async" (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
                             title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
 
                     </div>
                     <div *ngIf="selectedItem === 'Music'">
-                        <img (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}" [src]="movie.image"
+                        <img loading="lazy" decoding="async" (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}" [src]="movie.image"
                             [alt]="movie.name" />
                     </div>
+                    <span class="platinum-badge" *ngIf="selectedItem === 'Games' && movie.achievements" title="Platinado"><i class="uil uil-trophy"></i></span>
 
                 </div>
 
@@ -167,14 +168,15 @@
                     <div class="cardImage">
 
                         <div *ngIf="selectedItem !== 'Music'">
-                            <img (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
+                            <img loading="lazy" decoding="async" (click)="openModal(movie)" class="image ${getScoreClass(movie.score)}"
                                 title="{{ movie.name }}" [src]="movie.image" [alt]="movie.name" />
 
                         </div>
                         <div *ngIf="selectedItem === 'Music'">
-                            <img (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}"
+                            <img loading="lazy" decoding="async" (click)="openModal(movie)" class="imageMusic" title="{{ movie.name }}"
                                 [src]="movie.image" [alt]="movie.name" />
                         </div>
+                    <span class="platinum-badge" *ngIf="selectedItem === 'Games' && movie.achievements" title="Platinado"><i class="uil uil-trophy"></i></span>
 
                     </div>
 
@@ -211,9 +213,7 @@
     </div>
 
 
-    <div class="loading-overlay" *ngIf="loading">
-        <div class="loading-spinner"></div>
-    </div>
+    <app-loader *ngIf="loading"></app-loader>
 
     <div class="sidebar-overlay" *ngIf="isSidebarOpen" (click)="closeSettingsSidebar()">
     </div>

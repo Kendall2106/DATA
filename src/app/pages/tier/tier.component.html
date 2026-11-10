@@ -1,4 +1,21 @@
-<div class="body">
+<div class="body" [class.friend-mode]="viewFriend">
+
+    <!-- Cabecera cuando ves la tier list de tu amigo -->
+    <div class="tf-banner" *ngIf="viewFriend && friendInfo">
+        <div class="tf-avatar">
+            <img *ngIf="friendInfo.photo" [src]="friendInfo.photo" alt="">
+            <i *ngIf="!friendInfo.photo" class="uil uil-user"></i>
+        </div>
+        <div class="tf-text">
+            <span>TIER LIST DE</span>
+            <h4>{{ friendInfo.username }}</h4>
+        </div>
+        <div class="tf-actions">
+            <button type="button" class="tf-btn" (click)="goFriendProfile()"><i class="uil uil-user"></i> Ver perfil</button>
+            <button type="button" class="tf-btn tf-btn-main" (click)="goMyTier()"><i class="uil uil-arrow-left"></i> Mi tier list</button>
+        </div>
+    </div>
+
     <header>
         <div class="row">
             <div class="filter-container">
@@ -22,6 +39,10 @@
 
                     <button class="filter-button" [class.active]="true"><i class="uil">{{resultCount}}</i></button>
                     <button class="filter-button" [class.active]="this.SK" (click)="FilterSK()" ><i class="uil">SK</i></button>
+
+                    <button class="filter-button" *ngIf="!viewFriend && friend" (click)="goFriendTier()" title="Ver su tier list">
+                      <i class="uil uil-users-alt"> Tier de {{ friend.username }}</i>
+                    </button>
               </div>
             </div>
         </div>
@@ -46,8 +67,6 @@
     </div>
 
 
-    <div class="loading-overlay" *ngIf="loading">
-        <div class="loading-spinner"></div>
-    </div>
+    <app-loader *ngIf="loading"></app-loader>
 
 </div>

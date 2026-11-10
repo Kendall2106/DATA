@@ -65,6 +65,17 @@ export class ModalComponent implements OnInit {
   }
 
 
+  // ---------- Datos para mostrar ----------
+  get typeLabel(): string {
+    const labels: any = { Animes: 'Anime', Movies: 'Película', Series: 'Serie', Games: 'Juego', Books: 'Libro', Music: 'Música' };
+    return labels[this.type] ?? this.type;
+  }
+
+  get factLabel(): string {
+    const labels: any = { Animes: 'Puntuación', Movies: 'Puntuación', Series: 'Puntuación', Games: 'Plataforma', Books: 'Páginas', Music: 'Canciones' };
+    return labels[this.type] ?? '';
+  }
+
   closeModal() {
     this.modalService.dismissAll();
   }
@@ -109,6 +120,7 @@ export class ModalComponent implements OnInit {
       console.log("convert: "+ value);
     } catch (error) {
       this.showAlert("Error al obtener la imagen", "error");
+      throw error;
     } finally {
       this.loading = false;
     }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FriendService } from 'src/app/core/service/friend.service';
+import { ProfileService } from 'src/app/core/service/profile.service';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
@@ -12,7 +14,7 @@ import { SeriesService } from 'src/app/core/service/series.service';
   templateUrl: './tier.component.html',
   styleUrls: ['./tier.component.css']
 })
-export class TierComponent implements OnInit {
+export class TierComponent implements OnInit, OnDestroy {
   categorias: any[] = ["Masterpiece", "Re-watch", "Meh", "Forgettable", "trash"];
   data: any[] = [];
   anioActual: string = "";
@@ -31,8 +33,12 @@ export class TierComponent implements OnInit {
   selectedItem: string = '';
   categories: any[] = [];
   SK: boolean = false;
+  friend: any = null;        // tu amigo vinculado (para el boton de tu propia tier)
+  friendInfo: any = null;    // perfil del usuario cuya tier list estas viendo
+  viewUid: string | null = null;
+  viewFriend: boolean = false;
 
-  constructor(private router: Router, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
+  constructor(private router: Router, private route: ActivatedRoute, private friendService: FriendService, private profileService: ProfileService, private musicService: MusicService, private animeService: AnimeService, private movieService: MovieService, private seriesService: SeriesService, private gameService: GameService, private libroService: LibrosService) {
     this.opTipos =["Accion", "Terror", "Comedia", "Animacion", "Musical", "Romance", "Triller", "Fantasia", "No Ficcion", "Ficcion"];
     this.hobbyType =["Animes", "Movies", "Series", "Books", "Games", "Music"];
   }
@@ -42,7 +48,47 @@ export class TierComponent implements OnInit {
     
     this.updateYearOptions();
     this.selectedYear = this.opAnios[0];
+    this.initFriend();
+  }
+
+  // Con /Tier/:uid se muestra la tier list de tu amigo; sin parametro, la tuya
+  async initFriend() {
+    this.viewUid = this.route.snapshot.paramMap.get('uid');
+    this.viewFriend = !!this.viewUid;
+
+    try {
+      if (this.viewUid) {
+        this.friendInfo = await this.profileService.loadProfileOf(this.viewUid);
+        this.profileService.previewColor(this.friendInfo.color);
+      } else {
+        this.friend = await this.friendService.getFriend();
+      }
+    } catch (error) {
+      console.error("Error al cargar el amigo:", error);
+    }
     this.loadData(this.hobbyType[0]);
+  }
+
+  ngOnDestroy(): void {
+    if (this.viewFriend) {
+      this.profileService.restoreColor();
+    }
+  }
+
+  goMyTier() {
+    this.router.navigate(['/Tier']);
+  }
+
+  goFriendTier() {
+    if (this.friend) {
+      this.router.navigate(['/Tier', this.friend.uid]);
+    }
+  }
+
+  goFriendProfile() {
+    if (this.viewUid) {
+      this.router.navigate(['/Profile', this.viewUid]);
+    }
   }
 
   updateYearOptions(): void {
@@ -62,7 +108,9 @@ export class TierComponent implements OnInit {
     this.selectedItem = message;
     try {
       this.loading = true;
-      if (message === 'Movies') {
+      if (this.viewFriend) {
+        this.data = await this.friendService.getItemsOf(message, this.viewUid as string);
+      } else if (message === 'Movies') {
         this.data = await this.loadDataForType(this.movieService.getMovies());
       } else if (message === 'Series') {
         this.data = await this.loadDataForType(this.seriesService.getSeries());

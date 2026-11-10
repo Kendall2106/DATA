@@ -736,3 +736,27 @@ s .etiqueta {
   cursor: pointer; 
 }
 */
+
+
+/* ---------- Insignia de juego platinado ---------- */
+.cardImage {
+  position: relative;
+}
+
+.platinum-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-size: 0.95rem;
+  color: #6fe6ff;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 1px solid #6fe6ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(111, 230, 255, 0.55);
+  pointer-events: none;
+}

@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./game-list-discover.component.css']
 })
 export class GameListDiscoverComponent {
+  loading: boolean = false;
 
   message: string = "";
   data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
@@ -57,7 +58,9 @@ export class GameListDiscoverComponent {
     this.message = "Games";
     this.currentSearchType = 'all';
     // this.dataAiring();
+    this.loading = true;
     this.apiGamesServive.getGames(this.startIndex, this.maxResults).subscribe((response: any) => {
+      this.loading = false;
       this.data = [];
       console.log(response);
       response.forEach((item: any) => {
@@ -71,7 +74,7 @@ export class GameListDiscoverComponent {
           randomData: item.platforms[0].abbreviation ?? 'Sin nombre'
         });
       });
-    });
+    }, () => { this.loading = false; });
 
 
 
@@ -103,7 +106,9 @@ export class GameListDiscoverComponent {
 
     console.log("Searching for: " + this.search);
 
+    this.loading = true;
     await this.apiGamesServive.searchGames(this.search, this.startIndex, this.maxResults).subscribe((response: any) => {
+      this.loading = false;
       this.data = [];
       console.log(response);
       response.forEach((item: any) => {
@@ -117,7 +122,7 @@ export class GameListDiscoverComponent {
           randomData: item.platforms[0].abbreviation ?? 'Sin nombre'
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
 
@@ -126,7 +131,9 @@ export class GameListDiscoverComponent {
     this.currentGenre = plataform;
     console.log("Genre ID: " + plataform);
     this.data = [];
+    this.loading = true;
     await this.apiGamesServive.getGamesByGenre(plataform, this.startIndex, this.maxResults).subscribe((response: any) => {
+      this.loading = false;
       console.log(response);
       response.forEach((item: any) => {
         this.data.push({
@@ -139,7 +146,7 @@ export class GameListDiscoverComponent {
           randomData: item.platforms[0].abbreviation ?? 'Sin nombre'
         });
       });
-    });
+    }, () => { this.loading = false; });
 
   }
 

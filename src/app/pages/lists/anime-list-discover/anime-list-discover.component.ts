@@ -9,6 +9,7 @@ import { ModalComponent } from '../../component/modal/modal.components';
   styleUrls: ['./anime-list-discover.component.css']
 })
 export class AnimeListDiscoverComponent implements OnInit {
+  loading: boolean = false;
 
  message: string = "";
  genres: {id: number, name: string }[] = [];
@@ -52,7 +53,9 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
 
   async getAllAnime() {
     this.currentSearchType = 'all'; 
-    await this.apiAnimeService.getAnimeByPage(this.numPage).subscribe((response: any) => { 
+    this.loading = true;
+    await this.apiAnimeService.getAnimeByPage(this.numPage).subscribe((response: any) => {
+      this.loading = false; 
       this.data = [];
       this.data = response.data.map((item: any) => ({
        name: item.title,
@@ -64,7 +67,7 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
 
      console.log(this.data);
      
-    });
+    }, () => { this.loading = false; });
   }
 
   
@@ -89,7 +92,9 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
   async searchAnimesByName() {
     this.currentSearchType = 'search';
     this.data = [];
+    this.loading = true;
     await this.apiAnimeService.searchAnimesByName(this.search, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       response.data.forEach((item: any) => {
         this.data.push({
           name: item.title,
@@ -99,7 +104,7 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
           randomData: item.score
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
 
@@ -107,7 +112,9 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
     this.currentSearchType = 'genre'; 
     this.currentGenre = genre;
     this.data = [];
+    this.loading = true;
     await this.apiAnimeService.getAnimeByGenre(genre, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       response.data.forEach((item: any) => {
         this.data.push({
           name: item.title,
@@ -117,7 +124,7 @@ currentGenre: string = '';  // Para almacenar el género seleccionado
           randomData: item.score
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
 

@@ -19,6 +19,8 @@ export class ModalAlbumsComponent {
   loading: boolean = false;
   albums: any[] = [];
   albumInfoTemp: any = {};
+  showForm: boolean = false;
+  newAlbum: any = {};
 
   constructor(public modalService: NgbModal,public dataService: DataService,private router: Router) { }
   
@@ -40,6 +42,36 @@ export class ModalAlbumsComponent {
 
      // this.selectedAlbum = this.dataModal.album;
  
+  }
+
+  toggleForm() {
+    this.showForm = !this.showForm;
+    this.newAlbum = {};
+  }
+
+  obtenerImagenAlbum(event: any) {
+    const file = event.target.files[0];
+    Utils.imageToByte(file).then((value: any) => {
+      this.newAlbum.image = value;
+    });
+  }
+
+  async saveAlbum() {
+    if (!this.newAlbum.name || !this.newAlbum.image) {
+      return;
+    }
+
+    try {
+      this.loading = true;
+      await this.dataService.createAlbum(this.newAlbum);
+      this.showForm = false;
+      this.newAlbum = {};
+      await this.loadAlbums();
+    } catch (error) {
+      console.error("Error al crear el album:", error);
+    } finally {
+      this.loading = false;
+    }
   }
 
   async obtenerImagen(link: any, type: any) {

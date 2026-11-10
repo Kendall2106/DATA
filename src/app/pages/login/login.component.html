@@ -1,0 +1,42 @@
+<div class="login-body">
+  <div class="login-card">
+
+    <!-- Panel izquierdo: presentación -->
+    <div class="login-hero">
+      <img class="login-logo" src="./assets/img/prisma4.png" alt="DATA">
+
+      <div class="login-hero-text">
+        <h1>ACCESO</h1>
+        <p class="login-quote">"I want to be free, but I dont know who I am without the walls around me." - Evangelion</p>
+      </div>
+
+      <div class="login-hero-footer">
+        <span class="login-status"><i class="login-dot"></i> SISTEMA EN LÍNEA</span>
+        <span>NERV // DATA</span>
+      </div>
+    </div>
+
+    <!-- Panel derecho: formulario -->
+    <div class="login-panel">
+      <div class="login-stripes"></div>
+
+      <form class="login-form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <h3 class="login-title">Iniciar sesión</h3>
+        <p class="login-subtitle">Ingresa con tu usuario para ver tu biblioteca.</p>
+
+        <label for="username">USUARIO</label>
+        <input type="text" id="username" name="username" [(ngModel)]="username" autocomplete="username" required>
+
+        <label for="password">CONTRASEÑA</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" autocomplete="current-password" required>
+
+        <p class="login-error" *ngIf="error">ERROR // {{ error }}</p>
+
+        <button type="submit" [disabled]="loginForm.invalid || loading">{{ loading ? 'VERIFICANDO...' : 'ENTRAR' }}</button>
+
+        <span class="login-note">ACCESO RESTRINGIDO</span>
+      </form>
+    </div>
+
+  </div>
+</div>

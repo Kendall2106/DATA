@@ -1,76 +1,293 @@
-input{
-    width: 100%;
-    margin-bottom: 4%;
+.st-body {
+  padding: 24px 5% 40px;
+  color: #ded8cf;
+  text-align: left;
 }
 
-button{
-    width: 100%;
+.st-head h3 {
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-select{
-    width: 100%;
-    margin-bottom: 4%;
+.st-head p {
+  margin: 4px 0 20px;
+  color: #7a7a7a;
 }
 
-.imgTitle{
-    width: 280px; 
-    height: 180px;
-    margin-left: 2%;
+.st-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 14px;
+  align-items: start;
 }
 
-.container{
-    padding: 2%;
-    border-radius: 10px;
+.st-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-
-.body{
-    margin-top: 10px;
-    background-color: #121212;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    height: calc(102vh - 60px);
-   
+.st-panel {
+  padding: 18px 22px 22px;
+  background-color: #121212;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
 }
 
+.st-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #262626;
+}
 
+.st-title i {
+  font-size: 1.1rem;
+  color: var(--color-2, #ff6a13);
+}
 
-.star-rating {
-    font-size: 2rem; /* Tamaño de las estrellas */
-    color: gray; /* Color de las estrellas sin seleccionar */
-    margin-top: 0%;
-  }
-  
-  .star-rating .selected {
-    color: gold; /* Color de las estrellas seleccionadas */
-  }
-  
-  .star-rating span {
-    cursor: pointer; /* El cursor cambia cuando se pasa por encima */
-  }
+.st-hint {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  opacity: 0.6;
+}
 
+.st-empty {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
 
-  select{
-    margin-top: 5%;
-    width: 100%;
-    font-size: 1.2rem;
-    border: none;
-    color: white;
-    background-color: transparent;
-  }
-  
-  select option {
-    
-    background-color: var(--color-1); 
-    color: var(--color-text); 
-  }
+/* ---------- Metas ---------- */
+.st-goals {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 12px;
+}
 
-  .date{
-    margin-top: 4%;
-    width: 100%;
-    font-size: 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.39);
-    color: white;
-    background-color: transparent;
+.st-goal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  background-color: #0a0a0a;
+  border: 1px solid #1f1f1f;
+  border-left: 3px solid var(--color-2, #ff6a13);
+  border-radius: 8px;
+}
+
+.st-goal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.st-goal-name {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.st-saved {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: #7dff3a;
+}
+
+.st-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.st-stepper button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.st-stepper button:hover {
+  color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.st-stepper input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: center;
+  color: var(--color-2, #ff6a13);
+  background-color: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.st-stepper input::-webkit-outer-spin-button,
+.st-stepper input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.st-stepper input:focus {
+  border-color: var(--color-2, #ff6a13);
+}
+
+/* ---------- Amigo ---------- */
+.st-friend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.st-friend-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  overflow: hidden;
+  color: var(--color-2, #ff6a13);
+  background-color: #0a0a0a;
+  border: 2px solid var(--color-2, #ff6a13);
+  border-radius: 4px;
+}
+
+.st-friend-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.st-friend-name {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.st-friend-name small {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.st-row {
+  display: flex;
+  gap: 8px;
+}
+
+.st-input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  margin: 0;
+  padding: 6px 10px;
+  color: #ded8cf;
+  background-color: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  outline: none;
+}
+
+.st-input:focus {
+  border-color: var(--color-2, #ff6a13);
+}
+
+.st-btn {
+  width: auto;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.st-btn-main {
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.st-btn-danger:hover {
+  color: #ff4040;
+  border-color: #ff4040;
+}
+
+.st-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.st-error {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #ff4040;
+}
+
+/* ---------- Colores ---------- */
+.st-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.st-swatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.st-swatch:hover {
+  transform: scale(1.12);
+}
+
+.st-swatch.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #121212 inset;
+}
+
+.st-swatch-custom {
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px dashed #5a5a5a;
+}
+
+@media (max-width: 991.98px) {
+  .st-grid {
+    grid-template-columns: 1fr;
   }
-  
+}

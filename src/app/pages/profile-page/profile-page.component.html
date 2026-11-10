@@ -1,172 +1,236 @@
-<div class="body">
-  <div class="container">
-    <div class="row">
+<div class="pf-body">
 
-      <!--<div class="col-lg-1 col-1" style="margin-top: 5%;">
-       <img src="./assets/patrones.svg" alt="Patrones de líneas verticales">
-        
-      </div>-->
+  <!-- ========== Cabecera ========== -->
+  <div class="pf-banner">
+    <div class="pf-banner-bg" *ngIf="photo" [style.background-image]="'url(' + photo + ')'"></div>
 
-      <div class="col-lg-12" style="margin-top: 5%;">
-        <div class="TopSeccion col-lg-12">
-          <div class="row">
+    <button type="button" class="pf-help" title="¿Cómo funcionan los niveles?" (click)="helpOpen = true">?</button>
 
-            <div class="profile col-lg-4 col-4">
-              <div class="BoxIntern" style=" text-align: center;">
-                <h1 class="title">ケンダル</h1>
-              </div>
-              <div class="BoxIntern" style=" height: 300px; margin-top: 2%;">
-                <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                  <div class="imagen-circular">
-                    <img
-                      src="https://c4.wallpaperflare.com/wallpaper/607/847/687/deadpool-2-hd-4k-movies-wallpaper-preview.jpg"
-                      alt="">
-                  </div>
-                </div>
+    <div class="pf-avatar">
+      <div class="pf-avatar-inner">
+        <img *ngIf="photo" [src]="photo" alt="">
+        <i *ngIf="!photo" class="uil uil-user pf-avatar-icon"></i>
+      </div>
+      <span class="pf-status" title="En línea"></span>
+    </div>
 
-              </div>
-            </div>
-            <div class=" col-lg-2 col-2">
-              <div class="BoxIntern" style=" display: flex; justify-content: center; align-items: center;">
+    <div class="pf-info">
+      <span class="pf-tag">{{ isOwn ? 'DATA // PERFIL' : 'DATA // PERFIL DE AMIGO' }}</span>
+      <h1 class="pf-name">{{ username }}</h1>
+      <span class="pf-since" *ngIf="memberSince">Miembro desde {{ memberSince }}</span>
 
-                <h1>プ<br>ラ<br>チ<br>ナ</h1>
+      <div class="pf-bio" *ngIf="!editingBio">
+        <p>{{ bio || (isOwn ? defaultBio : '') }}</p>
+        <button *ngIf="isOwn" type="button" class="pf-link" (click)="startEditBio()">Editar</button>
+      </div>
 
-              </div>
-              <div class="BoxIntern"
-                style="margin-top: 2%; display: flex; justify-content: center; align-items: center; height: 100px; ">
-                <h1 style="color: var(--color-2);">5</h1>
-              </div>
-            </div>
-
-            <div class="profileTime col-lg-6 col-6">
-              <div class="BoxIntern ">
-                <h1>DATA</h1>
-                <h4>TIME CAPSULE 2019</h4>
-              </div>
-              <div class="BoxIntern">
-                <div style="margin-top: 30%;">
-                  <h1>{{actualYear}}</h1>
-                </div>
-                <div class="Underlined" style="padding-right: 2%;">
-                  [Resumen del año] 昨年の要約
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-        <div class="BottonSeccion col-lg-12">
-          <div class="row">
-            <div class="col-lg-6 ">
-              <div class="BoxIntern row col-lg-12">
-                <div class="BoxIntern col-lg-6 row" >
-                  <h4>Evangelion</h4>
-                <p style="word-wrap: break-word; font-size: 12px;" >
-                  "Cada uno de nosotros busca su propia libertad,
-                    pero a veces la buscamos en lugares equivocados."<br>
-                  
-              </p>
-                <div style="text-align: right;">
-                  <strong>- Rei Ayanami</strong>
-                </div>
-                  
-                </div>
-                <div class="BoxIntern col-lg-5">
-                
-                  <h4 class="title" style=" font-weight: 700;">さよなら</h4>
-                  <p style="word-wrap: break-word; font-size: 12px;">
-                    Kaori: Pude entrar en tu corazon?<br>
-                    Arima: Entraste sin quitarte los zapatos.<br>
-                  </p>
-                  <div class="Underlined" style="background-color: var(--color-2) ; padding-right: 2%;" >
-                    YOUR LIE IN APRIL
-                  </div>
-                </div>
-              </div>
-            </div>
-                
-              
-              
-
-                
-               
-
-          
-            <div class="col-lg-6 row graphicsBox">
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Anime
-                </div>
-                <div class="col-lg-6 Underlined">
-                  <div class="UnderlinedShadow">
-                    {{numAnimes}}
-                  </div>
-                </div>
-              </div>
-
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Peliculas
-                </div>
-                <div class="col-lg-6 Underlined">
-                  {{numMovies}}
-                </div>
-              </div>
-
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Series
-                </div>
-                <div class="col-lg-6 Underlined">
-                  {{numSeries}}
-                </div>
-              </div>
-
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Libros
-                </div>
-                <div class="col-lg-6 Underlined">
-                  {{numBooks}}
-                </div>
-              </div>
-
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Juegos
-                </div>
-                <div class="col-lg-6 Underlined">
-                  {{numGames}}
-                </div>
-              </div>
-
-              <div class="BoxIntern col-lg-12 row">
-                <div class="col-lg-6">
-                  Musica
-                </div>
-                <div class="col-lg-6 Underlined">
-                  {{numMusic}}
-                </div>
-              </div>
-
-
-
-            </div>
-
-          </div>
+      <div class="pf-bio-edit" *ngIf="editingBio">
+        <textarea [(ngModel)]="bioDraft" rows="2" maxlength="240"></textarea>
+        <div class="pf-row">
+          <button type="button" class="pf-btn pf-btn-main" (click)="saveBio()">Guardar</button>
+          <button type="button" class="pf-btn" (click)="editingBio = false">Cancelar</button>
         </div>
       </div>
 
+      <div class="pf-row">
+        <label class="pf-btn" *ngIf="isOwn">
+          <i class="uil uil-camera"></i> Cambiar foto
+          <input type="file" accept="image/*" (change)="onPhotoSelected($event)" hidden>
+        </label>
+        <span class="pf-error" *ngIf="profileError">{{ profileError }}</span>
+      </div>
+    </div>
 
-
+    <div class="pf-level">
+      <div class="pf-level-circle">{{ level }}</div>
+      <span class="pf-level-label">NIVEL</span>
+      <div class="pf-level-bar"><div [style.width.%]="levelProgress"></div></div>
+      <span class="pf-level-xp">{{ total }} / {{ nextLevelAt }}</span>
     </div>
   </div>
 
+  <!-- ========== Seccion de platinos ========== -->
+  <section class="pf-platinum">
+    <div class="pf-plat-head">
+      <i class="uil uil-trophy pf-plat-trophy"></i>
+      <div class="pf-plat-count">
+        <strong>{{ numPlatinum }}</strong>
+        <span>PLATINOS</span>
+      </div>
+      <div class="pf-plat-meta">
+        <span class="pf-plat-jp">プラチナ</span>
+        <small>{{ platPct }}% de {{ numGames }} juegos</small>
+      </div>
+    </div>
 
-  <div class="loading-overlay" *ngIf="loading">
-    <div class="loading-spinner"></div>
-</div>
+    <div class="pf-plat-strip">
+      <div class="pf-plat-game" *ngFor="let g of platinumGames" [title]="g.name">
+        <img [src]="'data:image/jpg;base64,' + g.image" alt="" decoding="async">
+        <i class="uil uil-trophy"></i>
+      </div>
+      <p class="pf-empty" *ngIf="platinumGames.length === 0">{{ numPlatinum > 0 ? 'Cargando platinos...' : 'Aún no hay juegos platinados.' }}</p>
+    </div>
+
+    <button type="button" class="pf-plat-all" *ngIf="platinumGames.length > 0" (click)="openPlatinum()">
+      Ver todos <i class="uil uil-angle-right-b"></i>
+    </button>
+  </section>
+
+  <div class="pf-grid">
+
+    <!-- ========== Columna principal ========== -->
+    <div class="pf-main">
+
+      <section class="pf-panel pf-showcase-panel">
+        <h3 class="pf-title">Vitrina de favoritos <span>5 estrellas</span></h3>
+
+        <div class="pf-tabs">
+          <button type="button" *ngFor="let tab of favTabs" [class.active]="favTab === tab.key"
+            (click)="favTab = tab.key">{{ tab.label }}</button>
+        </div>
+
+        <div class="pf-showcase">
+          <div class="pf-fav" *ngFor="let item of favorites[favTab]" [title]="item.name">
+            <img [src]="'data:image/jpg;base64,' + item.image" alt="" decoding="async">
+            <span>{{ item.name }}</span>
+          </div>
+
+          <!-- Tarjeta extra: abre todos los de 5 estrellas -->
+          <div class="pf-fav pf-fav-more" *ngIf="favCounts[favTab] > 0" (click)="openAllFavorites()">
+            <div class="pf-more-box">
+              <i class="uil uil-apps"></i>
+              <strong>Ver todos</strong>
+              <small>{{ favCounts[favTab] }} en total</small>
+            </div>
+          </div>
+
+          <p class="pf-empty" *ngIf="!favCounts[favTab]">
+            Aún no tienes obras de 5 estrellas en esta categoría.
+          </p>
+        </div>
+      </section>
+
+      <section class="pf-panel">
+        <h3 class="pf-title">Estadísticas <span>{{ total }} obras</span></h3>
+
+        <div class="pf-stat" *ngFor="let s of stats">
+          <i class="uil {{ s.icon }}"></i>
+          <span class="pf-stat-label">{{ s.label }}</span>
+          <div class="pf-stat-bar"><div [style.width.%]="pct(s.value)"></div></div>
+          <strong>{{ s.value }}</strong>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========== Columna lateral ========== -->
+    <aside class="pf-side">
+
+      <section class="pf-panel pf-badges-panel">
+        <h3 class="pf-title">Insignias</h3>
+        <div class="pf-badges">
+          <div class="pf-badge" *ngFor="let b of badges" [class.unlocked]="b.reached > 0"
+            [class.is-platinum]="b.reached === 5" [style.--tier-color]="b.tier ? b.tier.color : '#555'"
+            [title]="b.desc + ': ' + b.have + (b.nextGoal ? ' / ' + b.nextGoal : ' (máximo)')">
+            <i class="uil {{ b.icon }}"></i>
+            <strong>{{ b.name }}</strong>
+            <span class="pf-badge-tier">{{ b.tier ? b.tier.name : 'Bloqueada' }}</span>
+            <div class="pf-badge-bar"><div [style.width.%]="b.progress"></div></div>
+            <small>{{ b.have }}{{ b.nextGoal ? ' / ' + b.nextGoal : '' }}</small>
+            <div class="pf-pips"><i *ngFor="let on of b.pips" [class.on]="on"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pf-panel" *ngIf="!isOwn">
+        <h3 class="pf-title">Perfil de amigo</h3>
+        <div class="pf-row">
+          <button type="button" class="pf-btn pf-btn-main" (click)="backToMine()">Volver a mi perfil</button>
+          <button type="button" class="pf-btn" (click)="viewTier()"><i class="uil uil-chart-bar"></i> Ver su tier list</button>
+        </div>
+        <span class="pf-error" *ngIf="visitorError">{{ visitorError }}</span>
+      </section>
+
+      <section class="pf-panel" *ngIf="isOwn">
+        <h3 class="pf-title">Amigos <button type="button" class="pf-link" (click)="goSettings()">Configurar</button></h3>
+
+        <div class="pf-friend pf-friend-link" *ngIf="friend" (click)="viewFriend()" title="Ver su perfil">
+          <div class="pf-friend-avatar">
+            <img *ngIf="friend.photo" [src]="friend.photo" alt="">
+            <i *ngIf="!friend.photo" class="uil uil-user"></i>
+          </div>
+          <div class="pf-friend-name">
+            <strong>{{ friend.username }}</strong>
+            <small>Hermano · ver perfil</small>
+          </div>
+        </div>
+
+        <p class="pf-empty" *ngIf="!friend">Aún no tienes un amigo vinculado. Agrégalo en Ajustes.</p>
+      </section>
+
+    </aside>
+
+  </div>
+
+  <!-- ========== Todos los favoritos ========== -->
+  <div class="pf-overlay" *ngIf="showAllOpen" (click)="showAllOpen = false">
+    <div class="pf-dialog pf-dialog-wide" (click)="$event.stopPropagation()">
+      <div class="pf-dialog-head">
+        <h3>{{ showAllTitle }} <span>{{ showAllItems.length }}</span></h3>
+        <button type="button" class="pf-close" (click)="showAllOpen = false">&times;</button>
+      </div>
+      <div class="pf-dialog-body">
+        <p class="pf-empty" *ngIf="showAllLoading">Cargando...</p>
+        <div class="pf-all-grid">
+          <div class="pf-fav" *ngFor="let item of showAllItems" [title]="item.name">
+            <img [src]="'data:image/jpg;base64,' + item.image" alt="" loading="lazy" decoding="async">
+            <span>{{ item.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Ayuda de niveles ========== -->
+  <div class="pf-overlay" *ngIf="helpOpen" (click)="helpOpen = false">
+    <div class="pf-dialog" (click)="$event.stopPropagation()">
+      <div class="pf-dialog-head">
+        <h3>Niveles</h3>
+        <button type="button" class="pf-close" (click)="helpOpen = false">&times;</button>
+      </div>
+      <div class="pf-dialog-body pf-help-body">
+
+        <h4>Nivel del perfil</h4>
+        <p>Es la raíz cuadrada del total de obras que has guardado (animes, películas, series, libros, juegos y música), redondeada hacia abajo.
+          Nivel 10 = 100 obras, nivel 20 = 400, nivel 30 = 900.</p>
+
+        <h4>Niveles de las insignias</h4>
+        <p>Cada insignia sube por cinco niveles según la cantidad acumulada:</p>
+        <div class="pf-tier-legend">
+          <span *ngFor="let t of tiers; let i = index" [style.border-color]="t.color" [style.color]="t.color">{{ i + 1 }} · {{ t.name }}</span>
+        </div>
+
+        <table class="pf-table">
+          <thead>
+            <tr>
+              <th>Insignia</th>
+              <th *ngFor="let t of tiers" [style.color]="t.color">{{ t.name }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let b of badgeDefs">
+              <td>{{ b.name }}<small>{{ b.desc }}</small></td>
+              <td *ngFor="let g of b.goals">{{ g }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="pf-note">Las metas de animes, películas, libros y platinos parten de promedios reales de comunidades
+          (MyAnimeList, Letterboxd, Goodreads y trofeos de PlayStation). Las de series, juegos y música son estimadas por comparación.</p>
+      </div>
+    </div>
+  </div>
+
+  <app-loader *ngIf="loading"></app-loader>
 
 </div>

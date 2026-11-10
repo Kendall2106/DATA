@@ -80,58 +80,54 @@ export class Utils {
       + byteImage);
   }
 
+static async imageToByteFromUrl(imageUrl: string, type: any): Promise<string> {
 
-  static async imageToByteFromUrl(imageUrl: string, type: any): Promise<string> {
-     var response: any;
+  let response: Response;
 
-    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {
-      const params = new URLSearchParams({
-        url: imageUrl
-      });
-
-      response = await fetch(
-        'https://igdb-proxy.data-igdb.workers.dev/?' + params.toString()
-      );
-    } else {
-      response = await fetch(imageUrl);
-    }
-
-    if (!response.ok) {
-      throw new Error('No se pudo cargar la imagen: HTTP ' + response.status);
-    }
-
-  /*    if (type == "Movies" || type == "Series" || type == "Books" || type == "Games" || type == "Animes") {
-  response = await fetch(
-    'https://igdb-proxy.data-igdb.workers.dev/' + encodeURIComponent(imageUrl)
-  );
-} else {
-  response = await fetch(imageUrl);
-}*/
-
-if (!response.ok) {
-  throw new Error('No se pudo cargar la imagen');
-}
-
-    const blob = await response.blob();
-
-    const byteImagePromise = new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        resolve(e.target.result.split('base64,')[1] as string);
-      };
-      reader.readAsDataURL(blob);
-      reader.onerror = reject;
+  if (["Movies", "Series", "Books", "Games", "Animes", "Anime"].includes(type)) {
+    const params = new URLSearchParams({
+      url: imageUrl
     });
 
-    let base64String = await byteImagePromise;
-
-    if ((base64String.length * 3 / 4) > 1 * 900 * 900) {
-      console.log("deberia entrar");
-      base64String = await this.resizeImage(blob);
-    }
-
-    return base64String;
+    response = await fetch(
+      'https://igdb-proxy.data-igdb.workers.dev/?' + params.toString()
+    );
+  } else {
+    response = await fetch(imageUrl);
   }
+
+  if (!response.ok) {
+    throw new Error('No se pudo cargar la imagen: HTTP ' + response.status);
+  }
+
+  const blob = await response.blob();
+
+  // Comprueba que lo recibido sea una imagen real (si el proxy devuelve un error en texto, no se guarda)
+  try {
+    const bitmap = await createImageBitmap(blob);
+    bitmap.close();
+  } catch {
+    console.error('La respuesta no es una imagen. Tipo:', blob.type, 'Tamaño:', blob.size, 'URL:', imageUrl);
+    throw new Error('La respuesta del proxy no es una imagen valida');
+  }
+
+  let base64String = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      resolve(e.target.result.split('base64,')[1]);
+    };
+
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+
+  if ((base64String.length * 3 / 4) > 1 * 900 * 900) {
+    base64String = await this.resizeImage(blob);
+  }
+
+  return base64String;
+}
 
 
   static async resizeImage(blob: Blob): Promise<string> {

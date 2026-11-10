@@ -9,6 +9,7 @@ import { ModalComponent } from '../../component/modal/modal.components';
   styleUrls: ['./serie-list-discover.component.css']
 })
 export class SerieListDiscoverComponent {
+  loading: boolean = false;
   message: string = "";
   data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
   animesAiring: any[] =[];
@@ -43,7 +44,9 @@ export class SerieListDiscoverComponent {
     this.message = "Series";
     this.currentSearchType = 'all'; 
    // this.dataAiring();
+    this.loading = true;
     await this.apiSerieService.getSeries(this.numPage).subscribe((response: any) => {
+      this.loading = false;
       this.data = [];
       console.log(response);
       response.results.forEach((item: any) => {
@@ -55,7 +58,7 @@ export class SerieListDiscoverComponent {
           randomData: item.vote_average
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
   async getSeriesAiring() {
@@ -77,7 +80,9 @@ export class SerieListDiscoverComponent {
 
   async searchSeriesByName() {
     this.currentSearchType = 'search';
+    this.loading = true;
     await this.apiSerieService.seachSeries(this.search, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       const seriesWithImages = response.results.filter((m: any) => m.poster_path);
       this.data = [];
       seriesWithImages.forEach((item: any) => {
@@ -89,7 +94,7 @@ export class SerieListDiscoverComponent {
           randomData: item.vote_average
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
   getFormattedDate(date: Date): string {
@@ -111,7 +116,9 @@ export class SerieListDiscoverComponent {
     this.currentSearchType = 'genre'; 
     this.currentGenre = genre;
     this.data = [];
+    this.loading = true;
     await this.apiSerieService.getSerieByGenre(genre, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
       moviesWithImages.forEach((item: any) => {
         this.data.push({
@@ -123,7 +130,7 @@ export class SerieListDiscoverComponent {
         });
         
       });
-    });
+    }, () => { this.loading = false; });
 
   }
 

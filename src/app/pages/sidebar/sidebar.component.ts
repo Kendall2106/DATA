@@ -1,7 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from 'src/app/core/service/data.service';
+import { AuthService } from 'src/app/core/service/auth.service';
+import { ProfileService } from 'src/app/core/service/profile.service';
 import { ModalCreateItemComponent } from '../component/modal-create-item/modal-create-item.component';
 import { ModalAlbumsComponent } from '../component/modal-albums/modal-albums.component';
 
@@ -10,18 +13,34 @@ import { ModalAlbumsComponent } from '../component/modal-albums/modal-albums.com
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   anioActual: string = "";
   colorSeleccionado: string = ''; // Color inicial
+  username: string = '';
+  photo: string = '';
+  private profileSubscription?: Subscription;
 
 
-  constructor(private router: Router, private dataService: DataService, public modalService: NgbModal) {
+  constructor(private router: Router, private dataService: DataService, public modalService: NgbModal, private authService: AuthService, private profileService: ProfileService) {
   }
 
 
   
   ngOnInit(): void {
     this.anioActual = new Date().getFullYear() + "";
+
+    this.profileSubscription = this.profileService.profile$.subscribe(profile => {
+      this.username = profile.username;
+      this.photo = profile.photo;
+      if (profile.color) {
+        this.colorSeleccionado = profile.color;
+      }
+    });
+    this.profileService.loadProfile().catch(() => { });
+  }
+
+  ngOnDestroy(): void {
+    this.profileSubscription?.unsubscribe();
   }
 
 
@@ -32,7 +51,7 @@ export class SidebarComponent implements OnInit {
 
 
   navegarCreate() {
-    this.router.navigate(['/Create']);
+    this.router.navigate(['/Settings']);
   }
 
 
@@ -67,6 +86,11 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/AlbumInfo']);
   }
 
+  async cerrarSesion() {
+    await this.authService.logout();
+    this.router.navigate(['/Login']);
+  }
+
   closeModal() {
     this.modalService.dismissAll();
   }
@@ -92,8 +116,7 @@ export class SidebarComponent implements OnInit {
   }
 
   cambiarColor() {
-    localStorage.setItem('colorLocal', this.colorSeleccionado );
-    document.documentElement.style.setProperty('--color-2', this.colorSeleccionado);
+    this.profileService.saveColor(this.colorSeleccionado);
   }
 
 

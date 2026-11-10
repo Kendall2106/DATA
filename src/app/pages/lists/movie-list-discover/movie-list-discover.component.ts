@@ -9,6 +9,7 @@ import { ModalComponent } from '../../component/modal/modal.components';
   styleUrls: ['./movie-list-discover.component.css']
 })
 export class MovieListDiscoverComponent {
+  loading: boolean = false;
   message: string = "";
   data: { name: string, image: string, info: string, releaseDate: number, randomData: string }[] = [];
   animesAiring: any[] =[];
@@ -43,7 +44,9 @@ export class MovieListDiscoverComponent {
     this.message = "Movies";
     this.currentSearchType = 'all'; 
    // this.dataAiring();
+    this.loading = true;
     await this.apiMoviesService.getMovies(this.numPage).subscribe((response: any) => {
+      this.loading = false;
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
       this.data = [];
       console.log(response);
@@ -56,7 +59,7 @@ export class MovieListDiscoverComponent {
           randomData: item.vote_average
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
   
@@ -101,7 +104,9 @@ export class MovieListDiscoverComponent {
 
   async searchMoviesByName() {
     this.currentSearchType = 'search';
+    this.loading = true;
     await this.apiMoviesService.seachMovies(this.search, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
       this.data = [];
       moviesWithImages.forEach((item: any) => {
@@ -113,14 +118,16 @@ export class MovieListDiscoverComponent {
           randomData: item.vote_average
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
  async getMovieByGenre(genre: any) {
     this.currentSearchType = 'genre'; 
     this.currentGenre = genre;
     this.data = [];
+    this.loading = true;
     await this.apiMoviesService.getMovieByGenre(genre, this.numPage).subscribe((response: any) => {
+      this.loading = false;
       const moviesWithImages = response.results.filter((m: any) => m.poster_path);
       moviesWithImages.forEach((item: any) => {
         this.data.push({
@@ -134,7 +141,7 @@ export class MovieListDiscoverComponent {
       });
       console.log("Hola");
       console.log(response);
-    });
+    }, () => { this.loading = false; });
 
   }
 

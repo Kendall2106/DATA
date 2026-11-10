@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./music-list-discover.component.css']
 })
 export class MusicListDiscoverComponent implements OnInit {
+  loading: boolean = false;
   message: string = 'Music';
 
   data: {
@@ -45,14 +46,17 @@ export class MusicListDiscoverComponent implements OnInit {
     this.currentSearchType = 'all';
     this.message = 'Music';
 
+    this.loading = true;
     this.spotify.getAlbums(
       this.startIndex,
       this.maxResults
     ).subscribe({
       next: (response: any) => {
+        this.loading = false;
         this.loadAlbums(response);
       },
       error: (error: any) => {
+        this.loading = false;
         console.error('Error al cargar álbumes:', error);
         this.data = [];
         this.message = 'Error al cargar los álbumes.';
@@ -101,15 +105,18 @@ export class MusicListDiscoverComponent implements OnInit {
     this.currentSearchType = 'search';
     this.message = 'Resultados de búsqueda';
 
+    this.loading = true;
     this.spotify.getAlbumsByName(
       query,
       this.startIndex,
       this.maxResults
     ).subscribe({
       next: (response: any) => {
+        this.loading = false;
         this.loadAlbums(response);
       },
       error: (error: any) => {
+        this.loading = false;
         console.error('Error al buscar álbumes:', error);
         this.data = [];
         this.message = 'Error al buscar álbumes.';

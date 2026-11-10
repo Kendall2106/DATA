@@ -22,8 +22,17 @@ tipo: any;
   data: any = {}
   opTipos: string[][] = [];
   opCalificacion: string[] = [];
+  opKind: string[] = ["Novel", "Short story", "Light novel", "Anthology", "Graphic novel", "Manga", "Comic"];
   stars: boolean[] = Array(5).fill(false);
   settings: any[] = [];
+  categoriasLista = [
+    { key: 'Peliculas', label: 'Películas', icon: 'uil-film' },
+    { key: 'Series', label: 'Series', icon: 'uil-tv-retro' },
+    { key: 'Animes', label: 'Animes', icon: 'uil-play-circle' },
+    { key: 'Juegos', label: 'Juegos', icon: 'uil-dice-five' },
+    { key: 'Libros', label: 'Libros', icon: 'uil-book-open' },
+    { key: 'Musica', label: 'Música', icon: 'uil-music' }
+  ];
 
 
   constructor(public modalService: NgbModal, private router: Router, private dataService: DataService, private musicService: MusicService, private libroService: LibrosService, private juegosService: GameService, private animeService: AnimeService, private movieService: MovieService, private serieServicio: SeriesService, public settingsService: SettingsService) {
@@ -60,7 +69,15 @@ tipo: any;
   }
 
   onSubmit() {
-    console.log(this.data.image);
+    // Valores por defecto para que Firestore no reciba campos vacios (undefined)
+    this.data.review = this.data.review ?? "";
+    if (this.tipo != "Libros") {
+      this.data.releaseDate = this.data.releaseDate ?? "";
+    }
+    if (this.tipo != "Juegos" && this.tipo != "Musica") {
+      this.data.type = this.data.type ?? "";
+    }
+
     if (this.tipo == "Peliculas") {
       this.movieService.createMovies(this.data);
     }
@@ -74,9 +91,8 @@ tipo: any;
     }
 
     if (this.tipo == "Juegos") {
-      this.data.type = "01";
-      this.data.date = "2025-03-04";
-      this.data.releaseDate = 2024;
+      this.data.type = this.data.type ?? "01";
+      this.data.achievements = this.data.achievements === true;
       this.juegosService.createGames(this.data);
     }
 
@@ -86,9 +102,7 @@ tipo: any;
     }
 
     if (this.tipo == "Musica") {
-      this.data.date = "2025-09-03";
-      this.data.releaseDate = 2026;
-      this.data.artist = "";
+      this.data.artist = this.data.artist ?? "";
       this.musicService.createMusic(this.data);
     }
 

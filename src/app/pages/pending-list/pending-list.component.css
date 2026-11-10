@@ -584,3 +584,203 @@ select:disabled {
 .sort-select:focus {
     border-color: var(--color-2);
 }
+
+
+/* ---------- Contadores en los filtros ---------- */
+.pl-count {
+  margin-left: 6px;
+  padding: 0 7px;
+  font-size: 0.65rem;
+  line-height: 16px;
+  color: #ded8cf;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.filter-button.active .pl-count {
+  color: #0a0a0a;
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
+/* ---------- Etiqueta de proxima eleccion ---------- */
+.pl-next-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 2px 8px;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.cardImage {
+  position: relative;
+}
+
+.movie-card.is-next .image,
+.movie-card.is-next .imageMusic {
+  outline: 2px solid var(--color-2, #ff6a13);
+  outline-offset: -2px;
+}
+
+/* ---------- Inicio ---------- */
+.pl-home {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  padding: 14px 3% 10px;
+}
+
+.pl-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.pl-tile-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.pl-tile:hover .pl-tile-cover {
+  border-color: var(--color-2, #ff6a13);
+  transform: translateY(-3px);
+}
+
+.pl-tile-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pl-tile-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  color: #6b6b6b;
+  border: 1px dashed #3a3a3a;
+  border-radius: 10px;
+}
+
+.pl-tile-empty i {
+  font-size: 2rem;
+}
+
+.pl-tile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pl-tile-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pl-tile-title .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.pl-tile-info small {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.pl-tile-name {
+  overflow: hidden;
+  font-size: 0.75rem;
+  color: var(--color-2, #ff6a13);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Sin resultados ---------- */
+.pl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 60px 0;
+  color: #6b6b6b;
+}
+
+.pl-empty i {
+  font-size: 2.6rem;
+}
+
+@media (max-width: 1200px) {
+  .pl-home {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .pl-home {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* ---------- Acciones sobre cada tarjeta ---------- */
+.pl-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.movie-card:hover .pl-actions,
+.pl-action.on {
+  opacity: 1;
+}
+
+.pl-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #ded8cf;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #4a4a4a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pl-action:hover {
+  color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pl-action.on {
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.pl-action-danger:hover {
+  color: #ff4040;
+  border-color: #ff4040;
+}

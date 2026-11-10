@@ -10,6 +10,7 @@ import { DataService } from './core/service/data.service';
 import {initializeApp,provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
 import {getFirestore,provideFirestore} from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateComponent } from './pages/create/create.component';
@@ -45,6 +46,8 @@ import { ReviewSidebarComponent } from './pages/component/review-sidebar/review-
 import { ModalCreateItemComponent } from './pages/component/modal-create-item/modal-create-item.component';
 import { AlbumInfoPageComponent } from './pages/album-info-page/album-info-page.component';
 import { ModalAlbumsComponent } from './pages/component/modal-albums/modal-albums.component';
+import { LoginComponent } from './pages/login/login.component';
+import { LoaderComponent } from './pages/loader/loader.component';
 
 
 
@@ -84,7 +87,9 @@ import { ModalAlbumsComponent } from './pages/component/modal-albums/modal-album
     ReviewSidebarComponent,
     ModalCreateItemComponent,
     AlbumInfoPageComponent,
-    ModalAlbumsComponent
+    ModalAlbumsComponent,
+    LoginComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +104,8 @@ import { ModalAlbumsComponent } from './pages/component/modal-albums/modal-album
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(()=> getFirestore())
+    provideFirestore(()=> getFirestore()),
+    provideAuth(() => getAuth())
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

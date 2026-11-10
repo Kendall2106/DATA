@@ -11,21 +11,27 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { GraphicsPageComponent } from './pages/graphics-page/graphics-page.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { AlbumInfoPageComponent } from './pages/album-info-page/album-info-page.component';
+import { LoginComponent } from './pages/login/login.component';
+import { authGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
-  {path:'', component: DiscoverPageComponent },
-  {path:'Sidebar', component: SidebarComponent },
-  {path:'Workplace', component: WorkplaceComponent },
-  {path:'Create', component: CreateComponent },
-  {path:'Tier', component: TierComponent },
-  {path:'PendingList', component: PendingListComponent },
-  {path:'Profile', component: ProfilePageComponent },
-  {path:'Graphics', component: GraphicsPageComponent },
-  {path:'Collections', component: CollectionsComponent },
+  {path:'', component: DiscoverPageComponent, canActivate: [authGuard] },
+  {path:'Sidebar', component: SidebarComponent, canActivate: [authGuard] },
+  {path:'Workplace', component: WorkplaceComponent, canActivate: [authGuard] },
+  {path:'Settings', component: CreateComponent, canActivate: [authGuard] },
+  {path:'Tier', component: TierComponent, canActivate: [authGuard] },
+  {path:'Tier/:uid', component: TierComponent, canActivate: [authGuard] },
+  {path:'PendingList', component: PendingListComponent, canActivate: [authGuard] },
+  {path:'Profile', component: ProfilePageComponent, canActivate: [authGuard] },
+  {path:'Profile/:uid', component: ProfilePageComponent, canActivate: [authGuard] },
+  {path:'Graphics', component: GraphicsPageComponent, canActivate: [authGuard] },
+  {path:'Collections', component: CollectionsComponent, canActivate: [authGuard] },
   {
   path: 'AlbumInfo/:idAlbum',
-  component: AlbumInfoPageComponent
+  component: AlbumInfoPageComponent,
+  canActivate: [authGuard]
 },
+  {path:'Login', component: LoginComponent },
 ];
 
 @NgModule({

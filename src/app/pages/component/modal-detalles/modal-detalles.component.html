@@ -1,85 +1,142 @@
 <div class="modalPrin">
+
+    <!-- Cabecera -->
     <div class="modal-header">
-        <h4 class="modal-title">{{data.name}}</h4>
+        <div class="head-text">
+            <h4 class="modal-title">{{data.name}}</h4>
+            <div class="chips">
+                <span class="chip chip-main">{{ typeLabel }}</span>
+                <span class="chip" *ngIf="categoryName && type !== 'Music'">{{ categoryName }}</span>
+                <span class="chip" *ngIf="type === 'Books' && dataModal?.kind">{{ dataModal.kind }}</span>
+                <span class="chip" *ngIf="hasReleaseDate">Estreno: {{ dataModal.releaseDate }}</span>
+                <span class="chip chip-gold" *ngIf="type === 'Games' && dataModal?.achievements">Platinado</span>
+            </div>
+        </div>
         <button class="btnClose" aria-label="Cerrar" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
     <div class="modal-body">
-        <div class="row">
-            <div class="col-lg-3">
+        <div class="detail-layout">
+
+            <!-- Portada -->
+            <div class="detail-cover">
                 <img id="myImage" class="imagen" [src]="data.image" alt="#">
             </div>
 
-            <div class="col-lg-9">
-
-
-
-                <div class="row col-lg-12">
-                    <div class="row col-lg-12">
-                        <p class="synopsis">{{data.review}}</p>
-                    </div>
-
-                    <div class="col-lg-6 star-rating" style="text-align: left;">
-                        <span style="margin: 0; padding: 0;" *ngFor="let star of stars; let i = index"
-                            (click)="rate(i + 1)" [ngClass]="{'selected': (i + 1) <= dataModal.score}">
+            <!-- Columna 1: calificacion y resena -->
+            <div class="detail-col">
+                <div class="rating-row">
+                    <div class="star-rating">
+                        <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)"
+                            [ngClass]="{'selected': (i + 1) <= dataModal.score}">
                             &#9733;
                         </span>
                     </div>
-
-                    <div class="col-lg-6" *ngIf="type !== 'Music'">
-                        <select class="filter-dropdown" id="opTipos" [(ngModel)]="dataModal.type">
-                            <option value="Todos">Categoria: Todos</option>
-                            <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
-                        </select>
-                    </div>
-
+                    <span class="score-text">{{ dataModal.score || 0 }} / 5</span>
                 </div>
 
-                <div class="col-lg-3" style="margin-top: 6%;">
-                    <small>{{ fechaTemp | date:'dd/MM/yyyy' }}</small>
-                    <input class="date" type="date" id="date" name="date" [(ngModel)]="dataModal.date" required
-                        style="width: 100%;">
-                </div>
-
-                <div class="col-lg-6">
-                    <select class="filter-dropdown" id="opC" [(ngModel)]="selectedCollection">
-                        <option value="Todos" selected>Colección: Ninguna</option>
-                        <option *ngFor="let opcion of collections" [value]="opcion.id">
-                            {{ opcion.name }}
-                        </option>
-                    </select>
-                </div>
-
-
-                <button (click)="editReview()">
-                    Abrir reseña
-                </button>
-
-
-            </div>
-
-
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-12 d-flex justify-content-end">
-                        <button class="btn btnModalDelete" (click)="deleteData()" style="margin-right: 2%;">
-                            <i class="iconModal uil uil-save"> Delete</i>
-                        </button>
-
-                        <button class="btn btnModal" (click)="saveChanges()">
-                            <i class="iconModal uil uil-save"> Save</i>
+                <div class="block block-grow">
+                    <div class="block-head">
+                        <span class="block-title">RESEÑA</span>
+                        <button type="button" class="btn-ghost" (click)="editReview()">
+                            {{ dataModal.review ? 'Editar reseña' : 'Escribir reseña' }}
                         </button>
                     </div>
+                    <p class="synopsis">{{ dataModal.review || 'Sin reseña todavía.' }}</p>
                 </div>
             </div>
 
+            <!-- Columna 2: detalles y hermano -->
+            <div class="detail-col">
+                <div class="block">
+                    <span class="block-title">DETALLES</span>
+
+                    <div class="fields">
+
+                        <div class="field" *ngIf="type !== 'Music'">
+                            <label for="opTipos">CATEGORÍA</label>
+                            <select class="filter-dropdown" id="opTipos" [(ngModel)]="dataModal.type">
+                                <option value="Todos">Todos</option>
+                                <option *ngFor="let opcion of categories" [value]="opcion.id">{{ opcion.name }}</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="date">{{ dateLabel | uppercase }}</label>
+                            <input class="date" type="date" id="date" name="date" [(ngModel)]="dataModal.date" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="opC">COLECCIÓN</label>
+                            <select class="filter-dropdown" id="opC" [(ngModel)]="selectedCollection">
+                                <option value="Todos" selected>Ninguna</option>
+                                <option *ngFor="let opcion of collections" [value]="opcion.id">{{ opcion.name }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Libros -->
+                        <div class="field" *ngIf="type === 'Books'">
+                            <label for="author">AUTOR</label>
+                            <input class="text-input" type="text" id="author" [(ngModel)]="dataModal.author" autocomplete="off">
+                        </div>
+
+                        <div class="field" *ngIf="type === 'Books'">
+                            <label for="kind">FORMATO</label>
+                            <select class="filter-dropdown" id="kind" [(ngModel)]="dataModal.kind">
+                                <option value="">Sin definir</option>
+                                <option *ngFor="let k of opKind" [value]="k">{{ k }}</option>
+                            </select>
+                        </div>
+
+                        <!-- Musica -->
+                        <div class="field" *ngIf="type === 'Music'">
+                            <label for="artist">ARTISTA</label>
+                            <input class="text-input" type="text" id="artist" [(ngModel)]="dataModal.artist" autocomplete="off">
+                        </div>
+
+                        <!-- Juegos -->
+                        <div class="field" *ngIf="type === 'Games'">
+                            <label>LOGROS</label>
+                            <label class="switch">
+                                <input type="checkbox" [(ngModel)]="dataModal.achievements">
+                                <span class="switch-track"></span>
+                                <span class="switch-text">{{ dataModal.achievements ? 'Platinado' : 'Sin platinar' }}</span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Hermano: solo aparece si ya lo vio -->
+                <div class="friend-box seen" *ngIf="friend && friendEntry">
+                    <div class="friend-avatar">
+                        <img *ngIf="friend.photo" [src]="friend.photo" alt="">
+                        <i *ngIf="!friend.photo" class="uil uil-user"></i>
+                    </div>
+                    <div class="friend-text">
+                        <strong>{{ friend.username }}</strong>
+                        <span>Ya lo vio · <b class="friend-stars">{{ stars5(friendEntry.score) }}</b>
+                            <small *ngIf="friendEntry.date"> · {{ friendEntry.date.split('-').join('/') }}</small></span>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-        <div class="loading-overlay" *ngIf="loading">
-            <div class="loading-spinner"></div>
+        <!-- Acciones -->
+        <div class="modal-actions">
+            <button class="btn btnModalDelete" (click)="deleteData()">
+                <i class="iconModal uil uil-trash-alt"> Delete</i>
+            </button>
+
+            <button class="btn btnModal" (click)="saveChanges()">
+                <i class="iconModal uil uil-save"> Save</i>
+            </button>
         </div>
+
+        <app-loader *ngIf="loading"></app-loader>
 
     </div>
 </div>

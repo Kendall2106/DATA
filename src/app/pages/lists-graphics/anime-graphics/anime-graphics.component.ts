@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
 import { MovieService } from 'src/app/core/service/movie.service';
+import { MusicService } from 'src/app/core/service/music.service';
 import { SeriesService } from 'src/app/core/service/series.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class AnimeGraphicsComponent implements OnInit {
   categories: any[] = [];
   masterpieceData: any[] = [];
 
-  constructor(private animeService: AnimeService, private movieService: MovieService, private showSeries: SeriesService, private dataService: DataService, private router: Router) {
+  constructor(private animeService: AnimeService, private movieService: MovieService, private showSeries: SeriesService, private musicService: MusicService, private dataService: DataService, private router: Router) {
 
   }
 
@@ -56,9 +57,19 @@ export class AnimeGraphicsComponent implements OnInit {
     }
 
 
+    if (this.type == "Music") {
+      this.data = await this.musicService.getMusic();
+    }
+
     // Agregar imagen base64 y categoría por nombre
     this.data.forEach((element: any) => {
       element.image = 'data:image/jpg;base64,' + element.image;
+
+      // En musica se agrupa por artista
+      if (this.type == "Music") {
+        element.type = element.artist ?? '';
+        return;
+      }
 
       // Buscar la categoría correspondiente por ID
       const category = this.categories.find((cat: any) => cat.id === element.type);

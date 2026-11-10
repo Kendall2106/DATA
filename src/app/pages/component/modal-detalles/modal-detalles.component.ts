@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnimeService } from 'src/app/core/service/anime.service';
 import { DataService } from 'src/app/core/service/data.service';
+import { FriendService } from 'src/app/core/service/friend.service';
 import { GameService } from 'src/app/core/service/game.service';
 import { LibrosService } from 'src/app/core/service/libros.service';
 import { MovieService } from 'src/app/core/service/movie.service';
@@ -33,12 +34,15 @@ export class ModalDetallesComponent implements OnInit {
   stars: boolean[] = Array(5).fill(false);
   fechaTemp: any;
   selectedCollection: string = 'Todos';
+  friend: any = null;
+  friendEntry: any = null;
 
 
   constructor(
     private router: Router,
     public modalService: NgbModal, public dataService: DataService, private reviewSidebar: ReviewSidebarService,
-    private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService
+    private musicService: MusicService, private movieService: MovieService, private libroService: LibrosService, private gameService: GameService, private seriesService: SeriesService, private animeService: AnimeService,
+    private friendService: FriendService
   ) {
 
     this.opTipos = [
@@ -61,10 +65,55 @@ export class ModalDetallesComponent implements OnInit {
     this.fechaTemp = this.dataModal.date;
 
     this.loadCollection();
+    this.loadFriend();
 
 
   }
 
+
+  // ---------- Datos para mostrar ----------
+  get typeLabel(): string {
+    const labels: any = { Animes: 'Anime', Movies: 'Película', Series: 'Serie', Games: 'Juego', Books: 'Libro', Music: 'Música' };
+    return labels[this.type] ?? this.type;
+  }
+
+  get dateLabel(): string {
+    const labels: any = {
+      Animes: 'Fecha en que lo viste',
+      Movies: 'Fecha en que la viste',
+      Series: 'Fecha en que la viste',
+      Games: 'Fecha en que lo terminaste',
+      Books: 'Fecha en que lo terminaste',
+      Music: 'Fecha en que lo escuchaste'
+    };
+    return labels[this.type] ?? 'Fecha';
+  }
+
+  get categoryName(): string {
+    const category = this.categories.find(c => c.id === this.dataModal?.type);
+    return category ? category.name : '';
+  }
+
+  get hasReleaseDate(): boolean {
+    return this.type !== 'Books' && !!this.dataModal?.releaseDate;
+  }
+
+  stars5(score: any): string {
+    const n = Math.max(0, Math.min(5, Number(score) || 0));
+    return '★'.repeat(n) + '☆'.repeat(5 - n);
+  }
+
+  // ---------- Tu hermano ----------
+  async loadFriend() {
+    try {
+      this.friend = await this.friendService.getFriend();
+      if (this.friend) {
+        this.friendEntry = await this.friendService.getFriendEntry(this.type, this.data.name);
+      }
+    } catch (error) {
+      console.error("Error al consultar al amigo:", error);
+    }
+  }
 
   closeModal() {
     this.modalService.dismissAll();

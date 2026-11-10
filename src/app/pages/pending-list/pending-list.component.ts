@@ -36,6 +36,15 @@ export class PendingListComponent implements OnInit {
   selectedData: any = []; 
   listSeason: any[] = [];
   listSeasonActivate: boolean = false;
+  searchText: string = '';
+  categoryList = [
+    { key: 'Animes', label: 'Animes', icon: 'anime.png' },
+    { key: 'Movies', label: 'Movies', icon: 'movie.png' },
+    { key: 'Series', label: 'Shows', icon: 'show.png' },
+    { key: 'Books', label: 'Books', icon: 'book.png' },
+    { key: 'Games', label: 'Games', icon: 'game.png' },
+    { key: 'Music', label: 'Music', icon: 'music.png' }
+  ];
 
   constructor(private recoService: RecoService,
     private router: Router,  public modalService: NgbModal,
@@ -65,12 +74,14 @@ export class PendingListComponent implements OnInit {
     this.selectedItem = message;
     this.introVisible=true;
     this.isListView=true;
+    this.searchText = '';
 
     this.viewDataList(this.dataOriginal);
   }
 
   async loadData(message: any) {
     this.introVisible=false;
+    this.searchText = '';
     this.type = message;
     this.selectedItem = message;
 
@@ -131,7 +142,7 @@ export class PendingListComponent implements OnInit {
     this.orderData();
     this.resultFilter = this.data;
     this.filterSeaon();
-    this.resultCount = this.data.length;
+    this.resultCount = this.resultFilter.length;
 
    
   }
@@ -197,25 +208,25 @@ export class PendingListComponent implements OnInit {
   }
 
 
-  async toggleLike(dataLiked: any, dataTemp: any) {
+  // Marca (o desmarca) una obra como proxima de su categoria; solo puede haber una
+  async toggleLike(dataLiked: any, dataTemp: any, forceOn: boolean = false) {
+    const wasLiked = dataLiked.liked === true;
 
     for (let index = 0; index < this.data.length; index++) {
-
-      if(this.data[index].liked == true){
+      if (this.data[index].liked == true) {
         this.data[index].liked = false;
-        console.log("entro");
-        await this.recoService.updateReco(this.data[index].id, this.data[index].liked);
-       // break;
+        await this.recoService.updateReco(this.data[index].id, false);
       }
-
     }
 
-    if (dataLiked.liked == false) {
-      dataLiked.liked = true;
-    } else {
-      dataLiked.liked = false;
-    }
+    dataLiked.liked = forceOn ? true : !wasLiked;
     await this.recoService.updateReco(dataLiked.id, dataLiked.liked);
+  }
+
+  confirmDelete(movie: any) {
+    if (confirm('¿Eliminar "' + movie.name + '" de pendientes?')) {
+      this.deleteReco(movie);
+    }
   }
 
 
@@ -334,7 +345,7 @@ try {
 
   async getRandomItem(): Promise<void> {
    const randomIndex = await this.chooseData(this.data);
-   this.toggleLike(this.data[randomIndex], this.data);
+   this.toggleLike(this.data[randomIndex], this.data, true);
   }
 
    async addListSeason(dataTemp: any){
@@ -358,9 +369,26 @@ try {
   }
 
   filterSeaon(){
+    const text = this.searchText.trim().toLowerCase();
     this.resultFilter = this.data.filter(d =>
-      this.listSeasonActivate ? d.season === true :  d.season !== true
+      (this.listSeasonActivate ? d.season === true : d.season !== true) &&
+      (!text || (d.name ?? '').toLowerCase().includes(text))
     );
+    this.resultCount = this.resultFilter.length;
+  }
+
+  onSearch() {
+    this.filterSeaon();
+  }
+
+  // Cantidad de pendientes de una categoria
+  count(type: string): number {
+    return this.dataOriginal.filter(d => d.type === type).length;
+  }
+
+  // Obra elegida como proxima (con el dado) en una categoria
+  nextPick(type: string): any {
+    return this.dataOriginal.find(d => d.type === type && d.liked === true);
   }
 
  /* applyFilters() {
@@ -379,7 +407,7 @@ try {
   openModal(infoData: any) {
     const modalRef = this.modalService.open(ModalComponent, { centered: true });
     modalRef.componentInstance.data = infoData;
-    modalRef.componentInstance.type = "Animes";
+    modalRef.componentInstance.type = infoData.type || this.type;
     modalRef.componentInstance.pendiente = true;
 
     modalRef.componentInstance.accion.subscribe((resp: boolean) => {

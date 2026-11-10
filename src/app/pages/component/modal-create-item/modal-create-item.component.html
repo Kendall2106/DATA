@@ -1,194 +1,138 @@
 <div class="modal-overlay" (click)="cerrarModal()">
 
-    <div class="modal-content-custom" (click)="$event.stopPropagation()">
-
-        <!-- IZQUIERDA -->
-        <div class="poster-section">
-
-            <h3>Portada</h3>
-
-            <div class="poster-preview">
-
-                <img
-                    *ngIf="data.image"
-                    [src]="'data:image/png;base64,' + data.image"
-                    alt="Portada">
-
-                <div
-                    *ngIf="!data.image"
-                    class="empty-poster">
-
-                    Sin imagen
-
-                </div>
-
-            </div>
-
-            <input
-                type="file"
-                (change)="obtenerImagen($event)"
-                accept="image/png,.jpg,.jpeg,.gif">
-
-        </div>
-
-        <!-- DERECHA -->
-        <div class="form-section">
-
-            <div class="header">
-
-                <h2>Agregar Contenido</h2>
-
-            </div>
-
-            <!-- CATEGORIAS -->
-            <div class="category-buttons">
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Peliculas'"
-                    (click)="tipo='Peliculas'">
-
-                    🎬 Películas
-
-                </button>
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Series'"
-                    (click)="tipo='Series'">
-
-                    📺 Series
-
-                </button>
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Animes'"
-                    (click)="tipo='Animes'">
-
-                    ⭐ Animes
-
-                </button>
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Juegos'"
-                    (click)="tipo='Juegos'">
-
-                    🎮 Juegos
-
-                </button>
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Libros'"
-                    (click)="tipo='Libros'">
-
-                    📚 Libros
-
-                </button>
-
-                <button
-                    type="button"
-                    [class.active]="tipo === 'Musica'"
-                    (click)="tipo='Musica'">
-
-                    🎵 Música
-
-                </button>
-
-            </div>
-
-            <form
-                (ngSubmit)="onSubmit()"
-                #movieForm="ngForm">
-
-                <div class="form-grid">
-
-                    <div class="field full-width">
-
-                        <label>Nombre</label>
-
-                        <input
-                            type="text"
-                            name="name"
-                            [(ngModel)]="data.name"
-                            required>
-
-                    </div>
-
-                    <div class="field">
-
-                        <label>Fecha</label>
-
-                        <input
-                            type="date"
-                            name="date"
-                            [(ngModel)]="data.date">
-
-                    </div>
-
-                    <div
-                        class="field"
-                        *ngIf="tipo !== 'Juegos' && tipo !== 'Musica'">
-
-                        <label>Género</label>
-
-                        <select
-                            name="type"
-                            [(ngModel)]="data.type">
-
-                            <option
-                                *ngFor="let opcion of opTipos[0]"
-                                [value]="opcion">
-
-                                {{ opcion }}
-
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <!-- CALIFICACIÓN -->
-                <div class="rating-section">
-
-                    <label>Calificación</label>
-
-                    <div class="star-rating">
-
-                        <span
-                            *ngFor="let star of stars; let i = index"
-                            (click)="rate(data, i + 1)"
-                            [class.selected]="(i + 1) <= data.score">
-
-                            ★
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- BOTÓN -->
-                <div class="footer-actions">
-
-                    <button
-                        class="save-btn"
-                        type="submit"
-                        [disabled]="!movieForm.valid">
-
-                        Guardar
-
+    <div class="modalPrin" (click)="$event.stopPropagation()">
+
+        <!-- Cabecera -->
+        <div class="modal-header">
+            <div class="head-text">
+                <h4 class="modal-title">Agregar contenido</h4>
+                <div class="chips">
+                    <button type="button" class="chip" *ngFor="let c of categoriasLista"
+                        [class.chip-main]="tipo === c.key" (click)="tipo = c.key">
+                        <i class="uil {{ c.icon }}"></i> {{ c.label }}
                     </button>
+                </div>
+            </div>
+            <button type="button" class="btnClose" aria-label="Cerrar" (click)="cerrarModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #movieForm="ngForm">
+            <div class="modal-body">
+                <div class="detail-layout">
+
+                    <!-- Portada -->
+                    <div class="detail-cover">
+                        <div class="poster-preview">
+                            <img *ngIf="data.image" class="imagen" [src]="'data:image/png;base64,' + data.image" alt="Portada">
+                            <div *ngIf="!data.image" class="empty-poster">
+                                <i class="uil uil-image-plus"></i>
+                                <span>Sin imagen</span>
+                            </div>
+                        </div>
+
+                        <label class="btn-ghost file-btn">
+                            <i class="uil uil-upload"></i> Elegir portada
+                            <input type="file" (change)="obtenerImagen($event)" accept="image/png,.jpg,.jpeg,.gif" hidden>
+                        </label>
+                    </div>
+
+                    <!-- Datos -->
+                    <div class="detail-col">
+                        <div class="block">
+                            <span class="block-title">DETALLES</span>
+
+                            <div class="fields">
+                                <div class="field full-width">
+                                    <label for="name">NOMBRE</label>
+                                    <input class="text-input" type="text" id="name" name="name" [(ngModel)]="data.name"
+                                        autocomplete="off" required>
+                                </div>
+
+                                <div class="field">
+                                    <label for="date">FECHA</label>
+                                    <input class="date" type="date" id="date" name="date" [(ngModel)]="data.date" required>
+                                </div>
+
+                                <div class="field" *ngIf="tipo !== 'Juegos' && tipo !== 'Musica'">
+                                    <label for="type">GÉNERO</label>
+                                    <select id="type" name="type" [(ngModel)]="data.type">
+                                        <option *ngFor="let opcion of opTipos[0]" [value]="opcion">{{ opcion }}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Peliculas, series, animes, juegos y musica -->
+                                <div class="field" *ngIf="tipo !== 'Libros'">
+                                    <label for="releaseDate">{{ tipo === 'Juegos' || tipo === 'Musica' ? 'AÑO DE LANZAMIENTO' : 'AÑO DE ESTRENO' }}</label>
+                                    <input class="text-input" type="number" id="releaseDate" name="releaseDate"
+                                        [(ngModel)]="data.releaseDate" placeholder="2024">
+                                </div>
+
+                                <!-- Libros -->
+                                <div class="field" *ngIf="tipo === 'Libros'">
+                                    <label for="author">AUTOR</label>
+                                    <input class="text-input" type="text" id="author" name="author" [(ngModel)]="data.author"
+                                        autocomplete="off">
+                                </div>
+
+                                <div class="field" *ngIf="tipo === 'Libros'">
+                                    <label for="kind">FORMATO</label>
+                                    <select id="kind" name="kind" [(ngModel)]="data.kind">
+                                        <option *ngFor="let k of opKind" [value]="k">{{ k }}</option>
+                                    </select>
+                                </div>
+
+                                <!-- Musica -->
+                                <div class="field" *ngIf="tipo === 'Musica'">
+                                    <label for="artist">ARTISTA</label>
+                                    <input class="text-input" type="text" id="artist" name="artist" [(ngModel)]="data.artist"
+                                        autocomplete="off">
+                                </div>
+
+                                <!-- Juegos -->
+                                <div class="field" *ngIf="tipo === 'Juegos'">
+                                    <label>LOGROS</label>
+                                    <label class="switch">
+                                        <input type="checkbox" name="achievements" [(ngModel)]="data.achievements">
+                                        <span class="switch-track"></span>
+                                        <span class="switch-text">{{ data.achievements ? 'Platinado' : 'Sin platinar' }}</span>
+                                    </label>
+                                </div>
+
+                                <div class="field full-width">
+                                    <label for="review">RESEÑA (opcional)</label>
+                                    <textarea class="text-input" id="review" name="review" [(ngModel)]="data.review" rows="2"
+                                        maxlength="500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="block">
+                            <span class="block-title">CALIFICACIÓN</span>
+
+                            <div class="rating-row">
+                                <div class="star-rating">
+                                    <span *ngFor="let star of stars; let i = index" (click)="rate(data, i + 1)"
+                                        [class.selected]="(i + 1) <= data.score">
+                                        &#9733;
+                                    </span>
+                                </div>
+                                <span class="score-text">{{ data.score || 0 }} / 5</span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
-            </form>
-
-        </div>
+                <!-- Acciones -->
+                <div class="modal-actions">
+                    <button class="btn btnModal" type="submit" [disabled]="!movieForm.valid">
+                        <i class="iconModal uil uil-save"> Guardar</i>
+                    </button>
+                </div>
+            </div>
+        </form>
 
     </div>
 

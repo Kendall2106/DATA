@@ -198,3 +198,89 @@ select:disabled {
   cursor: not-allowed; /* Cursor indicando que está desactivado */
   opacity: 0.6; /* Reduce la opacidad */
 }
+
+
+/* ---------- Tier list de un amigo ---------- */
+.tf-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 20px;
+  padding: 14px 20px;
+  background-color: #0a0a0a;
+  border: 1px solid #1f1f1f;
+  border-left: 3px solid var(--color-2, #ff6a13);
+  border-radius: 10px;
+}
+
+.tf-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-size: 1.6rem;
+  color: var(--color-2, #ff6a13);
+  border: 2px solid var(--color-2, #ff6a13);
+  border-radius: 4px;
+}
+
+.tf-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tf-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.tf-text span {
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: var(--color-2, #ff6a13);
+}
+
+.tf-text h4 {
+  margin: 2px 0 0;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.tf-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.tf-btn {
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  color: #ded8cf;
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tf-btn:hover {
+  color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.tf-btn-main {
+  color: #0a0a0a;
+  background-color: var(--color-2, #ff6a13);
+  border-color: var(--color-2, #ff6a13);
+}
+
+.tf-btn-main:hover {
+  color: #0a0a0a;
+  opacity: 0.85;
+}
+
+.friend-mode .list {
+  height: calc(90vh - 150px);
+}

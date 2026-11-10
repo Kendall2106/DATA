@@ -1,47 +1,182 @@
-<div class="body">
+<div class="body gp-page">
+
   <header>
     <div class="row">
       <div class="filter-container">
-
         <div class="filter-options">
-          <button class="filter-button"><i class="uil">Home</i></button>
-          <button class="filter-button" (click)="loadData('Animes')" [class.active]="selectedItem === 'Animes'"><i
-              class="uil">Animes</i></button>
-          <button class="filter-button" (click)="loadData('Movies')" [class.active]="selectedItem === 'Movies'"><i
-              class="uil">Movies</i></button>
-          <button class="filter-button" (click)="loadData('Series')" [class.active]="selectedItem === 'Series'"><i
-              class="uil">Shows</i></button>
-          <button class="filter-button" (click)="loadData('Books')" [class.active]="selectedItem === 'Books'"><i class="uil">Books</i></button>
-          <button class="filter-button" (click)="loadData('Games')" [class.active]="selectedItem === 'Games'"><i
-              class="uil">Games</i></button>
-          <button class="filter-button"><i class="uil">Music</i></button>
-
+          <button class="filter-button" (click)="loadData('Home')" [class.active]="selectedItem === 'Home'">
+            <i class="uil"><i class="uil uil-chart-pie-alt icon-home"></i>Home</i>
+          </button>
+          <button class="filter-button" *ngFor="let t of tabs" (click)="loadData(t.key)"
+            [class.active]="selectedItem === t.key">
+            <i class="uil"><img [src]="'assets/img/Icons/' + t.icon" class="icon">{{ t.label }}</i>
+          </button>
         </div>
       </div>
     </div>
-
   </header>
 
+  <div class="gp-content">
 
+    <p class="gp-error" *ngIf="error">{{ error }}</p>
 
+    <!-- ========== Resumen general ========== -->
+    <ng-container *ngIf="selectedItem === 'Home' && stats">
 
-  <div class="container list col-lg-12">
-    <div *ngIf="showAnimeList">
-      <app-anime-graphics [type]="'Animes'"></app-anime-graphics>
-    </div>
-    <div *ngIf="showMovieList">
-      <app-anime-graphics [type]="'Movies'"></app-anime-graphics>
-    </div>
-    <div *ngIf="showSeriesList">
-      <app-anime-graphics [type]="'Series'"></app-anime-graphics>
-    </div>
-    <div *ngIf="showGameList">
-      <app-game-graphics></app-game-graphics>
-    </div>
-    <div *ngIf="showBookList">
-      <app-books-graphics></app-books-graphics>
-    </div>
-    <div *ngIf="showMusicList">
+      <div class="gp-kpis">
+        <div class="gp-kpi">
+          <i class="uil uil-layer-group"></i>
+          <div><strong>{{ stats.total }}</strong><span>Obras guardadas</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-star"></i>
+          <div><strong>{{ stats.avg | number:'1.1-1' }}</strong><span>Calificación promedio</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-award"></i>
+          <div><strong>{{ stats.masterpieces }}</strong><span>Obras maestras (5★)</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-trophy"></i>
+          <div><strong>{{ stats.platinum }}</strong><span>Juegos platinados</span></div>
+        </div>
+      </div>
 
-    </div>
+      <div class="gp-row gp-row-home">
+
+        <section class="gp-panel">
+          <h4 class="gp-title">Por categoría <span>{{ stats.total }} obras</span></h4>
+          <div class="gp-tiles">
+            <div class="gp-tile" *ngFor="let c of stats.cats" (click)="loadData(c.key)" title="Ver gráficas de {{ c.label }}">
+              <i class="uil {{ c.icon }}"></i>
+              <strong>{{ c.total }}</strong>
+              <span>{{ c.label }}</span>
+              <small>{{ c.avg ? (c.avg | number:'1.1-1') + ' ★ promedio' : 'sin calificar' }}</small>
+              <div class="gp-bar"><div [style.width.%]="c.pct"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="gp-col">
+          <section class="gp-panel gp-grow">
+            <h4 class="gp-title">Calificaciones <span>{{ stats.ratedTotal }} calificadas</span></h4>
+            <div class="gp-list">
+              <div class="gp-stars-row" *ngFor="let s of stats.stars">
+                <span class="gp-star-label">{{ s.value }} <b>★</b></span>
+                <div class="gp-bar gp-bar-gold"><div [style.width.%]="s.pct"></div></div>
+                <strong>{{ s.count }}</strong>
+              </div>
+            </div>
+            <p class="gp-note" *ngIf="stats.unrated > 0">{{ stats.unrated }} sin calificar</p>
+          </section>
+
+          <section class="gp-panel gp-grow">
+            <h4 class="gp-title">Platinos <span>del total de juegos</span></h4>
+            <div class="gp-donut-wrap">
+              <div class="gp-donut" [style.background]="stats.donut.bg">
+                <div class="gp-donut-hole"><strong>{{ stats.donut.percent }}%</strong></div>
+              </div>
+              <ul class="gp-legend">
+                <li><i class="gp-dot gp-dot-plat"></i> Platinados <b>{{ stats.donut.part }}</b></li>
+                <li><i class="gp-dot"></i> Sin platinar <b>{{ stats.donut.rest }}</b></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <!-- ========== Graficas de una categoria ========== -->
+    <ng-container *ngIf="selectedItem !== 'Home' && cat">
+
+      <div class="gp-kpis">
+        <div class="gp-kpi">
+          <i class="uil uil-layer-group"></i>
+          <div><strong>{{ cat.total }}</strong><span>{{ catLabel }} guardados</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-star"></i>
+          <div><strong>{{ cat.avg | number:'1.1-1' }}</strong><span>Calificación promedio</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-award"></i>
+          <div><strong>{{ cat.masterpieces }}</strong><span>Obras maestras (5★)</span></div>
+        </div>
+        <div class="gp-kpi">
+          <i class="uil uil-calendar-alt"></i>
+          <div><strong>{{ cat.thisYear }}</strong><span>Este año</span></div>
+        </div>
+      </div>
+
+      <div class="gp-row">
+
+        <section class="gp-panel">
+          <h4 class="gp-title">Por año <span>últimos 7 años</span></h4>
+          <div class="gp-years">
+            <div class="gp-year" *ngFor="let y of cat.years">
+              <span class="gp-year-count">{{ y.count }}</span>
+              <div class="gp-year-bar"><div [style.height.%]="y.pct"></div></div>
+              <small>{{ y.label }}</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="gp-panel">
+          <h4 class="gp-title">Calificaciones <span>{{ cat.ratedTotal }} calificadas</span></h4>
+          <div class="gp-list">
+            <div class="gp-stars-row" *ngFor="let s of cat.stars">
+              <span class="gp-star-label">{{ s.value }} <b>★</b></span>
+              <div class="gp-bar gp-bar-gold"><div [style.width.%]="s.pct"></div></div>
+              <strong>{{ s.count }}</strong>
+            </div>
+          </div>
+        </section>
+
+        <div class="gp-col">
+          <section class="gp-panel gp-grow" *ngFor="let p of cat.panels">
+            <h4 class="gp-title">{{ p.title }}</h4>
+
+            <div class="gp-list" *ngIf="p.kind === 'bars'">
+              <div class="gp-stars-row" *ngFor="let r of p.rows">
+                <span class="gp-row-label" [title]="r.label">{{ r.label }}</span>
+                <div class="gp-bar"><div [style.width.%]="r.pct"></div></div>
+                <strong>{{ r.count }}</strong>
+              </div>
+              <p class="gp-note" *ngIf="p.rows.length === 0">Sin datos todavía.</p>
+            </div>
+
+            <div class="gp-donut-wrap" *ngIf="p.kind === 'donut'">
+              <div class="gp-donut" [style.background]="p.donut.bg">
+                <div class="gp-donut-hole"><strong>{{ p.donut.percent }}%</strong></div>
+              </div>
+              <ul class="gp-legend">
+                <li><i class="gp-dot gp-dot-plat"></i> Platinados <b>{{ p.donut.part }}</b></li>
+                <li><i class="gp-dot"></i> Sin platinar <b>{{ p.donut.rest }}</b></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+      <section class="gp-panel gp-strip">
+        <h4 class="gp-title">Obras maestras recientes <span>5 estrellas</span></h4>
+        <div class="gp-covers">
+          <div class="gp-cover" *ngFor="let t of cat.top" [title]="t.name">
+            <img [src]="t.image" alt="" decoding="async">
+          </div>
+          <p class="gp-note" *ngIf="cat.top.length === 0">Aún no tienes obras de 5 estrellas aquí.</p>
+        </div>
+      </section>
+
+    </ng-container>
+
+    <p class="gp-note gp-empty" *ngIf="selectedItem !== 'Home' && cat && cat.total === 0">
+      Aún no hay obras en esta categoría.
+    </p>
+
   </div>
+
+  <app-loader *ngIf="loading"></app-loader>
+</div>

@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./book-list-discover.component.css']
 })
 export class BookListDiscoverComponent implements OnInit {
+  loading: boolean = false;
   message: string = "";
   data: { name: string, image: string, info: string, releaseDate: string, randomData: string, author: string }[] = [];
   animesAiring: any[] =[];
@@ -29,7 +30,9 @@ export class BookListDiscoverComponent implements OnInit {
    this.currentSearchType = 'all'; 
     this.message = "Books";
     //this.dataAiring();
+    this.loading = true;
     await this.apiBookService.getBooks(this.startIndex, this.maxResults).subscribe((response: any) => {
+      this.loading = false;
       const booksWithImages = response.items.filter((book: any) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
       this.data = [];
       console.log(response);
@@ -43,7 +46,7 @@ export class BookListDiscoverComponent implements OnInit {
           author: item.volumeInfo.authors[0]
         });
       });
-    });
+    }, () => { this.loading = false; });
   }
 
   async getBooksByNew() {
@@ -66,7 +69,9 @@ export class BookListDiscoverComponent implements OnInit {
   async getBooksByName() {
     this.data = [];
     this.currentSearchType = 'search'; 
+    this.loading = true;
     await this.apiBookService.getBooksByName(this.search,this.startIndex).subscribe((response: any) => {
+      this.loading = false;
       if (response.items) {
         const booksWithImages = response.items.filter((book: any) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
         booksWithImages.forEach((item: any) => {
@@ -80,7 +85,7 @@ export class BookListDiscoverComponent implements OnInit {
           });
         });
       }
-    });
+    }, () => { this.loading = false; });
   }
 
   openModal(infoData: any) {
