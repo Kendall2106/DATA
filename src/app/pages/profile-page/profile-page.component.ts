@@ -63,6 +63,17 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   // Ventana de ayuda
   helpOpen: boolean = false;
 
+  // Editor de la vitrina (elegir y ordenar)
+  readonly showcaseMax = 6;
+  slotNumbers = [0, 1, 2, 3, 4, 5];
+  editorOpen: boolean = false;
+  editorLoading: boolean = false;
+  editorSaving: boolean = false;
+  editorPool: any[] = [];
+  editorSel: any[] = [];
+  dragIndex: number = -1;
+  dragOver: number = -1;
+
   // Niveles de insignia: Blanco, Cobre, Plata, Oro y Platino
   tiers = [
     { name: 'Blanco', color: '#f2f2f2' },
@@ -132,6 +143,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   closeOverlays() {
     this.showAllOpen = false;
     this.helpOpen = false;
+    this.editorOpen = false;
   }
 
   // ---------- Nivel del perfil (raiz cuadrada del total de obras) ----------
@@ -334,6 +346,84 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       console.error("Error al cargar todos los favoritos:", error);
     } finally {
       this.showAllLoading = false;
+    }
+  }
+
+  // ---------- Editor de la vitrina ----------
+  async openEditor() {
+    this.editorOpen = true;
+    this.editorPool = [];
+    this.editorSel = [];
+    this.editorLoading = true;
+    try {
+      // Se toman en cuenta todas las obras de 5 estrellas de la categoria
+      this.editorPool = await this.profileService.getAllFavorites(this.favTab);
+      this.editorSel = (this.favorites[this.favTab] ?? [])
+        .map((fav: any) => this.editorPool.find(p => p.id === fav.id))
+        .filter((item: any) => !!item);
+    } catch (error) {
+      console.error("Error al cargar las obras de 5 estrellas:", error);
+    } finally {
+      this.editorLoading = false;
+    }
+  }
+
+  isPicked(item: any): boolean {
+    return this.editorSel.some(s => s.id === item.id);
+  }
+
+  togglePick(item: any) {
+    const index = this.editorSel.findIndex(s => s.id === item.id);
+    if (index >= 0) {
+      this.editorSel.splice(index, 1);
+    } else if (this.editorSel.length < this.showcaseMax) {
+      this.editorSel.push(item);
+    }
+  }
+
+  moveSlot(index: number, delta: number) {
+    const target = index + delta;
+    if (target < 0 || target >= this.editorSel.length) {
+      return;
+    }
+    const [item] = this.editorSel.splice(index, 1);
+    this.editorSel.splice(target, 0, item);
+  }
+
+  removeSlot(index: number) {
+    this.editorSel.splice(index, 1);
+  }
+
+  onDragStart(index: number) {
+    this.dragIndex = index;
+  }
+
+  onDragOver(event: DragEvent, index: number) {
+    event.preventDefault();
+    this.dragOver = index;
+  }
+
+  onDrop(index: number) {
+    if (this.dragIndex >= 0 && this.editorSel[index] && this.dragIndex !== index) {
+      const [item] = this.editorSel.splice(this.dragIndex, 1);
+      this.editorSel.splice(index, 0, item);
+    }
+    this.dragIndex = -1;
+    this.dragOver = -1;
+  }
+
+  async saveEditor(reset: boolean = false) {
+    try {
+      this.editorSaving = true;
+      await this.profileService.saveShowcase(this.favTab, reset ? [] : this.editorSel.map(s => s.id));
+      await this.loadFavorites();
+      this.editorOpen = false;
+    } catch (error) {
+      console.error("Error al guardar la vitrina:", error);
+      this.profileError = 'No se pudo guardar la vitrina. Revisa las reglas de Firestore para la colección profiles.';
+      this.editorOpen = false;
+    } finally {
+      this.editorSaving = false;
     }
   }
 

@@ -87,6 +87,11 @@
         <div class="pf-tabs">
           <button type="button" *ngFor="let tab of favTabs" [class.active]="favTab === tab.key"
             (click)="favTab = tab.key">{{ tab.label }}</button>
+
+          <!-- Elegir y ordenar la vitrina -->
+          <button type="button" class="pf-tab-edit" *ngIf="isOwn && favCounts[favTab] > 0" (click)="openEditor()">
+            <i class="uil uil-edit"></i> Ordenar
+          </button>
         </div>
 
         <div class="pf-showcase">
@@ -186,6 +191,58 @@
             <img [src]="'data:image/jpg;base64,' + item.image" alt="" loading="lazy" decoding="async">
             <span>{{ item.name }}</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== Editor de la vitrina ========== -->
+  <div class="pf-overlay" *ngIf="editorOpen" (click)="editorOpen = false">
+    <div class="pf-dialog pf-dialog-wide" (click)="$event.stopPropagation()">
+      <div class="pf-dialog-head">
+        <h3>Ordenar vitrina · {{ favTabLabel }} <span>{{ editorPool.length }} de 5★</span></h3>
+        <button type="button" class="pf-close" (click)="editorOpen = false">&times;</button>
+      </div>
+
+      <div class="pf-dialog-body">
+        <p class="pf-editor-hint">Elige hasta {{ showcaseMax }} entre todas tus obras de 5 estrellas y arrástralas para
+          ordenarlas (o usa las flechas). El primer lugar es el que aparece primero en tu vitrina.</p>
+
+        <div class="pf-slots">
+          <div class="pf-slot" *ngFor="let n of slotNumbers; let i = index" [class.filled]="editorSel[i]"
+            [class.drag-over]="dragOver === i" [attr.draggable]="editorSel[i] ? true : null"
+            (dragstart)="onDragStart(i)" (dragover)="onDragOver($event, i)" (drop)="onDrop(i)"
+            (dragend)="dragIndex = -1; dragOver = -1">
+            <span class="pf-slot-num">{{ i + 1 }}</span>
+
+            <ng-container *ngIf="editorSel[i] as item">
+              <img [src]="'data:image/jpg;base64,' + item.image" alt="" decoding="async">
+              <span class="pf-slot-name" [title]="item.name">{{ item.name }}</span>
+              <div class="pf-slot-actions">
+                <button type="button" (click)="moveSlot(i, -1)" [disabled]="i === 0" title="Mover antes">&lsaquo;</button>
+                <button type="button" (click)="moveSlot(i, 1)" [disabled]="i === editorSel.length - 1" title="Mover después">&rsaquo;</button>
+                <button type="button" (click)="removeSlot(i)" title="Quitar">&times;</button>
+              </div>
+            </ng-container>
+
+            <span class="pf-slot-empty" *ngIf="!editorSel[i]">Vacío</span>
+          </div>
+        </div>
+
+        <h4 class="pf-editor-title">Todas tus obras de 5 estrellas</h4>
+        <p class="pf-empty" *ngIf="editorLoading">Cargando...</p>
+        <div class="pf-all-grid pf-pool">
+          <div class="pf-fav pf-pick" *ngFor="let item of editorPool" [class.picked]="isPicked(item)"
+            [title]="item.name" (click)="togglePick(item)">
+            <img [src]="'data:image/jpg;base64,' + item.image" alt="" loading="lazy" decoding="async">
+            <span>{{ item.name }}</span>
+          </div>
+        </div>
+
+        <div class="pf-editor-actions">
+          <button type="button" class="pf-btn" [disabled]="editorSaving" (click)="saveEditor(true)">Restablecer orden</button>
+          <button type="button" class="pf-btn" (click)="editorOpen = false">Cancelar</button>
+          <button type="button" class="pf-btn pf-btn-main" [disabled]="editorSaving || editorSel.length === 0" (click)="saveEditor()">Guardar</button>
         </div>
       </div>
     </div>

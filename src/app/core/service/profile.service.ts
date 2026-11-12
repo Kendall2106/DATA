@@ -123,19 +123,46 @@ export class ProfileService {
     this.profileSubject.next({ ...this.profileSubject.value, bio });
   }
 
-  // Obras con 5 estrellas de cada categoria: unas pocas para la vitrina y el total de cada una
+  // Obras con 5 estrellas de cada categoria para la vitrina: las que elegiste (en tu orden) o, si no
+  // elegiste, las primeras; ademas el total de cada categoria
   async getFavorites(max: number = 6, userId?: string): Promise<{ items: any, counts: any }> {
     const uid = userId ?? await this.authService.getUid();
+
+    // Orden elegido por el usuario: { Animes: [id, id, ...], ... }
+    let showcase: any = {};
+    try {
+      const profile = await getDoc(doc(this.firestore, `profiles/${uid}`));
+      showcase = profile.exists() ? (profile.data()['showcase'] ?? {}) : {};
+    } catch (error) {
+      console.error("Error al cargar la vitrina:", error);
+    }
+
     const items: any = {};
     const counts: any = {};
     await Promise.all(this.categorias.map(async cat => {
       try {
         const base = query(collection(this.firestore, cat.collection), where('userId', '==', uid), where('score', '==', 5));
-        const [snapshot, total] = await Promise.all([
-          getDocs(query(base, limit(max))),
+        const ids: string[] = Array.isArray(showcase[cat.key]) ? showcase[cat.key].slice(0, max) : [];
+
+        const defaults = async () => {
+          const snapshot = await getDocs(query(base, limit(max)));
+          return snapshot.docs.map(d => ({ id: d.id, name: d.data()['name'], image: d.data()['image'] }));
+        };
+
+        const chosen = async () => {
+          const docs = await Promise.all(ids.map(id => getDoc(doc(this.firestore, `${cat.collection}/${id}`))));
+          // Se descartan las obras que ya no existen o que dejaron de tener 5 estrellas
+          return docs
+            .filter(d => d.exists() && d.data()['userId'] === uid && d.data()['score'] === 5)
+            .map(d => ({ id: d.id, name: d.data()?.['name'], image: d.data()?.['image'] }));
+        };
+
+        const [list, total] = await Promise.all([
+          ids.length > 0 ? chosen() : defaults(),
           getCountFromServer(base)
         ]);
-        items[cat.key] = snapshot.docs.map(d => ({ id: d.id, name: d.data()['name'], image: d.data()['image'] }));
+
+        items[cat.key] = (ids.length > 0 && list.length === 0) ? await defaults() : list;
         counts[cat.key] = total.data().count;
       } catch (error) {
         console.error("Error al cargar favoritos de " + cat.key + ":", error);
@@ -144,6 +171,12 @@ export class ProfileService {
       }
     }));
     return { items, counts };
+  }
+
+  // Guarda el orden de la vitrina de una categoria (lista vacia = orden por defecto)
+  async saveShowcase(key: string, ids: string[]): Promise<void> {
+    const uid = await this.authService.getUid();
+    await setDoc(doc(this.firestore, `profiles/${uid}`), { userId: uid, showcase: { [key]: ids } }, { merge: true });
   }
 
   // Todas las obras con 5 estrellas de una categoria
